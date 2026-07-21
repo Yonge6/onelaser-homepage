@@ -55,3 +55,7 @@ When implementing from a selected generated mock, treat that image as the source
 - Never expose internal priority codes such as `P0`, `P1`, `P2` or `P3` to customers. Priority determines media size and page weight only.
 - Use the supplied July 2026 XRF workshop, dark product, work-area and fine-detail images as the primary product-proof assets. Do not replace product-faithful supplied imagery with generic AI visuals when a real approved asset already fits the slot.
 - Customer-facing placeholder language should read `VIDEO PREVIEW` or `VIDEO STORY · IMAGE PREVIEW`, not unfinished-production language such as `REPLACEABLE MEDIA` or `VIDEO PLACEHOLDER`.
+- Keep the power guide, reliability, safety and micro-feature introductions left aligned; use one consistent editorial axis for narrative section headings.
+- Keep the desktop project-proof carousel at a fixed height with stable previous/next controls. Reduce its secondary headline scale so the proof image remains the dominant visual.
+- Make every P0 story media stage directly clickable and keyboard accessible, opening the existing full-size 16:9 media preview until production videos replace the stills.
+- Safety uses a full-viewport-width `#F5F5F7` background band with its content aligned to the 1280 px page grid.

@@ -4209,3 +4209,180 @@ body { color: var(--ink); }
     min-height: 680px;
   }
 }
+
+/* 2026-07-22 browser annotation pass: stable proof modules and unified alignment */
+.official-price__msrp > strong {
+  text-decoration: none;
+}
+
+.official-price__msrp > strong > span {
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.official-price__msrp > strong > small {
+  text-decoration: none;
+}
+
+.section-heading--left {
+  max-width: 900px;
+  margin-right: auto;
+  margin-left: 0;
+  text-align: left;
+}
+
+.section-heading--left > p {
+  max-width: 680px;
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.62;
+}
+
+.project-showcase {
+  height: 620px;
+  min-height: 620px;
+  align-items: stretch;
+}
+
+.project-visual {
+  height: 620px;
+  min-height: 620px;
+  aspect-ratio: auto;
+}
+
+.project-content {
+  position: relative;
+  justify-content: flex-start;
+  height: 620px;
+  padding: 56px;
+}
+
+.project-content h3 {
+  font-size: clamp(34px, 3vw, 48px);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.project-pagination {
+  position: absolute;
+  bottom: 48px;
+  left: 56px;
+  margin-top: 0;
+}
+
+.immersive-story__step {
+  display: block;
+  padding: 0;
+  border: 0;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: zoom-in;
+}
+
+.immersive-story__step:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 5px;
+}
+
+.immersive-story__media-label > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.video-modal__media img {
+  object-fit: contain;
+}
+
+.safety {
+  width: 100vw;
+  max-width: none;
+  margin-right: calc(50% - 50vw);
+  margin-left: calc(50% - 50vw);
+  padding-right: max(36px, calc((100vw - 1280px) / 2));
+  padding-left: max(36px, calc((100vw - 1280px) / 2));
+  background: #f5f5f7;
+}
+
+.safety-intro {
+  max-width: 850px;
+  margin: 0 auto 56px 0;
+  text-align: left;
+}
+
+.safety-intro p {
+  max-width: 700px;
+  margin: 24px 0 0;
+}
+
+.micro-features__intro {
+  display: block;
+  max-width: 900px;
+  margin: 0 0 52px;
+  text-align: left;
+}
+
+.micro-features__intro h2 {
+  max-width: 820px;
+}
+
+@media (max-width: 900px) {
+  .project-showcase {
+    height: auto;
+    min-height: 0;
+  }
+
+  .project-visual {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  .project-content {
+    height: auto;
+    min-height: 440px;
+    padding: 40px;
+  }
+
+  .project-pagination {
+    bottom: 40px;
+    left: 40px;
+  }
+
+  .safety {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .section-heading--left > p {
+    font-size: 14px;
+  }
+
+  .project-content {
+    min-height: 410px;
+    padding: 30px 24px;
+  }
+
+  .project-content h3 {
+    font-size: 34px;
+  }
+
+  .project-pagination {
+    bottom: 28px;
+    left: 24px;
+  }
+
+  .immersive-story__media-label {
+    font-size: 12px;
+    letter-spacing: .04em;
+  }
+
+  .safety {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+}

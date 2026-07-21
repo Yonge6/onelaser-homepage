@@ -1,44 +1,58 @@
-# XRF Gen2 full-page design QA
+# XRF Gen2 browser-annotation design QA
 
-## Review target
+## Evidence
 
-- Product source of truth: `XRF Gen2 卖点参数发布汇总.xlsx`.
-- Structural references: OMTech Polar 2 PDP and xTool P3 product/story pages.
-- Matched hero comparison: `qa/design-comparison-final.png` (reference and implementation at 1280 × 720).
-- Implementation captures: purchase hero, results carousel, 38W/70W guide, immersive stories, safety, specifications and a true 390 × 844 framed mobile viewport.
+- Source visual truth: the eight 2026-07-22 browser annotations plus the currently published page captured before this change.
+- Source captures: `qa/annotation-latest-source-view.png`, `qa/annotation-latest-old-results.png`, `qa/annotation-latest-old-performance.png`.
+- Rendered implementation: local Vite page at `http://127.0.0.1:5174/xrf-gen2-listing/`.
+- Implementation captures: `qa/annotation-latest-local-view.png`, `qa/annotation-latest-new-results.png`, `qa/annotation-latest-new-performance.png`, `qa/annotation-latest-modal.png`, `qa/annotation-latest-safety-heading.png`, `qa/annotation-latest-mobile-frame.png`.
+- Combined comparison input: `qa/annotation-comparison.png`, containing source and implementation for the results module and P0 story in one 1280 × 720 image.
+- Desktop viewport: 1280 × 720 CSS px. Source and implementation captures are both 1280 × 720 px; no density normalization was required.
+- Responsive viewport: a real 390 × 684 CSS px iframe inside the 1280 × 720 browser capture. Its document reported `innerWidth: 390`, zero horizontal overflow and no visible type below 12 px.
+- State: default 38W standalone configuration, first project proof and first P0 story unless named otherwise.
 
-## Content hierarchy
+## Full-view comparison
 
-- P0: passed. Seven 16:9 story chapters cover 70W power, RF results, TrueSpeed motion, IVS, smart workflow, larger jobs and cleaner production. Image previews are ready to be replaced by final video without changing layout.
-- P1: passed. Large visual modules explain the 38W/70W choice, workflow, reliability, safety architecture and US support.
-- P2: passed. Eight compact image-led proof cards cover extraction, isolated electronics, noise, protected focus, Class 1 design, suppression, interlock and thermal response.
-- P3: passed. Secondary details are contained in a concise horizontal rail and the specification/FAQ controls.
-- Optional features: passed. Smart Air, Riser Base, Conveyor and optional optics remain explicitly labelled optional.
+- Information hierarchy remains unchanged: the OneLaser header, workbook-led result story and image-led P0 chapter retain the current production anatomy.
+- The results implementation now keeps the image dominant by reducing the secondary `h3` while preserving the fixed 620 px desktop module.
+- The P0 implementation adds a visible play affordance and direct full-media action without changing the 16:9 stage or page rhythm.
+- Hero typography, white/`#F5F5F7` surfaces, OneLaser red accents and supplied product imagery remain consistent with the existing UI system.
 
-## Visual system
+## Focused region checks
 
-- Typography: passed. Certia is used throughout; the desktop product H1 computes to 40 px / 800 and mobile to 36 px / 800.
-- Minimum type: passed. Computed minimum is 12 px.
-- Surfaces: passed. Structural sections resolve to white, transparent-on-white or `#F5F5F7`; black is limited to real image content.
-- Color: passed. OneLaser red is limited to pricing, primary actions, selected borders and restrained proof accents. MSRP remains gray and financing remains blue.
-- Media: passed. Hero media and thumbnails are square; project proof remains fixed at 4:3; all immersive story media computes to 16:9 with `object-fit: contain`.
-- Reference comparison: passed. The implementation keeps the proven left-media/right-purchase anatomy while using a tighter OneLaser header, a more legible product title, quieter surfaces and clearer price hierarchy.
+- MSRP: only the numeric MSRP is struck through; `USD` has no text decoration.
+- Results carousel: before and after switching projects, the module remains 620 px high and the controls remain at exactly `relativeX: 792.875`, `relativeY: 530` in the 1280 px viewport.
+- P0 media interaction: each of seven stages is a keyboard-focusable button and opens the existing full-size 16:9 media dialog. The dialog opens with the correct accessible label and closes from its close button.
+- Alignment: power guide, reliability, safety and micro-feature introductions all compute to `text-align: left`.
+- Safety: section width equals the full 1280 px viewport at `x: 0`, with `rgb(245, 245, 247)` background and content aligned to the page grid.
+- Typography: computed scan found zero visible elements below 12 px.
+- Layout: desktop and 390 px documents both report zero horizontal overflow.
+- Browser console: no errors; only Vite connection and React development informational messages.
 
-## Responsive and interaction checks
+## Required fidelity surfaces
 
-- Desktop overflow: passed at 1540 × 1178.
-- Mobile overflow: passed at a true 390 × 844 iframe viewport.
-- Mobile hero media: passed at 354 × 354, with 16 swipeable product thumbnails and a separate video slot.
-- Power selection: passed. Selecting 70W updates `aria-pressed`, the hero price and the sticky purchase price to $4,499.00.
-- Project browsing: passed. The next-project control changes image/content while preserving the 4:3 stage size.
-- Story navigation: passed. Seven chapter controls move between the corresponding large media stories.
-- Specification accordion: passed. Controls disclose the correct workbook-derived values.
-- Build: passed with Vite; no horizontal overflow and no computed text below 12 px.
+- Fonts and typography: passed. Certia remains the shipped family; major headings retain bold weights, the project secondary title is reduced to 38.4 px at 1280 px, and the 12 px floor is preserved.
+- Spacing and layout rhythm: passed. Project proof height and controls are stable; left-aligned sections share the same editorial axis; safety spans edge to edge while its content stays on the 1280 px grid.
+- Colors and visual tokens: passed. Structural surfaces remain white or `#F5F5F7`; red remains reserved for actions, prices and proof accents.
+- Image quality and asset fidelity: passed. Supplied XRF renders remain uncropped in the 16:9 P0 stages and the media dialog uses `object-fit: contain`.
+- Copy and content: passed. No product claim or price was changed; the new media label clearly communicates `VIEW VIDEO / FULL IMAGE`.
 
-## Production follow-up
+## Comparison history
 
-- Replace image previews with final 16:9 P0 videos when production media is available.
-- Replace temporary project proof with validated test settings and measured production time where required.
-- Connect the prototype cart and SHOP actions to the production commerce backend.
+1. Earlier findings: MSRP currency inherited the strike-through; project proof typography was oversized and controls were not explicitly fixed; P0 stages did not directly open media; four section intros were centered; safety background was constrained.
+2. Fixes: split MSRP amount/currency decoration, fixed desktop project geometry, reduced its `h3`, made all P0 stages accessible media buttons, introduced the shared left-aligned heading style, and made safety a full-width `#F5F5F7` band.
+3. Post-fix evidence: `qa/annotation-comparison.png`, `qa/annotation-latest-modal.png`, computed carousel geometry, 1280 px safety metrics, and the 390 px responsive audit above.
+
+## Findings
+
+- No actionable P0, P1 or P2 findings remain.
+- P3 follow-up: replace the seven still-image previews with final production videos when those files are delivered; the interaction and 16:9 anatomy are already in place.
+
+## Primary interactions tested
+
+- Previous/next project controls and project dots.
+- P0 story card click to full-media dialog and dialog close.
+- Desktop and mobile responsive layout.
+- Sticky purchase bar remained visible and unchanged.
 
 final result: passed

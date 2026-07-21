@@ -359,10 +359,17 @@ function StickyStory({ onPlay }) {
       </div>
       <div className="immersive-story__steps">
         {scrollStories.map((item, index) => (
-          <article ref={(node) => { stepRefs.current[index] = node; }} className={active === index ? "immersive-story__step is-active" : "immersive-story__step"} key={item.id}>
+          <button
+            type="button"
+            ref={(node) => { stepRefs.current[index] = node; }}
+            className={active === index ? "immersive-story__step is-active" : "immersive-story__step"}
+            key={item.id}
+            onClick={() => onPlay(item.eyebrow, item.title, asset(item.image))}
+            aria-label={`Open ${item.title} video and full image preview`}
+          >
             <img src={asset(item.image)} alt={`${item.title} XRF Gen2 feature view`} />
-            <div className="immersive-story__media-label"><span>VIDEO STORY · IMAGE PREVIEW</span><span>{String(index + 1).padStart(2, "0")} / {String(scrollStories.length).padStart(2, "0")}</span></div>
-          </article>
+            <div className="immersive-story__media-label"><span><Play size={15} weight="fill" /> VIEW VIDEO / FULL IMAGE</span><span>{String(index + 1).padStart(2, "0")} / {String(scrollStories.length).padStart(2, "0")}</span></div>
+          </button>
         ))}
       </div>
     </section>
@@ -568,7 +575,7 @@ export function App() {
               </div>
               <div className="official-price__msrp">
                 <span>MSRP</span>
-                <strong>{formatMoney(selectedPurchasePackage.msrp)} <small>USD</small></strong>
+                <strong><span>{formatMoney(selectedPurchasePackage.msrp)}</span> <small>USD</small></strong>
               </div>
             </div>
             <div className="financing-line">
@@ -697,7 +704,7 @@ export function App() {
         </section>
 
         <section className="section power-guide" id="power-guide" data-reveal>
-          <div className="section-heading section-heading--center">
+          <div className="section-heading section-heading--left">
             <span className="eyebrow">TWO PURPOSE-BUILT RF OPTIONS</span>
             <h2>Choose the power that fits your work.</h2>
             <p>38W and 70W share the same professional platform. Your workload decides the right fit.</p>
@@ -749,7 +756,7 @@ export function App() {
         </section>
 
         <section className="section reliability" id="reliability" data-reveal>
-          <div className="section-heading section-heading--center">
+          <div className="section-heading section-heading--left">
             <span className="eyebrow">ENGINEERED FOR RELIABILITY</span>
             <h2>Less maintenance. More making.</h2>
             <p>The engineering details work together to reduce cleaning interruptions, field alignment and unexpected downtime.</p>
@@ -872,9 +879,9 @@ export function App() {
       </div>
 
       {videoModal && (
-        <div className="video-modal" role="dialog" aria-modal="true" aria-label={`${videoModal.title} video preview`} onClick={() => setVideoModal(null)}>
+        <div className="video-modal" role="dialog" aria-modal="true" aria-label={`${videoModal.title} media preview`} onClick={() => setVideoModal(null)}>
           <div className="video-modal__dialog" onClick={(event) => event.stopPropagation()}>
-            <button type="button" className="video-modal__close" aria-label="Close video" onClick={() => setVideoModal(null)}><X size={22} /></button>
+            <button type="button" className="video-modal__close" aria-label="Close media preview" onClick={() => setVideoModal(null)}><X size={22} /></button>
             <div className="video-modal__media">
               <img src={videoModal.image} alt="" />
               <span><Play size={26} weight="fill" /></span>
@@ -882,7 +889,7 @@ export function App() {
             <div className="video-modal__copy">
               <span className="eyebrow">{videoModal.eyebrow}</span>
               <h2>{videoModal.title}</h2>
-              <p>The full 16:9 frame is reserved for the final production video. This image preview preserves the intended story and layout.</p>
+              <p>Full-size 16:9 media preview. The final production video can replace this image without changing the story layout.</p>
             </div>
           </div>
         </div>
