@@ -1,63 +1,59 @@
-# XRF Gen2 Product Listing · Design QA
+# XRF Gen2 Product Listing · Revision Design QA
 
 ## Comparison target
 
-- Source visual truth:
-  - `/tmp/xrf-product-design-refs/omtech-polar2-top.png` — purchase structure reference.
-  - `/tmp/xrf-product-design-refs/xtool-p3-top.png` — premium white visual-language reference.
-  - `/Users/yongyuan/Downloads/OneLaser机器/XRF/渲染图/` — exact product appearance and product-detail imagery.
-- Implementation screenshot: `/Users/yongyuan/Documents/XRF Gen2 网页/qa/desktop-top-final.png`
-- Combined comparison evidence: `/Users/yongyuan/Documents/XRF Gen2 网页/qa/comparison.png`
-- Viewport: 1440 × 1100
-- State: desktop hero, 38W selected, product Studio view selected.
+- Source visual truth: `/Users/yongyuan/Documents/XRF Gen2 网页/qa/source-public-before-revision.png` — the published hero state referenced by the user's four browser annotations.
+- Implementation screenshot: `/Users/yongyuan/Documents/XRF Gen2 网页/qa/desktop-revision-final.png`
+- Combined comparison evidence: `/Users/yongyuan/Documents/XRF Gen2 网页/qa/revision-comparison.png`
+- Mobile implementation evidence: `/Users/yongyuan/Documents/XRF Gen2 网页/qa/mobile-gallery-revision.png`
+- Viewports: 1463 × 1178 desktop; 390 × 844 mobile.
+- State: page top, 38W selected, Studio product view selected.
 
 ## Full-view comparison evidence
 
-The combined comparison shows that the implementation preserves OMTech's two-column purchase anatomy while adopting xTool's brighter white canvas, large product stage, restrained controls and generous spacing. The OneLaser implementation uses the supplied XRF Gen2 render and cropped brand mark rather than approximated product or logo artwork.
+The combined comparison verifies the requested changes in the same desktop viewport and state. The previous `PRODUCT VIEW` and render-caption strips are removed, the product stage is now square, the announcement and page surfaces use white or `#F5F5F7`, and the typography visibly uses the supplied Certia brand family.
 
 ## Focused comparison evidence
 
-- `/Users/yongyuan/Documents/XRF Gen2 网页/qa/desktop-performance.png` verifies the large P0 video-story treatment, headline hierarchy, placeholder disclosure and real product image quality.
-- `/Users/yongyuan/Documents/XRF Gen2 网页/qa/desktop-configuration.png` verifies the core conversion journey, optional-accessory distinction and saved configuration state.
-- `/Users/yongyuan/Documents/XRF Gen2 网页/qa/desktop-safety.png` verifies the dark safety architecture and image/text balance.
-- `/Users/yongyuan/Documents/XRF Gen2 网页/qa/desktop-specs.png` verifies specification readability and expanded state.
-- `/Users/yongyuan/Documents/XRF Gen2 网页/qa/mobile-top.png` and `/Users/yongyuan/Documents/XRF Gen2 网页/qa/mobile-performance.png` verify mobile hierarchy, sticky CTA, responsive imagery and the stacked video-story pattern.
-- `/Users/yongyuan/Documents/XRF Gen2 网页/qa/mobile-menu.png` verifies the mobile navigation state.
+- Desktop runtime measurements: product stage 901.125 × 901.125 px; thumbnail 204.969 × 204.969 px.
+- Mobile runtime measurements: product stage 354 × 354 px; thumbnail 101.492 × 101.492 px; document width 390 px with no horizontal page overflow.
+- Product gallery: 16 square thumbnails; desktop strip width 3430 px inside a 901 px viewport and mobile strip width 1729 px inside a 354 px viewport.
+- Gallery interaction: selecting off-screen `Head 01` scrolled the thumbnail strip to 1720 px and updated the main image to `xrf-gallery-08.jpg`.
+- Font verification: `document.fonts.check("16px Certia")` returned true on desktop and mobile.
+- Color verification: no rendered element used the former black section/card background tokens in the checked desktop state.
 
 ## Required fidelity surfaces
 
-- Fonts and typography: passed. The system Helvetica/Arial stack reproduces the compact commercial sans feel of the references. Display scale, tight tracking, line height and mobile wrapping are coherent and readable.
-- Spacing and layout rhythm: passed. Desktop uses a clear left-media/right-purchase grid; section spacing and vertical rhythm remain consistent. Mobile collapses without overlap or horizontal overflow.
-- Colors and visual tokens: passed. White, warm gray and black dominate; OneLaser red-orange is reserved for selected states, labels and primary actions. There are no decorative gradients or blue UI drift.
-- Image quality and asset fidelity: passed. All visible product and lifestyle imagery comes from supplied OneLaser assets. The logo is a crop from the supplied brochure, not a redraw. Product renders are optimized without obvious compression artifacts.
-- Copy and content: passed for prototype scope. Product claims and specifications are based on the supplied workbook. Optional accessories are consistently labeled. No unverified 70W price or customer rating was invented.
-- Icons: passed. The design does not rely on improvised SVG, CSS-art or glyph icons; text actions and image controls are used where appropriate.
-- States and interactions: passed. Media selection, 38W/70W selection, navigation, configuration jump/save, specifications, FAQ and mobile menu were tested. Browser console error count: 0.
-- Accessibility: passed for prototype scope. Semantic headings and buttons, visible keyboard focus, alt text, reduced-motion handling, usable mobile tap targets and no horizontal overflow at 390 px.
+- Fonts and typography: passed. All UI text inherits the official Certia family. Regular, Medium, SemiBold, Bold, ExtraBold and Black files ship with the page, with Arial only as a final fallback.
+- Spacing and layout rhythm: passed. Removing the top and bottom hero labels gives the square product stage a clean, uninterrupted composition. Purchase controls remain aligned and readable.
+- Colors and visual tokens: passed. Structural page surfaces are white or `#F5F5F7`; previously dark announcement, video, safety and configuration surfaces were converted to the light system. OneLaser red remains the action accent.
+- Image quality and asset fidelity: passed. The main image and 16-item gallery use real supplied XRF Gen2 renders. Images remain contained without distortion inside square stages.
+- Copy and content: passed. The two specifically requested hero text strips are absent; product claims and optional-accessory labeling remain unchanged.
+- States and interactions: passed. Product-thumbnail selection, off-screen gallery access and native horizontal scrolling were verified. Browser console error count: 0.
+- Responsiveness and accessibility: passed. Desktop and mobile stages remain square, the thumbnail rail has touch/trackpad scrolling and scroll snapping, controls retain accessible names, and the 390 px viewport has no horizontal document overflow.
 
 ## Comparison history
 
 ### Iteration 1
 
-- Earlier finding: internal `P0 / P1 / P2 / P3` production-priority markers were visible as consumer-facing copy, creating launch-page clutter (P2, copy/content).
-- Fix made: replaced internal priority markers with product-facing labels such as `RF RESULTS`, `BUILT-IN PROTECTION`, `ONELASER SUPPORT` and `COMPLETE DETAILS`; kept only the explicitly approved `VIDEO PLACEHOLDER` disclosure.
-- Post-fix evidence: `qa/desktop-top-final.png`, `qa/desktop-performance.png`, `qa/desktop-safety.png`, `qa/desktop-specs.png`, and `qa/mobile-performance.png`.
+- Earlier findings: hero top/bottom labels remained visible; hero image and thumbnails were landscape; black section surfaces conflicted with the requested light visual system; system fonts replaced the official brand family (P1/P2).
+- Fixes made: removed both hero label strips, enforced 1:1 stage and thumbnail geometry, converted structural black backgrounds to white/`#F5F5F7`, bundled and applied Certia across all text.
+- Post-fix evidence: `qa/desktop-revision-final.png`, `qa/mobile-gallery-revision.png`, and `qa/revision-comparison.png`.
 
 ### Iteration 2
 
-- Earlier finding: immediate screenshots taken during long smooth-scroll transitions did not show the final target section state (P2, QA capture/state mismatch).
-- Fix made: waited for the known scroll transition to finish and recaptured the Safety, Specs and Configuration sections at their settled positions.
-- Post-fix evidence: `qa/desktop-safety.png`, `qa/desktop-specs.png`, and `qa/desktop-configuration.png`.
+- Earlier finding: the gallery exposed only four images and did not communicate that more views were available (P2).
+- Fix made: expanded the gallery to 16 supplied renders and converted the thumbnail row to an overflowed, scroll-snapped horizontal rail with a partial next card visible.
+- Post-fix evidence: runtime width/count measurements and successful `Head 01` off-screen selection.
 
 ## Findings
 
-No actionable P0, P1 or P2 design, responsiveness, accessibility or core-interaction findings remain.
+No actionable P0, P1 or P2 visual, responsiveness, accessibility or core-interaction findings remain for this revision.
 
 ## Follow-up polish
 
-- P3: replace each neutral video placeholder with the final 18–25 second production asset.
-- P3: add real project time/settings cards only after the six proposed material tests are complete.
-- P3: add final 70W pricing, verified review data and final compliance/guarantee language when commercial and legal sources are approved.
+- P3: final product labels can be renamed if the commercial team wants a specific photography taxonomy.
+- P3: replace each approved video placeholder when final production footage is available.
 
 ## Final result
 

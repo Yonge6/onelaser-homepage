@@ -16,3 +16,7 @@ When implementing from a selected generated mock, treat that image as the source
 - P1 receives large explanatory visuals; P2 appears as compact proof tiles; P3 belongs in specifications and FAQ.
 - Always label Smart Air, Riser Base, Conveyor, Rotary, Fume Extractor, and optional lenses as optional when shown.
 - Present 38W and 70W as equal-fit choices for different work, never as weak versus premium.
+- Use the official Certia brand font for every web text style. Ship the required font files with the prototype so the public page does not depend on locally installed fonts.
+- Page background surfaces must be white or `#F5F5F7`; do not use black as a section, card, announcement, or information-panel background.
+- Keep the hero product stage and every product thumbnail square. Do not show the `PRODUCT VIEW`, overview-video bar, render caption, or platform caption around the hero image.
+- Product media is a scrollable gallery with more than four square thumbnails. Keep a partial next thumbnail visible so desktop and mobile users understand they can swipe horizontally for additional real XRF renders.

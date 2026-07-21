@@ -7,6 +7,18 @@ const media = [
   { src: asset("xrf-open.jpg"), alt: "XRF Gen2 with the lid open", label: "Inside" },
   { src: asset("xrf-front.jpg"), alt: "Front view of XRF Gen2", label: "Front" },
   { src: asset("xrf-ivs.jpg"), alt: "XRF Gen2 intelligent vision system close-up", label: "IVS" },
+  { src: asset("xrf-gallery-01.jpg"), alt: "Straight-on front view of XRF Gen2", label: "Front 01" },
+  { src: asset("xrf-gallery-02.jpg"), alt: "Straight-on closed view of XRF Gen2", label: "Front 02" },
+  { src: asset("xrf-gallery-03.jpg"), alt: "Open XRF Gen2 from the front-left angle", label: "Open 01" },
+  { src: asset("xrf-gallery-04.jpg"), alt: "Open XRF Gen2 viewed from the front", label: "Open 02" },
+  { src: asset("xrf-gallery-05.jpg"), alt: "Open XRF Gen2 from the front-right angle", label: "Open 03" },
+  { src: asset("xrf-gallery-06.jpg"), alt: "Closed XRF Gen2 from the front-right angle", label: "Angle" },
+  { src: asset("xrf-gallery-07.jpg"), alt: "XRF Gen2 internal motion system", label: "Motion" },
+  { src: asset("xrf-gallery-08.jpg"), alt: "XRF Gen2 RF laser head close-up", label: "Head 01" },
+  { src: asset("xrf-gallery-09.jpg"), alt: "XRF Gen2 RF laser head from a lower angle", label: "Head 02" },
+  { src: asset("xrf-gallery-10.jpg"), alt: "XRF Gen2 gantry and honeycomb bed", label: "Gantry" },
+  { src: asset("xrf-gallery-11.jpg"), alt: "XRF Gen2 integrated touchscreen detail", label: "Touch" },
+  { src: asset("xrf-gallery-12.jpg"), alt: "XRF Gen2 work area and control enclosure", label: "Bed" },
 ];
 
 const specs = [
@@ -163,15 +175,7 @@ export function App() {
         <section className="hero section" id="top">
           <div className="hero-media">
             <div className="media-stage">
-              <div className="media-stage__bar">
-                <span>PRODUCT VIEW</span>
-                <button type="button" onClick={() => alert("Hero video slot ready for final 18–25 second production asset.")}>Watch 24s overview</button>
-              </div>
               <img src={media[activeMedia].src} alt={media[activeMedia].alt} />
-              <div className="media-stage__caption">
-                <span>Actual XRF Gen2 render</span>
-                <span>Gen2 · RF desktop platform</span>
-              </div>
             </div>
             <div className="thumbnail-row" aria-label="Product views">
               {media.map((item, index) => (
