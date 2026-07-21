@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from "react";
-import { CaretLeft, CaretRight, Minus, Play, Plus, X } from "@phosphor-icons/react";
+import { CaretLeft, CaretRight, Check, Minus, Play, Plus, Star, X } from "@phosphor-icons/react";
 
 const asset = (name) => `${import.meta.env.BASE_URL}assets/${name}`;
 
@@ -90,6 +90,68 @@ const accessoryOptions = [
   { id: "fume", name: "Filtered Fume Extractor", use: "Adds filtered extraction for the workspace.", image: "xrf-gallery-06.jpg" },
 ];
 
+const purchasePackages = [
+  {
+    id: "standalone",
+    name: "XRF Standalone",
+    price: 3999,
+    msrp: 6499,
+    badge: "CURRENT OFFER",
+    description: "38W RF desktop laser with 1,200 mm/s motion, True 3G acceleration and a 24 × 12 in workspace.",
+    detail: "The New King of Desktop Lasers",
+  },
+  {
+    id: "riser",
+    name: "XRF & Riser Base",
+    price: 4499,
+    msrp: 6999,
+    badge: "EXPANDED HEIGHT",
+    description: "Adds the optional Riser Base for taller objects and expanded rotary workflows.",
+    detail: "Includes optional Riser Base",
+  },
+];
+
+const officialAccessories = [
+  {
+    id: "lightburn",
+    name: "LightBurn Pro License Key",
+    price: 189.05,
+    msrp: 199,
+    description: "Professional laser layout, control and production software.",
+    image: "xrf-touchscreen.jpg",
+  },
+  {
+    id: "conveyor-official",
+    name: "Automatic Conveyor Feeder for OneLaser XRF",
+    price: 759.05,
+    msrp: 799,
+    description: "Optional continuous-feed workflow for long-format projects.",
+    image: "xrf-front.jpg",
+  },
+  {
+    id: "air-assist-official",
+    name: "OneLaser Air Assist Control",
+    price: 190,
+    msrp: 199.99,
+    description: "Optional automated dual-mode airflow for cutting and engraving.",
+    image: "xrf-gallery-08.jpg",
+  },
+  {
+    id: "lens-kit",
+    name: "MagSwitch Lens Holder Replacement Kit",
+    price: 33.25,
+    msrp: 34.99,
+    description: "Optional 20-pack replacement kit for the magnetic lens system.",
+    image: "xrf-gallery-09.jpg",
+  },
+];
+
+const formatMoney = (value) => new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 2,
+}).format(value);
+
 const specs = [
   {
     title: "Laser source",
@@ -112,7 +174,7 @@ const specs = [
   {
     title: "Workspace",
     rows: [
-      ["True engraving area", "24 × 12 in"],
+      ["True engraving area", "23.6 × 11.8 in (nominal 24 × 12 in)"],
       ["Honeycomb table", "650 × 350 mm"],
       ["Maximum work height", "8.5 in with optional Riser Base"],
       ["Maximum length", "Unlimited with pass-through workflow"],
@@ -206,19 +268,45 @@ export function App() {
   const [configured, setConfigured] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [selectedAccessories, setSelectedAccessories] = useState([]);
+  const [selectedPackageId, setSelectedPackageId] = useState("standalone");
+  const [purchasePower, setPurchasePower] = useState("38W");
+  const [selectedPurchaseAccessories, setSelectedPurchaseAccessories] = useState([]);
+  const [purchaseAdded, setPurchaseAdded] = useState(false);
   const [videoModal, setVideoModal] = useState(null);
   const thumbnailRailRef = useRef(null);
 
   const selectedPower = useMemo(
     () => power === "38W"
-      ? { label: "38W RF", use: "Fine detail & everyday production", price: "$5,999", note: "Starting price" }
-      : { label: "70W RF", use: "Deeper relief & higher throughput", price: "Launch pricing", note: "Request final configuration" },
+      ? { label: "38W RF", use: "Fine detail & everyday production", price: "$3,999", note: "Official current price" }
+      : { label: "70W RF", use: "Deeper relief & higher throughput", price: "$4,499", note: "New product price" },
     [power],
   );
 
+  const selectedPurchasePackage = useMemo(() => {
+    const selected = purchasePackages.find((item) => item.id === selectedPackageId) ?? purchasePackages[0];
+    const powerDelta = purchasePower === "70W" ? 500 : 0;
+    return { ...selected, price: selected.price + powerDelta, msrp: selected.msrp + powerDelta };
+  }, [selectedPackageId, purchasePower]);
+
+  const purchaseAccessoryTotal = useMemo(
+    () => officialAccessories
+      .filter((item) => selectedPurchaseAccessories.includes(item.id))
+      .reduce((sum, item) => sum + item.price, 0),
+    [selectedPurchaseAccessories],
+  );
+
+  const purchaseAccessoryMsrpTotal = useMemo(
+    () => officialAccessories
+      .filter((item) => selectedPurchaseAccessories.includes(item.id))
+      .reduce((sum, item) => sum + item.msrp, 0),
+    [selectedPurchaseAccessories],
+  );
+
+  const purchaseTotal = (selectedPurchasePackage.price + purchaseAccessoryTotal) * quantity;
+  const purchaseMsrpTotal = (selectedPurchasePackage.msrp + purchaseAccessoryMsrpTotal) * quantity;
+
   function configure() {
-    setConfigured(true);
-    document.getElementById("configuration")?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById("purchase-options")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function selectMedia(index) {
@@ -248,6 +336,13 @@ export function App() {
 
   function toggleAccessory(accessoryId) {
     setSelectedAccessories((current) => current.includes(accessoryId)
+      ? current.filter((id) => id !== accessoryId)
+      : [...current, accessoryId]);
+  }
+
+  function togglePurchaseAccessory(accessoryId) {
+    setPurchaseAdded(false);
+    setSelectedPurchaseAccessories((current) => current.includes(accessoryId)
       ? current.filter((id) => id !== accessoryId)
       : [...current, accessoryId]);
   }
@@ -320,50 +415,128 @@ export function App() {
 
           <div className="purchase-panel">
             <div className="product-kicker">
-              <span>NEW · GEN 2</span>
-              <span>Professional RF desktop platform</span>
+              <span>ONELASER XRF™</span>
+              <span>Professional RF desktop laser</span>
             </div>
             <h1>OneLaser XRF™ Performance Desktop Laser Engraver (38W/70W RF)</h1>
-            <p className="hero-lede">Professional RF precision, controlled 3G motion and intelligent vision—built to create premium products with less setup, less waste and less maintenance.</p>
+
+            <div className="rating-row" aria-label="Rated 4.93 out of 5 from 45 reviews">
+              <span className="rating-stars" aria-hidden="true">
+                {[0, 1, 2, 3, 4].map((item) => <Star size={18} weight="fill" key={item} />)}
+              </span>
+              <strong>4.93</strong>
+              <a href="https://www.1laser.com/products/onelaser-xrf-desktop-laser-machine#judgeme_product_reviews" target="_blank" rel="noreferrer">45 reviews</a>
+            </div>
 
             <ul className="hero-highlights">
-              <li>Fine RF detail up to 2,000 DPI with 38W or 70W power.</li>
-              <li>Real 1,200 mm/s working speed with controlled True 3G motion.</li>
-              <li>IVS vision, XFocus autofocus and a 24 × 12 in workspace.</li>
+              <li><strong>38W / 70W RF metal tube:</strong> rated up to 30,000 hours with air-cooled operation.</li>
+              <li><strong>1,200 mm/s + True 3G:</strong> real working speed with 29,430 mm/s² acceleration.</li>
+              <li><strong>Professional detail:</strong> up to 2,000 DPI, 0.07 mm laser dot and ≤ 0.01 mm repeat positioning.</li>
+              <li><strong>Desktop production area:</strong> 23.6 × 11.8 in working bed with integrated 5MP camera.</li>
+              <li><strong>Class 1 design:</strong> enclosed processing with US-based engineer support.</li>
             </ul>
 
-            <div className="choice-block">
-              <div className="choice-heading">
-                <span>Choose your RF power</span>
-                <a href="#power-guide">Compare</a>
+            <div className="official-price">
+              <div className="official-price__main">
+                <span>Final price</span>
+                <strong>{formatMoney(selectedPurchasePackage.price)} <small>USD</small></strong>
+                <em>Save {formatMoney(selectedPurchasePackage.msrp - selectedPurchasePackage.price)}</em>
               </div>
-              <div className="power-options">
-                {["38W", "70W"].map((value) => (
-                  <button type="button" key={value} onClick={() => setPower(value)} className={power === value ? "power-option is-selected" : "power-option"}>
-                    <span>{value} RF</span>
-                    <small>{value === "38W" ? "Fine detail & everyday production" : "Deeper relief & higher throughput"}</small>
-                  </button>
-                ))}
+              <div className="official-price__msrp">
+                <span>MSRP</span>
+                <strong>{formatMoney(selectedPurchasePackage.msrp)} <small>USD</small></strong>
               </div>
             </div>
-
-            <div className="price-row">
-              <div>
-                <span>{selectedPower.note}</span>
-                <strong>{selectedPower.price}</strong>
-              </div>
-              <p>or financing options at checkout<br />Estimated freight from $399</p>
+            <div className="financing-line">
+              <strong>0% APR · or as low as $194/mo with Affirm</strong>
+              <a href="https://www.1laser.com/pages/financing" target="_blank" rel="noreferrer">See if you qualify <CaretRight size={15} /></a>
             </div>
 
-            <button type="button" className="primary-cta" onClick={configure}>Configure Your XRF</button>
-            <button type="button" className="secondary-cta" onClick={() => document.getElementById("performance")?.scrollIntoView({ behavior: "smooth" })}>See it in action</button>
+            <div className="purchase-options" id="purchase-options">
+              <div className="purchase-section-heading">
+                <div><span>Choose your RF power</span><small>Same platform, tuned for different workloads.</small></div>
+                <a href="#power-guide">Compare 38W / 70W</a>
+              </div>
+              <div className="purchase-power-options">
+                {[
+                  { id: "38W", title: "38W RF", copy: "Fine detail & everyday production", price: 3999 },
+                  { id: "70W", title: "70W RF", copy: "Deeper relief & higher throughput", price: 4499, badge: "NEW" },
+                ].map((item) => {
+                  const selected = purchasePower === item.id;
+                  return (
+                    <button type="button" className={selected ? "purchase-power is-selected" : "purchase-power"} key={item.id} onClick={() => { setPurchasePower(item.id); setPower(item.id); setPurchaseAdded(false); }} aria-pressed={selected}>
+                      <span><strong>{item.title}</strong>{item.badge && <small>{item.badge}</small>}</span>
+                      <p>{item.copy}</p>
+                      <em>From {formatMoney(item.price)}</em>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="purchase-section-heading">
+                <div><span>Package</span><small>Choose the setup that matches your workspace.</small></div>
+                <a href="#configuration">Compare all options</a>
+              </div>
+              <div className="official-packages">
+                {purchasePackages.map((item) => {
+                  const selected = selectedPackageId === item.id;
+                  return (
+                    <button
+                      type="button"
+                      className={selected ? "official-package is-selected" : "official-package"}
+                      key={item.id}
+                      onClick={() => { setSelectedPackageId(item.id); setPurchaseAdded(false); }}
+                      aria-pressed={selected}
+                    >
+                      <div className="official-package__top">
+                        <span><small>{item.badge}</small><strong>{item.name}</strong></span>
+                        <span><strong>{formatMoney(item.price + (purchasePower === "70W" ? 500 : 0))}</strong><del>{formatMoney(item.msrp + (purchasePower === "70W" ? 500 : 0))}</del></span>
+                      </div>
+                      <p>{item.description.replace("38W", purchasePower)}</p>
+                      <div className="official-package__detail"><Check size={17} weight="bold" /><span>{item.detail}</span></div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="purchase-section-heading purchase-section-heading--accessories">
+                <div><span>Frequently bought together</span><small>Official current accessory prices · save 5% on listed essentials.</small></div>
+              </div>
+              <div className="purchase-accessories">
+                {officialAccessories.map((item) => {
+                  const selected = selectedPurchaseAccessories.includes(item.id);
+                  return (
+                    <label className={selected ? "purchase-accessory is-selected" : "purchase-accessory"} key={item.id}>
+                      <input type="checkbox" checked={selected} onChange={() => togglePurchaseAccessory(item.id)} />
+                      <img src={asset(item.image)} alt="" />
+                      <span><strong>{item.name}</strong><small>OPTIONAL</small><p>{item.description}</p></span>
+                      <span className="purchase-accessory__price"><strong>{formatMoney(item.price)}</strong><del>{formatMoney(item.msrp)}</del></span>
+                    </label>
+                  );
+                })}
+              </div>
+
+              <div className="purchase-total">
+                <span><small>Your configuration</small><strong>{purchasePower} · {selectedPurchasePackage.name}{selectedPurchaseAccessories.length ? ` + ${selectedPurchaseAccessories.length} optional item${selectedPurchaseAccessories.length > 1 ? "s" : ""}` : ""}</strong></span>
+                <strong>{formatMoney(purchaseTotal)}</strong>
+              </div>
+              <div className="purchase-actions purchase-actions--hero">
+                <div className="quantity-control" aria-label="Purchase quantity">
+                  <button type="button" aria-label="Decrease quantity" onClick={() => { setQuantity((value) => Math.max(1, value - 1)); setPurchaseAdded(false); }}><Minus size={15} /></button>
+                  <strong>{quantity}</strong>
+                  <button type="button" aria-label="Increase quantity" onClick={() => { setQuantity((value) => value + 1); setPurchaseAdded(false); }}><Plus size={15} /></button>
+                </div>
+                <button type="button" className="primary-cta" onClick={() => setPurchaseAdded(true)}>{purchaseAdded ? "Added to configuration" : "Add to Cart"}</button>
+              </div>
+              <a className="secondary-cta secondary-cta--link" href="https://www.1laser.com/products/onelaser-xrf-desktop-laser-machine" target="_blank" rel="noreferrer">Continue on OneLaser.com</a>
+            </div>
 
             <div className="trust-panel">
-              <div><strong>30 days</strong><span>Purchase guarantee</span></div>
-              <div><strong>3-2-1</strong><span>Warranty coverage</span></div>
-              <div><strong>US based</strong><span>Engineer support</span></div>
+              <div><strong>30-Day</strong><span>Easy returns</span></div>
+              <div><strong>3-Year</strong><span>Warranty</span></div>
+              <div><strong>100% USA</strong><span>Engineer support</span></div>
             </div>
-            <p className="optional-note">Smart Air, Riser Base, Conveyor, Rotary and Fume Extractor are optional.</p>
+            <p className="official-source-note">Current commercial data from OneLaser.com. Riser Base, Conveyor, Air Assist Control and replacement optics are optional unless explicitly included.</p>
           </div>
         </section>
 
@@ -642,7 +815,7 @@ export function App() {
                     return (
                       <button type="button" key={value} className={power === value ? "package-card is-selected" : "package-card"} onClick={() => setPower(value)}>
                         <div><span>{is38 ? "DETAIL + EVERYDAY PRODUCTION" : "DEPTH + HIGHER THROUGHPUT"}</span><h4>XRF Gen2 {value} RF</h4></div>
-                        <div className="package-card__price"><strong>{is38 ? "$5,999" : "Launch pricing"}</strong><span>{is38 ? "Starting price" : "Request final configuration"}</span></div>
+                        <div className="package-card__price"><strong>{is38 ? "$3,999" : "$4,499"}</strong><span>{is38 ? "Official current price" : "New product price"}</span></div>
                         <p>{is38 ? "Photo engraving, fine text, signs and balanced studio output." : "Heavier workloads, deeper relief and more production headroom."}</p>
                       </button>
                     );
@@ -729,8 +902,8 @@ export function App() {
       </footer>
 
       <div className="sticky-buy" aria-label="Sticky purchase bar">
-        <div><strong>XRF Gen2 · {selectedPower.label}</strong><span>{selectedPower.use}</span></div>
-        <div><strong>{selectedPower.price}</strong><button type="button" onClick={configure}>Configure Your XRF</button></div>
+        <div><strong>{selectedPurchasePackage.name}</strong><span>{purchasePower} RF · {selectedPurchaseAccessories.length ? `${selectedPurchaseAccessories.length} optional item${selectedPurchaseAccessories.length > 1 ? "s" : ""}` : "Standalone configuration"}</span></div>
+        <div className="sticky-buy__price"><span><strong>{formatMoney(purchaseTotal)}</strong><del>{formatMoney(purchaseMsrpTotal)}</del></span><button type="button" onClick={() => setPurchaseAdded(true)}>{purchaseAdded ? "Added" : "Add to Cart"}</button></div>
       </div>
 
       {videoModal && (

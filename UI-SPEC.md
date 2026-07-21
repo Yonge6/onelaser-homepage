@@ -44,6 +44,10 @@ Premium international product UI: Apple and DJI restraint, xTool purchase clarit
 - Cards use borders and surface contrast; no decorative shadows unless functional separation requires it.
 - Prices are always red. Optional accessories always show `OPTIONAL` before the name.
 - Product gallery: 660 × 660 px desktop stage; 70 × 70 px thumbnails; explicit previous/next controls and dedicated video slot.
+- Desktop hero purchase panel order: H1 → source-backed rating → five concise proof bullets → Final Price/MSRP/Save → financing → 38W/70W selector → package cards → optional add-ons → quantity/CTA → assurance.
+- Package and add-on cards use 1 px dividers, 10–12 px radii, no elevation, a red price, and a black 2 px-equivalent selected state (border plus inset ring).
+- Hero gallery is sticky on desktop while the longer purchase panel scrolls; it becomes static when the layout stacks below 1180 px.
+- Sticky purchase bar always reflects the selected power, package, optional-item count, quantity and calculated total.
 
 ## Responsive behavior
 
@@ -51,3 +55,4 @@ Premium international product UI: Apple and DJI restraint, xTool purchase clarit
 - Below 1180 px: product gallery and purchase panel stack.
 - Below 900 px: configurator and explanatory media split layouts stack.
 - Below 640 px: single-column cards, 18 px page gutters, 36 px product H1, full-width CTAs and no horizontal page overflow.
+- On mobile, power choices stack, add-on cards collapse to three visual columns, and the sticky bar preserves the live total plus the primary CTA.

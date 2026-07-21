@@ -1,63 +1,58 @@
-# XRF Gen2 PDP · UI System and Purchase Flow QA
+# XRF Gen2 PDP · Hero Commerce Flow QA
 
 ## Review target
 
-- Purchase-layout reference: xTool P3 and P2 product media, purchase decision and configuration anatomy.
-- Below-hero reference: OMTech Polar 2 capability navigation, benefit switching, media stories, configuration, specifications and FAQ behavior.
+- Purchase-flow reference: xTool P3 product title, evidence, price, package, add-on, quantity and sticky-cart anatomy.
+- Commercial-data reference: current OneLaser XRF product page plus the user-authorized 70W new-product price rule.
 - Product content source: `XRF Gen2 卖点参数发布汇总.xlsx`.
 - UI source of truth: `UI-SPEC.md`.
 - Desktop viewport: 1458 × 1178.
 - Mobile viewport: 390 × 844.
 
-## Evidence
+## Visual evidence
 
-- Desktop purchase view: `qa/desktop-top-purchase-v3.png`.
-- Desktop feature overview: `qa/desktop-feature-bento-v3.png`.
-- Desktop configurator: `qa/desktop-configurator-v3.png`.
-- Mobile purchase view: `qa/mobile-top-v3.png`.
-- Mobile feature overview: `qa/mobile-features-v3.png`.
-- Mobile configurator: `qa/mobile-configurator-v3.png`.
-- Reference and implementation comparison: `qa/reference-implementation-comparison-v3.png`.
+- xTool reference capture: `qa/reference-xtool-p3-top-v4.png`.
+- OneLaser official-page capture: `qa/reference-onelaser-official-top-v4.png`.
+- Final desktop hero: `qa/desktop-top-purchase-v5.jpg`.
+- Final mobile hero: `qa/mobile-top-purchase-v5.jpg`.
+- Final mobile 70W state: `qa/mobile-power-options-v5.jpg`.
+- Final mobile configured state: `qa/mobile-configured-v5.jpg`.
+- xTool / implementation side-by-side: `qa/reference-implementation-comparison-v5.jpg`.
+- OneLaser official / implementation side-by-side: `qa/official-data-implementation-comparison-v5.jpg`.
 
-## Browser annotations
+## Source fidelity
 
-- Product title: passed. Exact text is `OneLaser XRF™ Performance Desktop Laser Engraver (38W/70W RF)` at 40 px / 800 desktop and 36 px / 800 mobile.
-- Removed secondary hero slogan: passed. The former `From idea to finished product—faster.` heading is absent.
-- Removed hero specification matrix: passed. The former four-cell `hero-proof` block is absent.
-- Price styling: passed. Customer-facing price values resolve to OneLaser red `#F2380F`.
+- Purchase sequence: passed. The hero follows title and proof → price/MSRP → financing → power → package → optional add-ons → quantity/CTA.
+- Commercial values: passed. 38W starts at $3,999 with $6,499 MSRP; 70W is exactly $500 above its matching 38W configuration.
+- Rating, financing, packages, accessories, returns, warranty and support: passed against the captured OneLaser source.
+- Optional labeling: passed. Riser Base, Conveyor, Air Assist Control and replacement optics remain explicitly optional.
 
 ## UI system
 
-- Typography: passed. Runtime sampling resolves to Certia for the product H1; major headings use weight 800, body copy uses 400–500, and UI labels use 600–800.
-- Type hierarchy: passed. Product H1 is 40 / 42; display H2 is responsive 46–72; standard H2 is responsive 40–64; body copy is 14–16.
-- Surfaces: passed. Structural backgrounds use only white or `#F5F5F7`. No decorative gradients or black structural panels are present.
-- Components: passed. Cards use restrained borders, 10 px standard radii, minimal shadow and red only for actions, selected optional items and proof accents.
-- Spacing: passed. Section, card and control spacing follows the 4 px base scale documented in `UI-SPEC.md`.
+- Typography: passed. Runtime sampling resolves to Certia; desktop H1 is 40 px / 800 and mobile H1 is 36 px / 800.
+- Surfaces: passed. Structural backgrounds resolve to white or `#F5F5F7`; there are no black structural sections or decorative gradients.
+- Components: passed. Package and add-on cards use restrained borders, 10–12 px radii, no decorative elevation and clear selected states.
+- Prices: passed. All customer-facing price values use OneLaser red.
+- Gallery: passed. Desktop stage is 660 × 660; thumbnails are 70 × 70 with previous/next controls and a separate video slot.
 
-## Layout and responsive checks
+## Responsive and interaction checks
 
-- Desktop gallery: passed. Main stage is exactly 660 × 660; image thumbnails are exactly 70 × 70; the rail exposes previous/next controls, partial overflow and a separate video slot.
 - Desktop overflow: passed. At 1458 px, document width equals viewport width.
-- Mobile gallery: passed. At 390 px, the stage is 354 × 354, thumbnails remain 70 × 70 and document width equals viewport width.
-- Feature overview: passed. The light bento uses real XRF imagery, white proof panels and responsive 4-column, 2-column and 1-column layouts.
-- Anchored sections: passed. Scroll targets reserve space for both sticky navigation layers; section eyebrows and headings are no longer hidden after navigation.
-
-## Interaction checks
-
-- Gallery previous/next, thumbnail rail and video slot: passed.
-- Project carousel and RF benefit tabs: passed.
-- Sticky capability navigation: passed.
-- Package selector: passed. Switching to 70W updates selected state, summary and sticky purchase bar without treating 38W as an inferior option.
-- Optional add-ons: passed. Selecting Smart Air updates the explicit optional count and selected border state.
-- Quantity and configuration CTA: passed. Quantity increments and CTA confirms `Configuration saved`.
-- Specifications and FAQ controls: passed.
-- Browser console: passed. No application errors were recorded.
+- Mobile overflow: passed. At 390 px, document width equals viewport width.
+- Brand font delivery: passed. `document.fonts.check('36px Certia')` returns true.
+- 70W selection: passed. Final price, MSRP, package cards, summary and sticky purchase bar update by $500.
+- Package selection: passed. Riser Base selection updates the selected state and total.
+- Optional add-ons: passed. Accessory selection updates item count, price and total.
+- Quantity: passed. Quantity multiplies machine and selected accessory totals.
+- Purchase CTA: passed. Add to Cart confirms the configured state in the hero and sticky bar.
+- Mobile density: passed. Power choices stack, add-on cards reflow, controls remain readable and the sticky total/CTA remain visible.
+- Production build: passed. Vite production build completes successfully.
 
 ## Remaining production replacements
 
-- Replace each `VIDEO PLACEHOLDER` with the final corresponding production video.
-- Replace project proof slots with measured settings, processing time and final photography.
-- Confirm 70W launch pricing, final bundle contents, shipping, compliance and commercial terms before commerce launch.
+- Replace each `VIDEO PLACEHOLDER` with the final production video.
+- Replace accessory and project proof media when final photography is available.
+- Connect the prototype Add to Cart state to the production commerce backend.
 
 ## Final result
 
