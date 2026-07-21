@@ -20,3 +20,7 @@ When implementing from a selected generated mock, treat that image as the source
 - Page background surfaces must be white or `#F5F5F7`; do not use black as a section, card, announcement, or information-panel background.
 - Keep the hero product stage and every product thumbnail square. Do not show the `PRODUCT VIEW`, overview-video bar, render caption, or platform caption around the hero image.
 - Product media is a scrollable gallery with more than four square thumbnails. Keep a partial next thumbnail visible so desktop and mobile users understand they can swipe horizontally for additional real XRF renders.
+- The desktop hero follows the xTool P3 media anatomy: a 660 × 660 main stage with previous/next controls and a visible counter, plus 70 × 70 image thumbnails with their own previous/next controls and a separate overview-video slot. Retain OneLaser colors, copy and product assets.
+- Use bold Certia weights for every major page heading.
+- Below the hero, use OMTech Polar 2 interaction patterns as a structural reference—sticky capability navigation, switchable benefit explanations, project proof browsing, media stories, configuration, specification and FAQ controls—but redesign the presentation and content for OneLaser rather than reproducing OMTech branding or assets.
+- Structural backgrounds must resolve to exactly white or `#F5F5F7`; neutral borders, overlays and real image tones may use additional values only where functionally necessary.
