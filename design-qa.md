@@ -1,39 +1,44 @@
-# XRF Gen2 annotation QA
+# XRF Gen2 full-page design QA
 
 ## Review target
 
-- Source of truth: the user's browser annotations, `OneLaser Web UI Guideline.pdf`, and the existing xTool/OMTech-inspired PDP structure recorded in `AGENTS.md`.
-- Desktop viewport: 1742 × 1178.
-- Mobile viewport: 390 × 844.
-- Source and implementation comparison: `qa/annotation-source-vs-implementation.png`.
-- Additional implementation captures: `qa/annotation-desktop-hero.png`, `qa/annotation-overview.png`, `qa/annotation-results.png`, `qa/annotation-power.png`, `qa/annotation-p0.png`, `qa/annotation-safety.png`, and `qa/annotation-mobile-hero.png`.
+- Product source of truth: `XRF Gen2 卖点参数发布汇总.xlsx`.
+- Structural references: OMTech Polar 2 PDP and xTool P3 product/story pages.
+- Matched hero comparison: `qa/design-comparison-final.png` (reference and implementation at 1280 × 720).
+- Implementation captures: purchase hero, results carousel, 38W/70W guide, immersive stories, safety, specifications and a true 390 × 844 framed mobile viewport.
 
-## Annotation checks
+## Content hierarchy
 
-- Minimum type: passed. No authored `font-size` remains below 12 px; hero proof bullets compute to 12 px on desktop and mobile.
-- Hero commercial hierarchy: passed. Final price is red and weight 900; MSRP is gray; financing is blue; the power-compare link is removed.
-- Hero purchase controls: passed. Power cards contain no prices, `Buy with SHOP` is white on `#5532EB`, and trust/source strips are removed.
-- Hero redundancy: passed. The four-metric proof rail and the lower duplicate configurator are absent.
-- Overview: passed. One static 16:9 XRF image replaces the interactive feature bento.
-- Results: passed. Project media remains fixed at 4:3 while browsing projects.
-- RF power guide: passed. Two equal-fit, image-led cards make the 38W/70W difference visual; selecting one updates the primary purchase power and sticky price.
-- P0 media: passed. All seven P0/video stages compute to 16:9 at desktop and mobile sizes.
-- Safety: passed. One 16:9 product image is followed by a clear four-card proof grid.
+- P0: passed. Seven 16:9 story chapters cover 70W power, RF results, TrueSpeed motion, IVS, smart workflow, larger jobs and cleaner production. Image previews are ready to be replaced by final video without changing layout.
+- P1: passed. Large visual modules explain the 38W/70W choice, workflow, reliability, safety architecture and US support.
+- P2: passed. Eight compact image-led proof cards cover extraction, isolated electronics, noise, protected focus, Class 1 design, suppression, interlock and thermal response.
+- P3: passed. Secondary details are contained in a concise horizontal rail and the specification/FAQ controls.
+- Optional features: passed. Smart Air, Riser Base, Conveyor and optional optics remain explicitly labelled optional.
+
+## Visual system
+
+- Typography: passed. Certia is used throughout; the desktop product H1 computes to 40 px / 800 and mobile to 36 px / 800.
+- Minimum type: passed. Computed minimum is 12 px.
+- Surfaces: passed. Structural sections resolve to white, transparent-on-white or `#F5F5F7`; black is limited to real image content.
+- Color: passed. OneLaser red is limited to pricing, primary actions, selected borders and restrained proof accents. MSRP remains gray and financing remains blue.
+- Media: passed. Hero media and thumbnails are square; project proof remains fixed at 4:3; all immersive story media computes to 16:9 with `object-fit: contain`.
+- Reference comparison: passed. The implementation keeps the proven left-media/right-purchase anatomy while using a tighter OneLaser header, a more legible product title, quieter surfaces and clearer price hierarchy.
 
 ## Responsive and interaction checks
 
-- Desktop overflow: passed.
-- Mobile overflow: passed; document width equals the 390 px viewport.
-- Product H1: passed at 40 px desktop and 36 px mobile.
-- Power selection: passed. Selecting 70W updates `aria-pressed` and the sticky price to $4,499.00 for the standalone configuration.
-- Project browsing: passed. Next-project control changes the active project without changing the 4:3 media stage.
-- Reduced motion: passed. The existing `prefers-reduced-motion` path remains intact.
-- Production build: passed with Vite.
+- Desktop overflow: passed at 1540 × 1178.
+- Mobile overflow: passed at a true 390 × 844 iframe viewport.
+- Mobile hero media: passed at 354 × 354, with 16 swipeable product thumbnails and a separate video slot.
+- Power selection: passed. Selecting 70W updates `aria-pressed`, the hero price and the sticky purchase price to $4,499.00.
+- Project browsing: passed. The next-project control changes image/content while preserving the 4:3 stage size.
+- Story navigation: passed. Seven chapter controls move between the corresponding large media stories.
+- Specification accordion: passed. Controls disclose the correct workbook-derived values.
+- Build: passed with Vite; no horizontal overflow and no computed text below 12 px.
 
 ## Production follow-up
 
-- Replace `VIDEO PLACEHOLDER` media with final 16:9 production videos when available.
-- Replace temporary proof images/settings with validated project photography and measured production data.
-- Connect the prototype cart states to the production commerce backend.
+- Replace image previews with final 16:9 P0 videos when production media is available.
+- Replace temporary project proof with validated test settings and measured production time where required.
+- Connect the prototype cart and SHOP actions to the production commerce backend.
 
 final result: passed

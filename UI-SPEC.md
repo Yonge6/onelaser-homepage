@@ -4,6 +4,8 @@
 
 Premium international product UI: Apple and DJI restraint, xTool purchase clarity, Insta360 product storytelling, and Tesla-level visual reduction. Use supplied XRF renders and Certia brand typography throughout.
 
+The page follows one consistent evidence ladder: finished result → product capability → technical proof → practical customer outcome. Internal P0/P1/P2/P3 priorities control visual weight but never appear in customer-facing text.
+
 ## Color
 
 - Primary text: `#000000`
@@ -45,11 +47,12 @@ Premium international product UI: Apple and DJI restraint, xTool purchase clarit
 - Small radius: 12–16 px. Product/media cards: 24–32 px. Large panels/modals: 32 px.
 - Primary button: 52–56 px height, pill radius, OneLaser action red, white text, 800 weight.
 - Secondary button: 46–48 px height, pill radius, white surface, 1 px `#000000` border.
-- Selected card: OneLaser-red 2 px visual border, `#FFF7F4` surface and a visible non-color selection cue.
+- Selected card: OneLaser-red 2 px visual border and `#FFF7F4` surface. Do not add `SELECTED`, checkmark, or other redundant text inside an already-selected card.
 - Cards use borders and surface contrast; no decorative shadows unless functional separation requires it.
 - Prices are always red. Optional accessories always show `OPTIONAL` before the name.
 - Product gallery: 660 × 660 px desktop stage; 70 × 70 px thumbnails; explicit previous/next controls and dedicated video slot.
-- Overview and all P0/video media: fixed horizontal 16:9 stages. Project-result media: fixed 4:3 stage.
+- Overview and all P0/video media: fixed horizontal 16:9 stages. Video imagery uses `contain` so the whole frame remains visible. Project-result media: fixed 4:3 stage with centered cover behavior.
+- P0 uses a seven-chapter sticky 16:9 story system. P1 uses large split layouts. P2 uses compact image-led cards in a four-column desktop grid. P3 uses concise one-line proof cards or specification rows.
 - Power comparison: two image-led parallel cards; selection updates the primary purchase state. Safety: one 16:9 image with a four-card proof grid.
 - Desktop hero purchase panel order: H1 → source-backed rating → five concise proof bullets → Final Price/MSRP/Save → financing → 38W/70W selector → package cards → optional add-ons → quantity/CTA → assurance.
 - Package and add-on cards use 1 px dividers, 10–12 px radii, no elevation, a red price, and a black 2 px-equivalent selected state (border plus inset ring).
@@ -73,6 +76,7 @@ Premium international product UI: Apple and DJI restraint, xTool purchase clarit
 - Below 640 px: single-column cards, 18 px page gutters, 36 px product H1, full-width CTAs and no horizontal page overflow.
 - On mobile, power choices stack, add-on cards collapse to three visual columns, and the sticky bar preserves the live total plus the primary CTA.
 - The hero purchase panel remains the single configuration source of truth; do not add a duplicate long-form configurator later in the page.
+- The hero begins close to the header, without an eyebrow/kicker row, and uses compact top spacing. Wide comparison grids remain fluid up to the 1280 px content maximum instead of shrinking as the viewport grows.
 - Hero proof bullets use 12 px type. MSRP uses secondary gray; financing links use blue. The optional SHOP purchase action uses `#5532EB` with white text.
 - Do not place a second power-comparison link inside the hero and do not repeat the hero specifications in a proof rail immediately below it.
 - Power selectors contain no price. Final price uses 900 weight. Remove the hero trust strip and commercial-source footnote beneath the purchase buttons.

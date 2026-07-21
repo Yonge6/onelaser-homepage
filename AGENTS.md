@@ -46,3 +46,12 @@ When implementing from a selected generated mock, treat that image as the source
 - The secondary hero purchase action reads `Buy with SHOP` and uses a `#5532EB` purple surface with white text.
 - Power choice cards communicate use-case fit only and do not repeat prices. The hero final price uses Certia Black 900.
 - Do not show the three-column trust strip or the commercial-source note below hero purchase actions.
+- Selected power and package cards are communicated only through the red border and pale-red surface; never repeat `SELECTED`, a checkmark, or a `Selected here` label inside the choice UI.
+- The hero starts with the product H1 and keeps compact top spacing; do not show the `ONELASER XRF™` / `PROFESSIONAL RF DESKTOP LASER` kicker row.
+- Keep the static overview image in a compact white or `#F5F5F7` band with 64 px desktop and 40 px mobile vertical padding.
+- P0/video images must use `object-fit: contain` with no active/hover crop so the complete 16:9 frame stays visible.
+- The 38W/70W image comparison grows fluidly to the 1280 px content maximum on larger viewports. Project media always stays at a centered 4:3 stage with consistent dimensions.
+- The page narrative is workbook-led: finished results first, equal-fit 38W/70W choice second, then seven P0 image/video stories, followed by P1 workflow/reliability, P2 compact engineering proof, P3 one-line details, support, specifications and FAQ.
+- Never expose internal priority codes such as `P0`, `P1`, `P2` or `P3` to customers. Priority determines media size and page weight only.
+- Use the supplied July 2026 XRF workshop, dark product, work-area and fine-detail images as the primary product-proof assets. Do not replace product-faithful supplied imagery with generic AI visuals when a real approved asset already fits the slot.
+- Customer-facing placeholder language should read `VIDEO PREVIEW` or `VIDEO STORY · IMAGE PREVIEW`, not unfinished-production language such as `REPLACEABLE MEDIA` or `VIDEO PLACEHOLDER`.

@@ -25,93 +25,128 @@ const media = [
 
 const featureLinks = [
   ["features", "Overview"],
-  ["rf-benefits", "RF results"],
-  ["performance", "Performance"],
+  ["results", "Results"],
+  ["power-guide", "38W / 70W"],
+  ["performance", "Why XRF"],
   ["workflow", "Workflow"],
   ["safety", "Safety"],
   ["specs", "Specs"],
 ];
 
 const projectEvidence = [
-  { title: "Photo-grade grayscale", proof: "2,000 DPI RF detail", image: "xrf-lifestyle.jpg", tag: "RF RESULTS" },
-  { title: "Fine text and QR codes", proof: "≤ 0.01 mm positioning", image: "xrf-gallery-08.jpg", tag: "PRECISION" },
-  { title: "Print & cut outlines", proof: "IVS mark-point compensation", image: "xrf-ivs.jpg", tag: "INTELLIGENT VISION" },
-  { title: "Repeatable batch work", proof: "1,200 mm/s · True 3G", image: "xrf-gallery-07.jpg", tag: "THROUGHPUT" },
-  { title: "Rotary personalization", proof: "Optional Rotary accessory", image: "xrf-open.jpg", tag: "OPTIONAL ROTARY" },
-  { title: "Long-format signage", proof: "Optional Conveyor workflow", image: "xrf-front.jpg", tag: "OPTIONAL CONVEYOR" },
-];
-
-const rfBenefits = [
   {
-    id: "precision",
-    tab: "Cleaner details",
-    eyebrow: "FINE RF SPOT",
-    title: "Crisp marks your customers can inspect up close.",
-    copy: "Pulse-modulated RF control preserves small type, photographic transitions and fine surface detail with up to 2,000 DPI scanning precision.",
-    metrics: ["2,000 DPI", "≤ 0.01 mm", "Stable RF output"],
-    image: "xrf-gallery-08.jpg",
+    title: "One machine. A full product line.",
+    proof: "Wood · leather · tumblers · acrylic · coated metal",
+    copy: "Move from custom gifts to repeatable, premium products without changing platforms.",
+    image: "xrf-workshop-story.webp",
+    tag: "MADE TO SELL",
+    position: "50% 58%",
   },
   {
-    id: "response",
-    tab: "Faster response",
-    eyebrow: "CONTROLLED MOTION",
-    title: "Speed that stays useful inside a real job.",
-    copy: "Real 1,200 mm/s working speed, True 3G acceleration and closed-loop feedback turn rapid motion into repeatable finished output.",
-    metrics: ["1,200 mm/s", "True 3G", "Closed-loop feedback"],
-    image: "xrf-internal-wide.jpg",
+    title: "More pieces in every setup.",
+    proof: "24 × 12 in true production area",
+    copy: "The universal material size fits everyday stock and repeatable batch layouts without trimming down the job first.",
+    image: "xrf-work-area-proof.webp",
+    tag: "BATCH PRODUCTION",
+    position: "50% 50%",
   },
   {
-    id: "lifespan",
-    tab: "Longer lifespan",
-    eyebrow: "AIR-COOLED RF SOURCE",
-    title: "Less maintenance between you and the next order.",
-    copy: "The sealed, air-cooled RF metal tube is rated up to 30,000 hours and works with a factory-locked optical path designed to avoid routine field alignment.",
-    metrics: ["Up to 30,000 h", "Air cooled", "Factory-locked optics"],
-    image: "xrf-open.jpg",
+    title: "Details your customers can inspect up close.",
+    proof: "Up to 2,000 DPI · 0.07 mm RF laser dot",
+    copy: "Fine marks, small type and tonal transitions stay crisp enough to make the finished product feel more valuable.",
+    image: "xrf-detail-proof.webp",
+    tag: "RF PRECISION",
+    position: "50% 50%",
+  },
+  {
+    title: "Print. Place. Cut. Done.",
+    proof: "IVS mark detection with live compensation",
+    copy: "Head-mounted vision corrects position and angle so printed contours need less manual calibration and create less waste.",
+    image: "xrf-ivs.jpg",
+    tag: "INTELLIGENT VISION",
+    position: "50% 50%",
   },
 ];
 
 const scrollStories = [
   {
+    id: "powermax",
+    eyebrow: "POWERMAX 70™",
+    title: "More power. More materials. More possible.",
+    copy: "Choose 38W for fine-detail everyday production or the new 70W RF source for deeper 3D relief, sharper high-DPI grayscale at speed and more cutting headroom.",
+    metrics: ["38W / 70W RF", "Pulse frequency up to 50 kHz", "Equal-fit platform"],
+    image: "xrf-dark-hero.webp",
+  },
+  {
     id: "rf",
-    eyebrow: "P0 · RF RESULTS",
+    eyebrow: "3D PHOTO REALISTIC RF™",
     title: "Photo-real, every time.",
-    copy: "A sealed RF metal tube, precise pulse control and a fine laser spot preserve tiny type, tonal transitions and surface detail your customers can inspect up close.",
-    metrics: ["38W / 70W RF", "2,000 DPI", "Up to 30,000 hours"],
-    image: "xrf-open.jpg",
+    copy: "Pulse-modulated RF energy through a finer spot produces photographic grayscale and deep relief up to 2,000 DPI. The sealed source is air-cooled and rated up to 30,000 hours.",
+    metrics: ["2,000 DPI", "Air cooled", "Up to 30,000 h"],
+    image: "xrf-detail-proof.webp",
   },
   {
     id: "speed",
-    eyebrow: "P0 · TRUESPEED",
-    title: "The fastest of its class.",
-    copy: "Real 1,200 mm/s working speed, controlled 3G acceleration, closed-loop feedback and a 20% lighter head turn motion into repeatable finished output.",
-    metrics: ["1,200 mm/s", "True 3G", "≤ 0.01 mm"],
+    eyebrow: "TRUESPEED",
+    title: "Measured in real work. Not empty travel.",
+    copy: "Real 1,200 mm/s engraving speed and 3G acceleration are controlled by optimized DSP motion, closed-loop feedback, Hydra-derived steel axes and a 20% lighter head.",
+    metrics: ["1,200 mm/s", "29,430 mm/s²", "≤ 0.01 mm"],
     image: "xrf-internal-wide.jpg",
   },
   {
     id: "ivs",
-    eyebrow: "P0 · IVS PRINT & CUT",
+    eyebrow: "IVS PRINT & CUT",
     title: "Print and cut, made easy.",
     copy: "The head-mounted Intelligent Vision System detects registration marks and compensates position and angle in real time—reducing calibration, waste and rework.",
     metrics: ["Mark detection", "Live compensation", "Less material waste"],
     image: "xrf-ivs.jpg",
   },
   {
-    id: "motion",
-    eyebrow: "P0 · MOTION PLATFORM",
-    title: "Flagship motion, in a desktop machine.",
-    copy: "Hydra-derived all-steel rolling axes and closed-loop motors combine smooth travel, long service life and feedback-controlled accuracy for sustained production.",
-    metrics: ["All-steel axes", "Closed-loop motors", "20% lighter head"],
-    image: "xrf-gallery-07.jpg",
+    id: "workflow",
+    eyebrow: "ONE TOUCH OF INNOVATION",
+    title: "Out of the box, into creation.",
+    copy: "MakerBoost AI, the full touchscreen and XFocus autofocus remove setup friction—from one-click vector generation and material parameters to motion, alerts and live machine status.",
+    metrics: ["MakerBoost AI", "Full touchscreen", "XFocus autofocus"],
+    image: "xrf-touchscreen.jpg",
   },
   {
     id: "expand",
-    eyebrow: "P0 · OPTIONAL EXPANSION",
-    title: "Start desktop. Take on bigger jobs.",
-    copy: "A true 24 × 12 inch bed handles everyday stock. Optional Riser, Rotary and Conveyor accessories unlock taller, cylindrical and continuous long-format work.",
-    metrics: ["24 × 12 in", "8.5 in with optional Riser", "Optional auto-feed"],
+    eyebrow: "ONE CLICK. INFINITE LENGTH",
+    title: "Start desktop. Grow beyond it.",
+    copy: "A true 24 × 12 inch bed handles everyday stock. Optional Riser Base, Rotary and automatic Conveyor unlock taller, cylindrical and continuous long-format work.",
+    metrics: ["24 × 12 in", "8.5 in with optional Riser", "Optional Conveyor"],
+    image: "xrf-work-area-proof.webp",
+  },
+  {
+    id: "clean",
+    eyebrow: "CLEANER PRODUCTION",
+    title: "Right pressure. Every mode. Automatically.",
+    copy: "Optional Smart Air switches between high-pressure cutting and low-pressure engraving, while 3× extraction architecture and FumeGuard keep results and the workspace cleaner.",
+    metrics: ["Optional Smart Air", "3× extraction", "FumeGuard monitoring"],
     image: "xrf-front.jpg",
   },
+];
+
+const engineeringProofs = [
+  { title: "3× extraction", copy: "Flow-matched dual-channel exhaust clears smoke and residue faster.", image: "xrf-front.jpg" },
+  { title: "Sealed electronics", copy: "The working area and optical-electrical zones stay isolated from dust.", image: "xrf-open.jpg" },
+  { title: "Under 65 dB", copy: "Load-following cooling reduces noise without giving up production power.", image: "xrf-gallery-06.jpg" },
+  { title: "Protected focus path", copy: "Cable routing and thermal isolation keep critical parts outside the hot zone.", image: "xrf-gallery-09.jpg" },
+  { title: "Class 1 design", copy: "The enclosed platform is designed for shielded everyday operation.", image: "xrf-hero.jpg" },
+  { title: "Automatic suppression", copy: "Heat-triggered protection responds inside the isolated electrical bay.", image: "xrf-gallery-12.jpg" },
+  { title: "Lid interlock", copy: "Laser output stops unless the machine is correctly closed.", image: "xrf-open.jpg" },
+  { title: "Thermal response", copy: "High-temperature detection raises an alert and stops laser output.", image: "xrf-touchscreen.jpg" },
+];
+
+const microFeatures = [
+  ["12MP lid camera", "Full-frame positioning and remote monitoring"],
+  ["RedDot™", "Sub-1 mW guided alignment"],
+  ["WiFi / USB / Ethernet", "Flexible connected control"],
+  ["Power-off resume", "Continue after power returns"],
+  ["XFocus™", "Integrated motorized autofocus"],
+  ["Debris drawer", "Pull-out cleanup access"],
+  ["Zero field alignment", "Factory-calibrated optical path"],
+  ["Dual-anchor mount", "Laser-source alignment retention"],
 ];
 
 const purchasePackages = [
@@ -205,12 +240,40 @@ const specs = [
     ],
   },
   {
-    title: "Control & safety",
+    title: "Control & software",
     rows: [
       ["Connectivity", "WiFi / USB / Ethernet"],
       ["Software", "LightBurn / MakerBoost AI / RDWorks"],
+      ["Operating systems", "Windows / macOS"],
+      ["Control panel", "Integrated full touchscreen"],
+      ["Autofocus", "Integrated XFocus™ motorized autofocus"],
+    ],
+  },
+  {
+    title: "Machine & electrical",
+    rows: [
+      ["Standalone size", "1085 × 725 × 268 mm"],
+      ["Standalone weight", "127 lb"],
+      ["Voltage / frequency", "110–240V AC, 50/60Hz"],
+      ["Rated power draw", "672.9W at 115V / 653.5W at 225V"],
+    ],
+  },
+  {
+    title: "Optics & safety",
+    rows: [
+      ["Standard focal lens", "2.5 in"],
       ["Laser safety", "Class 1 design"],
       ["Protection", "Lid interlock / thermal alarm / electrical-bay suppression"],
+      ["Positioning", "Top-cover camera / IVS camera / RedDot™"],
+    ],
+  },
+  {
+    title: "Optional expansion",
+    rows: [
+      ["Smart Air Control", "Optional"],
+      ["Riser Base", "Optional · up to 8.5 in work height"],
+      ["Automatic Conveyor", "Optional · unlimited-length workflow"],
+      ["Rotary / Fume Extractor / 2 in lens", "Optional"],
     ],
   },
 ];
@@ -237,27 +300,6 @@ const faqs = [
     a: "OneLaser provides US-based engineer support and a 3-2-1 warranty: three years on the frame, two years on electronics and one year on the laser source.",
   },
 ];
-
-function VideoPlaceholder({ eyebrow, title, copy, image, dark = false, children, onPlay }) {
-  return (
-    <article className={`video-story ${dark ? "video-story--dark" : ""}`}>
-      <div className="video-story__copy">
-        <span className="eyebrow">{eyebrow}</span>
-        <h2>{title}</h2>
-        <p>{copy}</p>
-        {children}
-        <button className="text-action" type="button" onClick={onPlay}><Play size={17} weight="fill" />Watch the story</button>
-      </div>
-      <div className="video-story__media">
-        <img src={image} alt="" />
-        <div className="video-label">
-          <span>VIDEO PLACEHOLDER</span>
-          <span>16:9 · FINAL VIDEO</span>
-        </div>
-      </div>
-    </article>
-  );
-}
 
 function SpecGroup({ group }) {
   const [open, setOpen] = useState(false);
@@ -312,14 +354,14 @@ function StickyStory({ onPlay }) {
           <h2>{story.title}</h2>
           <p>{story.copy}</p>
           <div className="inline-metrics">{story.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
-          <button className="text-action" type="button" onClick={() => onPlay(story.eyebrow, story.title, asset(story.image))}><Play size={17} weight="fill" />Watch the story</button>
+          <button className="text-action" type="button" onClick={() => onPlay(story.eyebrow, story.title, asset(story.image))}><Play size={17} weight="fill" />Open video preview</button>
         </div>
       </div>
       <div className="immersive-story__steps">
         {scrollStories.map((item, index) => (
           <article ref={(node) => { stepRefs.current[index] = node; }} className={active === index ? "immersive-story__step is-active" : "immersive-story__step"} key={item.id}>
             <img src={asset(item.image)} alt={`${item.title} XRF Gen2 feature view`} />
-            <div className="immersive-story__media-label"><span>VIDEO PLACEHOLDER</span><span>{String(index + 1).padStart(2, "0")} / {String(scrollStories.length).padStart(2, "0")}</span></div>
+            <div className="immersive-story__media-label"><span>VIDEO STORY · IMAGE PREVIEW</span><span>{String(index + 1).padStart(2, "0")} / {String(scrollStories.length).padStart(2, "0")}</span></div>
           </article>
         ))}
       </div>
@@ -331,7 +373,6 @@ export function App() {
   const [power, setPower] = useState("38W");
   const [activeMedia, setActiveMedia] = useState(0);
   const [activeProject, setActiveProject] = useState(0);
-  const [activeBenefit, setActiveBenefit] = useState(0);
   const [activeFeature, setActiveFeature] = useState("features");
   const [openFaq, setOpenFaq] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -472,7 +513,7 @@ export function App() {
                 <button type="button" className="media-play" onClick={() => selectMedia(activeMedia)}>
                   <span><Play size={24} weight="fill" /></span>
                   <strong>XRF Gen2 overview</strong>
-                  <small>VIDEO PLACEHOLDER</small>
+                  <small>VIDEO PREVIEW</small>
                 </button>
               )}
             </div>
@@ -501,10 +542,6 @@ export function App() {
           </div>
 
           <div className="purchase-panel">
-            <div className="product-kicker">
-              <span>ONELASER XRF™</span>
-              <span>Professional RF desktop laser</span>
-            </div>
             <h1>OneLaser XRF™ Performance Desktop Laser Engraver (38W/70W RF)</h1>
 
             <div className="rating-row" aria-label="Rated 4.93 out of 5 from 45 reviews">
@@ -551,7 +588,7 @@ export function App() {
                   const selected = purchasePower === item.id;
                   return (
                     <button type="button" className={selected ? "purchase-power is-selected" : "purchase-power"} key={item.id} onClick={() => { setPurchasePower(item.id); setPower(item.id); setPurchaseAdded(false); }} aria-pressed={selected}>
-                      <span><strong>{item.title}</strong>{item.badge && <small>{item.badge}</small>}{selected && <i className="selection-check"><Check size={14} weight="bold" />Selected</i>}</span>
+                      <span><strong>{item.title}</strong>{item.badge && <small>{item.badge}</small>}</span>
                       <p>{item.copy}</p>
                     </button>
                   );
@@ -560,7 +597,6 @@ export function App() {
 
               <div className="purchase-section-heading">
                 <div><span>Package</span><small>Choose the setup that matches your workspace.</small></div>
-                <span className="purchase-section-note">Selected here</span>
               </div>
               <div className="official-packages">
                 {purchasePackages.map((item) => {
@@ -574,7 +610,7 @@ export function App() {
                       aria-pressed={selected}
                     >
                       <div className="official-package__top">
-                        <span><small>{item.badge}</small><strong>{item.name}</strong>{selected && <i className="selection-check"><Check size={14} weight="bold" />Selected</i>}</span>
+                        <span><small>{item.badge}</small><strong>{item.name}</strong></span>
                         <span><strong>{formatMoney(item.price + (purchasePower === "70W" ? 500 : 0))}</strong><del>{formatMoney(item.msrp + (purchasePower === "70W" ? 500 : 0))}</del></span>
                       </div>
                       <p>{item.description.replace("38W", purchasePower)}</p>
@@ -628,7 +664,7 @@ export function App() {
         </nav>
 
         <section className="feature-overview" id="features" data-reveal>
-          <img src={asset("xrf-internal-wide.jpg")} alt="Wide view of the XRF Gen2 work area and motion platform" />
+          <img src={asset("xrf-dark-hero.webp")} alt="XRF Gen2 RF desktop laser presented in a premium studio environment" />
         </section>
 
         <section className="section results" id="results" data-reveal>
@@ -637,18 +673,18 @@ export function App() {
               <span className="eyebrow">WHAT WILL YOU MAKE NEXT?</span>
               <h2>Made to sell.<br />Built to repeat.</h2>
             </div>
-            <p>XRF Gen2 is designed for the products customers notice: crisp photography, readable detail, clean acrylic, premium personalization and repeatable batches.</p>
+            <p>Start with the finished work customers pay for. Then trace every result back to the RF source, controlled motion and workflow that make it repeatable.</p>
           </div>
           <div className="project-showcase">
             <div className="project-visual">
-              <img src={asset(projectEvidence[activeProject].image)} alt={projectEvidence[activeProject].title} />
-              <span>REPLACEABLE PROJECT MEDIA · {String(activeProject + 1).padStart(2, "0")}/{String(projectEvidence.length).padStart(2, "0")}</span>
+              <img src={asset(projectEvidence[activeProject].image)} alt={projectEvidence[activeProject].title} style={{ objectPosition: projectEvidence[activeProject].position }} />
+              <span>PROJECT PROOF · {String(activeProject + 1).padStart(2, "0")}/{String(projectEvidence.length).padStart(2, "0")}</span>
             </div>
             <div className="project-content">
               <span className="eyebrow">{projectEvidence[activeProject].tag}</span>
               <h3>{projectEvidence[activeProject].title}</h3>
-              <p>{projectEvidence[activeProject].proof}</p>
-              <p className="project-note">Final production imagery, tested settings and measured completion time can replace this proof slot without changing the layout.</p>
+              <p>{projectEvidence[activeProject].copy}</p>
+              <strong className="project-proof">{projectEvidence[activeProject].proof}</strong>
               <div className="project-pagination">
                 <button type="button" onClick={() => setActiveProject((activeProject - 1 + projectEvidence.length) % projectEvidence.length)} aria-label="Previous project"><CaretLeft size={21} /></button>
                 <div>
@@ -668,48 +704,23 @@ export function App() {
           </div>
           <div className="power-compare">
             <button type="button" className={power === "38W" ? "power-card is-selected" : "power-card"} onClick={() => { setPower("38W"); setPurchasePower("38W"); }} aria-pressed={power === "38W"}>
-              <span className="power-card__media"><img src={asset("xrf-gallery-08.jpg")} alt="Fine RF laser head detail for 38W engraving work" /><i>38W RF · DETAIL</i></span>
+              <span className="power-card__media"><img src={asset("xrf-detail-proof.webp")} alt="Fine RF engraving detail for 38W everyday production" /><i>38W RF · FINE DETAIL</i></span>
               <span className="power-card__body">
-                <span className="power-card__top"><strong>38W RF</strong><em>{power === "38W" ? <><Check size={15} weight="bold" />Selected</> : "Choose 38W"}</em></span>
-                <strong className="power-card__title">Precision for everyday production.</strong>
-                <span className="power-card__use">Photos · fine text · personalization · daily production</span>
+                <span className="power-card__top"><strong>38W RF</strong></span>
+                <strong className="power-card__title">Fine detail for everyday production.</strong>
+                <span className="power-card__use">Photography · fine text · personalization · balanced daily output</span>
+                <span className="power-card__proofs"><i>2,000 DPI detail</i><i>Air cooled</i><i>Up to 30,000 h</i></span>
               </span>
             </button>
             <button type="button" className={power === "70W" ? "power-card is-selected" : "power-card"} onClick={() => { setPower("70W"); setPurchasePower("70W"); }} aria-pressed={power === "70W"}>
-              <span className="power-card__media"><img src={asset("xrf-internal-wide.jpg")} alt="XRF Gen2 motion platform for higher-throughput 70W work" /><i>70W RF · POWER</i></span>
+              <span className="power-card__media"><img src={asset("xrf-work-area-proof.webp")} alt="Batch production layout for higher-throughput 70W RF work" /><i>70W RF · NEW POWERMAX</i></span>
               <span className="power-card__body">
-                <span className="power-card__top"><strong>70W RF</strong><em>{power === "70W" ? <><Check size={15} weight="bold" />Selected</> : "Choose 70W"}</em></span>
+                <span className="power-card__top"><strong>70W RF</strong></span>
                 <strong className="power-card__title">More headroom for demanding work.</strong>
-                <span className="power-card__use">Deep relief · high-DPI grayscale · heavier workloads</span>
+                <span className="power-card__use">Deeper 3D relief · high-DPI grayscale at speed · heavier workloads</span>
+                <span className="power-card__proofs"><i>Up to 50 kHz</i><i>Deeper relief</i><i>More cutting headroom</i></span>
               </span>
             </button>
-          </div>
-        </section>
-
-        <section className="section rf-benefits" id="rf-benefits" data-reveal>
-          <div className="section-heading section-heading--center">
-            <span className="eyebrow">WHY RF CHANGES THE FINISHED RESULT</span>
-            <h2>Professional output, explained simply.</h2>
-            <p>Switch between the three RF advantages that matter most in everyday production.</p>
-          </div>
-          <div className="benefit-tabs" role="tablist" aria-label="RF advantages">
-            {rfBenefits.map((benefit, index) => (
-              <button type="button" role="tab" aria-selected={activeBenefit === index} className={activeBenefit === index ? "is-active" : ""} key={benefit.id} onClick={() => setActiveBenefit(index)}>
-                <span>{String(index + 1).padStart(2, "0")}</span>{benefit.tab}
-              </button>
-            ))}
-          </div>
-          <div className="benefit-panel" role="tabpanel">
-            <div className="benefit-panel__copy">
-              <span className="eyebrow">{rfBenefits[activeBenefit].eyebrow}</span>
-              <h3>{rfBenefits[activeBenefit].title}</h3>
-              <p>{rfBenefits[activeBenefit].copy}</p>
-              <div className="inline-metrics">{rfBenefits[activeBenefit].metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
-            </div>
-            <div className="benefit-panel__media">
-              <img src={asset(rfBenefits[activeBenefit].image)} alt="" />
-              <span>REPLACEABLE RF PROOF MEDIA</span>
-            </div>
           </div>
         </section>
 
@@ -718,45 +729,23 @@ export function App() {
         <section className="section workflow" id="workflow" data-reveal>
           <div className="section-heading section-heading--split">
             <div>
-              <span className="eyebrow">EASY WORKFLOW</span>
-              <h2>Professional control.<br />A shorter learning curve.</h2>
+              <span className="eyebrow">ONE TOUCH OF INNOVATION</span>
+              <h2>Out of the box.<br />Into creation.</h2>
             </div>
-            <p>From design to focus to final output, every interaction is designed to remove uncertainty before the job starts.</p>
+            <p>MakerBoost AI, the lid camera, XFocus and the full touchscreen turn a professional RF workflow into four clear decisions.</p>
           </div>
           <div className="workflow-layout">
             <div className="workflow-image">
               <img src={asset("xrf-touchscreen.jpg")} alt="XRF Gen2 integrated touchscreen close-up" />
-              <span>Actual XRF Gen2 detail render</span>
+              <span>FULL TOUCHSCREEN · MOTION · ALERTS · STATUS</span>
             </div>
             <ol className="workflow-steps">
-              <li><span>01</span><div><strong>Create</strong><p>Prepare artwork in MakerBoost AI, LightBurn or RDWorks.</p></div></li>
-              <li><span>02</span><div><strong>Place</strong><p>Use the lid camera and RedDot positioning to preview your material.</p></div></li>
-              <li><span>03</span><div><strong>Focus</strong><p>XFocus automatically moves the head to the detected material height.</p></div></li>
-              <li><span>04</span><div><strong>Run</strong><p>Confirm from the touchscreen and monitor status, alerts and faults.</p></div></li>
+              <li><span>01</span><div><strong>Create</strong><p>Generate vectors and match material parameters in MakerBoost AI, or work in LightBurn and RDWorks.</p></div></li>
+              <li><span>02</span><div><strong>Place</strong><p>Use the 12MP lid camera and RedDot™ positioning to align artwork before material is spent.</p></div></li>
+              <li><span>03</span><div><strong>Focus</strong><p>XFocus™ moves the head to the detected material height automatically.</p></div></li>
+              <li><span>04</span><div><strong>Run</strong><p>Move the head, adjust parameters and read status, alarms and faults from the touchscreen.</p></div></li>
             </ol>
           </div>
-        </section>
-
-        <section className="story-stack" data-reveal>
-          <VideoPlaceholder
-            eyebrow="BIGGER JOBS"
-            title="Start desktop. Take on bigger jobs."
-            copy="A 24 × 12 inch workspace handles everyday stock. Optional Riser Base, Rotary and Conveyor accessories open tall objects, cylinders and continuous long-format work."
-            image={asset("xrf-hero.jpg")}
-            onPlay={() => openStory("BIGGER JOBS", "Start desktop. Take on bigger jobs.", asset("xrf-hero.jpg"))}
-          >
-            <div className="inline-metrics"><span>24 × 12 in</span><span>8.5 in height with optional Riser</span><span>Unlimited length workflow</span></div>
-          </VideoPlaceholder>
-
-          <VideoPlaceholder
-            eyebrow="CLEANER PRODUCTION"
-            title="Cleaner results. A better place to work."
-            copy="Flow-matched dual exhaust channels triple extraction capacity, while FumeGuard monitors fumes inside the fully enclosed machine. Optional Smart Air automatically matches airflow to cutting or engraving."
-            image={asset("xrf-front.jpg")}
-            onPlay={() => openStory("CLEANER PRODUCTION", "Cleaner results. A better place to work.", asset("xrf-front.jpg"))}
-          >
-            <div className="inline-metrics"><span>3× extraction architecture</span><span>FumeGuard monitoring</span><span>Optional Smart Air</span></div>
-          </VideoPlaceholder>
         </section>
 
         <section className="section reliability" id="reliability" data-reveal>
@@ -779,6 +768,24 @@ export function App() {
           </div>
         </section>
 
+        <section className="proof-system" data-reveal>
+          <div className="proof-system__heading">
+            <span className="eyebrow">ENGINEERING PROOF</span>
+            <h2>Small systems.<br />One steadier machine.</h2>
+            <p>Each compact system removes a real source of residue, noise, drift or risk.</p>
+          </div>
+          <div className="proof-system__grid">
+            {engineeringProofs.map((item, index) => (
+              <article key={item.title}>
+                <div><img src={asset(item.image)} alt="" /></div>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className="section safety" id="safety" data-reveal>
           <div className="safety-intro">
             <span className="eyebrow">BUILT-IN PROTECTION</span>
@@ -794,16 +801,25 @@ export function App() {
           </div>
         </section>
 
+        <section className="micro-features" aria-label="Additional XRF Gen2 features" data-reveal>
+          <div className="micro-features__intro"><span className="eyebrow">MORE DETAILS, LESS NOISE</span><h2>Everything else, exactly where it belongs.</h2></div>
+          <div className="micro-features__rail">
+            {microFeatures.map(([title, copy], index) => (
+              <article key={title}><span>{String(index + 1).padStart(2, "0")}</span><strong>{title}</strong><p>{copy}</p></article>
+            ))}
+          </div>
+        </section>
+
         <section className="support-section" id="support" data-reveal>
-          <img src={asset("xrf-lifestyle.jpg")} alt="OneLaser customer in a workshop beside XRF Gen2" />
+          <img src={asset("xrf-workshop-story.webp")} alt="OneLaser customer in a workshop beside XRF Gen2 and finished products" />
           <div className="support-overlay">
-            <span className="eyebrow">ONELASER SUPPORT</span>
-            <h2>You’re not buying it alone.</h2>
-            <p>US-based engineers with hands-on laser experience help with setup, troubleshooting and long-term support.</p>
+            <span className="eyebrow">ONE SUPPORT</span>
+            <h2>Real engineers.<br />Real experience.</h2>
+            <p>US-based engineers with 5+ years of average laser-industry experience help with setup, troubleshooting and long-term production support.</p>
             <div className="support-proof">
-              <div><strong>3 years</strong><span>Frame & structure</span></div>
-              <div><strong>2 years</strong><span>Electronics</span></div>
-              <div><strong>1 year</strong><span>Laser source</span></div>
+              <div><strong>30 days</strong><span>Satisfaction period*</span></div>
+              <div><strong>3–2–1</strong><span>Warranty structure</span></div>
+              <div><strong>US based</strong><span>Engineer support</span></div>
             </div>
             <a href="#faq">Review support details</a>
           </div>
@@ -834,7 +850,7 @@ export function App() {
         </section>
 
         <section className="final-cta" data-reveal>
-          <img src={asset("xrf-hero.jpg")} alt="XRF Gen2 product render" />
+          <img src={asset("xrf-dark-hero.webp")} alt="XRF Gen2 product render" />
           <div>
             <span className="eyebrow">XRF GEN2</span>
             <h2>Make better products.<br />Grow with confidence.</h2>
@@ -846,7 +862,7 @@ export function App() {
 
       <footer className="site-footer">
         <img src={asset("onelaser-logo.png")} alt="OneLaser" />
-        <p>XRF Gen2 product-listing prototype. Published claims should be reviewed against final compliance and commercial terms before launch.</p>
+        <p>Professional RF production for creators, studios and growing custom-product businesses.</p>
         <a href="#top">Back to top</a>
       </footer>
 
@@ -856,7 +872,7 @@ export function App() {
       </div>
 
       {videoModal && (
-        <div className="video-modal" role="dialog" aria-modal="true" aria-label={`${videoModal.title} video placeholder`} onClick={() => setVideoModal(null)}>
+        <div className="video-modal" role="dialog" aria-modal="true" aria-label={`${videoModal.title} video preview`} onClick={() => setVideoModal(null)}>
           <div className="video-modal__dialog" onClick={(event) => event.stopPropagation()}>
             <button type="button" className="video-modal__close" aria-label="Close video" onClick={() => setVideoModal(null)}><X size={22} /></button>
             <div className="video-modal__media">
@@ -866,7 +882,7 @@ export function App() {
             <div className="video-modal__copy">
               <span className="eyebrow">{videoModal.eyebrow}</span>
               <h2>{videoModal.title}</h2>
-              <p>This replaceable 16:9 slot is ready for the final production video.</p>
+              <p>The full 16:9 frame is reserved for the final production video. This image preview preserves the intended story and layout.</p>
             </div>
           </div>
         </div>
