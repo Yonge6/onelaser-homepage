@@ -28,8 +28,9 @@ Premium international product UI: Apple and DJI restraint, xTool purchase clarit
 - Body large: 18–20 px / Certia Regular 400.
 - Body: 16 px / Certia Regular 400.
 - UI label: 13 px / 18 px / Certia SemiBold 600–700.
-- Eyebrow and caption: 9–11 px / 14–16 px / Certia ExtraBold 800 / uppercase / 0.10–0.13 em tracking.
+- Eyebrow and caption: 12 px / 16 px / Certia ExtraBold 800 / uppercase / 0.10–0.13 em tracking.
 - Prices: 22–30 px / Certia ExtraBold 800 / OneLaser red.
+- Minimum customer-facing type size: 12 px at every viewport. Never use 11 px or smaller text.
 
 ## Spacing and layout
 
@@ -48,6 +49,8 @@ Premium international product UI: Apple and DJI restraint, xTool purchase clarit
 - Cards use borders and surface contrast; no decorative shadows unless functional separation requires it.
 - Prices are always red. Optional accessories always show `OPTIONAL` before the name.
 - Product gallery: 660 × 660 px desktop stage; 70 × 70 px thumbnails; explicit previous/next controls and dedicated video slot.
+- Overview and all P0/video media: fixed horizontal 16:9 stages. Project-result media: fixed 4:3 stage.
+- Power comparison: two image-led parallel cards; selection updates the primary purchase state. Safety: one 16:9 image with a four-card proof grid.
 - Desktop hero purchase panel order: H1 → source-backed rating → five concise proof bullets → Final Price/MSRP/Save → financing → 38W/70W selector → package cards → optional add-ons → quantity/CTA → assurance.
 - Package and add-on cards use 1 px dividers, 10–12 px radii, no elevation, a red price, and a black 2 px-equivalent selected state (border plus inset ring).
 - Hero gallery is sticky on desktop while the longer purchase panel scrolls; it becomes static when the layout stacks below 1180 px.
@@ -69,3 +72,7 @@ Premium international product UI: Apple and DJI restraint, xTool purchase clarit
 - Below 900 px: configurator and explanatory media split layouts stack.
 - Below 640 px: single-column cards, 18 px page gutters, 36 px product H1, full-width CTAs and no horizontal page overflow.
 - On mobile, power choices stack, add-on cards collapse to three visual columns, and the sticky bar preserves the live total plus the primary CTA.
+- The hero purchase panel remains the single configuration source of truth; do not add a duplicate long-form configurator later in the page.
+- Hero proof bullets use 12 px type. MSRP uses secondary gray; financing links use blue. The optional SHOP purchase action uses `#5532EB` with white text.
+- Do not place a second power-comparison link inside the hero and do not repeat the hero specifications in a proof rail immediately below it.
+- Power selectors contain no price. Final price uses 900 weight. Remove the hero trust strip and commercial-source footnote beneath the purchase buttons.

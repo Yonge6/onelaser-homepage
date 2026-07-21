@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { CaretLeft, CaretRight, Check, Minus, Play, Plus, Star, X } from "@phosphor-icons/react";
+import { CaretLeft, CaretRight, Check, Fire, LockKey, Minus, Play, Plus, ShieldCheck, Star, Thermometer, X } from "@phosphor-icons/react";
 
 const asset = (name) => `${import.meta.env.BASE_URL}assets/${name}`;
 
@@ -29,7 +29,6 @@ const featureLinks = [
   ["performance", "Performance"],
   ["workflow", "Workflow"],
   ["safety", "Safety"],
-  ["configuration", "Configure"],
   ["specs", "Specs"],
 ];
 
@@ -70,18 +69,6 @@ const rfBenefits = [
     metrics: ["Up to 30,000 h", "Air cooled", "Factory-locked optics"],
     image: "xrf-open.jpg",
   },
-];
-
-const featureOverview = [
-  { id: "rf-benefits", eyebrow: "RF METAL TUBE", title: "Photo-real, every time.", copy: "Up to 2,000 DPI for fine grayscale, small type and premium surface detail.", image: "xrf-gallery-08.jpg", size: "tall" },
-  { id: "performance", eyebrow: "TRUE SPEED", title: "1,200 mm/s", copy: "Real working speed at controlled 3G acceleration.", size: "metric" },
-  { id: "performance", eyebrow: "INTELLIGENT VISION", title: "Print and cut, made easy.", copy: "IVS detects registration marks and compensates placement in real time.", image: "xrf-ivs.jpg", size: "wide" },
-  { id: "power-guide", eyebrow: "NEW 70W RF", title: "More power. More possible.", copy: "More headroom for deep relief, high-DPI grayscale and demanding production.", image: "xrf-hero.jpg", size: "large" },
-  { id: "workflow", eyebrow: "MAKERBOOST AI + XFOCUS", title: "Out of the box, into creation.", copy: "Design, preview, focus and run with fewer manual steps.", image: "xrf-touchscreen.jpg", size: "tall" },
-  { id: "safety", eyebrow: "BUILT-IN PROTECTION", title: "Class 1 design", copy: "Enclosure, lid interlock and thermal response work together.", size: "metric" },
-  { id: "configuration", eyebrow: "OPTIONAL EXPANSION", title: "Endless engraving, auto-feed.", copy: "Optional Riser, Conveyor and Rotary expand the jobs you can accept.", image: "xrf-front.jpg", size: "wide" },
-  { id: "reliability", eyebrow: "LOW MAINTENANCE", title: "Sealed tight. Dust out.", copy: "Protected optics, magnetic lens changes and factory-locked alignment.", image: "xrf-gallery-09.jpg", size: "wide" },
-  { id: "support", eyebrow: "US ENGINEER SUPPORT", title: "Real engineers. Real experience.", copy: "Setup, troubleshooting and long-term support from laser specialists.", image: "xrf-lifestyle.jpg", size: "tall" },
 ];
 
 const scrollStories = [
@@ -125,14 +112,6 @@ const scrollStories = [
     metrics: ["24 × 12 in", "8.5 in with optional Riser", "Optional auto-feed"],
     image: "xrf-front.jpg",
   },
-];
-
-const accessoryOptions = [
-  { id: "smart-air", name: "Smart Air Assist", use: "Automatically matches airflow to cutting or engraving.", image: "xrf-gallery-08.jpg" },
-  { id: "riser", name: "Riser Base", use: "Adds clearance for objects up to 8.5 inches tall.", image: "xrf-open.jpg" },
-  { id: "conveyor", name: "Auto Conveyor", use: "Supports continuous long-format processing.", image: "xrf-front.jpg" },
-  { id: "rotary", name: "Rotary Accessory", use: "Enables cylindrical personalization workflows.", image: "xrf-lifestyle.jpg" },
-  { id: "fume", name: "Filtered Fume Extractor", use: "Adds filtered extraction for the workspace.", image: "xrf-gallery-06.jpg" },
 ];
 
 const purchasePackages = [
@@ -302,26 +281,6 @@ function SpecGroup({ group }) {
   );
 }
 
-function AnimatedMetric({ value, label }) {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return undefined;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setVisible(true);
-        observer.disconnect();
-      }
-    }, { threshold: 0.55 });
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  return <div ref={ref} className={visible ? "metric-reveal is-visible" : "metric-reveal"}><strong>{value}</strong><span>{label}</span></div>;
-}
-
 function StickyStory({ onPlay }) {
   const [active, setActive] = useState(0);
   const stepRefs = useRef([]);
@@ -376,9 +335,7 @@ export function App() {
   const [activeFeature, setActiveFeature] = useState("features");
   const [openFaq, setOpenFaq] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [configured, setConfigured] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const [selectedAccessories, setSelectedAccessories] = useState([]);
   const [selectedPackageId, setSelectedPackageId] = useState("standalone");
   const [purchasePower, setPurchasePower] = useState("38W");
   const [selectedPurchaseAccessories, setSelectedPurchaseAccessories] = useState([]);
@@ -416,13 +373,6 @@ export function App() {
       window.removeEventListener("resize", updateProgress);
     };
   }, []);
-
-  const selectedPower = useMemo(
-    () => power === "38W"
-      ? { label: "38W RF", use: "Fine detail & everyday production", price: "$3,999", note: "Official current price" }
-      : { label: "70W RF", use: "Deeper relief & higher throughput", price: "$4,499", note: "New product price" },
-    [power],
-  );
 
   const selectedPurchasePackage = useMemo(() => {
     const selected = purchasePackages.find((item) => item.id === selectedPackageId) ?? purchasePackages[0];
@@ -474,12 +424,6 @@ export function App() {
   function jumpTo(sectionId) {
     setActiveFeature(sectionId);
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  function toggleAccessory(accessoryId) {
-    setSelectedAccessories((current) => current.includes(accessoryId)
-      ? current.filter((id) => id !== accessoryId)
-      : [...current, accessoryId]);
   }
 
   function togglePurchaseAccessory(accessoryId) {
@@ -598,19 +542,17 @@ export function App() {
             <div className="purchase-options" id="purchase-options">
               <div className="purchase-section-heading">
                 <div><span>Choose your RF power</span><small>Same platform, tuned for different workloads.</small></div>
-                <a href="#power-guide">Compare 38W / 70W</a>
               </div>
               <div className="purchase-power-options">
                 {[
-                  { id: "38W", title: "38W RF", copy: "Fine detail & everyday production", price: 3999 },
-                  { id: "70W", title: "70W RF", copy: "Deeper relief & higher throughput", price: 4499, badge: "NEW" },
+                  { id: "38W", title: "38W RF", copy: "Fine detail & everyday production" },
+                  { id: "70W", title: "70W RF", copy: "Deeper relief & higher throughput", badge: "NEW" },
                 ].map((item) => {
                   const selected = purchasePower === item.id;
                   return (
                     <button type="button" className={selected ? "purchase-power is-selected" : "purchase-power"} key={item.id} onClick={() => { setPurchasePower(item.id); setPower(item.id); setPurchaseAdded(false); }} aria-pressed={selected}>
                       <span><strong>{item.title}</strong>{item.badge && <small>{item.badge}</small>}{selected && <i className="selection-check"><Check size={14} weight="bold" />Selected</i>}</span>
                       <p>{item.copy}</p>
-                      <em>From {formatMoney(item.price)}</em>
                     </button>
                   );
                 })}
@@ -618,7 +560,7 @@ export function App() {
 
               <div className="purchase-section-heading">
                 <div><span>Package</span><small>Choose the setup that matches your workspace.</small></div>
-                <a href="#configuration">Compare all options</a>
+                <span className="purchase-section-note">Selected here</span>
               </div>
               <div className="official-packages">
                 {purchasePackages.map((item) => {
@@ -671,23 +613,10 @@ export function App() {
                 </div>
                 <button type="button" className="primary-cta" onClick={() => setPurchaseAdded(true)}>{purchaseAdded ? "Added to configuration" : "Add to Cart"}</button>
               </div>
-              <a className="secondary-cta secondary-cta--link" href="https://www.1laser.com/products/onelaser-xrf-desktop-laser-machine" target="_blank" rel="noreferrer">Continue on OneLaser.com</a>
+              <a className="secondary-cta secondary-cta--link secondary-cta--shop" href="https://www.1laser.com/products/onelaser-xrf-desktop-laser-machine" target="_blank" rel="noreferrer">Buy with SHOP</a>
             </div>
 
-            <div className="trust-panel">
-              <div><strong>30-Day</strong><span>Easy returns</span></div>
-              <div><strong>3-Year</strong><span>Warranty</span></div>
-              <div><strong>100% USA</strong><span>Engineer support</span></div>
-            </div>
-            <p className="official-source-note">Current commercial data from OneLaser.com. Riser Base, Conveyor, Air Assist Control and replacement optics are optional unless explicitly included.</p>
           </div>
-        </section>
-
-        <section className="proof-rail" aria-label="XRF Gen2 product proof" data-reveal>
-          <AnimatedMetric value="2,000 DPI" label="Maximum scanning precision" />
-          <AnimatedMetric value="True 3G" label="Controlled acceleration" />
-          <AnimatedMetric value="≤ 0.01 mm" label="Positioning accuracy" />
-          <AnimatedMetric value="30,000 h" label="Rated RF source life" />
         </section>
 
         <nav className="feature-nav" aria-label="Explore XRF Gen2 capabilities">
@@ -698,28 +627,8 @@ export function App() {
           </div>
         </nav>
 
-        <section className="section feature-overview" id="features" data-reveal>
-          <div className="section-heading section-heading--split feature-overview__heading">
-            <div>
-              <span className="eyebrow">XRF GEN2 AT A GLANCE</span>
-              <h2>Features built around finished work.</h2>
-            </div>
-            <p>Nine connected capabilities designed to improve output, throughput and day-to-day confidence. Select a card to explore the supporting proof.</p>
-          </div>
-          <div className="feature-bento">
-            {featureOverview.map((feature, index) => (
-              <button type="button" className={`feature-bento__card feature-bento__card--${feature.size}`} key={`${feature.title}-${index}`} onClick={() => jumpTo(feature.id)}>
-                {feature.image && <img src={asset(feature.image)} alt="" />}
-                <span className="feature-bento__index">{String(index + 1).padStart(2, "0")}</span>
-                <div>
-                  <span>{feature.eyebrow}</span>
-                  <strong>{feature.title}</strong>
-                  <p>{feature.copy}</p>
-                </div>
-              </button>
-            ))}
-          </div>
-          <p className="feature-disclaimer">Smart Air, Riser Base, Conveyor and Rotary are optional and sold separately unless included in a configured bundle.</p>
+        <section className="feature-overview" id="features" data-reveal>
+          <img src={asset("xrf-internal-wide.jpg")} alt="Wide view of the XRF Gen2 work area and motion platform" />
         </section>
 
         <section className="section results" id="results" data-reveal>
@@ -758,28 +667,22 @@ export function App() {
             <p>38W and 70W share the same professional platform. Your workload decides the right fit.</p>
           </div>
           <div className="power-compare">
-            <article className={power === "38W" ? "power-card is-selected" : "power-card"}>
-              <div className="power-card__top"><span>38W RF</span><span>DETAIL + VALUE</span></div>
-              <h3>Precision for everyday production.</h3>
-              <p>Ideal for photo engraving, fine text, personalization, signs and balanced studio output.</p>
-              <ul>
-                <li>Fine-detail engraving and photography</li>
-                <li>Everyday custom-product production</li>
-                <li>Balanced performance and investment</li>
-              </ul>
-              <button type="button" onClick={() => setPower("38W")}>Choose 38W</button>
-            </article>
-            <article className={power === "70W" ? "power-card is-selected" : "power-card"}>
-              <div className="power-card__top"><span>70W RF</span><span>DEPTH + THROUGHPUT</span></div>
-              <h3>More headroom for demanding work.</h3>
-              <p>Built for heavier workloads, deeper 3D relief and sharper high-DPI grayscale at speed.</p>
-              <ul>
-                <li>Visibly deeper 3D relief</li>
-                <li>High-DPI grayscale at production speed</li>
-                <li>More cutting and workload headroom</li>
-              </ul>
-              <button type="button" onClick={() => setPower("70W")}>Choose 70W</button>
-            </article>
+            <button type="button" className={power === "38W" ? "power-card is-selected" : "power-card"} onClick={() => { setPower("38W"); setPurchasePower("38W"); }} aria-pressed={power === "38W"}>
+              <span className="power-card__media"><img src={asset("xrf-gallery-08.jpg")} alt="Fine RF laser head detail for 38W engraving work" /><i>38W RF · DETAIL</i></span>
+              <span className="power-card__body">
+                <span className="power-card__top"><strong>38W RF</strong><em>{power === "38W" ? <><Check size={15} weight="bold" />Selected</> : "Choose 38W"}</em></span>
+                <strong className="power-card__title">Precision for everyday production.</strong>
+                <span className="power-card__use">Photos · fine text · personalization · daily production</span>
+              </span>
+            </button>
+            <button type="button" className={power === "70W" ? "power-card is-selected" : "power-card"} onClick={() => { setPower("70W"); setPurchasePower("70W"); }} aria-pressed={power === "70W"}>
+              <span className="power-card__media"><img src={asset("xrf-internal-wide.jpg")} alt="XRF Gen2 motion platform for higher-throughput 70W work" /><i>70W RF · POWER</i></span>
+              <span className="power-card__body">
+                <span className="power-card__top"><strong>70W RF</strong><em>{power === "70W" ? <><Check size={15} weight="bold" />Selected</> : "Choose 70W"}</em></span>
+                <strong className="power-card__title">More headroom for demanding work.</strong>
+                <span className="power-card__use">Deep relief · high-DPI grayscale · heavier workloads</span>
+              </span>
+            </button>
           </div>
         </section>
 
@@ -882,13 +785,12 @@ export function App() {
             <h2>Protection built into every job.</h2>
             <p>Safety is treated as an architecture: separation, containment, monitoring and automatic response—not a list of stickers.</p>
           </div>
-          <div className="safety-architecture">
-            <div className="safety-photo"><img src={asset("xrf-open.jpg")} alt="Open XRF Gen2 showing its enclosed work area" /></div>
-            <div className="safety-zones">
-              <article><span>WORK ZONE</span><h3>Fully enclosed processing</h3><p>Class 1 laser design and lid interlock prevent operation until sealed.</p></article>
-              <article><span>OPTICAL ZONE</span><h3>Isolated and protected</h3><p>Optical and electronic areas are separated from dust and processing heat.</p></article>
-              <article><span>RESPONSE ZONE</span><h3>Automatic intervention</h3><p>Thermal alerts stop laser output; the electrical bay includes heat-triggered suppression.</p></article>
-            </div>
+          <div className="safety-stage"><img src={asset("xrf-open.jpg")} alt="Open XRF Gen2 showing its enclosed Class 1 work area" /></div>
+          <div className="safety-proof-grid">
+            <article><ShieldCheck size={28} weight="regular" /><div><h3>Class 1 enclosure</h3><p>A fully enclosed processing zone keeps normal operation contained.</p></div></article>
+            <article><LockKey size={28} weight="regular" /><div><h3>Lid interlock</h3><p>Opening the lid stops laser operation until the machine is safely sealed.</p></div></article>
+            <article><Fire size={28} weight="regular" /><div><h3>Automatic suppression</h3><p>The isolated electrical bay includes heat-triggered fire suppression.</p></div></article>
+            <article><Thermometer size={28} weight="regular" /><div><h3>Thermal response</h3><p>High-temperature detection raises an alert and stops laser output.</p></div></article>
           </div>
         </section>
 
@@ -904,69 +806,6 @@ export function App() {
               <div><strong>1 year</strong><span>Laser source</span></div>
             </div>
             <a href="#faq">Review support details</a>
-          </div>
-        </section>
-
-        <section className="section configuration" id="configuration" data-reveal>
-          <div className="section-heading section-heading--split">
-            <div>
-              <span className="eyebrow">BUILD YOUR XRF</span>
-              <h2>Choose the platform. Add only what you need.</h2>
-            </div>
-            <p>Configure the same professional XRF Gen2 platform around the work you plan to accept. Every optional item is clearly labeled before it enters your build.</p>
-          </div>
-          <div className="configurator-layout">
-            <div className="configurator-main">
-              <div className="configurator-block">
-                <div className="configurator-block__heading"><span>01</span><div><h3>Select RF power</h3><p>Both versions use the same XRF Gen2 platform.</p></div></div>
-                <div className="package-options">
-                  {["38W", "70W"].map((value) => {
-                    const is38 = value === "38W";
-                    return (
-                      <button type="button" key={value} className={power === value ? "package-card is-selected" : "package-card"} onClick={() => setPower(value)}>
-                        <div><span>{is38 ? "DETAIL + EVERYDAY PRODUCTION" : "DEPTH + HIGHER THROUGHPUT"}</span><h4>XRF Gen2 {value} RF</h4></div>
-                        <div className="package-card__price"><strong>{is38 ? "$3,999" : "$4,499"}</strong><span>{is38 ? "Official current price" : "New product price"}</span></div>
-                        <p>{is38 ? "Photo engraving, fine text, signs and balanced studio output." : "Heavier workloads, deeper relief and more production headroom."}</p>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="configurator-block">
-                <div className="configurator-block__heading"><span>02</span><div><h3>Optional expansion</h3><p>Select accessories that match the work you plan to accept.</p></div></div>
-                <div className="accessory-list">
-                  {accessoryOptions.map((item) => {
-                    const selected = selectedAccessories.includes(item.id);
-                    return (
-                      <label className={selected ? "accessory-card is-selected" : "accessory-card"} key={item.id}>
-                        <input type="checkbox" checked={selected} onChange={() => toggleAccessory(item.id)} />
-                        <img src={asset(item.image)} alt="" />
-                        <span><small>OPTIONAL</small><strong>{item.name}</strong><p>{item.use}</p></span>
-                      </label>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-
-            <aside className="configurator-summary">
-              <span className="config-label">YOUR CONFIGURATION</span>
-              <h3>XRF Gen2 {selectedPower.label}</h3>
-              <p>{selectedPower.use}</p>
-              <div className="summary-row"><span>Machine</span><strong>{selectedPower.label}</strong></div>
-              <div className="summary-row"><span>Optional accessories</span><strong>{selectedAccessories.length || "None"}</strong></div>
-              <div className="summary-price"><span>{selectedPower.note}</span><strong>{selectedPower.price}</strong></div>
-              <div className="purchase-actions">
-                <div className="quantity-control" aria-label="Quantity">
-                  <button type="button" aria-label="Decrease quantity" onClick={() => setQuantity((value) => Math.max(1, value - 1))}><Minus size={15} /></button>
-                  <strong>{quantity}</strong>
-                  <button type="button" aria-label="Increase quantity" onClick={() => setQuantity((value) => value + 1)}><Plus size={15} /></button>
-                </div>
-                <button type="button" className="configurator-cta" onClick={() => setConfigured(true)}>{configured ? "Configuration saved" : "Add to configuration"}</button>
-              </div>
-              <p className="configurator-assurance">30-Day Guarantee · 3-2-1 Warranty · US-Based Engineer Support</p>
-            </aside>
           </div>
         </section>
 

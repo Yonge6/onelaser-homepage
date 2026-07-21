@@ -34,3 +34,15 @@ When implementing from a selected generated mock, treat that image as the source
 - Use `https://www.1laser.com/products/onelaser-xrf-desktop-laser-machine` as the current commercial-data source for the hero: rating, current 38W price, MSRP, financing copy, packages, accessory names/prices, returns, warranty and support. The workbook remains the feature/specification source when the official sales page does not cover a Gen2 claim.
 - The hero purchase flow follows xTool P3's decision order while remaining visually OneLaser: product title and evidence, official price/MSRP, equal-fit 38W/70W power selector, package selector, optional frequently-bought-together cards, quantity/CTA and bottom sticky purchase bar.
 - The user-authorized 70W new-product price is exactly $500 above the equivalent 38W configuration. Therefore Standalone is $3,999 / $4,499 and Riser Base is $4,499 / $4,999 for 38W / 70W respectively, unless newer direct user or official pricing supersedes it.
+- Customer-facing text must never render below 12 px at any breakpoint; small labels may use tracking and weight for hierarchy instead of smaller type.
+- Keep the XRF Gen2 at-a-glance module as one static 16:9 wide image with no internal interaction.
+- Keep project-result media at a fixed 4:3 aspect ratio across desktop and mobile so switching projects never shifts the page layout.
+- Make the 38W/70W comparison image-led and visually parallel; selecting a card must also update the hero purchase power and sticky total.
+- Every P0 story and video placeholder uses a horizontal 16:9 stage.
+- Present safety as one wide 16:9 product image followed by compact proof cards; avoid abstract safety-zone diagrams.
+- The hero purchase panel is the only configuration flow. Do not repeat a second full configurator below the storytelling content.
+- Hero highlight bullets use 12 px type. MSRP is gray, while the final price remains OneLaser red. Financing links use blue.
+- Do not show a separate `Compare 38W / 70W` link in the hero or the four-metric proof rail below it.
+- The secondary hero purchase action reads `Buy with SHOP` and uses a `#5532EB` purple surface with white text.
+- Power choice cards communicate use-case fit only and do not repeat prices. The hero final price uses Certia Black 900.
+- Do not show the three-column trust strip or the commercial-source note below hero purchase actions.
