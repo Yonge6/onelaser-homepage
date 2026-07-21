@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { CaretLeft, CaretRight, Check, Minus, Play, Plus, Star, X } from "@phosphor-icons/react";
 
 const asset = (name) => `${import.meta.env.BASE_URL}assets/${name}`;
@@ -24,12 +24,12 @@ const media = [
 ];
 
 const featureLinks = [
-  ["results", "Projects"],
-  ["rf-benefits", "RF precision"],
-  ["performance", "Speed + IVS"],
+  ["features", "Overview"],
+  ["rf-benefits", "RF results"],
+  ["performance", "Performance"],
   ["workflow", "Workflow"],
   ["safety", "Safety"],
-  ["configuration", "Configuration"],
+  ["configuration", "Configure"],
   ["specs", "Specs"],
 ];
 
@@ -73,13 +73,58 @@ const rfBenefits = [
 ];
 
 const featureOverview = [
-  { id: "rf-benefits", eyebrow: "RF PRECISION", title: "2,000 DPI", copy: "Fine grayscale, small type and premium surface detail.", image: "xrf-gallery-08.jpg", size: "tall" },
-  { id: "performance", eyebrow: "REAL WORK SPEED", title: "1,200 mm/s", copy: "True 3G motion with closed-loop feedback.", size: "metric" },
-  { id: "performance", eyebrow: "INTELLIGENT VISION", title: "Print. Place. Cut.", copy: "IVS recognizes registration marks and compensates placement.", image: "xrf-ivs.jpg", size: "wide" },
-  { id: "results", eyebrow: "BATCH PRODUCTION", title: "24 × 12 in", copy: "A true desktop workspace built for repeatable orders.", image: "xrf-open.jpg", size: "large" },
-  { id: "workflow", eyebrow: "LOWER LEARNING CURVE", title: "MakerBoost + XFocus", copy: "Design, preview, focus and run with fewer manual steps.", image: "xrf-touchscreen.jpg", size: "tall" },
+  { id: "rf-benefits", eyebrow: "RF METAL TUBE", title: "Photo-real, every time.", copy: "Up to 2,000 DPI for fine grayscale, small type and premium surface detail.", image: "xrf-gallery-08.jpg", size: "tall" },
+  { id: "performance", eyebrow: "TRUE SPEED", title: "1,200 mm/s", copy: "Real working speed at controlled 3G acceleration.", size: "metric" },
+  { id: "performance", eyebrow: "INTELLIGENT VISION", title: "Print and cut, made easy.", copy: "IVS detects registration marks and compensates placement in real time.", image: "xrf-ivs.jpg", size: "wide" },
+  { id: "power-guide", eyebrow: "NEW 70W RF", title: "More power. More possible.", copy: "More headroom for deep relief, high-DPI grayscale and demanding production.", image: "xrf-hero.jpg", size: "large" },
+  { id: "workflow", eyebrow: "MAKERBOOST AI + XFOCUS", title: "Out of the box, into creation.", copy: "Design, preview, focus and run with fewer manual steps.", image: "xrf-touchscreen.jpg", size: "tall" },
   { id: "safety", eyebrow: "BUILT-IN PROTECTION", title: "Class 1 design", copy: "Enclosure, lid interlock and thermal response work together.", size: "metric" },
-  { id: "configuration", eyebrow: "OPTIONAL EXPANSION", title: "Longer. Taller. Rotary.", copy: "Riser, Conveyor and Rotary expand the work you can accept.", image: "xrf-front.jpg", size: "wide" },
+  { id: "configuration", eyebrow: "OPTIONAL EXPANSION", title: "Endless engraving, auto-feed.", copy: "Optional Riser, Conveyor and Rotary expand the jobs you can accept.", image: "xrf-front.jpg", size: "wide" },
+  { id: "reliability", eyebrow: "LOW MAINTENANCE", title: "Sealed tight. Dust out.", copy: "Protected optics, magnetic lens changes and factory-locked alignment.", image: "xrf-gallery-09.jpg", size: "wide" },
+  { id: "support", eyebrow: "US ENGINEER SUPPORT", title: "Real engineers. Real experience.", copy: "Setup, troubleshooting and long-term support from laser specialists.", image: "xrf-lifestyle.jpg", size: "tall" },
+];
+
+const scrollStories = [
+  {
+    id: "rf",
+    eyebrow: "P0 · RF RESULTS",
+    title: "Photo-real, every time.",
+    copy: "A sealed RF metal tube, precise pulse control and a fine laser spot preserve tiny type, tonal transitions and surface detail your customers can inspect up close.",
+    metrics: ["38W / 70W RF", "2,000 DPI", "Up to 30,000 hours"],
+    image: "xrf-open.jpg",
+  },
+  {
+    id: "speed",
+    eyebrow: "P0 · TRUESPEED",
+    title: "The fastest of its class.",
+    copy: "Real 1,200 mm/s working speed, controlled 3G acceleration, closed-loop feedback and a 20% lighter head turn motion into repeatable finished output.",
+    metrics: ["1,200 mm/s", "True 3G", "≤ 0.01 mm"],
+    image: "xrf-internal-wide.jpg",
+  },
+  {
+    id: "ivs",
+    eyebrow: "P0 · IVS PRINT & CUT",
+    title: "Print and cut, made easy.",
+    copy: "The head-mounted Intelligent Vision System detects registration marks and compensates position and angle in real time—reducing calibration, waste and rework.",
+    metrics: ["Mark detection", "Live compensation", "Less material waste"],
+    image: "xrf-ivs.jpg",
+  },
+  {
+    id: "motion",
+    eyebrow: "P0 · MOTION PLATFORM",
+    title: "Flagship motion, in a desktop machine.",
+    copy: "Hydra-derived all-steel rolling axes and closed-loop motors combine smooth travel, long service life and feedback-controlled accuracy for sustained production.",
+    metrics: ["All-steel axes", "Closed-loop motors", "20% lighter head"],
+    image: "xrf-gallery-07.jpg",
+  },
+  {
+    id: "expand",
+    eyebrow: "P0 · OPTIONAL EXPANSION",
+    title: "Start desktop. Take on bigger jobs.",
+    copy: "A true 24 × 12 inch bed handles everyday stock. Optional Riser, Rotary and Conveyor accessories unlock taller, cylindrical and continuous long-format work.",
+    metrics: ["24 × 12 in", "8.5 in with optional Riser", "Optional auto-feed"],
+    image: "xrf-front.jpg",
+  },
 ];
 
 const accessoryOptions = [
@@ -257,12 +302,78 @@ function SpecGroup({ group }) {
   );
 }
 
+function AnimatedMetric({ value, label }) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return undefined;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setVisible(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.55 });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  return <div ref={ref} className={visible ? "metric-reveal is-visible" : "metric-reveal"}><strong>{value}</strong><span>{label}</span></div>;
+}
+
+function StickyStory({ onPlay }) {
+  const [active, setActive] = useState(0);
+  const stepRefs = useRef([]);
+
+  useEffect(() => {
+    const observers = stepRefs.current.map((node, index) => {
+      if (!node) return null;
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) setActive(index);
+      }, { rootMargin: "-32% 0px -48%", threshold: 0.15 });
+      observer.observe(node);
+      return observer;
+    });
+    return () => observers.forEach((observer) => observer?.disconnect());
+  }, []);
+
+  const story = scrollStories[active];
+
+  return (
+    <section className="immersive-story" id="performance">
+      <div className="immersive-story__sticky">
+        <div className="immersive-story__progress" aria-label={`Chapter ${active + 1} of ${scrollStories.length}`}>
+          {scrollStories.map((item, index) => (
+            <button type="button" key={item.id} className={active === index ? "is-active" : ""} onClick={() => stepRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "center" })} aria-label={`Show ${item.title}`}><span /></button>
+          ))}
+        </div>
+        <div className="immersive-story__copy" key={story.id}>
+          <span className="eyebrow">{story.eyebrow}</span>
+          <h2>{story.title}</h2>
+          <p>{story.copy}</p>
+          <div className="inline-metrics">{story.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
+          <button className="text-action" type="button" onClick={() => onPlay(story.eyebrow, story.title, asset(story.image))}><Play size={17} weight="fill" />Watch the story</button>
+        </div>
+      </div>
+      <div className="immersive-story__steps">
+        {scrollStories.map((item, index) => (
+          <article ref={(node) => { stepRefs.current[index] = node; }} className={active === index ? "immersive-story__step is-active" : "immersive-story__step"} key={item.id}>
+            <img src={asset(item.image)} alt={`${item.title} XRF Gen2 feature view`} />
+            <div className="immersive-story__media-label"><span>VIDEO PLACEHOLDER</span><span>{String(index + 1).padStart(2, "0")} / {String(scrollStories.length).padStart(2, "0")}</span></div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function App() {
   const [power, setPower] = useState("38W");
   const [activeMedia, setActiveMedia] = useState(0);
   const [activeProject, setActiveProject] = useState(0);
   const [activeBenefit, setActiveBenefit] = useState(0);
-  const [activeFeature, setActiveFeature] = useState("results");
+  const [activeFeature, setActiveFeature] = useState("features");
   const [openFaq, setOpenFaq] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [configured, setConfigured] = useState(false);
@@ -274,6 +385,37 @@ export function App() {
   const [purchaseAdded, setPurchaseAdded] = useState(false);
   const [videoModal, setVideoModal] = useState(null);
   const thumbnailRailRef = useRef(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const revealNodes = [...document.querySelectorAll("[data-reveal]")];
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add("is-visible");
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8%" });
+    revealNodes.forEach((node) => revealObserver.observe(node));
+
+    const trackedSections = featureLinks
+      .map(([id]) => document.getElementById(id))
+      .filter(Boolean);
+    const updateProgress = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0);
+      const currentSection = trackedSections.reduce((current, node) => (
+        node.getBoundingClientRect().top <= 190 ? node : current
+      ), null);
+      if (currentSection?.id) setActiveFeature(currentSection.id);
+    };
+    updateProgress();
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    return () => {
+      revealObserver.disconnect();
+      window.removeEventListener("scroll", updateProgress);
+      window.removeEventListener("resize", updateProgress);
+    };
+  }, []);
 
   const selectedPower = useMemo(
     () => power === "38W"
@@ -349,6 +491,7 @@ export function App() {
 
   return (
     <div className="site-shell">
+      <div className="page-progress" aria-hidden="true"><span style={{ width: `${scrollProgress}%` }} /></div>
       <a className="skip-link" href="#main">Skip to content</a>
       <div className="announcement">
         <span>XRF GEN2</span>
@@ -432,7 +575,7 @@ export function App() {
               <li><strong>38W / 70W RF metal tube:</strong> rated up to 30,000 hours with air-cooled operation.</li>
               <li><strong>1,200 mm/s + True 3G:</strong> real working speed with 29,430 mm/s² acceleration.</li>
               <li><strong>Professional detail:</strong> up to 2,000 DPI, 0.07 mm laser dot and ≤ 0.01 mm repeat positioning.</li>
-              <li><strong>Desktop production area:</strong> 23.6 × 11.8 in working bed with integrated 5MP camera.</li>
+              <li><strong>Desktop production area:</strong> 23.6 × 11.8 in working bed with a full-frame top-cover camera.</li>
               <li><strong>Class 1 design:</strong> enclosed processing with US-based engineer support.</li>
             </ul>
 
@@ -465,7 +608,7 @@ export function App() {
                   const selected = purchasePower === item.id;
                   return (
                     <button type="button" className={selected ? "purchase-power is-selected" : "purchase-power"} key={item.id} onClick={() => { setPurchasePower(item.id); setPower(item.id); setPurchaseAdded(false); }} aria-pressed={selected}>
-                      <span><strong>{item.title}</strong>{item.badge && <small>{item.badge}</small>}</span>
+                      <span><strong>{item.title}</strong>{item.badge && <small>{item.badge}</small>}{selected && <i className="selection-check"><Check size={14} weight="bold" />Selected</i>}</span>
                       <p>{item.copy}</p>
                       <em>From {formatMoney(item.price)}</em>
                     </button>
@@ -489,7 +632,7 @@ export function App() {
                       aria-pressed={selected}
                     >
                       <div className="official-package__top">
-                        <span><small>{item.badge}</small><strong>{item.name}</strong></span>
+                        <span><small>{item.badge}</small><strong>{item.name}</strong>{selected && <i className="selection-check"><Check size={14} weight="bold" />Selected</i>}</span>
                         <span><strong>{formatMoney(item.price + (purchasePower === "70W" ? 500 : 0))}</strong><del>{formatMoney(item.msrp + (purchasePower === "70W" ? 500 : 0))}</del></span>
                       </div>
                       <p>{item.description.replace("38W", purchasePower)}</p>
@@ -540,11 +683,11 @@ export function App() {
           </div>
         </section>
 
-        <section className="proof-rail" aria-label="XRF Gen2 product proof">
-          <div><strong>2,000 DPI</strong><span>Maximum scanning precision</span></div>
-          <div><strong>True 3G</strong><span>Controlled acceleration</span></div>
-          <div><strong>≤ 0.01 mm</strong><span>Positioning accuracy</span></div>
-          <div><strong>Air cooled</strong><span>No water chiller</span></div>
+        <section className="proof-rail" aria-label="XRF Gen2 product proof" data-reveal>
+          <AnimatedMetric value="2,000 DPI" label="Maximum scanning precision" />
+          <AnimatedMetric value="True 3G" label="Controlled acceleration" />
+          <AnimatedMetric value="≤ 0.01 mm" label="Positioning accuracy" />
+          <AnimatedMetric value="30,000 h" label="Rated RF source life" />
         </section>
 
         <nav className="feature-nav" aria-label="Explore XRF Gen2 capabilities">
@@ -555,13 +698,13 @@ export function App() {
           </div>
         </nav>
 
-        <section className="section feature-overview" id="features">
+        <section className="section feature-overview" id="features" data-reveal>
           <div className="section-heading section-heading--split feature-overview__heading">
             <div>
               <span className="eyebrow">XRF GEN2 AT A GLANCE</span>
               <h2>Features built around finished work.</h2>
             </div>
-            <p>Seven connected capabilities designed to improve output, throughput and day-to-day confidence. Select a card to explore the supporting proof.</p>
+            <p>Nine connected capabilities designed to improve output, throughput and day-to-day confidence. Select a card to explore the supporting proof.</p>
           </div>
           <div className="feature-bento">
             {featureOverview.map((feature, index) => (
@@ -579,7 +722,7 @@ export function App() {
           <p className="feature-disclaimer">Smart Air, Riser Base, Conveyor and Rotary are optional and sold separately unless included in a configured bundle.</p>
         </section>
 
-        <section className="section results" id="results">
+        <section className="section results" id="results" data-reveal>
           <div className="section-heading section-heading--split">
             <div>
               <span className="eyebrow">WHAT WILL YOU MAKE NEXT?</span>
@@ -608,7 +751,7 @@ export function App() {
           </div>
         </section>
 
-        <section className="section power-guide" id="power-guide">
+        <section className="section power-guide" id="power-guide" data-reveal>
           <div className="section-heading section-heading--center">
             <span className="eyebrow">TWO PURPOSE-BUILT RF OPTIONS</span>
             <h2>Choose the power that fits your work.</h2>
@@ -640,7 +783,7 @@ export function App() {
           </div>
         </section>
 
-        <section className="section rf-benefits" id="rf-benefits">
+        <section className="section rf-benefits" id="rf-benefits" data-reveal>
           <div className="section-heading section-heading--center">
             <span className="eyebrow">WHY RF CHANGES THE FINISHED RESULT</span>
             <h2>Professional output, explained simply.</h2>
@@ -667,41 +810,9 @@ export function App() {
           </div>
         </section>
 
-        <section className="story-stack" id="performance">
-          <VideoPlaceholder
-            eyebrow="RF RESULTS"
-            title="Details your customers can see."
-            copy="A fine RF spot, pulse-modulated control and stable output preserve small type, grayscale transitions and surface detail—up to 2,000 DPI."
-            image={asset("xrf-open.jpg")}
-            dark
-            onPlay={() => openStory("RF RESULTS", "Details your customers can see.", asset("xrf-open.jpg"))}
-          >
-            <div className="inline-metrics"><span>38W / 70W RF</span><span>Air cooled</span><span>Up to 30,000 hours</span></div>
-          </VideoPlaceholder>
+        <StickyStory onPlay={openStory} />
 
-          <VideoPlaceholder
-            eyebrow="SPEED + CONTROL"
-            title="Fast, without losing control."
-            copy="Real 1,200 mm/s working speed, True 3G acceleration, closed-loop feedback and Hydra-derived all-steel motion turn speed into finished output—not empty-travel claims."
-            image={asset("xrf-internal-wide.jpg")}
-            onPlay={() => openStory("SPEED + CONTROL", "Fast, without losing control.", asset("xrf-internal-wide.jpg"))}
-          >
-            <div className="inline-metrics"><span>1,200 mm/s</span><span>True 3G</span><span>20% lighter head</span></div>
-          </VideoPlaceholder>
-
-          <VideoPlaceholder
-            eyebrow="IVS PRINT & CUT"
-            title="Print. Place. Cut. Done."
-            copy="The head-mounted Intelligent Vision System recognizes registration marks and compensates cut placement in real time—reducing manual calibration, misalignment and waste."
-            image={asset("xrf-ivs.jpg")}
-            dark
-            onPlay={() => openStory("IVS PRINT & CUT", "Print. Place. Cut. Done.", asset("xrf-ivs.jpg"))}
-          >
-            <div className="inline-metrics"><span>Mark-point recognition</span><span>Real-time compensation</span></div>
-          </VideoPlaceholder>
-        </section>
-
-        <section className="section workflow" id="workflow">
+        <section className="section workflow" id="workflow" data-reveal>
           <div className="section-heading section-heading--split">
             <div>
               <span className="eyebrow">EASY WORKFLOW</span>
@@ -723,13 +834,12 @@ export function App() {
           </div>
         </section>
 
-        <section className="story-stack">
+        <section className="story-stack" data-reveal>
           <VideoPlaceholder
             eyebrow="BIGGER JOBS"
             title="Start desktop. Take on bigger jobs."
             copy="A 24 × 12 inch workspace handles everyday stock. Optional Riser Base, Rotary and Conveyor accessories open tall objects, cylinders and continuous long-format work."
             image={asset("xrf-hero.jpg")}
-            dark
             onPlay={() => openStory("BIGGER JOBS", "Start desktop. Take on bigger jobs.", asset("xrf-hero.jpg"))}
           >
             <div className="inline-metrics"><span>24 × 12 in</span><span>8.5 in height with optional Riser</span><span>Unlimited length workflow</span></div>
@@ -746,7 +856,7 @@ export function App() {
           </VideoPlaceholder>
         </section>
 
-        <section className="section reliability">
+        <section className="section reliability" id="reliability" data-reveal>
           <div className="section-heading section-heading--center">
             <span className="eyebrow">ENGINEERED FOR RELIABILITY</span>
             <h2>Less maintenance. More making.</h2>
@@ -766,7 +876,7 @@ export function App() {
           </div>
         </section>
 
-        <section className="section safety" id="safety">
+        <section className="section safety" id="safety" data-reveal>
           <div className="safety-intro">
             <span className="eyebrow">BUILT-IN PROTECTION</span>
             <h2>Protection built into every job.</h2>
@@ -782,7 +892,7 @@ export function App() {
           </div>
         </section>
 
-        <section className="support-section">
+        <section className="support-section" id="support" data-reveal>
           <img src={asset("xrf-lifestyle.jpg")} alt="OneLaser customer in a workshop beside XRF Gen2" />
           <div className="support-overlay">
             <span className="eyebrow">ONELASER SUPPORT</span>
@@ -797,7 +907,7 @@ export function App() {
           </div>
         </section>
 
-        <section className="section configuration" id="configuration">
+        <section className="section configuration" id="configuration" data-reveal>
           <div className="section-heading section-heading--split">
             <div>
               <span className="eyebrow">BUILD YOUR XRF</span>
@@ -860,7 +970,7 @@ export function App() {
           </div>
         </section>
 
-        <section className="section specs" id="specs">
+        <section className="section specs" id="specs" data-reveal>
           <div className="section-heading section-heading--split">
             <div><span className="eyebrow">COMPLETE DETAILS</span><h2>Specifications.</h2></div>
             <p>Core published specifications for the XRF Gen2 platform. Final bundle content and electrical requirements should be confirmed at checkout.</p>
@@ -870,7 +980,7 @@ export function App() {
           </div>
         </section>
 
-        <section className="section faq" id="faq">
+        <section className="section faq" id="faq" data-reveal>
           <div className="faq-heading"><span className="eyebrow">BUYING QUESTIONS</span><h2>Good answers before you commit.</h2></div>
           <div className="faq-list">
             {faqs.map((item, index) => (
@@ -884,7 +994,7 @@ export function App() {
           </div>
         </section>
 
-        <section className="final-cta">
+        <section className="final-cta" data-reveal>
           <img src={asset("xrf-hero.jpg")} alt="XRF Gen2 product render" />
           <div>
             <span className="eyebrow">XRF GEN2</span>

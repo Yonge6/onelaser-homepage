@@ -1,59 +1,58 @@
-# XRF Gen2 PDP · Hero Commerce Flow QA
+# XRF Gen2 UI Guideline + Motion QA
 
 ## Review target
 
-- Purchase-flow reference: xTool P3 product title, evidence, price, package, add-on, quantity and sticky-cart anatomy.
-- Commercial-data reference: current OneLaser XRF product page plus the user-authorized 70W new-product price rule.
-- Product content source: `XRF Gen2 卖点参数发布汇总.xlsx`.
-- UI source of truth: `UI-SPEC.md`.
+- Visual source: `/Users/yongyuan/Downloads/OneLaser Web UI Guideline.pdf`.
+- Product content source: `XRF Gen2 卖点参数发布汇总.xlsx`, using only `XRF Gen2 卖点` and `XRF Gen2 Specs-1`.
+- Motion direction: the official guideline's restrained fade, slight translate, product-detail zoom, metric reveal and sticky storytelling patterns.
 - Desktop viewport: 1458 × 1178.
 - Mobile viewport: 390 × 844.
 
-## Visual evidence
+## Comparison evidence
 
-- xTool reference capture: `qa/reference-xtool-p3-top-v4.png`.
-- OneLaser official-page capture: `qa/reference-onelaser-official-top-v4.png`.
-- Final desktop hero: `qa/desktop-top-purchase-v5.jpg`.
-- Final mobile hero: `qa/mobile-top-purchase-v5.jpg`.
-- Final mobile 70W state: `qa/mobile-power-options-v5.jpg`.
-- Final mobile configured state: `qa/mobile-configured-v5.jpg`.
-- xTool / implementation side-by-side: `qa/reference-implementation-comparison-v5.jpg`.
-- OneLaser official / implementation side-by-side: `qa/official-data-implementation-comparison-v5.jpg`.
+- Guideline selection/card rules + final hero: `qa/reference-vs-hero-final.png`.
+- Guideline video/motion rules + final sticky story: `qa/reference-vs-story-final.png`.
+- Final desktop hero: `qa/desktop-ui-guideline-final.png`.
+- Final desktop motion chapter: `qa/desktop-motion-final.png`.
+- Final mobile hero: `qa/mobile-hero-v3.png`.
+- Final mobile sticky story: `qa/mobile-story-v3.png`.
 
-## Source fidelity
+## Visual system
 
-- Purchase sequence: passed. The hero follows title and proof → price/MSRP → financing → power → package → optional add-ons → quantity/CTA.
-- Commercial values: passed. 38W starts at $3,999 with $6,499 MSRP; 70W is exactly $500 above its matching 38W configuration.
-- Rating, financing, packages, accessories, returns, warranty and support: passed against the captured OneLaser source.
-- Optional labeling: passed. Riser Base, Conveyor, Air Assist Control and replacement optics remain explicitly optional.
+- Typography: passed. Runtime resolves all text to the shipped Certia family; major headings use weight 800.
+- Color: passed. Brand red is `#E7310E`, action red is `#D92D0D`, and structural surfaces resolve to white or `#F5F5F7`.
+- Components: passed. Primary actions are pill-shaped, selection cards use the official red border/tint and a visible Selected check label, and media cards use 24–32 px radii.
+- Prices: passed. Customer-facing prices use OneLaser red.
+- Gallery: passed. Desktop stage is exactly 660 × 660; mobile stage is square and 354 px within the 390 px viewport; thumbnails remain horizontally browsable with a separate video slot.
 
-## UI system
+## Information architecture
 
-- Typography: passed. Runtime sampling resolves to Certia; desktop H1 is 40 px / 800 and mobile H1 is 36 px / 800.
-- Surfaces: passed. Structural backgrounds resolve to white or `#F5F5F7`; there are no black structural sections or decorative gradients.
-- Components: passed. Package and add-on cards use restrained borders, 10–12 px radii, no decorative elevation and clear selected states.
-- Prices: passed. All customer-facing price values use OneLaser red.
-- Gallery: passed. Desktop stage is 660 × 660; thumbnails are 70 × 70 with previous/next controls and a separate video slot.
+- Benefit-first order: passed. Customer result precedes feature, technical proof and real-result media.
+- Priority mapping: passed. P0 appears in the five-chapter sticky story, P1 uses large visual modules, P2 uses compact proof patterns, and P3 remains in specifications/FAQ.
+- Optional labeling: passed. Smart Air, Riser Base, Conveyor, Rotary, Fume Extractor and optional optics remain explicitly optional.
+- Deprecated content: passed. The `参数作废` sheet is not used.
 
-## Responsive and interaction checks
+## Motion and interaction
 
-- Desktop overflow: passed. At 1458 px, document width equals viewport width.
-- Mobile overflow: passed. At 390 px, document width equals viewport width.
-- Brand font delivery: passed. `document.fonts.check('36px Certia')` returns true.
-- 70W selection: passed. Final price, MSRP, package cards, summary and sticky purchase bar update by $500.
-- Package selection: passed. Riser Base selection updates the selected state and total.
-- Optional add-ons: passed. Accessory selection updates item count, price and total.
-- Quantity: passed. Quantity multiplies machine and selected accessory totals.
-- Purchase CTA: passed. Add to Cart confirms the configured state in the hero and sticky bar.
-- Mobile density: passed. Power choices stack, add-on cards reflow, controls remain readable and the sticky total/CTA remain visible.
-- Production build: passed. Vite production build completes successfully.
+- Sticky storytelling: passed. RF Results, TrueSpeed, IVS, Motion Platform and Optional Expansion synchronize copy, chapter progress and media while scrolling.
+- Navigation: passed. The sticky capability navigation updates its active section and supports direct chapter jumps.
+- Reveal system: passed. Metrics and sections reveal once through IntersectionObserver; product and proof media use restrained 1.03–1.06 zoom.
+- Reduced motion: passed. `prefers-reduced-motion` disables animation and preserves visible content.
+- Purchase flow: passed. 70W remains exactly $500 above the matching 38W configuration, and power, package, add-on, quantity and sticky totals update together.
+
+## Responsive and technical checks
+
+- Desktop overflow: passed. Document width equals the 1458 px viewport.
+- Mobile overflow: passed. Document width equals the 390 px viewport.
+- Image integrity: passed. No broken images were detected.
+- Font delivery: passed. `document.fonts.check('16px Certia')` returns true.
+- Browser console: passed. No errors or warnings were detected.
+- Production build: passed. Vite completes successfully.
 
 ## Remaining production replacements
 
-- Replace each `VIDEO PLACEHOLDER` with the final production video.
-- Replace accessory and project proof media when final photography is available.
+- Replace each `VIDEO PLACEHOLDER` with the final muted autoplay or click-to-play production media.
+- Replace project and accessory proof imagery when final photography and tested project settings are available.
 - Connect the prototype Add to Cart state to the production commerce backend.
-
-## Final result
 
 passed
