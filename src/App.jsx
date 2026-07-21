@@ -72,6 +72,24 @@ const rfBenefits = [
   },
 ];
 
+const featureOverview = [
+  { id: "rf-benefits", eyebrow: "RF PRECISION", title: "2,000 DPI", copy: "Fine grayscale, small type and premium surface detail.", image: "xrf-gallery-08.jpg", size: "tall" },
+  { id: "performance", eyebrow: "REAL WORK SPEED", title: "1,200 mm/s", copy: "True 3G motion with closed-loop feedback.", size: "metric" },
+  { id: "performance", eyebrow: "INTELLIGENT VISION", title: "Print. Place. Cut.", copy: "IVS recognizes registration marks and compensates placement.", image: "xrf-ivs.jpg", size: "wide" },
+  { id: "results", eyebrow: "BATCH PRODUCTION", title: "24 × 12 in", copy: "A true desktop workspace built for repeatable orders.", image: "xrf-open.jpg", size: "large" },
+  { id: "workflow", eyebrow: "LOWER LEARNING CURVE", title: "MakerBoost + XFocus", copy: "Design, preview, focus and run with fewer manual steps.", image: "xrf-touchscreen.jpg", size: "tall" },
+  { id: "safety", eyebrow: "BUILT-IN PROTECTION", title: "Class 1 design", copy: "Enclosure, lid interlock and thermal response work together.", size: "metric" },
+  { id: "configuration", eyebrow: "OPTIONAL EXPANSION", title: "Longer. Taller. Rotary.", copy: "Riser, Conveyor and Rotary expand the work you can accept.", image: "xrf-front.jpg", size: "wide" },
+];
+
+const accessoryOptions = [
+  { id: "smart-air", name: "Smart Air Assist", use: "Automatically matches airflow to cutting or engraving.", image: "xrf-gallery-08.jpg" },
+  { id: "riser", name: "Riser Base", use: "Adds clearance for objects up to 8.5 inches tall.", image: "xrf-open.jpg" },
+  { id: "conveyor", name: "Auto Conveyor", use: "Supports continuous long-format processing.", image: "xrf-front.jpg" },
+  { id: "rotary", name: "Rotary Accessory", use: "Enables cylindrical personalization workflows.", image: "xrf-lifestyle.jpg" },
+  { id: "fume", name: "Filtered Fume Extractor", use: "Adds filtered extraction for the workspace.", image: "xrf-gallery-06.jpg" },
+];
+
 const specs = [
   {
     title: "Laser source",
@@ -186,6 +204,8 @@ export function App() {
   const [openFaq, setOpenFaq] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [configured, setConfigured] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const [selectedAccessories, setSelectedAccessories] = useState([]);
   const [videoModal, setVideoModal] = useState(null);
   const thumbnailRailRef = useRef(null);
 
@@ -224,6 +244,12 @@ export function App() {
   function jumpTo(sectionId) {
     setActiveFeature(sectionId);
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function toggleAccessory(accessoryId) {
+    setSelectedAccessories((current) => current.includes(accessoryId)
+      ? current.filter((id) => id !== accessoryId)
+      : [...current, accessoryId]);
   }
 
   return (
@@ -297,8 +323,7 @@ export function App() {
               <span>NEW · GEN 2</span>
               <span>Professional RF desktop platform</span>
             </div>
-            <h1>XRF Gen2 Desktop RF Laser</h1>
-            <h2>From idea to finished product—faster.</h2>
+            <h1>OneLaser XRF™ Performance Desktop Laser Engraver (38W/70W RF)</h1>
             <p className="hero-lede">Professional RF precision, controlled 3G motion and intelligent vision—built to create premium products with less setup, less waste and less maintenance.</p>
 
             <ul className="hero-highlights">
@@ -306,13 +331,6 @@ export function App() {
               <li>Real 1,200 mm/s working speed with controlled True 3G motion.</li>
               <li>IVS vision, XFocus autofocus and a 24 × 12 in workspace.</li>
             </ul>
-
-            <div className="hero-proof" aria-label="Key specifications">
-              <span><strong>38W / 70W</strong> RF power</span>
-              <span><strong>1,200 mm/s</strong> real work speed</span>
-              <span><strong>24 × 12 in</strong> workspace</span>
-              <span><strong>30,000 h</strong> rated life</span>
-            </div>
 
             <div className="choice-block">
               <div className="choice-heading">
@@ -363,6 +381,30 @@ export function App() {
             ))}
           </div>
         </nav>
+
+        <section className="section feature-overview" id="features">
+          <div className="section-heading section-heading--split feature-overview__heading">
+            <div>
+              <span className="eyebrow">XRF GEN2 AT A GLANCE</span>
+              <h2>Features built around finished work.</h2>
+            </div>
+            <p>Seven connected capabilities designed to improve output, throughput and day-to-day confidence. Select a card to explore the supporting proof.</p>
+          </div>
+          <div className="feature-bento">
+            {featureOverview.map((feature, index) => (
+              <button type="button" className={`feature-bento__card feature-bento__card--${feature.size}`} key={`${feature.title}-${index}`} onClick={() => jumpTo(feature.id)}>
+                {feature.image && <img src={asset(feature.image)} alt="" />}
+                <span className="feature-bento__index">{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <span>{feature.eyebrow}</span>
+                  <strong>{feature.title}</strong>
+                  <p>{feature.copy}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+          <p className="feature-disclaimer">Smart Air, Riser Base, Conveyor and Rotary are optional and sold separately unless included in a configured bundle.</p>
+        </section>
 
         <section className="section results" id="results">
           <div className="section-heading section-heading--split">
@@ -585,42 +627,62 @@ export function App() {
         <section className="section configuration" id="configuration">
           <div className="section-heading section-heading--split">
             <div>
-              <span className="eyebrow">CONFIGURATION TRANSPARENCY</span>
-              <h2>Know exactly what you’re building.</h2>
+              <span className="eyebrow">BUILD YOUR XRF</span>
+              <h2>Choose the platform. Add only what you need.</h2>
             </div>
-            <p>Optional accessories are always labeled, so the capability you see matches the configuration you buy.</p>
+            <p>Configure the same professional XRF Gen2 platform around the work you plan to accept. Every optional item is clearly labeled before it enters your build.</p>
           </div>
-          <div className="config-grid">
-            <article>
-              <span className="config-label">STANDARD PLATFORM</span>
+          <div className="configurator-layout">
+            <div className="configurator-main">
+              <div className="configurator-block">
+                <div className="configurator-block__heading"><span>01</span><div><h3>Select RF power</h3><p>Both versions use the same XRF Gen2 platform.</p></div></div>
+                <div className="package-options">
+                  {["38W", "70W"].map((value) => {
+                    const is38 = value === "38W";
+                    return (
+                      <button type="button" key={value} className={power === value ? "package-card is-selected" : "package-card"} onClick={() => setPower(value)}>
+                        <div><span>{is38 ? "DETAIL + EVERYDAY PRODUCTION" : "DEPTH + HIGHER THROUGHPUT"}</span><h4>XRF Gen2 {value} RF</h4></div>
+                        <div className="package-card__price"><strong>{is38 ? "$5,999" : "Launch pricing"}</strong><span>{is38 ? "Starting price" : "Request final configuration"}</span></div>
+                        <p>{is38 ? "Photo engraving, fine text, signs and balanced studio output." : "Heavier workloads, deeper relief and more production headroom."}</p>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="configurator-block">
+                <div className="configurator-block__heading"><span>02</span><div><h3>Optional expansion</h3><p>Select accessories that match the work you plan to accept.</p></div></div>
+                <div className="accessory-list">
+                  {accessoryOptions.map((item) => {
+                    const selected = selectedAccessories.includes(item.id);
+                    return (
+                      <label className={selected ? "accessory-card is-selected" : "accessory-card"} key={item.id}>
+                        <input type="checkbox" checked={selected} onChange={() => toggleAccessory(item.id)} />
+                        <img src={asset(item.image)} alt="" />
+                        <span><small>OPTIONAL</small><strong>{item.name}</strong><p>{item.use}</p></span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            <aside className="configurator-summary">
+              <span className="config-label">YOUR CONFIGURATION</span>
               <h3>XRF Gen2 {selectedPower.label}</h3>
-              <ul>
-                <li>24 × 12 inch engraving area</li>
-                <li>Integrated XFocus autofocus</li>
-                <li>Air assist and built-in exhaust fan</li>
-                <li>Touch control panel</li>
-                <li>WiFi / USB / Ethernet</li>
-                <li>LightBurn / MakerBoost / RDWorks support</li>
-              </ul>
-            </article>
-            <article className="config-optional">
-              <span className="config-label">OPTIONAL EXPANSION</span>
-              <h3>Build for your next job.</h3>
-              <ul>
-                <li>Smart Air Assist</li>
-                <li>Riser Base</li>
-                <li>Auto Conveyor</li>
-                <li>Rotary accessory</li>
-                <li>Filtered Fume Extractor</li>
-                <li>1.5 / 2 / 3 inch focal lenses</li>
-              </ul>
-            </article>
-            <aside className="config-summary">
-              <span>YOUR STARTING CONFIGURATION</span>
-              <strong>{selectedPower.label}</strong>
               <p>{selectedPower.use}</p>
-              <div><span>{selectedPower.note}</span><strong>{selectedPower.price}</strong></div>
-              <button type="button" onClick={() => setConfigured(true)}>{configured ? "Configuration saved" : "Start configuration"}</button>
+              <div className="summary-row"><span>Machine</span><strong>{selectedPower.label}</strong></div>
+              <div className="summary-row"><span>Optional accessories</span><strong>{selectedAccessories.length || "None"}</strong></div>
+              <div className="summary-price"><span>{selectedPower.note}</span><strong>{selectedPower.price}</strong></div>
+              <div className="purchase-actions">
+                <div className="quantity-control" aria-label="Quantity">
+                  <button type="button" aria-label="Decrease quantity" onClick={() => setQuantity((value) => Math.max(1, value - 1))}><Minus size={15} /></button>
+                  <strong>{quantity}</strong>
+                  <button type="button" aria-label="Increase quantity" onClick={() => setQuantity((value) => value + 1)}><Plus size={15} /></button>
+                </div>
+                <button type="button" className="configurator-cta" onClick={() => setConfigured(true)}>{configured ? "Configuration saved" : "Add to configuration"}</button>
+              </div>
+              <p className="configurator-assurance">30-Day Guarantee · 3-2-1 Warranty · US-Based Engineer Support</p>
             </aside>
           </div>
         </section>
