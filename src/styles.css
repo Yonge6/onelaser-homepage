@@ -6548,3 +6548,52 @@ body { color: var(--ink); }
     animation: none;
   }
 }
+
+/* 2026-07-22 final overview strip and proof-stage alignment. */
+.feature-overview {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 24px;
+  background: #141414;
+}
+
+.feature-overview > img {
+  width: 100%;
+  max-width: none;
+  height: auto;
+  aspect-ratio: 3458 / 1400;
+  display: block;
+  object-fit: contain;
+  border: 0;
+  border-radius: 0;
+}
+
+.power-proof-stage__copy h3 {
+  font-size: 36px;
+  line-height: 1.04;
+  letter-spacing: -.025em;
+}
+
+@media (min-width: 1181px) {
+  .immersive-story__sticky {
+    align-items: start;
+  }
+}
+
+@media (max-width: 640px) {
+  .feature-overview {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .feature-overview > img {
+    min-height: 0;
+    aspect-ratio: 3458 / 1400;
+  }
+
+  .power-proof-stage__copy h3 {
+    font-size: 28px;
+    line-height: 1.08;
+  }
+}

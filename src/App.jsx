@@ -857,13 +857,17 @@ export function App() {
           </div>
         </nav>
 
+        <section className="feature-overview" id="features" data-reveal>
+          <img src={asset("xrf-feature-overview-web.webp")} alt="XRF Gen2 capabilities overview including RF precision, 38W and 70W power, 1,300 millimeters per second motion, IVS, workflow, safety and support" />
+        </section>
+
         <section className="tv-proof" aria-labelledby="tv-proof-title" data-reveal>
           <div className="tv-proof__copy">
             <span className="eyebrow">AS SEEN ON TV</span>
             <h2 id="tv-proof-title">Featured on FOX &amp; Friends Weekend.</h2>
             <p>Discover why OneLaser was featured as a standout tool for makers, creators and small businesses.</p>
             <div className="tv-proof__signals" aria-label="FOX feature highlights">
-              <span>As Seen on TV</span><span>FOX &amp; Friends Weekend</span><span>December 2024</span>
+              <span>As Seen on TV</span><span>FOX &amp; Friends Weekend</span>
             </div>
           </div>
           <button type="button" className="tv-proof__media" onClick={() => setYoutubeVideo(tvFeature)} aria-label="Play the FOX and Friends Weekend OneLaser feature">
@@ -871,10 +875,6 @@ export function App() {
             <span className="tv-proof__play"><Play size={28} weight="fill" /></span>
             <i>FOX &amp; FRIENDS WEEKEND · VIDEO</i>
           </button>
-        </section>
-
-        <section className="feature-overview" id="features" data-reveal>
-          <img src={asset("xrf-dark-hero.webp")} alt="XRF Gen2 RF desktop laser presented in a premium studio environment" />
         </section>
 
         <section className="sales-video sales-video--performance" data-reveal>
