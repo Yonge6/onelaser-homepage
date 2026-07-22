@@ -56,3 +56,29 @@
 - Sticky purchase bar remained visible and unchanged.
 
 final result: passed
+
+## 2026-07-22 video decision-journey revision
+
+### Source and comparison evidence
+
+- Latest source of truth: `pasted-text.txt` from the user, which assigns each video to a specific buying question and explicitly rejects one aggregated video wall.
+- Before/after visual comparison: `qa/video-journey-comparison.png` combines the earlier seven-video rail with the new performance-proof module.
+- Current desktop evidence: `qa/video-journey-performance-final.png`; additional interactive review was performed in the live in-app browser for the FOX, business-success, independent-review, competitor and facility/support modules.
+
+### Journey and content checks
+
+- Module order is now Hero → FOX media proof → core benefit image → hobby-laser performance test → finished-product results → customer success → power/RF stories → workflow/reliability/safety → specifications → independent reviews → xTool P2 comparison → facility/support → FAQ/CTA.
+- The previous generic creator-video rail is absent from the DOM.
+- Default document contains zero YouTube iframes. Covers use lazy static YouTube thumbnails; one privacy-enhanced iframe is created only after a visitor clicks.
+- Primary independent reviews show three uniform 16:9 cards. `View more creator reviews` opens a secondary review dialog without creating an iframe; choosing a review closes that dialog and opens the shared player.
+- FOX wording is limited to `Featured on FOX & Friends Weekend` with `As Seen on TV`, `FOX & Friends Weekend`, and `December 2024` proof tags.
+- Customer-success copy avoids earnings promises and includes the required individual-results disclaimer.
+
+### Interaction and responsive checks
+
+- Shared YouTube player passed close-button, overlay and Escape paths. After close, the iframe count returns from one to zero and playback is removed.
+- Desktop document reports zero horizontal overflow, zero visible text below 12 px and no runtime console errors after a clean reload.
+- Mobile 390 × 844 reports zero horizontal overflow, zero text below 12 px, no initial iframe, and a swipeable review rail (`354 px` client width / `1021 px` scroll width).
+- Performance, business, review, competitor and facility media all retain 16:9 cover geometry and use the same play affordance and modal.
+
+final result: passed

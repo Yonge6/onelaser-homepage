@@ -23,9 +23,9 @@ The page follows one consistent evidence ladder: finished result → product cap
 
 ## Typography
 
-- Product H1: 40 px / 42 px line height / Certia ExtraBold 800; mobile 36 px / 37 px.
+- Product H1: 32 px / 34 px line height / Certia ExtraBold 800 on desktop and mobile.
 - Display: responsive 72–96 px desktop and 44–52 px mobile / Certia ExtraBold 800.
-- Section H2: responsive 42–56 px desktop and 30–34 px mobile / Certia ExtraBold 800.
+- Editorial section H2: 48 px desktop and 32 px mobile / Certia ExtraBold 800.
 - Card H3: responsive 28–34 px desktop and 23–26 px mobile / Certia ExtraBold 800.
 - Body large: 18–20 px / Certia Regular 400.
 - Body: 16 px / Certia Regular 400.
@@ -51,6 +51,9 @@ The page follows one consistent evidence ladder: finished result → product cap
 - Cards use borders and surface contrast; no decorative shadows unless functional separation requires it.
 - Prices are always red. Optional accessories always show `OPTIONAL` before the name.
 - Product gallery: 660 × 660 px desktop stage; 70 × 70 px thumbnails; explicit previous/next controls and dedicated video slot.
+- Video proof follows the buying journey rather than a single gallery: media endorsement, performance test, customer success, independent reviews, competitor comparison and production/support trust each sit beside the decision they resolve.
+- National media coverage such as the FOX & Friends Weekend feature uses a standalone early-page `As Seen on TV` module and does not share the creator-review carousel. Do not imply an award or endorsement beyond the fact of being featured.
+- Review cards use lazy 16:9 covers in a three-card desktop carousel with partial swipe behavior on mobile. Additional reviews open from `View More Creator Reviews`; all playback reuses one accessible modal and no iframe exists before the user clicks.
 - Overview and all P0/video media: fixed horizontal 16:9 stages. Video imagery uses `contain` so the whole frame remains visible. Project-result media: fixed 4:3 stage with centered cover behavior.
 - P0 uses a seven-chapter sticky 16:9 story system. P1 uses large split layouts. P2 uses compact image-led cards in a four-column desktop grid. P3 uses concise one-line proof cards or specification rows.
 - Power comparison: two image-led parallel cards; selection updates the primary purchase state. Safety: one 16:9 image with a four-card proof grid.
@@ -78,5 +81,7 @@ The page follows one consistent evidence ladder: finished result → product cap
 - The hero purchase panel remains the single configuration source of truth; do not add a duplicate long-form configurator later in the page.
 - The hero begins close to the header, without an eyebrow/kicker row, and uses compact top spacing. Wide comparison grids remain fluid up to the 1280 px content maximum instead of shrinking as the viewport grows.
 - Hero proof bullets use 12 px type. MSRP uses secondary gray; financing links use blue. The optional SHOP purchase action uses `#5532EB` with white text.
+- Narrative section descriptions sit directly beneath their left-aligned heading. Do not use split heading/copy columns.
+- Keep short workflow headings and reliability support copy on one line where the desktop grid has room; allow natural wrapping below 1180 px.
 - Do not place a second power-comparison link inside the hero and do not repeat the hero specifications in a proof rail immediately below it.
 - Power selectors contain no price. Final price uses 900 weight. Remove the hero trust strip and commercial-source footnote beneath the purchase buttons.
