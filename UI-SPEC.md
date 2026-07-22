@@ -39,7 +39,8 @@ The page follows one consistent evidence ladder: finished result → product cap
 - Base spacing unit: 4 px.
 - Standard steps: 4, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96, 120, 160 px.
 - Desktop content maximum: 1280 px; purchase hero may use 1440 px to preserve the approved 660 px gallery.
-- Main section vertical padding: 120–160 px desktop; 72–96 px mobile.
+- Main section vertical padding: 96 px desktop; 64 px mobile. Sticky storytelling may use more scroll range where the interaction requires it.
+- Section-heading internal rhythm: 8 px from eyebrow to title and 12 px from title to supporting copy.
 - Related controls: 8–12 px gap. Card groups: 12–16 px gap. Major content tracks: 48–72 px gap.
 
 ## Components
@@ -53,7 +54,8 @@ The page follows one consistent evidence ladder: finished result → product cap
 - Product gallery: 660 × 660 px desktop stage; 70 × 70 px thumbnails; explicit previous/next controls and dedicated video slot.
 - Video proof follows the buying journey rather than a single gallery: media endorsement, performance test, customer success, independent reviews, competitor comparison and production/support trust each sit beside the decision they resolve.
 - National media coverage such as the FOX & Friends Weekend feature uses a standalone early-page `As Seen on TV` module and does not share the creator-review carousel. Do not imply an award or endorsement beyond the fact of being featured.
-- Review cards use lazy 16:9 covers in a three-card desktop carousel with partial swipe behavior on mobile. Additional reviews open from `View More Creator Reviews`; all playback reuses one accessible modal and no iframe exists before the user clicks.
+- Review cards use lazy 16:9 covers in a three-card desktop carousel with partial swipe behavior on mobile. All reviews live in the same arrow-controlled rail; all playback reuses one accessible modal and no iframe exists before the user clicks.
+- Video modules use 48 px / 800 headings on desktop and 32 px / 800 on mobile. Their centered play controls are black at 20% opacity with a white glyph, and the clickable cover replaces any separate text play action.
 - Overview and all P0/video media: fixed horizontal 16:9 stages. Video imagery uses `contain` so the whole frame remains visible. Project-result media: fixed 4:3 stage with centered cover behavior.
 - P0 uses a seven-chapter sticky 16:9 story system. P1 uses large split layouts. P2 uses compact image-led cards in a four-column desktop grid. P3 uses concise one-line proof cards or specification rows.
 - Power comparison: two image-led parallel cards; selection updates the primary purchase state. Safety: one 16:9 image with a four-card proof grid.
@@ -63,6 +65,7 @@ The page follows one consistent evidence ladder: finished result → product cap
 - Package and add-on cards use 1 px dividers, 10–12 px radii, no elevation, a red price, and a black 2 px-equivalent selected state (border plus inset ring).
 - Hero gallery is sticky on desktop while the longer purchase panel scrolls; it becomes static when the layout stacks below 1180 px.
 - Sticky purchase bar always reflects the selected power, package, optional-item count, quantity and calculated total.
+- Published customer-facing performance labels are `1,300 mm/s` and `True 3.5G` everywhere.
 
 ## Motion
 

@@ -156,22 +156,11 @@ const reviewVideos = [
   { id: "jNaj50MkKiE", title: "“I was wrong about OneLaser.”", channel: "Make or Break Shop", tag: "LONG-TERM PERSPECTIVE" },
   { id: "hwtVOBUCGxw", title: "Full XRF review", channel: "The Louisiana Hobby Guy", tag: "INDEPENDENT HANDS-ON REVIEW" },
   { id: "87PrP4Vigzo", title: "Before you buy the XRF", channel: "Velf Creations", tag: "COMPLETE BUYER OVERVIEW" },
-];
-
-const moreReviewVideos = [
   { id: "zHtW_nGm19U", title: "Pro desktop laser at a budget price", channel: "Make or Break Shop", tag: "CREATOR REVIEW" },
   { id: "yB_RQwZj5p8", title: "Mark Ellis reviews XRF Desktop at CES 2025", channel: "OneLaser", tag: "CES 2025 THIRD-PARTY PROOF" },
 ];
 
 const scrollStories = [
-  {
-    id: "powermax",
-    eyebrow: "POWERMAX 70™",
-    title: "More power. More materials. More possible.",
-    copy: "Choose 38W for fine-detail everyday production or the new 70W RF source for deeper 3D relief, sharper high-DPI grayscale at speed and more cutting headroom.",
-    metrics: ["38W / 70W RF", "Pulse frequency up to 50 kHz", "Equal-fit platform"],
-    image: "xrf-dark-hero.webp",
-  },
   {
     id: "rf",
     eyebrow: "3D PHOTO REALISTIC RF™",
@@ -184,8 +173,8 @@ const scrollStories = [
     id: "speed",
     eyebrow: "TRUESPEED",
     title: "Measured in real work. Not empty travel.",
-    copy: "Real 1,200 mm/s engraving speed and 3G acceleration are controlled by optimized DSP motion, closed-loop feedback, Hydra-derived steel axes and a 20% lighter head.",
-    metrics: ["1,200 mm/s", "29,430 mm/s²", "≤ 0.01 mm"],
+    copy: "Real 1,300 mm/s engraving speed and 3.5G acceleration are controlled by optimized DSP motion, closed-loop feedback, Hydra-derived steel axes and a 20% lighter head.",
+    metrics: ["1,300 mm/s", "34,335 mm/s²", "≤ 0.01 mm"],
     image: "xrf-internal-wide.jpg",
   },
   {
@@ -227,10 +216,6 @@ const engineeringProofs = [
   { title: "Sealed electronics", copy: "The working area and optical-electrical zones stay isolated from dust.", image: "xrf-open.jpg" },
   { title: "Under 65 dB", copy: "Load-following cooling reduces noise without giving up production power.", image: "xrf-gallery-06.jpg" },
   { title: "Protected focus path", copy: "Cable routing and thermal isolation keep critical parts outside the hot zone.", image: "xrf-gallery-09.jpg" },
-  { title: "Class 1 design", copy: "The enclosed platform is designed for shielded everyday operation.", image: "xrf-hero.jpg" },
-  { title: "Automatic suppression", copy: "Heat-triggered protection responds inside the isolated electrical bay.", image: "xrf-gallery-12.jpg" },
-  { title: "Lid interlock", copy: "Laser output stops unless the machine is correctly closed.", image: "xrf-open.jpg" },
-  { title: "Thermal response", copy: "High-temperature detection raises an alert and stops laser output.", image: "xrf-touchscreen.jpg" },
 ];
 
 const microFeatures = [
@@ -251,7 +236,7 @@ const purchasePackages = [
     price: 3999,
     msrp: 6499,
     badge: "CURRENT OFFER",
-    description: "38W RF desktop laser with 1,200 mm/s motion, True 3G acceleration and a 24 × 12 in workspace.",
+    description: "38W RF desktop laser with 1,300 mm/s motion, True 3.5G acceleration and a 24 × 12 in workspace.",
     detail: "The New King of Desktop Lasers",
   },
   {
@@ -319,8 +304,8 @@ const specs = [
   {
     title: "Performance",
     rows: [
-      ["Real working speed", "1,200 mm/s"],
-      ["Real working acceleration", "3G"],
+      ["Real working speed", "1,300 mm/s"],
+      ["Real working acceleration", "3.5G"],
       ["Positioning accuracy", "≤ 0.01 mm"],
       ["Maximum scanning precision", "2,000 DPI"],
     ],
@@ -449,7 +434,6 @@ function StickyStory({ onPlay }) {
           <h2>{story.title}</h2>
           <p>{story.copy}</p>
           <div className="inline-metrics">{story.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
-          <button className="text-action" type="button" onClick={() => onPlay(story.eyebrow, story.title, asset(story.image))}><Play size={17} weight="fill" />Open video preview</button>
         </div>
       </div>
       <div className="immersive-story__steps">
@@ -471,12 +455,12 @@ function StickyStory({ onPlay }) {
   );
 }
 
-function YouTubeCover({ video, onPlay, label = "WATCH VIDEO", className = "" }) {
+function YouTubeCover({ video, onPlay, className = "" }) {
   return (
     <button type="button" className={`youtube-cover ${className}`.trim()} onClick={() => onPlay(video)} aria-label={`Play ${video.title} by ${video.channel}`}>
       <img src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`} alt="" loading="lazy" />
       <span className="youtube-cover__play"><Play size={26} weight="fill" /></span>
-      <i>{label}</i>
+      <i>{video.tag}</i>
     </button>
   );
 }
@@ -509,7 +493,6 @@ export function App() {
   const [purchaseAdded, setPurchaseAdded] = useState(false);
   const [videoModal, setVideoModal] = useState(null);
   const [youtubeVideo, setYoutubeVideo] = useState(null);
-  const [moreReviewsOpen, setMoreReviewsOpen] = useState(false);
   const thumbnailRailRef = useRef(null);
   const reviewVideoRailRef = useRef(null);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -552,12 +535,11 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    if (!youtubeVideo && !moreReviewsOpen) return undefined;
+    if (!youtubeVideo) return undefined;
     const previousOverflow = document.body.style.overflow;
     const closeOnEscape = (event) => {
       if (event.key === "Escape") {
-        if (youtubeVideo) setYoutubeVideo(null);
-        else setMoreReviewsOpen(false);
+        setYoutubeVideo(null);
       }
     };
     document.body.style.overflow = "hidden";
@@ -566,7 +548,7 @@ export function App() {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", closeOnEscape);
     };
-  }, [youtubeVideo, moreReviewsOpen]);
+  }, [youtubeVideo]);
 
   const selectedPurchasePackage = useMemo(() => {
     const selected = purchasePackages.find((item) => item.id === selectedPackageId) ?? purchasePackages[0];
@@ -711,7 +693,7 @@ export function App() {
 
             <ul className="hero-highlights">
               <li><strong>38W / 70W RF metal tube:</strong> rated up to 30,000 hours with air-cooled operation.</li>
-              <li><strong>1,200 mm/s + True 3G:</strong> real working speed with 29,430 mm/s² acceleration.</li>
+              <li><strong>1,300 mm/s + True 3.5G:</strong> real working speed with 34,335 mm/s² acceleration.</li>
               <li><strong>Professional detail:</strong> up to 2,000 DPI, 0.07 mm laser dot and ≤ 0.01 mm repeat positioning.</li>
               <li><strong>Desktop production area:</strong> 23.6 × 11.8 in working bed with a full-frame top-cover camera.</li>
               <li><strong>Class 1 design:</strong> enclosed processing with US-based engineer support.</li>
@@ -828,7 +810,6 @@ export function App() {
             <div className="tv-proof__signals" aria-label="FOX feature highlights">
               <span>As Seen on TV</span><span>FOX &amp; Friends Weekend</span><span>December 2024</span>
             </div>
-            <button type="button" onClick={() => setYoutubeVideo(tvFeature)}><Play size={18} weight="fill" />Watch the FOX feature</button>
           </div>
           <button type="button" className="tv-proof__media" onClick={() => setYoutubeVideo(tvFeature)} aria-label="Play the FOX and Friends Weekend OneLaser feature">
             <img src={`https://i.ytimg.com/vi/${tvFeature.id}/maxresdefault.jpg`} alt="FOX and Friends Weekend OneLaser television feature" loading="lazy" />
@@ -842,25 +823,24 @@ export function App() {
         </section>
 
         <section className="sales-video sales-video--performance" data-reveal>
-          <YouTubeCover video={decisionVideos.performance} onPlay={setYoutubeVideo} label="WATCH THE FULL TEST" />
+          <YouTubeCover video={decisionVideos.performance} onPlay={setYoutubeVideo} />
           <div className="sales-video__copy">
             <span className="eyebrow">XRF PERFORMANCE PROOF</span>
             <h2>Not just faster. Built for production.</h2>
             <p>See how the XRF compares with a typical hobby laser when speed, detail and repeatability actually matter.</p>
             <div className="sales-video__metrics">
-              <span><strong>1,200 mm/s</strong>Real working speed</span>
-              <span><strong>True 3G</strong>Controlled acceleration</span>
+              <span><strong>1,300 mm/s</strong>Real working speed</span>
+              <span><strong>True 3.5G</strong>Controlled acceleration</span>
               <span><strong>38W RF</strong>Fine-detail metal tube</span>
               <span><strong>Repeatable</strong>Production-ready output</span>
             </div>
-            <button type="button" onClick={() => setYoutubeVideo(decisionVideos.performance)}><Play size={18} weight="fill" />Watch the full test</button>
           </div>
         </section>
 
         <section className="section results" id="results" data-reveal>
           <div className="section-heading section-heading--stack">
             <span className="eyebrow">WHAT WILL YOU MAKE NEXT?</span>
-            <h2>Made to sell.<br />Built to repeat.</h2>
+            <h2>Made to sell. Built to repeat.</h2>
             <p>Start with the finished work customers pay for. Then trace every result back to the RF source, controlled motion and workflow that make it repeatable.</p>
           </div>
           <div className="project-showcase">
@@ -918,19 +898,19 @@ export function App() {
           </div>
         </section>
 
-        <section className="business-proof" data-reveal>
+        <section className="business-proof" id="business-proof" data-reveal>
           <div className="section-heading section-heading--stack">
             <span className="eyebrow">CUSTOMER SUCCESS</span>
             <h2>Built to build a business.</h2>
             <p>More than a creative tool&mdash;the XRF is designed to support real products, real orders and growing businesses.</p>
           </div>
           <div className="business-proof__grid">
-            <article className="business-proof__main">
-              <YouTubeCover video={decisionVideos.business} onPlay={setYoutubeVideo} label="WATCH HIS STORY" />
-              <div><span className="eyebrow">FROM SIDE PROJECT TO SIX-FIGURE BUSINESS</span><h3>See how one maker built around real customer orders.</h3><p>A OneLaser customer turned laser production into a growing business and a more repeatable workflow.</p><button type="button" onClick={() => setYoutubeVideo(decisionVideos.business)}>Watch his story</button></div>
+            <article className="business-proof__card">
+              <YouTubeCover video={decisionVideos.business} onPlay={setYoutubeVideo} />
+              <div><span className="eyebrow">FROM SIDE PROJECT TO SIX-FIGURE BUSINESS</span><h3>See how one maker built around real customer orders.</h3><p>A OneLaser customer turned laser production into a growing business and a more repeatable workflow.</p></div>
             </article>
-            <article className="business-proof__secondary">
-              <YouTubeCover video={decisionVideos.businessFit} onPlay={setYoutubeVideo} label="BUYER PERSPECTIVE" />
+            <article className="business-proof__card">
+              <YouTubeCover video={decisionVideos.businessFit} onPlay={setYoutubeVideo} />
               <div><span className="eyebrow">SMALL BUSINESS · PRODUCTION</span><h3>Is the XRF right for your business?</h3><p>A buyer-focused view of fit, workflow and production potential.</p></div>
             </article>
           </div>
@@ -970,7 +950,7 @@ export function App() {
         <section className="section workflow" id="workflow" data-reveal>
           <div className="section-heading section-heading--stack">
             <span className="eyebrow">ONE TOUCH OF INNOVATION</span>
-            <h2>Out of the box. Into creation.</h2>
+            <h2>Four decisions from design to done.</h2>
             <p>MakerBoost AI, the lid camera, XFocus and the full touchscreen turn a professional RF workflow into four clear decisions.</p>
           </div>
           <div className="workflow-layout">
@@ -1059,7 +1039,7 @@ export function App() {
           </div>
         </section>
 
-        <section className="review-proof" aria-labelledby="review-proof-title" data-reveal>
+        <section className="review-proof" id="reviews" aria-labelledby="review-proof-title" data-reveal>
           <div className="review-proof__header">
             <div className="section-heading section-heading--stack">
               <span className="eyebrow">INDEPENDENT WORKSHOP REVIEWS</span>
@@ -1074,11 +1054,10 @@ export function App() {
           <div className="review-proof__rail" ref={reviewVideoRailRef}>
             {reviewVideos.map((video, index) => <ReviewVideoCard video={video} onPlay={setYoutubeVideo} index={index} total={reviewVideos.length} key={video.id} />)}
           </div>
-          <button type="button" className="review-proof__more" onClick={() => setMoreReviewsOpen(true)}>View more creator reviews</button>
         </section>
 
-        <section className="sales-video sales-video--competitor" data-reveal>
-          <YouTubeCover video={decisionVideos.competitor} onPlay={setYoutubeVideo} label="WATCH THE COMPARISON" />
+        <section className="sales-video sales-video--competitor" id="comparison-proof" data-reveal>
+          <YouTubeCover video={decisionVideos.competitor} onPlay={setYoutubeVideo} />
           <div className="sales-video__copy">
             <span className="eyebrow">A FAIR SIDE-BY-SIDE</span>
             <h2>Considering an xTool P2? Watch this first.</h2>
@@ -1094,7 +1073,7 @@ export function App() {
         </section>
 
         <section className="facility-trust" data-reveal>
-          <YouTubeCover video={decisionVideos.facility} onPlay={setYoutubeVideo} label="BEHIND ONELASER" />
+          <YouTubeCover video={decisionVideos.facility} onPlay={setYoutubeVideo} />
           <div className="facility-trust__copy"><span className="eyebrow">ENGINEERING YOU CAN SEE</span><h2>Support you can reach.</h2><p>See the production capability behind the machine, then stay supported through ownership.</p></div>
           <div className="facility-trust__proofs"><span>3-Year Warranty</span><span>Technical Support</span><span>Replacement Parts</span><span>Knowledge Base</span></div>
         </section>
@@ -1162,18 +1141,6 @@ export function App() {
               <span className="eyebrow">{videoModal.eyebrow}</span>
               <h2>{videoModal.title}</h2>
               <p>Full-size 16:9 media preview. The final production video can replace this image without changing the story layout.</p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {moreReviewsOpen && (
-        <div className="review-library-modal" role="dialog" aria-modal="true" aria-label="More OneLaser creator reviews" onClick={() => setMoreReviewsOpen(false)}>
-          <div className="review-library-modal__dialog" onClick={(event) => event.stopPropagation()}>
-            <button type="button" className="review-library-modal__close" aria-label="Close more creator reviews" onClick={() => setMoreReviewsOpen(false)}><X size={23} /></button>
-            <div className="section-heading section-heading--stack"><span className="eyebrow">MORE CREATOR PROOF</span><h2>More voices from the workshop.</h2><p>Additional reviews and event perspectives, kept one click away from the main buying story.</p></div>
-            <div className="review-library-modal__grid">
-              {moreReviewVideos.map((video) => <ReviewVideoCard video={video} onPlay={(item) => { setMoreReviewsOpen(false); setYoutubeVideo(item); }} key={video.id} />)}
             </div>
           </div>
         </div>

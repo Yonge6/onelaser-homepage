@@ -57,6 +57,31 @@
 
 final result: passed
 
+## 2026-07-22 performance-label, spacing and duplicate-proof pass
+
+### Global product data
+
+- Replaced every customer-facing `1,200 mm/s` reference with `1,300 mm/s` and every `3G` reference with `3.5G` across hero proof, package copy, story metrics and specifications.
+- Desktop and 390 px mobile DOM audits report no remaining `1,200` or standalone `3G` text.
+- The 70W + Riser state displays `$4,999.00 USD` with a `$7,499.00 USD` MSRP at the same 30 px / 900 gray treatment used by other configurations.
+
+### Duplicate selling-point review
+
+- Removed the repeated 38W/70W PowerMax story because the image-led power guide already owns that purchase decision.
+- Removed repeated safety cards from the compact engineering grid because Class 1, lid interlock, suppression and thermal response already appear in the dedicated safety module.
+- Reframed the workflow heading as `Four decisions from design to done` so it no longer repeats the general creation promise.
+- The workbook-led dynamic sequence now contains six non-overlapping chapters, while the independent-review rail contains all five creator videos with no separate `View more` action.
+
+### UI and interaction checks
+
+- Standard section-heading rhythm is 8 px eyebrow-to-title and 12 px title-to-copy; the materials heading uses a 32 px transition into its fixed proof stage.
+- Desktop material title and supporting copy remain one line. The material benefit title is capped at 36 px and reports zero overflow; mobile uses 28 px and also reports zero overflow.
+- Customer-business videos have identical 631 × 568 px desktop card geometry. Video covers use descriptive proof tags instead of redundant watch buttons, with the play control at black 20% opacity.
+- Default page state contains zero iframes. Clicking the FOX cover creates one privacy-enhanced YouTube iframe; closing removes the iframe and player from the DOM.
+- Desktop 1742 × 1178 and mobile 390 × 844 both report zero horizontal overflow. H1 remains 32 px, editorial H2 is 48 px desktop / 32 px mobile, and the minimum visible customer-facing text is 12 px.
+
+final result: passed
+
 ## 2026-07-22 generated proof imagery and materials revision
 
 ### Source and asset checks
