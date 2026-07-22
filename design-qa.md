@@ -57,9 +57,31 @@
 
 final result: passed
 
+## 2026-07-22 power-proof and icon-system revision
+
+### Power proof interaction
+
+- Replaced the two purchase-like comparison cards with a display-only 38W / 70W segmented control and one large proof stage on a full-width `#F5F5F7` band.
+- Toggling the proof from 38W to 70W changes only the editorial image and copy. The hero power choice and sticky purchase configuration remain unchanged.
+- Desktop and 390 px mobile both keep the stage inside the shared content grid with zero horizontal overflow.
+
+### Rounded carousel and icon coverage
+
+- The finished-product carousel now clips the image and copy inside one shared 32 px desktop / 24 px mobile radius, so both halves read as a single component.
+- All five material tabs now include distinct Phosphor line icons while preserving the red-underline-only active state.
+- All eight compact micro-feature tiles now include distinct OneLaser-red Phosphor line icons.
+
+### Responsive verification
+
+- Desktop metrics: full-width power band `1742 px`; centered inner grid `1280 px`; five material icons; eight micro-feature icons; zero horizontal overflow.
+- Mobile metrics: power band `390 px`; inner content `354 px`; project radius `24 px`; material tabs remain horizontally swipeable; proof switching does not change the selected 38W purchase state.
+- The final pass was verified interactively in the local in-app browser at both target viewport sizes.
+
+final result: passed
+
 ## 2026-07-22 wide-section and P0 playback-control correction
 
-- Root cause: late shared `.section` overrides reduced the power guide and full-width safety band to 1280 px while earlier zero/viewport margins left both anchored at the page origin. The power guide is now centered at `x=231 / w=1280` in the 1742 px viewport; safety spans `x=0 / w=1742` with its intro and 16:9 stage centered at `x=231 / w=1280`.
+- Root cause: late shared `.section` overrides reduced the power guide and full-width safety band to 1280 px while earlier zero/viewport margins left both anchored at the page origin. The current power guide and safety band both span `x=0 / w=1742`, with their inner content centered at `x=231 / w=1280`.
 - Engineering proof title is one 48 px desktop line across the 1280 px content axis and returns to normal responsive wrapping below 1180 px.
 - FOX desktop copy/video gap increased to 96 px. Its title now wraps within the copy column instead of overflowing into the video; measured title overflow is zero. Mobile uses a 44 px stacked gap.
 - All six P0 image-preview stages now contain the same centered translucent-black play control. Desktop controls measure 72 px and mobile 58 px; center offsets are `0 / 0` for every stage.
@@ -108,11 +130,11 @@ final result: passed
 - All five desktop states retain the same 725 px gallery height. The selected category uses only the approved OneLaser red underline; no duplicate selected badge appears.
 - Mobile tabs remain horizontally swipeable, the active image retains a 16:9 frame and the page reports zero horizontal overflow.
 
-### 38W / 70W comparison
+### Previous 38W / 70W comparison (superseded)
 
 - Desktop evidence: `qa/generated-power-desktop.png`; responsive evidence: `qa/generated-power-mobile.png`.
 - 38W and 70W remain visually parallel and equal-fit: 38W emphasizes fine-detail everyday production; 70W emphasizes deeper relief and heavier workloads.
-- Selecting either card still synchronizes the hero power choice and sticky purchase total. Power cards do not repeat prices or selected labels.
+- This earlier parallel-card interaction has been superseded by the independent display-only segmented proof switch documented in the latest power-proof revision above.
 
 ### Functional proof placement
 

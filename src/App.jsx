@@ -1,5 +1,31 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { CaretLeft, CaretRight, Check, Fire, LockKey, Minus, Play, Plus, ShieldCheck, Star, Thermometer, X } from "@phosphor-icons/react";
+import {
+  Anchor,
+  ArrowClockwise,
+  Camera,
+  CaretLeft,
+  CaretRight,
+  Check,
+  Crosshair,
+  CubeFocus,
+  CubeTransparent,
+  Fire,
+  Handbag,
+  LockKey,
+  Minus,
+  Play,
+  Plus,
+  ShieldCheck,
+  Star,
+  Tag,
+  Target,
+  Thermometer,
+  Trash,
+  Tree,
+  WifiHigh,
+  Wine,
+  X,
+} from "@phosphor-icons/react";
 
 const asset = (name) => `${import.meta.env.BASE_URL}assets/${name}`;
 
@@ -42,6 +68,7 @@ const materialCategories = [
     copy: "Build layered signage, displays, organizers and decorative objects with clean contours and premium edge quality.",
     proof: "Clear · colored · layered · dimensional",
     image: "material-acrylic.webp",
+    icon: CubeTransparent,
   },
   {
     id: "wood",
@@ -50,6 +77,7 @@ const materialCategories = [
     copy: "Turn natural wood into photo-real engraving, deep relief, architectural parts and products made to sell again and again.",
     proof: "Photo engraving · relief · batch goods · models",
     image: "material-wood.webp",
+    icon: Tree,
   },
   {
     id: "leather",
@@ -58,6 +86,7 @@ const materialCategories = [
     copy: "Create refined wallets, notebooks, straps and tags with consistent tonal contrast and precise cut edges.",
     proof: "Wallets · straps · tags · premium gifts",
     image: "material-leather.webp",
+    icon: Handbag,
   },
   {
     id: "glass-stone",
@@ -66,6 +95,7 @@ const materialCategories = [
     copy: "Add crisp frosted artwork and detailed personalization to awards, slate, glassware, coasters and polished stone.",
     proof: "Awards · slate · glassware · keepsakes",
     image: "material-glass-stone.webp",
+    icon: Wine,
   },
   {
     id: "coated-metal",
@@ -74,6 +104,30 @@ const materialCategories = [
     copy: "Produce detailed tumblers, anodized cards, tags and identification plates with clean, repeatable contrast.",
     proof: "Tumblers · cards · tags · nameplates",
     image: "material-coated-metal.webp",
+    icon: Tag,
+  },
+];
+
+const powerProofs = [
+  {
+    id: "38W",
+    tab: "38W RF",
+    eyebrow: "38W RF · FINE DETAIL",
+    title: "Fine detail for everyday production.",
+    copy: "A precise RF source for photography, fine text, personalization and balanced daily output.",
+    proof: "2,000 DPI detail · Air cooled · Up to 30,000 hours",
+    image: "power-38w-proof.webp",
+    alt: "Fine RF engraving detail for 38W everyday production",
+  },
+  {
+    id: "70W",
+    tab: "70W RF",
+    eyebrow: "70W RF · NEW POWERMAX",
+    title: "More headroom for demanding work.",
+    copy: "More RF output for deeper relief, high-DPI grayscale at speed and heavier production workloads.",
+    proof: "Up to 50 kHz · Deeper relief · More cutting headroom",
+    image: "power-70w-proof.webp",
+    alt: "Deep relief and batch production proof for higher-throughput 70W RF work",
   },
 ];
 
@@ -219,14 +273,14 @@ const engineeringProofs = [
 ];
 
 const microFeatures = [
-  ["12MP lid camera", "Full-frame positioning and remote monitoring"],
-  ["RedDot™", "Sub-1 mW guided alignment"],
-  ["WiFi / USB / Ethernet", "Flexible connected control"],
-  ["Power-off resume", "Continue after power returns"],
-  ["XFocus™", "Integrated motorized autofocus"],
-  ["Debris drawer", "Pull-out cleanup access"],
-  ["Zero field alignment", "Factory-calibrated optical path"],
-  ["Dual-anchor mount", "Laser-source alignment retention"],
+  { title: "12MP lid camera", copy: "Full-frame positioning and remote monitoring", icon: Camera },
+  { title: "RedDot™", copy: "Sub-1 mW guided alignment", icon: Crosshair },
+  { title: "WiFi / USB / Ethernet", copy: "Flexible connected control", icon: WifiHigh },
+  { title: "Power-off resume", copy: "Continue after power returns", icon: ArrowClockwise },
+  { title: "XFocus™", copy: "Integrated motorized autofocus", icon: CubeFocus },
+  { title: "Debris drawer", copy: "Pull-out cleanup access", icon: Trash },
+  { title: "Zero field alignment", copy: "Factory-calibrated optical path", icon: Target },
+  { title: "Dual-anchor mount", copy: "Laser-source alignment retention", icon: Anchor },
 ];
 
 const purchasePackages = [
@@ -480,10 +534,10 @@ function ReviewVideoCard({ video, onPlay, index, total }) {
 }
 
 export function App() {
-  const [power, setPower] = useState("38W");
   const [activeMedia, setActiveMedia] = useState(0);
   const [activeProject, setActiveProject] = useState(0);
   const [activeMaterial, setActiveMaterial] = useState(0);
+  const [activePowerProof, setActivePowerProof] = useState(0);
   const [activeFeature, setActiveFeature] = useState("features");
   const [openFaq, setOpenFaq] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -727,7 +781,7 @@ export function App() {
                 ].map((item) => {
                   const selected = purchasePower === item.id;
                   return (
-                    <button type="button" className={selected ? "purchase-power is-selected" : "purchase-power"} key={item.id} onClick={() => { setPurchasePower(item.id); setPower(item.id); setPurchaseAdded(false); }} aria-pressed={selected}>
+                    <button type="button" className={selected ? "purchase-power is-selected" : "purchase-power"} key={item.id} onClick={() => { setPurchasePower(item.id); setPurchaseAdded(false); }} aria-pressed={selected}>
                       <span><strong>{item.title}</strong>{item.badge && <small>{item.badge}</small>}</span>
                       <p>{item.copy}</p>
                     </button>
@@ -882,19 +936,22 @@ export function App() {
               </div>
             </div>
             <div className="material-tabs" role="tablist" aria-label="Explore XRF Gen2 material categories">
-              {materialCategories.map((item, index) => (
-                <button
-                  type="button"
-                  role="tab"
-                  aria-selected={activeMaterial === index}
-                  className={activeMaterial === index ? "is-active" : ""}
-                  key={item.id}
-                  onClick={() => setActiveMaterial(index)}
-                >
-                  <span>{item.label}</span>
-                  <small>{String(index + 1).padStart(2, "0")}</small>
-                </button>
-              ))}
+              {materialCategories.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={activeMaterial === index}
+                    className={activeMaterial === index ? "is-active" : ""}
+                    key={item.id}
+                    onClick={() => setActiveMaterial(index)}
+                  >
+                    <span className="material-tab__label"><Icon size={23} weight="regular" aria-hidden="true" /><span>{item.label}</span></span>
+                    <small>{String(index + 1).padStart(2, "0")}</small>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -918,31 +975,38 @@ export function App() {
           <small className="business-proof__disclaimer">Individual results vary. Business success depends on products, pricing, marketing, demand and execution.</small>
         </section>
 
-        <section className="section power-guide" id="power-guide" data-reveal>
-          <div className="section-heading section-heading--left">
-            <span className="eyebrow">TWO PURPOSE-BUILT RF OPTIONS</span>
-            <h2>Choose the power that fits your work.</h2>
-            <p>38W and 70W share the same professional platform. Your workload decides the right fit.</p>
-          </div>
-          <div className="power-compare">
-            <button type="button" className={power === "38W" ? "power-card is-selected" : "power-card"} onClick={() => { setPower("38W"); setPurchasePower("38W"); }} aria-pressed={power === "38W"}>
-              <span className="power-card__media"><img src={asset("power-38w-proof.webp")} alt="Fine RF engraving detail for 38W everyday production" /><i>38W RF · FINE DETAIL</i></span>
-              <span className="power-card__body">
-                <span className="power-card__top"><strong>38W RF</strong></span>
-                <strong className="power-card__title">Fine detail for everyday production.</strong>
-                <span className="power-card__use">Photography · fine text · personalization · balanced daily output</span>
-                <span className="power-card__proofs"><i>2,000 DPI detail</i><i>Air cooled</i><i>Up to 30,000 h</i></span>
-              </span>
-            </button>
-            <button type="button" className={power === "70W" ? "power-card is-selected" : "power-card"} onClick={() => { setPower("70W"); setPurchasePower("70W"); }} aria-pressed={power === "70W"}>
-              <span className="power-card__media"><img src={asset("power-70w-proof.webp")} alt="Deep relief and batch production proof for higher-throughput 70W RF work" /><i>70W RF · NEW POWERMAX</i></span>
-              <span className="power-card__body">
-                <span className="power-card__top"><strong>70W RF</strong></span>
-                <strong className="power-card__title">More headroom for demanding work.</strong>
-                <span className="power-card__use">Deeper 3D relief · high-DPI grayscale at speed · heavier workloads</span>
-                <span className="power-card__proofs"><i>Up to 50 kHz</i><i>Deeper relief</i><i>More cutting headroom</i></span>
-              </span>
-            </button>
+        <section className="power-guide" id="power-guide" data-reveal>
+          <div className="power-guide__inner">
+            <div className="section-heading section-heading--left">
+              <span className="eyebrow">TWO PURPOSE-BUILT RF OPTIONS</span>
+              <h2>Choose the power that fits your work.</h2>
+              <p>38W and 70W share the same professional platform. Explore the result each RF source is designed to produce.</p>
+            </div>
+            <div className="power-switch" role="tablist" aria-label="Explore 38W and 70W RF results">
+              {powerProofs.map((item, index) => (
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={activePowerProof === index}
+                  className={activePowerProof === index ? "is-active" : ""}
+                  key={item.id}
+                  onClick={() => setActivePowerProof(index)}
+                >
+                  {item.tab}
+                </button>
+              ))}
+            </div>
+            <div className="power-proof-stage" aria-live="polite">
+              <div className="power-proof-stage__media">
+                <img key={powerProofs[activePowerProof].id} src={asset(powerProofs[activePowerProof].image)} alt={powerProofs[activePowerProof].alt} />
+              </div>
+              <div className="power-proof-stage__copy">
+                <span className="eyebrow">{powerProofs[activePowerProof].eyebrow}</span>
+                <h3>{powerProofs[activePowerProof].title}</h3>
+                <p>{powerProofs[activePowerProof].copy}</p>
+                <strong>{powerProofs[activePowerProof].proof}</strong>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -1024,8 +1088,11 @@ export function App() {
         <section className="micro-features" aria-label="Additional XRF Gen2 features" data-reveal>
           <div className="micro-features__intro"><span className="eyebrow">MORE DETAILS, LESS NOISE</span><h2>Everything else, exactly where it belongs.</h2></div>
           <div className="micro-features__rail">
-            {microFeatures.map(([title, copy], index) => (
-              <article key={title}><span>{String(index + 1).padStart(2, "0")}</span><strong>{title}</strong><p>{copy}</p></article>
+            {microFeatures.map(({ title, copy, icon: Icon }, index) => (
+              <article key={title}>
+                <div className="micro-feature__top"><Icon size={26} weight="regular" aria-hidden="true" /><span>{String(index + 1).padStart(2, "0")}</span></div>
+                <strong>{title}</strong><p>{copy}</p>
+              </article>
             ))}
           </div>
         </section>

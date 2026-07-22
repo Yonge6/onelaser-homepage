@@ -58,14 +58,18 @@ The page follows one consistent evidence ladder: finished result → product cap
 - Review cards use lazy 16:9 covers in a three-card desktop carousel with partial swipe behavior on mobile. All reviews live in the same arrow-controlled rail; all playback reuses one accessible modal and no iframe exists before the user clicks.
 - Video modules use 48 px / 800 headings on desktop and 32 px / 800 on mobile. Their centered play controls are black at 20% opacity with a white glyph, and the clickable cover replaces any separate text play action.
 - Overview and all P0/video media: fixed horizontal 16:9 stages. Video imagery uses `contain` so the whole frame remains visible. Project-result media: fixed 4:3 stage with centered cover behavior.
-- P0 uses a seven-chapter sticky 16:9 story system. P1 uses large split layouts. P2 uses compact image-led cards in a four-column desktop grid. P3 uses concise one-line proof cards or specification rows.
-- Power comparison: two image-led parallel cards; selection updates the primary purchase state. Safety: one 16:9 image with a four-card proof grid.
+- P0 uses a six-chapter non-duplicative sticky 16:9 story system. P1 uses large split layouts. P2 uses compact image-led cards in a four-column desktop grid. P3 uses concise one-line proof cards or specification rows.
+- Power proof: one large image-led stage controlled by a 38W / 70W segmented switch on a full-width `#F5F5F7` band. This is a display-only editorial control and never changes the hero purchase state, cart or sticky total. Safety: one 16:9 image with a four-card proof grid.
+- Project proof: image and copy form one clipped carousel with a shared 32 px desktop / 24 px mobile radius; switching content never changes stage height or control position.
+- Materials tabs: every tab pairs a distinct Phosphor line icon with its label; the active state is communicated only by the red underline.
+- Micro features: all eight tiles use distinct Phosphor line icons in OneLaser red, with titles carrying the primary hierarchy.
 - Materials gallery: one fixed proof stage with finished-product photography, an editorial copy panel and five keyboard-accessible tabs. Desktop stage height is stable; below 1000 px the 16:9 image stacks above copy and the tabs become a horizontal swipe rail.
 - AI-generated proof assets ship as compressed WebP at up to 1600 px wide. They may visualize finished products and restrained functional overlays, but must not invent customer-facing specifications or replace an approved machine render when product geometry is the evidence.
 - Desktop hero purchase panel order: H1 → source-backed rating → five concise proof bullets → Final Price/MSRP/Save → financing → 38W/70W selector → package cards → optional add-ons → quantity/CTA → assurance.
 - Package and add-on cards use 1 px dividers, 10–12 px radii, no elevation, a red price, and a black 2 px-equivalent selected state (border plus inset ring).
 - Hero gallery is sticky on desktop while the longer purchase panel scrolls; it becomes static when the layout stacks below 1180 px.
 - Sticky purchase bar always reflects the selected power, package, optional-item count, quantity and calculated total.
+- On mobile, hero purchase power choices may stack, while the independent editorial power-proof switch remains a compact two-option segmented control.
 - Published customer-facing performance labels are `1,300 mm/s` and `True 3.5G` everywhere.
 
 ## Motion
