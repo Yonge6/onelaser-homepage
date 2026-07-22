@@ -466,7 +466,7 @@ function StickyStory({ onPlay }) {
       if (!node) return null;
       const observer = new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting) setActive(index);
-      }, { rootMargin: "-32% 0px -48%", threshold: 0.15 });
+      }, { rootMargin: "-14% 0px -54%", threshold: 0.04 });
       observer.observe(node);
       return observer;
     });
@@ -672,12 +672,6 @@ export function App() {
     <div className="site-shell">
       <div className="page-progress" aria-hidden="true"><span style={{ width: `${scrollProgress}%` }} /></div>
       <a className="skip-link" href="#main">Skip to content</a>
-      <div className="announcement">
-        <span>XRF GEN2</span>
-        <span>Built for premium desktop production</span>
-        <span>US engineer support</span>
-      </div>
-
       <header className="site-header">
         <a href="#top" className="brand" aria-label="OneLaser home">
           <img src={asset("onelaser-logo.png")} alt="OneLaser" />
@@ -858,6 +852,7 @@ export function App() {
         </nav>
 
         <section className="feature-overview" id="features" data-reveal>
+          <img src={asset("xrf-overview-hero-web.webp")} alt="OneLaser XRF Gen2 in a working studio with finished products and brand proof" />
           <img src={asset("xrf-feature-overview-web.webp")} alt="XRF Gen2 capabilities overview including RF precision, 38W and 70W power, 1,300 millimeters per second motion, IVS, workflow, safety and support" />
         </section>
 
