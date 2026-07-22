@@ -466,7 +466,7 @@ function StickyStory({ onPlay }) {
       if (!node) return null;
       const observer = new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting) setActive(index);
-      }, { rootMargin: "-14% 0px -54%", threshold: 0.04 });
+      }, { rootMargin: "-44% 0px -44%", threshold: 0.04 });
       observer.observe(node);
       return observer;
     });
@@ -476,34 +476,40 @@ function StickyStory({ onPlay }) {
   const story = scrollStories[active];
 
   return (
-    <section className="immersive-story" id="performance">
-      <div className="immersive-story__sticky">
-        <div className="immersive-story__progress" aria-label={`Chapter ${active + 1} of ${scrollStories.length}`}>
-          {scrollStories.map((item, index) => (
-            <button type="button" key={item.id} className={active === index ? "is-active" : ""} onClick={() => stepRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "center" })} aria-label={`Show ${item.title}`}><span /></button>
-          ))}
+    <section className="immersive-story" id="performance" style={{ "--story-scroll-height": `${120 + scrollStories.length * 72}vh`, "--story-count": scrollStories.length }}>
+      <div className="immersive-story__scene">
+        <div className="immersive-story__sticky">
+          <div className="immersive-story__progress" aria-label={`Chapter ${active + 1} of ${scrollStories.length}`}>
+            {scrollStories.map((item, index) => (
+              <button type="button" key={item.id} className={active === index ? "is-active" : ""} onClick={() => stepRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "center" })} aria-label={`Show ${item.title}`}><span /></button>
+            ))}
+          </div>
+          <div className="immersive-story__copy" key={story.id}>
+            <span className="eyebrow">{story.eyebrow}</span>
+            <h2>{story.title}</h2>
+            <p>{story.copy}</p>
+            <div className="inline-metrics">{story.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
+          </div>
         </div>
-        <div className="immersive-story__copy" key={story.id}>
-          <span className="eyebrow">{story.eyebrow}</span>
-          <h2>{story.title}</h2>
-          <p>{story.copy}</p>
-          <div className="inline-metrics">{story.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
-        </div>
+        <button
+          type="button"
+          className="immersive-story__step immersive-story__active-media is-active"
+          key={story.id}
+          onClick={() => onPlay(story.eyebrow, story.title, asset(story.image))}
+          aria-label={`Open ${story.title} video and full image preview`}
+        >
+          <img src={asset(story.image)} alt={`${story.title} XRF Gen2 feature view`} />
+          <span className="immersive-story__play" aria-hidden="true"><Play size={26} weight="fill" /></span>
+          <div className="immersive-story__media-label"><span>VIDEO STORY · IMAGE PREVIEW</span><span>{String(active + 1).padStart(2, "0")} / {String(scrollStories.length).padStart(2, "0")}</span></div>
+        </button>
       </div>
-      <div className="immersive-story__steps">
+      <div className="immersive-story__steps" aria-hidden="true">
         {scrollStories.map((item, index) => (
-          <button
-            type="button"
+          <span
             ref={(node) => { stepRefs.current[index] = node; }}
-            className={active === index ? "immersive-story__step is-active" : "immersive-story__step"}
+            className="immersive-story__sentinel"
             key={item.id}
-            onClick={() => onPlay(item.eyebrow, item.title, asset(item.image))}
-            aria-label={`Open ${item.title} video and full image preview`}
-          >
-            <img src={asset(item.image)} alt={`${item.title} XRF Gen2 feature view`} />
-            <span className="immersive-story__play" aria-hidden="true"><Play size={26} weight="fill" /></span>
-            <div className="immersive-story__media-label"><span>VIDEO STORY · IMAGE PREVIEW</span><span>{String(index + 1).padStart(2, "0")} / {String(scrollStories.length).padStart(2, "0")}</span></div>
-          </button>
+          />
         ))}
       </div>
     </section>
@@ -875,13 +881,13 @@ export function App() {
         <section className="sales-video sales-video--performance" data-reveal>
           <YouTubeCover video={decisionVideos.performance} onPlay={setYoutubeVideo} />
           <div className="sales-video__copy">
-            <span className="eyebrow">XRF PERFORMANCE PROOF</span>
+            <span className="eyebrow">PERFORMANCE</span>
             <h2>Not just faster. Built for production.</h2>
             <p>See how the XRF compares with a typical hobby laser when speed, detail and repeatability actually matter.</p>
             <div className="sales-video__metrics">
               <span><strong>1,300 mm/s</strong>Real working speed</span>
               <span><strong>True 3.5G</strong>Controlled acceleration</span>
-              <span><strong>38W RF</strong>Fine-detail metal tube</span>
+              <span><strong>38W/70W RF</strong>Fine-detail metal tube</span>
               <span><strong>Repeatable</strong>Production-ready output</span>
             </div>
           </div>
@@ -896,7 +902,6 @@ export function App() {
           <div className="project-showcase">
             <div className="project-visual">
               <img src={asset(projectEvidence[activeProject].image)} alt={projectEvidence[activeProject].title} style={{ objectPosition: projectEvidence[activeProject].position }} />
-              <span>PROJECT PROOF · {String(activeProject + 1).padStart(2, "0")}/{String(projectEvidence.length).padStart(2, "0")}</span>
             </div>
             <div className="project-content">
               <span className="eyebrow">{projectEvidence[activeProject].tag}</span>

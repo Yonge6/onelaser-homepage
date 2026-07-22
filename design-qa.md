@@ -57,6 +57,16 @@
 
 final result: passed
 
+## 2026-07-22 finished-product carousel label cleanup
+
+- Removed the `PROJECT PROOF · 01/04` production label from every finished-product carousel state; navigation state now relies only on the existing arrows and pagination dots.
+- Visual evidence: `qa/final-project-no-overlay-1538.png` and `qa/final-project-no-overlay-390.png`.
+- Desktop 1538 × 1178 verification reports zero `.project-visual > span` nodes, no `PROJECT PROOF` text in the rendered document and zero horizontal overflow.
+- Mobile 390 × 844 verification reports the same zero-label, zero-overflow result while preserving the fixed project image geometry and shared card radius.
+- Retained the compact 48 px desktop / 32 px mobile narrative section rhythm and the centered sticky P0 copy/media scene from the current visual-system pass.
+
+final result: passed
+
 ## 2026-07-22 power-proof and icon-system revision
 
 ### Power proof interaction

@@ -1157,7 +1157,6 @@ h3 { font-weight: 800; }
   object-fit: cover;
 }
 
-.project-visual > span,
 .benefit-panel__media > span {
   position: absolute;
   bottom: 18px;
@@ -6564,6 +6563,7 @@ body { color: var(--ink); }
   width: 100%;
   max-width: none;
   height: auto;
+  aspect-ratio: auto;
   display: block;
   object-fit: contain;
   border: 0;
@@ -6578,23 +6578,63 @@ body { color: var(--ink); }
 
 @media (min-width: 1181px) {
   .immersive-story {
-    align-items: start;
+    width: 100%;
+    max-width: none;
+    min-height: var(--story-scroll-height);
+    display: block;
+    margin: 0;
+    padding: 0 max(36px, calc((100vw - 1440px) / 2));
+    overflow: visible;
+  }
+
+  .immersive-story__scene {
+    position: sticky;
+    top: 88px;
+    z-index: 2;
+    height: calc(100vh - 112px);
+    display: grid;
+    grid-template-columns: minmax(380px, .78fr) minmax(0, 1.22fr);
+    align-items: center;
+    gap: clamp(48px, 5vw, 76px);
+    box-sizing: border-box;
+    padding: 16px clamp(36px, 4vw, 64px) 64px;
+    background: #fff;
   }
 
   .immersive-story__sticky {
-    top: 112px;
-    height: calc(100vh - 144px);
-    min-height: 520px;
-    box-sizing: border-box;
-    padding-top: 0;
-    align-items: start;
-    align-content: start;
+    position: static;
+    top: auto;
+    height: auto;
+    min-height: 0;
+    align-items: center;
+    align-content: center;
     transform: none;
   }
 
   .immersive-story__steps {
-    gap: 6vh;
-    padding-bottom: 4vh;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: grid;
+    grid-template-rows: repeat(var(--story-count), minmax(0, 1fr));
+    gap: 0;
+    padding: 0;
+    pointer-events: none;
+  }
+
+  .immersive-story__sentinel {
+    display: block;
+    min-height: 0;
+  }
+
+  .immersive-story__active-media {
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -6606,10 +6646,101 @@ body { color: var(--ink); }
 
   .feature-overview > img {
     min-height: 0;
+    aspect-ratio: auto;
   }
 
   .power-proof-stage__copy h3 {
     font-size: 28px;
     line-height: 1.08;
+  }
+}
+
+/* 2026-07-22 compact sales rhythm: standard narrative boundaries are half the former size. */
+.section:not(.hero) {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.tv-proof,
+.business-proof,
+.review-proof,
+.creator-videos,
+.proof-system,
+.micro-features {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.sales-video {
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
+
+.facility-trust {
+  margin-top: 48px;
+}
+
+.power-guide {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.section.safety {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+@media (max-width: 1180px) {
+  .immersive-story {
+    min-height: 0;
+  }
+
+  .immersive-story__scene {
+    display: grid;
+    gap: 32px;
+  }
+
+  .immersive-story__steps {
+    display: none;
+  }
+
+  .immersive-story__sticky {
+    position: relative;
+    top: auto;
+    height: auto;
+    min-height: 0;
+  }
+
+  .immersive-story__active-media {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 640px) {
+  .section:not(.hero),
+  .tv-proof,
+  .business-proof,
+  .review-proof,
+  .creator-videos,
+  .proof-system,
+  .micro-features,
+  .section.safety {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .sales-video {
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
+
+  .facility-trust {
+    margin-top: 32px;
+  }
+
+  .power-guide {
+    padding-top: 32px;
+    padding-bottom: 32px;
   }
 }
