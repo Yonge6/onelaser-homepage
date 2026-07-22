@@ -41,6 +41,7 @@ The page follows one consistent evidence ladder: finished result → product cap
 - Desktop content maximum: 1280 px; purchase hero may use 1440 px to preserve the approved 660 px gallery.
 - Main section vertical padding: 96 px desktop; 64 px mobile. Sticky storytelling may use more scroll range where the interaction requires it.
 - Section-heading internal rhythm: 8 px from eyebrow to title and 12 px from title to supporting copy.
+- Wide narrative modules use the centered 1280 px editorial axis; full-width color bands center their inner content on that axis. Every clickable P0 media stage uses a centered 72 px translucent-black play control (58 px mobile).
 - Related controls: 8–12 px gap. Card groups: 12–16 px gap. Major content tracks: 48–72 px gap.
 
 ## Components

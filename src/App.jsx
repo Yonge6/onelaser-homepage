@@ -447,7 +447,8 @@ function StickyStory({ onPlay }) {
             aria-label={`Open ${item.title} video and full image preview`}
           >
             <img src={asset(item.image)} alt={`${item.title} XRF Gen2 feature view`} />
-            <div className="immersive-story__media-label"><span><Play size={15} weight="fill" /> VIEW VIDEO / FULL IMAGE</span><span>{String(index + 1).padStart(2, "0")} / {String(scrollStories.length).padStart(2, "0")}</span></div>
+            <span className="immersive-story__play" aria-hidden="true"><Play size={26} weight="fill" /></span>
+            <div className="immersive-story__media-label"><span>VIDEO STORY · IMAGE PREVIEW</span><span>{String(index + 1).padStart(2, "0")} / {String(scrollStories.length).padStart(2, "0")}</span></div>
           </button>
         ))}
       </div>
@@ -990,7 +991,7 @@ export function App() {
         <section className="proof-system" data-reveal>
           <div className="proof-system__heading">
             <span className="eyebrow">ENGINEERING PROOF</span>
-            <h2>Small systems.<br />One steadier machine.</h2>
+            <h2>Small systems. One steadier machine.</h2>
             <p>Each compact system removes a real source of residue, noise, drift or risk.</p>
           </div>
           <div className="proof-system__grid">

@@ -57,6 +57,16 @@
 
 final result: passed
 
+## 2026-07-22 wide-section and P0 playback-control correction
+
+- Root cause: late shared `.section` overrides reduced the power guide and full-width safety band to 1280 px while earlier zero/viewport margins left both anchored at the page origin. The power guide is now centered at `x=231 / w=1280` in the 1742 px viewport; safety spans `x=0 / w=1742` with its intro and 16:9 stage centered at `x=231 / w=1280`.
+- Engineering proof title is one 48 px desktop line across the 1280 px content axis and returns to normal responsive wrapping below 1180 px.
+- FOX desktop copy/video gap increased to 96 px. Its title now wraps within the copy column instead of overflowing into the video; measured title overflow is zero. Mobile uses a 44 px stacked gap.
+- All six P0 image-preview stages now contain the same centered translucent-black play control. Desktop controls measure 72 px and mobile 58 px; center offsets are `0 / 0` for every stage.
+- Responsive audit: 1742 × 1178 and 390 × 844 both report zero horizontal overflow, and minimum visible customer-facing type remains 12 px.
+
+final result: passed
+
 ## 2026-07-22 performance-label, spacing and duplicate-proof pass
 
 ### Global product data
