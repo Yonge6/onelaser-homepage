@@ -76,6 +76,10 @@ When implementing from a selected generated mock, treat that image as the source
 - On desktop, narrative headings and their direct descriptions stay on one line when they fit the 1280 px grid. All section introductions share the same 1280 px left axis and wrap normally below 1180 px.
 - Customer-facing performance data is now `1,300 mm/s` and `True 3.5G`; remove every older `1,200 mm/s` and `3G` reference from hero proof, package copy, story copy, metrics and specifications.
 - Use a compact, repeatable section-heading rhythm: 8 px from eyebrow to title and 12 px from title to supporting copy. Adjacent modules must not repeat the same claim or the same lead asset; each section must add a distinct proof layer.
+- The Hero overview video uses the official OneLaser YouTube video `F1ZJvoeANgk`. Ship its static cover locally and open it through the shared lazy in-page YouTube player; do not show a placeholder in this slot.
+- Do not keep a standalone hobby-laser performance video module near the top of the page. Include that proof as the first item in the arrow-controlled independent-review video rail instead.
+- Place the supplied profit-and-product-output artwork immediately above the supplied at-a-glance capability collage. Both images render edge to edge on the same `#141414` band with no padding or gap between them.
+- P0 chapter changes use a restrained crossfade, slight upward settle and subtle image scale reset while copy and media remain locked on one horizontal scene. Disable this motion under `prefers-reduced-motion`.
 - Render the two supplied at-a-glance images at their intrinsic aspect ratios with no inherited 16:9 frame, padding, gap or letterboxing above or below either image.
 - In the desktop P0 scroll story, the active copy and active 16:9 media form one sticky scene and stay vertically centered on the same horizontal line; offscreen chapters act only as scroll triggers and must not push the visible media out of alignment.
 - Keep the finished-product carousel image clean: do not overlay a `PROJECT PROOF` counter or similar production label on the project media; use the existing arrows and dots for navigation state.

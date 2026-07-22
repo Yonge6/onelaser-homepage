@@ -57,6 +57,35 @@
 
 final result: passed
 
+## 2026-07-22 profit artwork replacement
+
+- Replaced the previous profit-and-product-output artwork with the latest user-supplied `/Users/yongyuan/Downloads/2.webp`.
+- Shipped the optimized page asset as `public/assets/xrf-profit-products-web.webp` at 2400 × 1125, preserving the source aspect ratio and customer-facing copy.
+- Verified the new `Your Work Is Only As Good As Your Laser.` artwork renders between the two supplied overview images with zero vertical gap.
+- Desktop and 390 px mobile both report zero horizontal overflow; all three images retain intrinsic aspect ratios and span the viewport width.
+
+final result: passed
+
+## 2026-07-22 hero overview video and proof consolidation
+
+### Hero video
+
+- Replaced the final Hero media placeholder with a local 1280 × 720 cover for the official OneLaser video `F1ZJvoeANgk`.
+- The square Hero stage and 70 px overview thumbnail both use the real cover. Clicking either opens the existing privacy-enhanced, lazy in-page YouTube player; no iframe loads in the default page state.
+
+### Duplicate proof and overview artwork
+
+- Removed the standalone hobby-laser performance module and moved the same performance proof to the first position in the arrow-controlled independent-review rail.
+- Inserted the supplied profit-and-product-output artwork immediately above the capability collage. Both assets render at intrinsic aspect ratio on one `#141414` band with no padding, gap, crop or inherited 16:9 frame.
+- The new profit artwork is optimized from 3840 × 1800 / 2.2 MB to 2400 × 1125 / approximately 369 KB WebP.
+
+### P0 interaction
+
+- Active P0 chapters retain the sticky two-column scene, centered translucent-black play control and keyboard-accessible full-media preview.
+- Chapter changes use a restrained opacity, 12 px vertical settle and 1.025-to-1 image scale transition. `prefers-reduced-motion` removes these animations.
+
+final result: passed
+
 ## 2026-07-22 finished-product carousel label cleanup
 
 - Removed the `PROJECT PROOF · 01/04` production label from every finished-product carousel state; navigation state now relies only on the existing arrows and pagination dots.

@@ -46,7 +46,13 @@ const media = [
   { src: asset("xrf-gallery-10.jpg"), alt: "XRF Gen2 gantry and honeycomb bed", label: "Gantry" },
   { src: asset("xrf-gallery-11.jpg"), alt: "XRF Gen2 integrated touchscreen detail", label: "Touch" },
   { src: asset("xrf-gallery-12.jpg"), alt: "XRF Gen2 work area and control enclosure", label: "Bed" },
-  { src: asset("xrf-internal-wide.jpg"), alt: "XRF Gen2 overview video placeholder", label: "Overview", type: "video" },
+  {
+    src: asset("xrf-overview-video-cover.jpg"),
+    alt: "OneLaser XRF Gen2 overview video cover",
+    label: "Overview",
+    type: "youtube",
+    youtubeId: "F1ZJvoeANgk",
+  },
 ];
 
 const featureLinks = [
@@ -207,6 +213,7 @@ const decisionVideos = {
 };
 
 const reviewVideos = [
+  decisionVideos.performance,
   { id: "jNaj50MkKiE", title: "“I was wrong about OneLaser.”", channel: "Make or Break Shop", tag: "LONG-TERM PERSPECTIVE" },
   { id: "hwtVOBUCGxw", title: "Full XRF review", channel: "The Louisiana Hobby Guy", tag: "INDEPENDENT HANDS-ON REVIEW" },
   { id: "87PrP4Vigzo", title: "Before you buy the XRF", channel: "Velf Creations", tag: "COMPLETE BUYER OVERVIEW" },
@@ -641,8 +648,13 @@ export function App() {
   function selectMedia(index) {
     setActiveMedia(index);
     const item = media[index];
-    if (item.type === "video") {
-      setVideoModal({ eyebrow: "XRF GEN2 OVERVIEW", title: "From setup to finished product.", image: item.src });
+    if (item.type === "youtube") {
+      setYoutubeVideo({
+        id: item.youtubeId,
+        title: "OneLaser XRF Gen2 overview",
+        channel: "OneLaser",
+        tag: "XRF GEN2 OVERVIEW",
+      });
     }
   }
 
@@ -703,18 +715,18 @@ export function App() {
               <span className="media-count">{String(activeMedia + 1).padStart(2, "0")} / {String(media.length).padStart(2, "0")}</span>
               <button type="button" className="media-arrow media-arrow--previous" aria-label="Previous product view" onClick={() => stepMedia(-1)}><CaretLeft size={25} /></button>
               <button type="button" className="media-arrow media-arrow--next" aria-label="Next product view" onClick={() => stepMedia(1)}><CaretRight size={25} /></button>
-              {media[activeMedia].type === "video" && (
+              {media[activeMedia].type === "youtube" && (
                 <button type="button" className="media-play" onClick={() => selectMedia(activeMedia)}>
                   <span><Play size={24} weight="fill" /></span>
                   <strong>XRF Gen2 overview</strong>
-                  <small>VIDEO PREVIEW</small>
+                  <small>WATCH VIDEO</small>
                 </button>
               )}
             </div>
             <div className="thumbnail-controls">
               <button type="button" className="thumb-arrow" aria-label="Scroll product views left" onClick={() => scrollThumbnails(-1)}><CaretLeft size={20} /></button>
               <div className="thumbnail-row" ref={thumbnailRailRef} aria-label="Product views">
-                {media.filter((item) => item.type !== "video").map((item, index) => (
+                {media.filter((item) => item.type !== "youtube").map((item, index) => (
                   <button
                     type="button"
                     key={item.src}
@@ -728,7 +740,7 @@ export function App() {
               </div>
               <button type="button" className="thumb-arrow" aria-label="Scroll product views right" onClick={() => scrollThumbnails(1)}><CaretRight size={20} /></button>
               <span className="thumbnail-divider" aria-hidden="true" />
-              <button type="button" className="video-thumbnail" onClick={() => selectMedia(media.length - 1)} aria-label="Open XRF Gen2 overview video placeholder">
+              <button type="button" className="video-thumbnail" onClick={() => selectMedia(media.length - 1)} aria-label="Play the OneLaser XRF Gen2 overview video">
                 <img src={media.at(-1).src} alt="" />
                 <span><Play size={16} weight="fill" /></span>
               </button>
@@ -859,6 +871,7 @@ export function App() {
 
         <section className="feature-overview" id="features" data-reveal>
           <img src={asset("xrf-overview-hero-web.webp")} alt="OneLaser XRF Gen2 in a working studio with finished products and brand proof" />
+          <img src={asset("xrf-profit-products-web.webp")} alt="Premium products and example business outputs made with the OneLaser XRF Gen2" />
           <img src={asset("xrf-feature-overview-web.webp")} alt="XRF Gen2 capabilities overview including RF precision, 38W and 70W power, 1,300 millimeters per second motion, IVS, workflow, safety and support" />
         </section>
 
@@ -876,21 +889,6 @@ export function App() {
             <span className="tv-proof__play"><Play size={28} weight="fill" /></span>
             <i>FOX &amp; FRIENDS WEEKEND · VIDEO</i>
           </button>
-        </section>
-
-        <section className="sales-video sales-video--performance" data-reveal>
-          <YouTubeCover video={decisionVideos.performance} onPlay={setYoutubeVideo} />
-          <div className="sales-video__copy">
-            <span className="eyebrow">PERFORMANCE</span>
-            <h2>Not just faster. Built for production.</h2>
-            <p>See how the XRF compares with a typical hobby laser when speed, detail and repeatability actually matter.</p>
-            <div className="sales-video__metrics">
-              <span><strong>1,300 mm/s</strong>Real working speed</span>
-              <span><strong>True 3.5G</strong>Controlled acceleration</span>
-              <span><strong>38W/70W RF</strong>Fine-detail metal tube</span>
-              <span><strong>Repeatable</strong>Production-ready output</span>
-            </div>
-          </div>
         </section>
 
         <section className="section results" id="results" data-reveal>
