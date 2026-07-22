@@ -57,6 +57,8 @@ The page follows one consistent evidence ladder: finished result → product cap
 - Overview and all P0/video media: fixed horizontal 16:9 stages. Video imagery uses `contain` so the whole frame remains visible. Project-result media: fixed 4:3 stage with centered cover behavior.
 - P0 uses a seven-chapter sticky 16:9 story system. P1 uses large split layouts. P2 uses compact image-led cards in a four-column desktop grid. P3 uses concise one-line proof cards or specification rows.
 - Power comparison: two image-led parallel cards; selection updates the primary purchase state. Safety: one 16:9 image with a four-card proof grid.
+- Materials gallery: one fixed proof stage with finished-product photography, an editorial copy panel and five keyboard-accessible tabs. Desktop stage height is stable; below 1000 px the 16:9 image stacks above copy and the tabs become a horizontal swipe rail.
+- AI-generated proof assets ship as compressed WebP at up to 1600 px wide. They may visualize finished products and restrained functional overlays, but must not invent customer-facing specifications or replace an approved machine render when product geometry is the evidence.
 - Desktop hero purchase panel order: H1 → source-backed rating → five concise proof bullets → Final Price/MSRP/Save → financing → 38W/70W selector → package cards → optional add-ons → quantity/CTA → assurance.
 - Package and add-on cards use 1 px dividers, 10–12 px radii, no elevation, a red price, and a black 2 px-equivalent selected state (border plus inset ring).
 - Hero gallery is sticky on desktop while the longer purchase panel scrolls; it becomes static when the layout stacks below 1180 px.

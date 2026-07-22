@@ -26,11 +26,55 @@ const media = [
 const featureLinks = [
   ["features", "Overview"],
   ["results", "Results"],
+  ["materials", "Materials"],
   ["power-guide", "38W / 70W"],
   ["performance", "Why XRF"],
   ["workflow", "Workflow"],
   ["safety", "Safety"],
   ["specs", "Specs"],
+];
+
+const materialCategories = [
+  {
+    id: "acrylic",
+    label: "Acrylic",
+    title: "Polished edges. Dimensional color.",
+    copy: "Build layered signage, displays, organizers and decorative objects with clean contours and premium edge quality.",
+    proof: "Clear · colored · layered · dimensional",
+    image: "material-acrylic.webp",
+  },
+  {
+    id: "wood",
+    label: "Wood",
+    title: "From photo detail to repeatable batches.",
+    copy: "Turn natural wood into photo-real engraving, deep relief, architectural parts and products made to sell again and again.",
+    proof: "Photo engraving · relief · batch goods · models",
+    image: "material-wood.webp",
+  },
+  {
+    id: "leather",
+    label: "Leather",
+    title: "Personalization that feels permanent.",
+    copy: "Create refined wallets, notebooks, straps and tags with consistent tonal contrast and precise cut edges.",
+    proof: "Wallets · straps · tags · premium gifts",
+    image: "material-leather.webp",
+  },
+  {
+    id: "glass-stone",
+    label: "Glass & Stone",
+    title: "Fine marks on hard, high-value surfaces.",
+    copy: "Add crisp frosted artwork and detailed personalization to awards, slate, glassware, coasters and polished stone.",
+    proof: "Awards · slate · glassware · keepsakes",
+    image: "material-glass-stone.webp",
+  },
+  {
+    id: "coated-metal",
+    label: "Coated Metal",
+    title: "High contrast for everyday production.",
+    copy: "Produce detailed tumblers, anodized cards, tags and identification plates with clean, repeatable contrast.",
+    proof: "Tumblers · cards · tags · nameplates",
+    image: "material-coated-metal.webp",
+  },
 ];
 
 const projectEvidence = [
@@ -62,7 +106,7 @@ const projectEvidence = [
     title: "Print. Place. Cut. Done.",
     proof: "IVS mark detection with live compensation",
     copy: "Head-mounted vision corrects position and angle so printed contours need less manual calibration and create less waste.",
-    image: "xrf-ivs.jpg",
+    image: "ivs-print-cut-proof.webp",
     tag: "INTELLIGENT VISION",
     position: "50% 50%",
   },
@@ -134,7 +178,7 @@ const scrollStories = [
     title: "Photo-real, every time.",
     copy: "Pulse-modulated RF energy through a finer spot produces photographic grayscale and deep relief up to 2,000 DPI. The sealed source is air-cooled and rated up to 30,000 hours.",
     metrics: ["2,000 DPI", "Air cooled", "Up to 30,000 h"],
-    image: "xrf-detail-proof.webp",
+    image: "power-38w-proof.webp",
   },
   {
     id: "speed",
@@ -150,7 +194,7 @@ const scrollStories = [
     title: "Print and cut, made easy.",
     copy: "The head-mounted Intelligent Vision System detects registration marks and compensates position and angle in real time—reducing calibration, waste and rework.",
     metrics: ["Mark detection", "Live compensation", "Less material waste"],
-    image: "xrf-ivs.jpg",
+    image: "ivs-print-cut-proof.webp",
   },
   {
     id: "workflow",
@@ -166,7 +210,7 @@ const scrollStories = [
     title: "Start desktop. Grow beyond it.",
     copy: "A true 24 × 12 inch bed handles everyday stock. Optional Riser Base, Rotary and automatic Conveyor unlock taller, cylindrical and continuous long-format work.",
     metrics: ["24 × 12 in", "8.5 in with optional Riser", "Optional Conveyor"],
-    image: "xrf-work-area-proof.webp",
+    image: "conveyor-proof.webp",
   },
   {
     id: "clean",
@@ -174,7 +218,7 @@ const scrollStories = [
     title: "Right pressure. Every mode. Automatically.",
     copy: "Optional Smart Air switches between high-pressure cutting and low-pressure engraving, while 3× extraction architecture and FumeGuard keep results and the workspace cleaner.",
     metrics: ["Optional Smart Air", "3× extraction", "FumeGuard monitoring"],
-    image: "xrf-front.jpg",
+    image: "smart-air-proof.webp",
   },
 ];
 
@@ -454,6 +498,7 @@ export function App() {
   const [power, setPower] = useState("38W");
   const [activeMedia, setActiveMedia] = useState(0);
   const [activeProject, setActiveProject] = useState(0);
+  const [activeMaterial, setActiveMaterial] = useState(0);
   const [activeFeature, setActiveFeature] = useState("features");
   const [openFaq, setOpenFaq] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -468,6 +513,13 @@ export function App() {
   const thumbnailRailRef = useRef(null);
   const reviewVideoRailRef = useRef(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    materialCategories.forEach(({ image }) => {
+      const preload = new Image();
+      preload.src = asset(image);
+    });
+  }, []);
 
   useEffect(() => {
     const revealNodes = [...document.querySelectorAll("[data-reveal]")];
@@ -832,6 +884,40 @@ export function App() {
           </div>
         </section>
 
+        <section className="section materials" id="materials" data-reveal>
+          <div className="section-heading section-heading--stack">
+            <span className="eyebrow">MATERIALS THAT BECOME PRODUCTS</span>
+            <h2>One platform. More ways to create value.</h2>
+            <p>Explore real product categories XRF Gen2 can turn into premium, repeatable work for gifts, retail and custom orders.</p>
+          </div>
+          <div className="material-gallery">
+            <div className="material-gallery__stage" aria-live="polite">
+              <img key={materialCategories[activeMaterial].id} src={asset(materialCategories[activeMaterial].image)} alt={`${materialCategories[activeMaterial].label} products created for XRF Gen2 material proof`} />
+              <div className="material-gallery__copy">
+                <span>{materialCategories[activeMaterial].label}</span>
+                <h3>{materialCategories[activeMaterial].title}</h3>
+                <p>{materialCategories[activeMaterial].copy}</p>
+                <strong>{materialCategories[activeMaterial].proof}</strong>
+              </div>
+            </div>
+            <div className="material-tabs" role="tablist" aria-label="Explore XRF Gen2 material categories">
+              {materialCategories.map((item, index) => (
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={activeMaterial === index}
+                  className={activeMaterial === index ? "is-active" : ""}
+                  key={item.id}
+                  onClick={() => setActiveMaterial(index)}
+                >
+                  <span>{item.label}</span>
+                  <small>{String(index + 1).padStart(2, "0")}</small>
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="business-proof" data-reveal>
           <div className="section-heading section-heading--stack">
             <span className="eyebrow">CUSTOMER SUCCESS</span>
@@ -859,7 +945,7 @@ export function App() {
           </div>
           <div className="power-compare">
             <button type="button" className={power === "38W" ? "power-card is-selected" : "power-card"} onClick={() => { setPower("38W"); setPurchasePower("38W"); }} aria-pressed={power === "38W"}>
-              <span className="power-card__media"><img src={asset("xrf-detail-proof.webp")} alt="Fine RF engraving detail for 38W everyday production" /><i>38W RF · FINE DETAIL</i></span>
+              <span className="power-card__media"><img src={asset("power-38w-proof.webp")} alt="Fine RF engraving detail for 38W everyday production" /><i>38W RF · FINE DETAIL</i></span>
               <span className="power-card__body">
                 <span className="power-card__top"><strong>38W RF</strong></span>
                 <strong className="power-card__title">Fine detail for everyday production.</strong>
@@ -868,7 +954,7 @@ export function App() {
               </span>
             </button>
             <button type="button" className={power === "70W" ? "power-card is-selected" : "power-card"} onClick={() => { setPower("70W"); setPurchasePower("70W"); }} aria-pressed={power === "70W"}>
-              <span className="power-card__media"><img src={asset("xrf-work-area-proof.webp")} alt="Batch production layout for higher-throughput 70W RF work" /><i>70W RF · NEW POWERMAX</i></span>
+              <span className="power-card__media"><img src={asset("power-70w-proof.webp")} alt="Deep relief and batch production proof for higher-throughput 70W RF work" /><i>70W RF · NEW POWERMAX</i></span>
               <span className="power-card__body">
                 <span className="power-card__top"><strong>70W RF</strong></span>
                 <strong className="power-card__title">More headroom for demanding work.</strong>

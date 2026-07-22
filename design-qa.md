@@ -57,6 +57,36 @@
 
 final result: passed
 
+## 2026-07-22 generated proof imagery and materials revision
+
+### Source and asset checks
+
+- Product-claim source: `XRF Gen2 卖点参数发布汇总.xlsx`; approved XRF renders remain the geometry source wherever the machine is visible.
+- Added ten optimized 16:9 WebP proof assets for five material categories, 38W/70W use-case comparison, IVS print-and-cut, optional Smart Air and optional Conveyor storytelling.
+- Optimized output totals approximately 1.2 MB across all ten assets at a 1600 px maximum width; production pages do not load the original generation files.
+- Customer-facing copy continues to label optional systems as optional and does not introduce new speed, price, certification or production claims.
+
+### Materials gallery
+
+- Desktop evidence: `qa/generated-materials-desktop.png`; responsive evidence: `qa/generated-materials-mobile.png`.
+- Acrylic, Wood, Leather, Glass & Stone and Coated Metal each load a distinct finished-product image and benefit-first copy.
+- All five desktop states retain the same 725 px gallery height. The selected category uses only the approved OneLaser red underline; no duplicate selected badge appears.
+- Mobile tabs remain horizontally swipeable, the active image retains a 16:9 frame and the page reports zero horizontal overflow.
+
+### 38W / 70W comparison
+
+- Desktop evidence: `qa/generated-power-desktop.png`; responsive evidence: `qa/generated-power-mobile.png`.
+- 38W and 70W remain visually parallel and equal-fit: 38W emphasizes fine-detail everyday production; 70W emphasizes deeper relief and heavier workloads.
+- Selecting either card still synchronizes the hero power choice and sticky purchase total. Power cards do not repeat prices or selected labels.
+
+### Functional proof placement
+
+- Workbook-led P0 stories now use dedicated IVS, Smart Air and long-format Conveyor visuals instead of generic repeated renders.
+- Full-media interactions, 16:9 geometry, keyboard access and reduced-motion behavior remain intact.
+- QA viewport metrics: 1440 px desktop and 390 px mobile both report document width equal to viewport width.
+
+final result: passed
+
 ## 2026-07-22 video decision-journey revision
 
 ### Source and comparison evidence
