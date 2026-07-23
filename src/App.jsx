@@ -1274,7 +1274,7 @@ export function App() {
             <div className="makerboost-proof__intro">
               <header className="makerboost-proof__header">
                 <span className="eyebrow">MAKERBOOST AI SOFTWARE</span>
-                <h2>&quot;Out of the box, into creation.&quot;</h2>
+                <h2>Out of the box, into creation.</h2>
               </header>
               <div className="makerboost-proof__copy">
                 <p className="makerboost-proof__subhead">MakerBoost AI Software — Deeply Tuned for XRF, Zero Learning Curve</p>
@@ -1291,7 +1291,7 @@ export function App() {
           <div className="software-compatibility__inner">
             <header className="software-compatibility__header">
               <span className="eyebrow">SOFTWARE</span>
-              <h2>&quot;Your software. Your way.&quot;</h2>
+              <h2>Your software. Your way.</h2>
             </header>
             <article className="software-compatibility__stage">
               <div className="software-compatibility__copy">

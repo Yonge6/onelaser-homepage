@@ -238,7 +238,7 @@ export const productCategories = [
   {
     id: "personalized-gifts",
     label: "Personalized Gifts",
-    description: "Fast-moving personalized products for birthdays, holidays, weddings and everyday gifting.",
+    description: "Personalized products for gifting, celebrations and repeat seasonal orders.",
     image: "material-leather.webp",
     alt: "Personalized leather wallets, journals, straps and key tags",
     productIds: ["custom-tumbler", "leather-wallet", "custom-keychains"],
@@ -247,7 +247,7 @@ export const productCategories = [
   {
     id: "home-outdoor-decor",
     label: "Home & Outdoor Décor",
-    description: "Visually distinctive products with room for larger formats, richer detail and premium pricing.",
+    description: "Large-format décor with strong visual impact and premium pricing potential.",
     image: "material-wood.webp",
     alt: "Detailed engraved wood wall art, portraits, models and home décor",
     productIds: ["outdoor-wall-art", "eagle-wall-panel", "walnut-serving-board"],
@@ -256,7 +256,7 @@ export const productCategories = [
   {
     id: "drinkware-events",
     label: "Drinkware & Events",
-    description: "Personalized drinkware and event products designed for gifting, celebrations and coordinated batch orders.",
+    description: "Personalized drinkware for gifts, events and coordinated batch orders.",
     image: "material-coated-metal.webp",
     alt: "Powder-coated tumblers and coated-metal products with detailed engraving",
     productIds: ["rocks-glass", "wine-bottle", "custom-tumbler"],
@@ -265,7 +265,7 @@ export const productCategories = [
   {
     id: "branded-goods",
     label: "Branded Goods",
-    description: "Custom products for local businesses, teams, organizations and creators building their own brands.",
+    description: "Retail-ready products for local businesses, teams and creator brands.",
     image: "material-acrylic.webp",
     alt: "Laser-compatible acrylic products arranged as a coordinated branded collection",
     productIds: ["leather-patch-cap", "coated-metal-tags", "wood-acrylic-charms"],

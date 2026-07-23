@@ -175,7 +175,6 @@ function ProductEconomics({ product }) {
             <span>ILLUSTRATIVE EXAMPLE</span>
             <h4>Example product economics</h4>
           </div>
-          <strong>{product.name}</strong>
         </header>
         <dl className="product-economics__metrics">
           <div><dt>Example selling price</dt><dd>{economics.sellingPrice}</dd></div>
@@ -230,7 +229,7 @@ function ProductOpportunities({ asset }) {
         <header className="product-opportunities__header">
           <span className="eyebrow">PRODUCT OPPORTUNITIES</span>
           <h2 id="product-opportunities-title">What could you sell with XRF Gen2?</h2>
-          <p>Explore product categories that can grow from personalized one-offs into repeatable collections, event orders and small-batch production.</p>
+          <p>Explore product categories designed for one-offs, repeat orders and small-batch production.</p>
         </header>
 
         <div className="product-opportunities__tabs" role="tablist" aria-label="Explore product opportunity categories">
@@ -274,7 +273,6 @@ function ProductOpportunities({ asset }) {
 
           <div className="product-opportunities__content">
             <header className="product-opportunities__category-copy">
-              <span>{activeCategory.label}</span>
               <p>{activeCategory.description}</p>
             </header>
             <div className="product-switcher" role="tablist" aria-label={`${activeCategory.label} products`}>
@@ -292,7 +290,6 @@ function ProductOpportunities({ asset }) {
                 >
                   <small>{String(index + 1).padStart(2, "0")}</small>
                   <strong>{product.name}</strong>
-                  <span>{product.material}</span>
                 </button>
               ))}
             </div>

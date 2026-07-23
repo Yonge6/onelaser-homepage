@@ -284,16 +284,8 @@
   padding: 0 2px;
 }
 
-.product-opportunities__category-copy > span {
-  color: var(--red);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-
 .product-opportunities__category-copy > p {
-  margin: 8px 0 0;
+  margin: 0;
   color: var(--muted);
   font-size: 15px;
   line-height: 1.5;
@@ -315,7 +307,7 @@
 .product-switcher__item {
   position: relative;
   min-width: 0;
-  min-height: 88px;
+  min-height: 72px;
   width: 100%;
   display: flex;
   padding: 14px;
@@ -352,17 +344,6 @@
   font-size: 15px;
   font-weight: 800;
   line-height: 1.15;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.product-switcher__item > span {
-  margin-top: 5px;
-  overflow: hidden;
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 1.25;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -439,10 +420,7 @@
 }
 
 .product-economics header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 20px;
+  display: block;
 }
 
 .product-economics header span {
@@ -458,16 +436,6 @@
   font-weight: 800;
   line-height: 1.08;
   letter-spacing: -.025em;
-}
-
-.product-economics header > strong {
-  padding: 7px 10px;
-  border-radius: 999px;
-  background: #f2f2f4;
-  color: var(--ink);
-  font-size: 12px;
-  font-weight: 800;
-  white-space: nowrap;
 }
 
 .product-economics__metrics {
@@ -848,15 +816,6 @@
   .product-economics {
     min-height: 0;
     border-radius: 22px;
-  }
-
-  .product-economics header {
-    display: block;
-  }
-
-  .product-economics header > strong {
-    display: inline-block;
-    margin-top: 14px;
   }
 
   .product-economics__metrics {
