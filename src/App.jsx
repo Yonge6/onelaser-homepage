@@ -1236,35 +1236,39 @@ export function App() {
 
         <CapabilityBrowser onPlay={openStory} />
 
-        <section className="software-proof" id="software" data-reveal>
-          <div className="software-proof__inner">
-            <header className="software-proof__header">
-              <span className="eyebrow">SOFTWARE</span>
-              <h2>&quot;Out of the box, into creation.&quot;</h2>
-            </header>
-            <div className="software-proof__stories">
-              <article className="software-proof__story">
-                <div className="software-proof__media">
-                  <img src={asset("software-makerboost.webp")} alt="MakerBoost AI software identity artwork" />
-                </div>
-                <div className="software-proof__copy">
-                  <span className="software-proof__index">01</span>
-                  <h3>MakerBoost AI Software — Deeply Tuned for XRF, Zero Learning Curve</h3>
-                  <p>MakerBoost AI is deeply integrated with the XRF platform — one-click AI vector generation and a material-matched parameter library take first-time users from unboxing to finished work in minutes.</p>
-                </div>
-              </article>
-              <article className="software-proof__story software-proof__story--reverse">
-                <div className="software-proof__media">
-                  <img src={asset("software-compatibility.webp")} alt="LightBurn and RDWorks software compatibility shown on a laptop" />
-                </div>
-                <div className="software-proof__copy">
-                  <span className="software-proof__index">02</span>
-                  <strong className="software-proof__quote">&quot;Your software. Your way.&quot;</strong>
-                  <h3>LightBurn / RDWorks / MakerBoost Compatible</h3>
-                  <p>Works with LightBurn, RDWorks, and MakerBoost AI — supporting formats including AI, PDF, DXF, HPGL, PLT, RD, SVG, LBRN, BMP, JPG, PNG, GIF, TIFF and more.</p>
-                </div>
-              </article>
+        <section className="makerboost-proof" id="makerboost" data-reveal>
+          <div className="makerboost-proof__inner">
+            <div className="makerboost-proof__intro">
+              <header className="makerboost-proof__header">
+                <span className="eyebrow">MAKERBOOST AI SOFTWARE</span>
+                <h2>&quot;Out of the box, into creation.&quot;</h2>
+              </header>
+              <div className="makerboost-proof__copy">
+                <h3>MakerBoost AI Software — Deeply Tuned for XRF, Zero Learning Curve</h3>
+                <p>MakerBoost AI is deeply integrated with the XRF platform — one-click AI vector generation and a material-matched parameter library take first-time users from unboxing to finished work in minutes.</p>
+              </div>
             </div>
+            <div className="makerboost-proof__media">
+              <img src={asset("software-makerboost.webp")} alt="MakerBoost AI software identity artwork" />
+            </div>
+          </div>
+        </section>
+
+        <section className="software-compatibility" id="software" data-reveal>
+          <div className="software-compatibility__inner">
+            <header className="software-compatibility__header">
+              <span className="eyebrow">SOFTWARE</span>
+              <h2>&quot;Your software. Your way.&quot;</h2>
+            </header>
+            <article className="software-compatibility__stage">
+              <div className="software-compatibility__copy">
+                <h3>LightBurn / RDWorks / MakerBoost Compatible</h3>
+                <p>Works with LightBurn, RDWorks, and MakerBoost AI — supporting formats including AI, PDF, DXF, HPGL, PLT, RD, SVG, LBRN, BMP, JPG, PNG, GIF, TIFF and more.</p>
+              </div>
+              <div className="software-compatibility__media">
+                <img src={asset("software-compatibility.webp")} alt="LightBurn and RDWorks software compatibility shown on a laptop" />
+              </div>
+            </article>
           </div>
         </section>
 

@@ -6652,13 +6652,18 @@ body { color: var(--ink); }
   animation: material-in 420ms cubic-bezier(.2,.7,.2,1) both;
 }
 
-.software-proof,
+.makerboost-proof,
+.software-compatibility,
 .ownership-support {
   padding: 48px max(36px, calc((100vw - 1280px) / 2));
   box-sizing: border-box;
 }
 
-.software-proof {
+.makerboost-proof {
+  background: #fff;
+}
+
+.software-compatibility {
   background: #f5f5f7;
 }
 
@@ -6666,25 +6671,41 @@ body { color: var(--ink); }
   background: #fff;
 }
 
-.software-proof__inner,
+.makerboost-proof__inner,
+.software-compatibility__inner,
 .ownership-support__inner {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
 }
 
-.software-proof__header,
+.makerboost-proof__intro {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(420px, 1.2fr);
+  gap: 48px 80px;
+  align-items: end;
+  margin-bottom: 32px;
+}
+
+.makerboost-proof__header,
+.software-compatibility__header,
 .ownership-support__header {
   margin-bottom: 32px;
 }
 
-.software-proof__header .eyebrow,
+.makerboost-proof__header {
+  margin-bottom: 0;
+}
+
+.makerboost-proof__header .eyebrow,
+.software-compatibility__header .eyebrow,
 .ownership-support__header .eyebrow {
   display: block;
   margin-bottom: 8px;
 }
 
-.software-proof__header h2,
+.makerboost-proof__header h2,
+.software-compatibility__header h2,
 .ownership-support__header h2 {
   max-width: 1100px;
   margin: 0;
@@ -6694,49 +6715,52 @@ body { color: var(--ink); }
   letter-spacing: -.045em;
 }
 
-.software-proof__stories {
-  display: grid;
-  gap: 20px;
+.makerboost-proof__copy {
+  padding-bottom: 2px;
 }
 
-.software-proof__story {
+.makerboost-proof__copy h3 {
+  max-width: 740px;
+  margin: 0;
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -.035em;
+}
+
+.makerboost-proof__copy p {
+  max-width: 760px;
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.62;
+}
+
+.makerboost-proof__media {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  background: #000;
+}
+
+.makerboost-proof__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 15 / 7;
+  object-fit: contain;
+}
+
+.software-compatibility__stage {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(360px, .75fr);
+  grid-template-columns: minmax(360px, .75fr) minmax(0, 1.25fr);
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 32px;
   background: #fff;
 }
 
-.software-proof__story--reverse {
-  grid-template-columns: minmax(360px, .75fr) minmax(0, 1.25fr);
-}
-
-.software-proof__story--reverse .software-proof__media {
-  grid-column: 2;
-}
-
-.software-proof__story--reverse .software-proof__copy {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-.software-proof__media {
-  min-width: 0;
-  display: grid;
-  place-items: center;
-  background: #f5f5f7;
-}
-
-.software-proof__media img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 15 / 7;
-  object-fit: contain;
-}
-
-.software-proof__copy {
+.software-compatibility__copy {
   display: flex;
   min-width: 0;
   padding: clamp(32px, 4vw, 56px);
@@ -6744,38 +6768,34 @@ body { color: var(--ink); }
   justify-content: center;
 }
 
-.software-proof__index {
-  color: var(--red);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .1em;
-}
-
-.software-proof__quote {
-  margin-top: 18px;
-  color: var(--red);
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 1.35;
-}
-
-.software-proof__copy h3 {
-  margin: 18px 0 0;
+.software-compatibility__copy h3 {
+  margin: 0;
   font-size: 34px;
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -.035em;
 }
 
-.software-proof__quote + h3 {
-  margin-top: 10px;
-}
-
-.software-proof__copy p {
+.software-compatibility__copy p {
   margin: 20px 0 0;
   color: var(--muted);
   font-size: 16px;
   line-height: 1.62;
+}
+
+.software-compatibility__media {
+  display: grid;
+  min-width: 0;
+  place-items: center;
+  background: #f5f5f7;
+}
+
+.software-compatibility__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 15 / 7;
+  object-fit: contain;
 }
 
 .ownership-support__grid {
@@ -6877,22 +6897,18 @@ body { color: var(--ink); }
     min-height: 360px;
   }
 
-  .software-proof__story,
-  .software-proof__story--reverse {
+  .makerboost-proof__intro,
+  .software-compatibility__stage {
     grid-template-columns: 1fr;
   }
 
-  .software-proof__story--reverse .software-proof__media,
-  .software-proof__story--reverse .software-proof__copy {
-    grid-column: 1;
+  .makerboost-proof__intro {
+    gap: 24px;
+    align-items: start;
   }
 
-  .software-proof__story--reverse .software-proof__media {
+  .software-compatibility__media {
     grid-row: 1;
-  }
-
-  .software-proof__story--reverse .software-proof__copy {
-    grid-row: 2;
   }
 
   .ownership-support__grid {
@@ -6980,37 +6996,52 @@ body { color: var(--ink); }
     padding-top: 18px;
   }
 
-  .software-proof,
+  .makerboost-proof,
+  .software-compatibility,
   .ownership-support {
     padding: 32px 18px;
   }
 
-  .software-proof__header,
+  .makerboost-proof__intro,
+  .software-compatibility__header,
   .ownership-support__header {
     margin-bottom: 24px;
   }
 
-  .software-proof__header h2,
+  .makerboost-proof__header h2,
+  .software-compatibility__header h2,
   .ownership-support__header h2 {
     font-size: 32px;
     line-height: 1.04;
   }
 
-  .software-proof__story {
-    border-radius: 24px;
+  .makerboost-proof__intro {
+    gap: 20px;
   }
 
-  .software-proof__copy {
-    padding: 24px 22px 28px;
-  }
-
-  .software-proof__copy h3 {
+  .makerboost-proof__copy h3,
+  .software-compatibility__copy h3 {
     font-size: 26px;
     line-height: 1.08;
   }
 
-  .software-proof__copy p {
+  .makerboost-proof__copy p,
+  .software-compatibility__copy p {
     font-size: 15px;
+  }
+
+  .makerboost-proof__media,
+  .software-compatibility__stage {
+    border-radius: 24px;
+  }
+
+  .software-compatibility__copy {
+    padding: 24px 22px 28px;
+  }
+
+  .makerboost-proof__media img,
+  .software-compatibility__media img {
+    aspect-ratio: 15 / 7;
   }
 
   .ownership-support__card {
@@ -7035,7 +7066,8 @@ body { color: var(--ink); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .software-proof__media img {
+  .makerboost-proof__media img,
+  .software-compatibility__media img {
     transition: none;
   }
 }
