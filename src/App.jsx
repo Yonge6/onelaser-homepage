@@ -29,6 +29,7 @@ import {
 import { CommercialCapabilities } from "./components/CommercialCapabilities.jsx";
 
 const asset = (name) => `${import.meta.env.BASE_URL}assets/${name}`;
+const MATERIAL_AUTOPLAY_DELAY = 6000;
 
 const media = [
   { src: asset("xrf-hero.jpg"), alt: "XRF Gen2 closed three-quarter product render", label: "Studio" },
@@ -714,6 +715,13 @@ function CapabilityBrowser({ onPlay }) {
 export function App() {
   const [activeMedia, setActiveMedia] = useState(0);
   const [activeMaterial, setActiveMaterial] = useState(0);
+  const [materialPaused, setMaterialPaused] = useState(false);
+  const [materialTimerEpoch, setMaterialTimerEpoch] = useState(0);
+  const [materialReducedMotion, setMaterialReducedMotion] = useState(() => (
+    typeof window !== "undefined"
+      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      : false
+  ));
   const [activeRfAdvantage, setActiveRfAdvantage] = useState(0);
   const [activePowerProof, setActivePowerProof] = useState(0);
   const [openFaq, setOpenFaq] = useState(0);
@@ -727,6 +735,8 @@ export function App() {
   const [youtubeVideo, setYoutubeVideo] = useState(null);
   const thumbnailRailRef = useRef(null);
   const reviewVideoRailRef = useRef(null);
+  const materialTabRefs = useRef([]);
+  const materialTouchStartX = useRef(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
@@ -735,6 +745,22 @@ export function App() {
       preload.src = asset(image);
     });
   }, []);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setMaterialReducedMotion(mediaQuery.matches);
+    updatePreference();
+    mediaQuery.addEventListener("change", updatePreference);
+    return () => mediaQuery.removeEventListener("change", updatePreference);
+  }, []);
+
+  useEffect(() => {
+    if (materialReducedMotion || materialPaused) return undefined;
+    const timeout = window.setTimeout(() => {
+      setActiveMaterial((current) => (current + 1) % materialCategories.length);
+    }, MATERIAL_AUTOPLAY_DELAY);
+    return () => window.clearTimeout(timeout);
+  }, [activeMaterial, materialPaused, materialReducedMotion, materialTimerEpoch]);
 
   useEffect(() => {
     const revealNodes = [...document.querySelectorAll("[data-reveal]")];
@@ -826,6 +852,32 @@ export function App() {
 
   function scrollReviewVideos(direction) {
     reviewVideoRailRef.current?.scrollBy({ left: direction * 420, behavior: "smooth" });
+  }
+
+  function selectMaterial(index, { focus = false } = {}) {
+    const nextIndex = (index + materialCategories.length) % materialCategories.length;
+    setActiveMaterial(nextIndex);
+    setMaterialTimerEpoch((current) => current + 1);
+    if (focus) materialTabRefs.current[nextIndex]?.focus();
+  }
+
+  function resumeMaterialAutoplay() {
+    setMaterialPaused(false);
+    setMaterialTimerEpoch((current) => current + 1);
+  }
+
+  function handleMaterialKeyDown(event, index) {
+    const navigationKeys = ["ArrowLeft", "ArrowRight", "Home", "End"];
+    if (!navigationKeys.includes(event.key)) return;
+    event.preventDefault();
+    const nextIndex = event.key === "Home"
+      ? 0
+      : event.key === "End"
+        ? materialCategories.length - 1
+        : event.key === "ArrowLeft"
+          ? index - 1
+          : index + 1;
+    selectMaterial(nextIndex, { focus: true });
   }
 
   function openStory(title, image) {
@@ -1042,8 +1094,36 @@ export function App() {
             <h2>One platform. More ways to create value.</h2>
             <p>Explore real product categories XRF Gen2 can turn into premium, repeatable work for gifts, retail and custom orders.</p>
           </div>
-          <div className="material-gallery">
-            <div className="material-gallery__stage" aria-live="polite">
+          <div
+            className="material-gallery"
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="XRF Gen2 finished-product material gallery"
+            onMouseEnter={() => setMaterialPaused(true)}
+            onMouseLeave={resumeMaterialAutoplay}
+            onFocusCapture={() => setMaterialPaused(true)}
+            onBlurCapture={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) resumeMaterialAutoplay();
+            }}
+            onTouchStart={(event) => {
+              materialTouchStartX.current = event.changedTouches[0]?.clientX ?? null;
+              setMaterialPaused(true);
+            }}
+            onTouchEnd={(event) => {
+              const endX = event.changedTouches[0]?.clientX;
+              if (materialTouchStartX.current !== null && endX !== undefined) {
+                const distance = endX - materialTouchStartX.current;
+                if (Math.abs(distance) > 48) selectMaterial(activeMaterial + (distance > 0 ? -1 : 1));
+              }
+              materialTouchStartX.current = null;
+              resumeMaterialAutoplay();
+            }}
+            onTouchCancel={() => {
+              materialTouchStartX.current = null;
+              resumeMaterialAutoplay();
+            }}
+          >
+            <div id="material-gallery-stage" className="material-gallery__stage" aria-live={materialPaused ? "polite" : "off"}>
               <img key={materialCategories[activeMaterial].id} src={asset(materialCategories[activeMaterial].image)} alt={`${materialCategories[activeMaterial].label} products created for XRF Gen2 material proof`} />
               <div className="material-gallery__copy">
                 <span>{materialCategories[activeMaterial].label}</span>
@@ -1060,15 +1140,25 @@ export function App() {
                     type="button"
                     role="tab"
                     aria-selected={activeMaterial === index}
+                    aria-controls="material-gallery-stage"
                     className={activeMaterial === index ? "is-active" : ""}
                     key={item.id}
-                    onClick={() => setActiveMaterial(index)}
+                    ref={(node) => { materialTabRefs.current[index] = node; }}
+                    onClick={() => selectMaterial(index)}
+                    onKeyDown={(event) => handleMaterialKeyDown(event, index)}
                   >
                     <span className="material-tab__label"><Icon size={23} weight="regular" aria-hidden="true" /><span>{item.label}</span></span>
                     <small>{String(index + 1).padStart(2, "0")}</small>
                   </button>
                 );
               })}
+            </div>
+            <div className="material-progress" aria-hidden="true">
+              <span
+                key={`${activeMaterial}-${materialTimerEpoch}`}
+                className={materialPaused ? "is-paused" : ""}
+                style={{ "--material-progress-duration": `${MATERIAL_AUTOPLAY_DELAY}ms` }}
+              />
             </div>
           </div>
         </section>

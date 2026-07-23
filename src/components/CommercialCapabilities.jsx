@@ -277,30 +277,41 @@ function ProductOpportunities({ asset }) {
               <span>{activeCategory.label}</span>
               <p>{activeCategory.description}</p>
             </header>
-            <div className="product-list" aria-label={`${activeCategory.label} products`}>
-              {categoryProducts.map((product) => (
+            <div className="product-switcher" role="tablist" aria-label={`${activeCategory.label} products`}>
+              {categoryProducts.map((product, index) => (
                 <button
                   type="button"
-                  className={product.id === activeProduct.id ? "product-card is-active" : "product-card"}
-                  aria-pressed={product.id === activeProduct.id}
+                  role="tab"
+                  id={`product-tab-${product.id}`}
+                  aria-controls={`product-panel-${product.id}`}
+                  aria-selected={product.id === activeProduct.id}
+                  tabIndex={product.id === activeProduct.id ? 0 : -1}
+                  className={product.id === activeProduct.id ? "product-switcher__item is-active" : "product-switcher__item"}
                   onClick={() => setActiveProductId(product.id)}
                   key={product.id}
                 >
-                  <span className="product-card__heading">
-                    <strong>{product.name}</strong>
-                    <span>Example economics <ArrowUpRight size={15} aria-hidden="true" /></span>
-                  </span>
-                  <span className="product-card__facts">
-                    <span><small>Material</small>{product.material}</span>
-                    <span><small>Process</small>{product.process}</span>
-                  </span>
-                  <span className="product-card__tags">
-                    {product.tags.map((tag) => <i key={tag}>{tag}</i>)}
-                  </span>
-                  <span className="product-card__setup">{product.setupNote}</span>
+                  <small>{String(index + 1).padStart(2, "0")}</small>
+                  <strong>{product.name}</strong>
+                  <span>{product.material}</span>
                 </button>
               ))}
             </div>
+            <article
+              className="product-detail"
+              id={`product-panel-${activeProduct.id}`}
+              role="tabpanel"
+              aria-labelledby={`product-tab-${activeProduct.id}`}
+              aria-live="polite"
+            >
+              <div className="product-detail__facts">
+                <span><small>Material</small><strong>{activeProduct.material}</strong></span>
+                <span><small>Process</small><strong>{activeProduct.process}</strong></span>
+              </div>
+              <div className="product-detail__tags">
+                {activeProduct.tags.map((tag) => <span key={tag}>{tag}</span>)}
+              </div>
+              <p>{activeProduct.setupNote}</p>
+            </article>
             <ProductEconomics product={activeProduct} />
           </div>
         </div>
