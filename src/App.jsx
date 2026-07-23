@@ -658,7 +658,7 @@ function CapabilityBrowser({ onPlay }) {
               aria-current={activeChapter === index ? "step" : undefined}
               data-chapter-nav={index}
             >
-              <span><i>{String(index + 1).padStart(2, "0")}</i><strong>{item.nav}</strong></span>
+              <strong>{item.nav}</strong>
             </button>
           ))}
         </nav>
@@ -674,8 +674,8 @@ function CapabilityBrowser({ onPlay }) {
               key={chapter.id}
             >
               <header className="capability-scroll__chapter-heading">
-                <span>{String(chapterIndex + 1).padStart(2, "0")} / {String(capabilityChapters.length).padStart(2, "0")}</span>
-                <div><small>{chapter.nav}</small><h3 id={`capability-${chapter.id}-title`}>{chapter.title}</h3></div>
+                <small>{chapter.nav}</small>
+                <h3 id={`capability-${chapter.id}-title`}>{chapter.title}</h3>
                 <p>{chapter.summary}</p>
               </header>
 
@@ -693,8 +693,10 @@ function CapabilityBrowser({ onPlay }) {
                       <span className="capability-scroll__media-label"><span>VIDEO STORY · IMAGE PREVIEW</span><span>{String(storyIndex + 1).padStart(2, "0")} / {String(chapter.spotlights.length).padStart(2, "0")}</span></span>
                     </button>
                     <div className="capability-scroll__story-copy">
-                      <div><span className="eyebrow">{spotlight.eyebrow}</span><h4>{spotlight.title}</h4></div>
-                      <div><p>{spotlight.copy}</p><div>{spotlight.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div></div>
+                      <span className="eyebrow">{spotlight.eyebrow}</span>
+                      <h4>{spotlight.title}</h4>
+                      <p>{spotlight.copy}</p>
+                      <div>{spotlight.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
                     </div>
                   </article>
                 ))}
@@ -1315,18 +1317,23 @@ export function App() {
           </div>
         </section>
 
-        <section className="facility-trust" data-reveal>
+        <section className="sales-video sales-video--facility" data-reveal>
           <YouTubeCover video={decisionVideos.facility} onPlay={setYoutubeVideo} />
-          <div className="facility-trust__copy"><span className="eyebrow">ENGINEERING YOU CAN SEE</span><h2>Built behind the product.</h2><p>See the production capability, quality process and parts readiness behind every OneLaser machine.</p></div>
-          <div className="facility-trust__proofs"><span>Expanded Facility</span><span>Assembly</span><span>Quality Control</span><span>Parts Readiness</span></div>
+          <div className="sales-video__copy">
+            <span className="eyebrow">ENGINEERING YOU CAN SEE</span>
+            <h2>Built behind the product.</h2>
+            <p>See the production capability, quality process and parts readiness behind every OneLaser machine.</p>
+            <dl className="comparison-proof">
+              <div><dt>Facility</dt><dd>Expanded production capacity</dd></div>
+              <div><dt>Assembly</dt><dd>Built and tuned by OneLaser</dd></div>
+              <div><dt>Quality control</dt><dd>Checked before delivery</dd></div>
+              <div><dt>Parts readiness</dt><dd>Support beyond setup</dd></div>
+            </dl>
+          </div>
         </section>
 
         <section className="ownership-support" id="support" data-reveal>
           <div className="ownership-support__inner">
-            <header className="ownership-support__header">
-              <span className="eyebrow">SUPPORT</span>
-              <h2>&quot;We built it to last. We back it to prove it.&quot;</h2>
-            </header>
             <div className="ownership-support__grid">
               <article className="ownership-support__card">
                 <div className="ownership-support__card-top"><Check size={26} weight="bold" aria-hidden="true" /><span>01</span></div>
@@ -1338,8 +1345,9 @@ export function App() {
               </article>
               <article className="ownership-support__card">
                 <div className="ownership-support__card-top"><ShieldCheck size={26} weight="regular" aria-hidden="true" /><span>02</span></div>
-                <div className="ownership-support__lead"><h3>3-2-1 Warranty — 3-Year Frame / 2-Year Electronics / 1-Year Laser Source</h3></div>
+                <div className="ownership-support__lead"><h3>We built it to last. We back it to prove it.</h3></div>
                 <div className="ownership-support__details">
+                  <h4>3-2-1 Warranty — 3-Year Frame / 2-Year Electronics / 1-Year Laser Source</h4>
                   <p>Every XRF is backed by our 3-2-1 warranty: three years on the frame and structure, two years on electronics, and one year on the laser source — among the strongest coverage in its class. It's not fine print; it's what confidence in our own build quality looks like.</p>
                 </div>
               </article>
@@ -1369,15 +1377,6 @@ export function App() {
           </div>
         </section>
 
-        <section className="final-cta" data-reveal>
-          <img src={asset("xrf-dark-hero.webp")} alt="XRF Gen2 product render" />
-          <div>
-            <span className="eyebrow">XRF GEN2</span>
-            <h2>Make better products.<br />Grow with confidence.</h2>
-            <p>Choose the RF power that fits your work and build the platform around your next stage.</p>
-            <button type="button" onClick={configure}>Configure Your XRF</button>
-          </div>
-        </section>
       </main>
 
       <footer className="site-footer">

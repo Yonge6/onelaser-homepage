@@ -7071,3 +7071,187 @@ body { color: var(--ink); }
     transition: none;
   }
 }
+
+/* 2026-07-23 annotation pass: xTool-style selling-point rail, stacked editorial
+   copy, matched video-card anatomy and independent software modules. */
+.sales-video--facility {
+  margin-top: 0;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+.makerboost-proof__intro {
+  display: block;
+}
+
+.makerboost-proof__copy {
+  margin-top: 24px;
+}
+
+.makerboost-proof__copy h3,
+.makerboost-proof__copy p {
+  max-width: none;
+}
+
+.makerboost-proof__copy h3,
+.software-compatibility__copy h3 {
+  font-size: 30px;
+}
+
+.makerboost-proof__copy p,
+.software-compatibility__copy p {
+  font-size: 14px;
+}
+
+.software-compatibility__stage {
+  display: flex;
+  flex-direction: column;
+}
+
+.software-compatibility__copy {
+  padding: 32px 40px;
+}
+
+.capability-scroll__chapter-heading {
+  display: block;
+  margin-bottom: 32px;
+}
+
+.capability-scroll__chapter-heading small {
+  margin-bottom: 8px;
+}
+
+.capability-scroll__chapter-heading h3 {
+  max-width: none;
+}
+
+.capability-scroll__chapter-heading > p {
+  max-width: none;
+  margin: 12px 0 0;
+}
+
+.capability-scroll__story-copy {
+  display: block;
+  padding-top: 24px;
+}
+
+.capability-scroll__story-copy h4 {
+  max-width: none;
+  margin-top: 8px;
+}
+
+.capability-scroll__story-copy p {
+  max-width: none;
+  margin: 12px 0 0;
+  font-size: 15px;
+}
+
+.capability-scroll__story-copy > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.capability-scroll__story-copy > div span {
+  padding: 7px 11px;
+  border: 1px solid var(--divider);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+@media (min-width: 1181px) {
+  .sales-video--facility {
+    min-height: 593px;
+  }
+
+  .makerboost-proof__copy h3,
+  .makerboost-proof__copy p,
+  .makerboost-proof__header h2,
+  .software-compatibility__copy h3,
+  .software-compatibility__copy p,
+  .software-compatibility__header h2,
+  .capability-scroll__chapter-heading h3,
+  .capability-scroll__chapter-heading > p,
+  .capability-scroll__story-copy h4,
+  .capability-scroll__story-copy p {
+    white-space: nowrap;
+  }
+
+  .makerboost-proof__copy p {
+    letter-spacing: -.01em;
+  }
+}
+
+@media (min-width: 761px) {
+  .capability-scroll__layout {
+    grid-template-columns: 160px minmax(0, 1280px);
+    gap: 24px;
+    padding-right: max(32px, calc((100vw - 1280px) / 2));
+  }
+
+  .capability-scroll__nav {
+    top: 92px;
+    width: 160px;
+    border: 0;
+  }
+
+  .capability-scroll__nav button {
+    min-height: 46px;
+    padding: 13px 8px;
+    border: 0;
+    background: transparent;
+  }
+
+  .capability-scroll__nav button::before {
+    display: none;
+  }
+
+  .capability-scroll__nav button:hover {
+    background: transparent;
+    color: var(--ink);
+  }
+
+  .capability-scroll__nav button.is-active {
+    background: transparent;
+    color: var(--red);
+  }
+
+  .capability-scroll__nav button strong {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 760px) {
+  .capability-scroll__nav button {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .capability-scroll__nav button.is-active {
+    border-color: transparent;
+    background: transparent;
+    color: var(--red);
+  }
+}
+
+@media (max-width: 640px) {
+  .makerboost-proof__copy h3,
+  .software-compatibility__copy h3 {
+    font-size: 26px;
+  }
+
+  .makerboost-proof__copy p,
+  .software-compatibility__copy p {
+    font-size: 15px;
+  }
+
+  .software-compatibility__copy {
+    padding: 24px 22px 28px;
+  }
+}
