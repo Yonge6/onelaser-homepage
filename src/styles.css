@@ -245,16 +245,14 @@
   line-height: 1.6;
 }
 
-.capability-scroll__story-copy > div:last-child > div,
-.capability-scroll__feature > div > div {
+.capability-scroll__story-copy > div {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 16px;
 }
 
-.capability-scroll__story-copy > div:last-child > div span,
-.capability-scroll__feature > div > div span {
+.capability-scroll__story-copy > div span {
   padding: 7px 11px;
   border: 1px solid var(--divider);
   border-radius: 999px;
@@ -266,48 +264,6 @@
 
 .capability-scroll__feature {
   margin-top: 48px;
-  overflow: hidden;
-  border: 1px solid var(--divider);
-  border-radius: 32px;
-  background: #f5f5f7;
-}
-
-.capability-scroll__feature > img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: contain;
-  background: #f5f5f7;
-}
-
-.capability-scroll__feature > div {
-  display: grid;
-  grid-template-columns: minmax(260px, .8fr) minmax(0, 1.2fr);
-  gap: 32px 48px;
-  padding: 28px 32px 32px;
-}
-
-.capability-scroll__feature .eyebrow {
-  grid-column: 1 / -1;
-}
-
-.capability-scroll__feature h4 {
-  margin: -20px 0 0;
-  font-size: 32px;
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -.03em;
-}
-
-.capability-scroll__feature p {
-  margin: -20px 0 0;
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.capability-scroll__feature > div > div {
-  grid-column: 2;
 }
 
 .capability-scroll__support {
@@ -544,8 +500,7 @@
     gap: 40px;
   }
 
-  .capability-scroll__media,
-  .capability-scroll__feature {
+  .capability-scroll__media {
     border-radius: 24px;
   }
 
@@ -579,20 +534,6 @@
 
   .capability-scroll__story-copy p {
     font-size: 15px;
-  }
-
-  .capability-scroll__feature > div {
-    display: block;
-    padding: 22px 20px 24px;
-  }
-
-  .capability-scroll__feature h4,
-  .capability-scroll__feature p {
-    margin-top: 8px;
-  }
-
-  .capability-scroll__feature h4 {
-    font-size: 28px;
   }
 
   .capability-scroll__support {
@@ -7194,7 +7135,7 @@ body { color: var(--ink); }
   }
 
   .capability-scroll__nav {
-    top: 92px;
+    top: calc(50vh - 115px);
     width: 160px;
     border: 0;
   }
@@ -7421,6 +7362,7 @@ body { color: var(--ink); }
 
   .capability-scroll__nav {
     z-index: 6;
+    top: calc(50vh - 95px);
     width: 136px;
     height: auto;
     margin-bottom: -190px;

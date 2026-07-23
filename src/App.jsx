@@ -222,7 +222,6 @@ const capabilityChapters = [
     summary: "The RF source turns fine detail, tonal range and dimensional relief into a visible product advantage.",
     spotlights: [
       {
-        eyebrow: "3D PHOTO REALISTIC RF™",
         title: "Photo-real, every time.",
         copy: "Pulse-modulated RF energy through a finer 0.07 mm spot produces crisp small type, photographic grayscale and dimensional relief up to 2,000 DPI—without water cooling.",
         metrics: ["2,000 DPI", "0.07 mm spot", "Up to 30,000 h"],
@@ -248,7 +247,6 @@ const capabilityChapters = [
     summary: "Measured working performance, closed-loop control and an all-steel motion system keep fast jobs useful—not merely fast.",
     spotlights: [
       {
-        eyebrow: "TRUESPEED",
         title: "Measured in real work. Not empty travel.",
         copy: "Real 1,300 mm/s engraving speed and True 3.5G acceleration shorten production time while optimized DSP control keeps the toolpath deliberate.",
         metrics: ["1,300 mm/s", "True 3.5G", "Real engraving conditions"],
@@ -274,14 +272,12 @@ const capabilityChapters = [
     summary: "Vision, autofocus and direct machine control reduce the guesswork between an idea and a finished job.",
     spotlights: [
       {
-        eyebrow: "IVS PRINT & CUT",
         title: "Print and cut, made easy.",
         copy: "The head-mounted Intelligent Vision System detects registration marks and compensates position and angle in real time—reducing calibration, waste and rework.",
         metrics: ["Mark detection", "Live compensation", "Less material waste"],
         image: "xrf-ivs.jpg",
       },
       {
-        eyebrow: "ONE TOUCH OF INNOVATION",
         title: "Focus and control, in one clear flow.",
         copy: "XFocus™ handles focal distance while the full touchscreen keeps motion, settings, alerts and machine status close at hand.",
         metrics: ["XFocus™ autofocus", "Full touchscreen", "Direct machine control"],
@@ -307,7 +303,6 @@ const capabilityChapters = [
     summary: "A universal bed, optional height and automatic material handling let the same platform follow a wider product catalog.",
     spotlights: [
       {
-        eyebrow: "ONE CLICK. INFINITE LENGTH",
         title: "Turn long-format work into one continuous job.",
         copy: "The optional automatic Conveyor feeds material in sync with the job, stitching sections into one continuous result for signs, boards and repeating patterns.",
         metrics: ["Optional Conveyor", "Automatic feed", "Unlimited project length"],
@@ -333,7 +328,6 @@ const capabilityChapters = [
     summary: "Airflow, containment and protected critical systems work together to reduce residue, maintenance and production risk.",
     spotlights: [
       {
-        eyebrow: "SMART AIR ASSIST™ · OPTIONAL",
         title: "Right pressure. Every mode. Automatically.",
         copy: "Optional Smart Air changes between high-pressure cutting and low-pressure engraving so edges stay cleaner and fine surface detail keeps its contrast.",
         metrics: ["Optional accessory", "Cut / engrave modes", "Automatic switching"],
@@ -341,7 +335,6 @@ const capabilityChapters = [
       },
     ],
     feature: {
-      eyebrow: "PROTECTION BY DESIGN",
       title: "Safety is the architecture.",
       copy: "A Class 1 enclosure, lid interlock, isolated electronics bay, thermal response and automatic fire suppression protect the operator and the machine through every job.",
       metrics: ["Class 1 design", "Lid interlock", "Automatic suppression"],
@@ -651,7 +644,7 @@ function CapabilityBrowser({ onPlay }) {
                     <button
                       type="button"
                       className="capability-scroll__media"
-                      onClick={() => onPlay(spotlight.eyebrow, spotlight.title, asset(spotlight.image))}
+                      onClick={() => onPlay(spotlight.title, asset(spotlight.image))}
                       aria-label={`Open ${spotlight.title} full-size media preview`}
                     >
                       <img src={asset(spotlight.image)} alt={`${spotlight.title} XRF Gen2 proof`} />
@@ -659,7 +652,6 @@ function CapabilityBrowser({ onPlay }) {
                       <span className="capability-scroll__media-label"><span>VIDEO STORY · IMAGE PREVIEW</span><span>{String(storyIndex + 1).padStart(2, "0")} / {String(chapter.spotlights.length).padStart(2, "0")}</span></span>
                     </button>
                     <div className="capability-scroll__story-copy">
-                      <span className="eyebrow">{spotlight.eyebrow}</span>
                       <h4>{spotlight.title}</h4>
                       <p>{spotlight.copy}</p>
                       <div>{spotlight.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
@@ -669,10 +661,18 @@ function CapabilityBrowser({ onPlay }) {
               </div>
 
               {chapter.feature && (
-                <article className="capability-scroll__feature">
-                  <img src={asset(chapter.feature.image)} alt={`${chapter.feature.title} XRF Gen2 proof`} />
-                  <div>
-                    <span className="eyebrow">{chapter.feature.eyebrow}</span>
+                <article className="capability-scroll__feature capability-scroll__story">
+                  <button
+                    type="button"
+                    className="capability-scroll__media"
+                    onClick={() => onPlay(chapter.feature.title, asset(chapter.feature.image))}
+                    aria-label={`Open ${chapter.feature.title} full-size media preview`}
+                  >
+                    <img src={asset(chapter.feature.image)} alt={`${chapter.feature.title} XRF Gen2 proof`} />
+                    <span className="capability-scroll__play" aria-hidden="true"><Play size={25} weight="fill" /></span>
+                    <span className="capability-scroll__media-label"><span>VIDEO STORY · IMAGE PREVIEW</span><span>01 / 01</span></span>
+                  </button>
+                  <div className="capability-scroll__story-copy">
                     <h4>{chapter.feature.title}</h4>
                     <p>{chapter.feature.copy}</p>
                     <div>{chapter.feature.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
@@ -828,8 +828,8 @@ export function App() {
     reviewVideoRailRef.current?.scrollBy({ left: direction * 420, behavior: "smooth" });
   }
 
-  function openStory(eyebrow, title, image) {
-    setVideoModal({ eyebrow, title, image });
+  function openStory(title, image) {
+    setVideoModal({ title, image });
   }
 
   function togglePurchaseAccessory(accessoryId) {
@@ -1340,7 +1340,6 @@ export function App() {
               <span><Play size={26} weight="fill" /></span>
             </div>
             <div className="video-modal__copy">
-              <span className="eyebrow">{videoModal.eyebrow}</span>
               <h2>{videoModal.title}</h2>
               <p>Full-size 16:9 media preview. The final production video can replace this image without changing the story layout.</p>
             </div>
