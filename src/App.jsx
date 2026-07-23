@@ -128,6 +128,39 @@ const powerProofs = [
   },
 ];
 
+const generationComparisons = [
+  {
+    feature: "RF Power",
+    gen1: "38W RF",
+    gen2: "38W or 70W RF Option",
+  },
+  {
+    feature: "Motion Control",
+    gen1: "—",
+    gen2: "Closed-Loop Motion System — Position Feedback at Full Speed",
+  },
+  {
+    feature: "Laser Head",
+    gen1: "Original design",
+    gen2: "Mass-Optimized Laser Head — 20% Lighter",
+  },
+  {
+    feature: "Print & Cut",
+    gen1: "Lid camera and RedDot positioning",
+    gen2: "IVS Mark-Dot Positioning — Camera-Guided Precision Cutting",
+  },
+  {
+    feature: "Motion Axes",
+    gen1: "Previous-generation motion system",
+    gen2: "Fully Upgraded Motion Axes — All-Steel, Hydra-Derived",
+  },
+  {
+    feature: "Extraction & Optics",
+    gen1: "Existing exhaust and optical structure",
+    gen2: "3× Extraction + Sealed Optical Protection",
+  },
+];
+
 const rfAdvantages = [
   {
     id: "detail",
@@ -549,6 +582,40 @@ function ReviewVideoCard({ video, onPlay, index, total }) {
       </span>
       <span className="review-video-card__copy"><small>{video.tag}</small><strong>{video.title}</strong><span>{video.channel}</span></span>
     </button>
+  );
+}
+
+function GenerationComparison() {
+  return (
+    <section className="generation-comparison" id="generation-comparison" aria-labelledby="generation-comparison-title" data-reveal>
+      <div className="generation-comparison__inner">
+        <header className="generation-comparison__header">
+          <span className="eyebrow">XRF GEN 2 VS. GEN 1</span>
+          <h2 id="generation-comparison-title">The XRF’s Biggest Upgrade Yet.</h2>
+          <p><strong>More power. Higher precision. Greater reliability.</strong></p>
+        </header>
+
+        <div className="generation-comparison__grid" role="list" aria-label="XRF Gen 1 and XRF Gen 2 feature comparison">
+          {generationComparisons.map((item) => (
+            <article className="generation-comparison__card" role="listitem" key={item.feature}>
+              <h3>{item.feature}</h3>
+              <div className="generation-comparison__values">
+                <div className="generation-comparison__gen1">
+                  <span>XRF Gen 1</span>
+                  <p>{item.gen1}</p>
+                </div>
+                <div className="generation-comparison__gen2">
+                  <span>XRF Gen 2</span>
+                  <p>{item.gen2}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <p className="generation-comparison__statement">Deeper 3D relief. Sharper grayscale. Steadier engraving. Cleaner production.</p>
+      </div>
+    </section>
   );
 }
 
@@ -1266,6 +1333,8 @@ export function App() {
             </div>
           </div>
         </section>
+
+        <GenerationComparison />
 
         <CapabilityBrowser onPlay={openStory} />
 
