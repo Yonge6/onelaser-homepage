@@ -177,7 +177,6 @@ function ProductEconomics({ product }) {
           </div>
         </header>
         <dl className="product-economics__metrics">
-          <div><dt>Example selling price</dt><dd>{economics.sellingPrice}</dd></div>
           <div><dt>Example margin</dt><dd>{economics.margin}</dd></div>
           <div><dt>Potential hourly output</dt><dd>{economics.hourlyOutput}</dd></div>
         </dl>
@@ -195,6 +194,7 @@ function ProductOpportunities({ asset }) {
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
   const [activeProductId, setActiveProductId] = useState(productCategories[0].productIds[0]);
   const categoryTabRefs = useRef([]);
+  const productTabRefs = useRef([]);
   const activeCategory = productCategories[activeCategoryIndex];
   const categoryProducts = useMemo(
     () => activeCategory.productIds.map((productId) => products[productId]),
@@ -223,8 +223,23 @@ function ProductOpportunities({ asset }) {
     categoryTabRefs.current[nextIndex]?.focus();
   }
 
+  function handleProductKeyDown(event, index) {
+    const navigationKeys = ["ArrowLeft", "ArrowRight", "Home", "End"];
+    if (!navigationKeys.includes(event.key)) return;
+    event.preventDefault();
+    const nextIndex = event.key === "Home"
+      ? 0
+      : event.key === "End"
+        ? categoryProducts.length - 1
+        : event.key === "ArrowLeft"
+          ? (index - 1 + categoryProducts.length) % categoryProducts.length
+          : (index + 1) % categoryProducts.length;
+    setActiveProductId(categoryProducts[nextIndex].id);
+    productTabRefs.current[nextIndex]?.focus();
+  }
+
   return (
-    <section className="product-opportunities" aria-labelledby="product-opportunities-title">
+    <section id="product-opportunities" className="product-opportunities" aria-labelledby="product-opportunities-title">
       <div className="product-opportunities__inner">
         <header className="product-opportunities__header">
           <span className="eyebrow">PRODUCT OPPORTUNITIES</span>
@@ -259,54 +274,73 @@ function ProductOpportunities({ asset }) {
           role="tabpanel"
           aria-labelledby={`opportunity-tab-${activeCategory.id}`}
         >
-          <figure className="product-opportunities__scene">
-            <img
-              key={activeCategory.id}
-              src={asset(activeCategory.image)}
-              alt={activeCategory.alt}
-              width="1600"
-              height="900"
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
+          <header className="product-opportunities__category-copy">
+            <p>{activeCategory.description}</p>
+          </header>
 
-          <div className="product-opportunities__content">
-            <header className="product-opportunities__category-copy">
-              <p>{activeCategory.description}</p>
-            </header>
-            <div className="product-switcher" role="tablist" aria-label={`${activeCategory.label} products`}>
-              {categoryProducts.map((product, index) => (
+          <div className="product-card-grid" role="tablist" aria-label={`${activeCategory.label} products`}>
+            {categoryProducts.map((product, index) => {
+              const economics = economicsExamples[product.economicsId];
+              const isActive = product.id === activeProduct.id;
+
+              return (
                 <button
                   type="button"
                   role="tab"
                   id={`product-tab-${product.id}`}
-                  aria-controls={`product-panel-${product.id}`}
-                  aria-selected={product.id === activeProduct.id}
-                  tabIndex={product.id === activeProduct.id ? 0 : -1}
-                  className={product.id === activeProduct.id ? "product-switcher__item is-active" : "product-switcher__item"}
+                  aria-controls={`product-panel-${activeCategory.id}`}
+                  aria-selected={isActive}
+                  tabIndex={isActive ? 0 : -1}
+                  className={isActive ? "product-card is-active" : "product-card"}
                   onClick={() => setActiveProductId(product.id)}
+                  onKeyDown={(event) => handleProductKeyDown(event, index)}
                   key={product.id}
+                  ref={(node) => { productTabRefs.current[index] = node; }}
+                  data-product-id={product.id}
                 >
-                  <small>{String(index + 1).padStart(2, "0")}</small>
-                  <strong>{product.name}</strong>
+                  <span className="product-card__media">
+                    <img
+                      src={asset(product.image)}
+                      alt={product.imageAlt}
+                      width="1200"
+                      height="900"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </span>
+                  <span className="product-card__body">
+                    <small>{String(index + 1).padStart(2, "0")}</small>
+                    <strong>{product.name}</strong>
+                    <span>Example {economics.sellingPrice}</span>
+                  </span>
                 </button>
-              ))}
-            </div>
+              );
+            })}
+          </div>
+
+          <div
+            className="product-opportunities__selection"
+            id={`product-panel-${activeCategory.id}`}
+            role="tabpanel"
+            aria-labelledby={`product-tab-${activeProduct.id}`}
+            aria-live="polite"
+          >
             <article
               className="product-detail"
-              id={`product-panel-${activeProduct.id}`}
-              role="tabpanel"
-              aria-labelledby={`product-tab-${activeProduct.id}`}
-              aria-live="polite"
+              key={activeProduct.id}
             >
               <div className="product-detail__facts">
                 <span><small>Material</small><strong>{activeProduct.material}</strong></span>
                 <span><small>Process</small><strong>{activeProduct.process}</strong></span>
+                <span>
+                  <small>Example selling price</small>
+                  <strong className="product-detail__price">{economicsExamples[activeProduct.economicsId].sellingPrice}</strong>
+                </span>
               </div>
               <div className="product-detail__tags">
                 {activeProduct.tags.map((tag) => <span key={tag}>{tag}</span>)}
               </div>
+              <p className="product-detail__summary">{activeProduct.description}</p>
               <p>{activeProduct.setupNote}</p>
             </article>
             <ProductEconomics product={activeProduct} />

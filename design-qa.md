@@ -57,6 +57,41 @@
 
 final result: passed
 
+## 2026-07-23 Product Opportunities product-card redesign
+
+### Evidence
+
+- Source visual truth: `/var/folders/vd/kws8fm5509l6b9hnywhd8yfr0000gn/T/codex-clipboard-d476df56-d727-4b53-a487-2ba46744b870.png`.
+- Desktop implementation: `qa/product-opportunities-cards-desktop-top.png` and `qa/product-opportunities-cards-desktop.png`.
+- Mobile implementation: `qa/product-opportunities-cards-mobile-390.png`.
+- Combined reference and implementation input: `qa/product-opportunities-design-qa-combined.png`.
+- Desktop viewport: 1586 × 1178 CSS px. Mobile viewport: 390 × 844 CSS px.
+- State: Personalized Gifts with Engraved Jewelry Box selected; interaction checks also covered Home & Outdoor Décor, House Number Sign and Walnut Serving Board.
+
+### Full-view and focused comparison
+
+- Preserved the supplied reference's 1280 px editorial axis, white/`#F5F5F7` surfaces, OneLaser-red selected state, 48 px desktop heading, restrained borders and rounded high-end product presentation.
+- Replaced the old shared category image and compact product buttons with three independent image-led product cards, as required by the updated brief.
+- Product imagery occupies approximately 70–74% of each card. The selected card uses a red border, pale-red surface and 1.012 scale while non-selected cards remain visually subdued.
+- The selected product drives one shared two-column details and Economics row below the cards, keeping the explanatory content visible without duplicating it across all three products.
+
+### Content, accessibility and interaction
+
+- All four category tabs and all twelve requested product names are stored in the centralized commercial-capability data object.
+- Every product owns an independent `image` and `imageAlt` field. Missing photography resolves to one neutral local WebP placeholder and never borrows another product's image.
+- Product tabs expose Material, Process, tags and Example selling price. The simplified Economics panel retains Example margin, Potential hourly output, Best suited for, Required setup and the full visible illustrative disclaimer.
+- Category and product controls use tab semantics, selected state, focus-visible treatment and ArrowLeft/ArrowRight/Home/End keyboard navigation.
+- Mobile category tabs and product cards remain single-row horizontal rails inside the module. The 390 px document reports `scrollWidth === innerWidth`, so there is no page-level horizontal overflow.
+- Browser console reports no errors or warnings.
+
+### Comparison history and findings
+
+1. Earlier anatomy used one category-wide scene image and small product selectors, which obscured the individual product-image relationship.
+2. The implementation now presents three equal independent cards per category and keeps the shared detail/economics content immediately below.
+3. No actionable P0, P1 or P2 findings remain. The neutral placeholder is an intentional temporary content state until twelve approved product photographs are supplied.
+
+final result: passed
+
 ## 2026-07-23 generation comparison table redesign
 
 ### Evidence
