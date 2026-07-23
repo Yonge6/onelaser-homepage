@@ -351,3 +351,13 @@ final result: passed
 - Verified the removed `December 2024` tag is absent from the customer-facing source and rendered signal list.
 
 final result: passed
+
+## 2026-07-24 official OneLaser shell and accessory refresh
+
+### Data and responsive checks
+
+- Purchase accessories now use locally shipped official OneLaser imagery and current product names/prices for LightBurn Pro, Conveyor Feeder, Air Assist Control and MagSwitch lens kit.
+- Header navigation links to the official Laser Machines, Accessories, Support, Community and Contact destinations; footer uses official contact details and resource links.
+- Desktop 1489 × 1178 and mobile 390 × 844 previews report zero horizontal overflow. Mobile navigation opens as a contained panel and all four accessory images load with non-zero natural dimensions.
+
+final result: passed

@@ -1,18 +1,24 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Anchor,
+  ArrowUpRight,
   ArrowClockwise,
   Camera,
+  CaretDown,
   CaretLeft,
   CaretRight,
   Check,
   Crosshair,
   CubeFocus,
   CubeTransparent,
+  EnvelopeSimple,
   Fire,
   Handbag,
+  List,
   LockKey,
+  MapPin,
   Minus,
+  Phone,
   Play,
   Plus,
   ShieldCheck,
@@ -412,35 +418,39 @@ const purchasePackages = [
 const officialAccessories = [
   {
     id: "lightburn",
-    name: "LightBurn Pro License Key",
-    price: 189.05,
+    name: 'LightBurn "Pro" Version - License Key',
+    price: 199,
     msrp: 199,
-    description: "Professional laser layout, control and production software.",
-    image: "xrf-touchscreen.jpg",
+    description: "Professional laser layout, control and production software for Windows and macOS.",
+    image: "accessory-lightburn.png",
+    source: "https://www.1laser.com/products/lightburn-software-pro-license-key",
   },
   {
     id: "conveyor-official",
     name: "Automatic Conveyor Feeder for OneLaser XRF",
-    price: 759.05,
+    price: 799,
     msrp: 799,
-    description: "Optional continuous-feed workflow for long-format projects.",
-    image: "xrf-front.jpg",
+    description: "Optional continuous-feed workflow for long-format projects. Must be used with the X Series Riser Base.",
+    image: "accessory-conveyor.jpg",
+    source: "https://www.1laser.com/products/onelaser-automatic-conveyor-feeder",
   },
   {
     id: "air-assist-official",
-    name: "OneLaser Air Assist Control",
-    price: 190,
-    msrp: 199.99,
-    description: "Optional automated dual-mode airflow for cutting and engraving.",
-    image: "xrf-gallery-08.jpg",
+    name: "OneLaser Air Assist Control, Automated Dual-Mode Airflow with Real-Time Pressure Monitoring",
+    price: 199.99,
+    msrp: 249.99,
+    description: "Optional automated dual-mode airflow with real-time pressure monitoring for cutting and engraving.",
+    image: "accessory-air-assist.jpg",
+    source: "https://www.1laser.com/products/air-assist-for-laser-engraver-cutter",
   },
   {
     id: "lens-kit",
-    name: "MagSwitch Lens Holder Replacement Kit",
-    price: 33.25,
+    name: "MagSwitch™ Lens Holder Replacement Kit for X Series Laser Engravers",
+    price: 34.99,
     msrp: 34.99,
-    description: "Optional 20-pack replacement kit for the magnetic lens system.",
-    image: "xrf-gallery-09.jpg",
+    description: "Optional replacement kit for the magnetic lens system on X Series laser engravers.",
+    image: "accessory-lens-kit.jpg",
+    source: "https://www.1laser.com/products/magswitch-lens-holder-replacement-kit",
   },
 ];
 
@@ -972,18 +982,24 @@ export function App() {
       <div className="page-progress" aria-hidden="true"><span style={{ width: `${scrollProgress}%` }} /></div>
       <a className="skip-link" href="#main">Skip to content</a>
       <header className="site-header">
-        <a href="#top" className="brand" aria-label="OneLaser home">
+        <a href="#top" className="brand" aria-label="OneLaser XRF Gen2 home">
           <img src={asset("onelaser-logo.png")} alt="OneLaser" />
         </a>
         <button className="menu-button" type="button" onClick={() => setMenuOpen((value) => !value)} aria-expanded={menuOpen}>
-          {menuOpen ? "Close" : "Menu"}
+          {menuOpen ? <X size={19} weight="bold" /> : <List size={20} weight="bold" />}
+          <span>{menuOpen ? "Close" : "Menu"}</span>
         </button>
         <nav className={menuOpen ? "nav is-open" : "nav"} aria-label="Product navigation">
-          <a href="#results" onClick={() => setMenuOpen(false)}>Results</a>
-          <a href="#capabilities" onClick={() => setMenuOpen(false)}>Why XRF</a>
-          <a href="#specs" onClick={() => setMenuOpen(false)}>Specs</a>
+          <a href="https://www.1laser.com/collections/laser-engraving-cutting-marking-machines" target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>Laser Machines <ArrowUpRight size={13} /></a>
+          <a href="https://www.1laser.com/collections/laser-accessories" target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>Accessories <ArrowUpRight size={13} /></a>
+          <a href="https://www.1laser.com/pages/contact-us" target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>Support <ArrowUpRight size={13} /></a>
+          <a href="https://www.1laser.com/pages/laser-engraving-community" target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>Community <ArrowUpRight size={13} /></a>
+          <a href="https://www.1laser.com/pages/contact-us" target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>Contact <ArrowUpRight size={13} /></a>
         </nav>
-        <button className="header-cta" type="button" onClick={configure}>Configure</button>
+        <div className="header-actions">
+          <a className="header-contact" href="tel:+16268004130" aria-label="Call OneLaser at 626-800-4130"><Phone size={17} weight="bold" /></a>
+          <button className="header-cta" type="button" onClick={configure}>Configure <CaretDown size={15} weight="bold" /></button>
+        </div>
       </header>
 
       <main id="main">
@@ -1106,7 +1122,7 @@ export function App() {
               </div>
 
               <div className="purchase-section-heading purchase-section-heading--accessories">
-                <div><span>Frequently bought together</span><small>Official current accessory prices · save 5% on listed essentials.</small></div>
+                <div><span>Frequently bought together</span><small>Official accessory pricing from OneLaser.</small></div>
               </div>
               <div className="purchase-accessories">
                 {officialAccessories.map((item) => {
@@ -1114,7 +1130,7 @@ export function App() {
                   return (
                     <label className={selected ? "purchase-accessory is-selected" : "purchase-accessory"} key={item.id}>
                       <input type="checkbox" checked={selected} onChange={() => togglePurchaseAccessory(item.id)} />
-                      <img src={asset(item.image)} alt="" />
+                      <img src={asset(item.image)} alt={item.name} />
                       <span><strong>{item.name}</strong><small>OPTIONAL</small><p>{item.description}</p></span>
                       <span className="purchase-accessory__price"><strong>{formatMoney(item.price)}</strong><del>{formatMoney(item.msrp)}</del></span>
                     </label>
@@ -1489,9 +1505,24 @@ export function App() {
       </main>
 
       <footer className="site-footer">
-        <img src={asset("onelaser-logo.png")} alt="OneLaser" />
-        <p>Professional RF production for creators, studios and growing custom-product businesses.</p>
-        <a href="#top">Back to top</a>
+        <div className="site-footer__inner">
+          <div className="site-footer__brand">
+            <a href="#top" className="site-footer__logo" aria-label="Back to OneLaser XRF Gen2 top"><img src={asset("onelaser-logo.png")} alt="OneLaser" /></a>
+            <p>Professional laser production for creators, studios and growing custom-product businesses.</p>
+            <div className="site-footer__contact">
+              <a href="tel:+16268004130"><Phone size={16} weight="bold" />626-800-4130</a>
+              <a href="mailto:sales@1laser.com"><EnvelopeSimple size={16} weight="bold" />sales@1laser.com</a>
+              <span><MapPin size={16} weight="bold" />Lake Forest, California</span>
+            </div>
+          </div>
+          <div className="site-footer__columns">
+            <div className="site-footer__column"><strong>Machines</strong><a href="https://www.1laser.com/products/onelaser-xrf-desktop-laser-machine" target="_blank" rel="noreferrer">XRF Gen2</a><a href="https://www.1laser.com/collections/laser-engraving-cutting-marking-machines" target="_blank" rel="noreferrer">All laser machines</a><a href="https://www.1laser.com/collections/laser-accessories" target="_blank" rel="noreferrer">Laser accessories</a></div>
+            <div className="site-footer__column"><strong>Support</strong><a href="https://www.1laser.com/pages/contact-us" target="_blank" rel="noreferrer">Contact OneLaser</a><a href="https://www.1laser.com/pages/sales-consultation" target="_blank" rel="noreferrer">Get a quote</a><a href="https://www.1laser.com/pages/laser-engraving-community" target="_blank" rel="noreferrer">Join the community</a></div>
+            <div className="site-footer__column"><strong>Resources</strong><a href="https://www.1laser.com/pages/common-faq" target="_blank" rel="noreferrer">Common FAQ</a><a href="https://www.1laser.com/pages/financing" target="_blank" rel="noreferrer">Financing</a><a href="https://www.1laser.com/blogs/topic" target="_blank" rel="noreferrer">Blog center</a></div>
+            <div className="site-footer__column"><strong>Follow</strong><a href="https://www.youtube.com/@OneLaser.Official" target="_blank" rel="noreferrer">YouTube <ArrowUpRight size={13} /></a><a href="https://www.instagram.com/onelaser.official/" target="_blank" rel="noreferrer">Instagram <ArrowUpRight size={13} /></a><a href="https://www.facebook.com/onelaser.official" target="_blank" rel="noreferrer">Facebook <ArrowUpRight size={13} /></a></div>
+          </div>
+        </div>
+        <div className="site-footer__bottom"><span>© {new Date().getFullYear()} OneLaser. All rights reserved.</span><span>20472 Crescent Bay Dr, STE 104, Lake Forest, CA 92630</span><a href="#top">Back to top <ArrowUpRight size={13} /></a></div>
       </footer>
 
       <div className="sticky-buy" aria-label="Sticky purchase bar">
