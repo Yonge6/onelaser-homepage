@@ -195,6 +195,7 @@ function ProductOpportunities({ asset }) {
   const [activeProductId, setActiveProductId] = useState(productCategories[0].productIds[0]);
   const categoryTabRefs = useRef([]);
   const productTabRefs = useRef([]);
+  const selectionRef = useRef(null);
   const activeCategory = productCategories[activeCategoryIndex];
   const categoryProducts = useMemo(
     () => activeCategory.productIds.map((productId) => products[productId]),
@@ -236,6 +237,17 @@ function ProductOpportunities({ asset }) {
           : (index + 1) % categoryProducts.length;
     setActiveProductId(categoryProducts[nextIndex].id);
     productTabRefs.current[nextIndex]?.focus();
+  }
+
+  function selectProduct(productId) {
+    setActiveProductId(productId);
+    if (typeof window === "undefined" || !window.matchMedia("(max-width: 640px)").matches) return;
+    window.requestAnimationFrame(() => {
+      selectionRef.current?.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        block: "nearest",
+      });
+    });
   }
 
   return (
@@ -292,7 +304,7 @@ function ProductOpportunities({ asset }) {
                   aria-selected={isActive}
                   tabIndex={isActive ? 0 : -1}
                   className={isActive ? "product-card is-active" : "product-card"}
-                  onClick={() => setActiveProductId(product.id)}
+                  onClick={() => selectProduct(product.id)}
                   onKeyDown={(event) => handleProductKeyDown(event, index)}
                   key={product.id}
                   ref={(node) => { productTabRefs.current[index] = node; }}
@@ -324,6 +336,7 @@ function ProductOpportunities({ asset }) {
             role="tabpanel"
             aria-labelledby={`product-tab-${activeProduct.id}`}
             aria-live="polite"
+            ref={selectionRef}
           >
             <article
               className="product-detail"

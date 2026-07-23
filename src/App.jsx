@@ -600,22 +600,22 @@ function GenerationComparison() {
             <caption className="sr-only">XRF Gen 1 and XRF Gen 2 feature comparison</caption>
             <colgroup>
               <col className="generation-comparison__feature-column" />
-              <col className="generation-comparison__gen1-column" />
               <col className="generation-comparison__gen2-column" />
+              <col className="generation-comparison__gen1-column" />
             </colgroup>
             <thead>
               <tr>
                 <th scope="col"><span className="sr-only">Feature</span></th>
-                <th scope="col">XRF Gen 1</th>
-                <th scope="col">XRF Gen 2</th>
+                <th scope="col" className="generation-comparison__gen2-heading">XRF Gen 2</th>
+                <th scope="col" className="generation-comparison__gen1-heading">XRF Gen 1</th>
               </tr>
             </thead>
             <tbody>
               {generationComparisons.map((item) => (
                 <tr key={item.feature}>
                   <th scope="row">{item.feature}</th>
-                  <td className="generation-comparison__gen1" data-label="XRF Gen 1">{item.gen1}</td>
                   <td className="generation-comparison__gen2" data-label="XRF Gen 2">{item.gen2}</td>
+                  <td className="generation-comparison__gen1" data-label="XRF Gen 1">{item.gen1}</td>
                 </tr>
               ))}
             </tbody>

@@ -57,6 +57,31 @@
 
 final result: passed
 
+## 2026-07-23 comparison order and compact commerce pass
+
+### Source and implementation comparison
+
+- Before/after visual comparison: `qa/annotation-round-design-qa-combined.png`.
+- The live source placed XRF Gen 1 before XRF Gen 2 and used red top/vertical rules around the Gen 2 column.
+- The implementation places XRF Gen 2 immediately after the feature label column, moves the subdued light-gray Gen 1 column to the right, and removes the red column rules while retaining red only in the Gen 2 heading text.
+- Mobile retains the same semantic order: feature → Gen 2 → Gen 1, with zero horizontal overflow at 390 px.
+
+### Product Opportunities
+
+- Desktop evidence: `qa/annotation-product-compact-desktop.png`; mobile evidence: `qa/annotation-product-compact-mobile.png`.
+- Product media now uses a 16:9 ratio so imagery remains approximately 70% of the compact card height instead of forcing tall 4:3 cards.
+- Desktop selected-product details and the illustrative economics panel remain visible in the same 1178 px scene; the selected-detail row measures 268 px.
+- At 390 × 844, product cards measure 248 px and selecting a product scrolls its shared detail/economics panel into view. The page reports zero horizontal overflow.
+- The full economics disclaimer remains visible in normal document flow and no earnings claim was removed or promoted.
+
+### CTA and materials
+
+- `Ready to build your next product line?` renders as one line on the 1546 px desktop viewport and wraps normally below the 1280 px breakpoint.
+- Material selection uses OneLaser red for the active icon, label and index while preserving the single 1 px autoplay progress line.
+- DOM verification after selecting Wood reports `aria-selected="true"` and `rgb(231, 49, 14)` for the button, label and index.
+
+final result: passed
+
 ## 2026-07-23 Product Opportunities product-card redesign
 
 ### Evidence
