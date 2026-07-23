@@ -6510,6 +6510,148 @@ body { color: var(--ink); }
 }
 
 /* 2026-07-23 dedicated software and ownership-support modules. */
+.rf-advantages {
+  width: 100%;
+  padding: 48px max(36px, calc((100vw - 1280px) / 2));
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.rf-advantages__inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.rf-advantages__header {
+  max-width: 980px;
+  margin: 0 0 32px;
+}
+
+.rf-advantages__header .eyebrow {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.rf-advantages__header h2 {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -.04em;
+}
+
+.rf-advantages__header p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.rf-advantages__tabs {
+  width: min(100%, 720px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0 0 20px;
+  padding: 6px;
+  border-radius: 999px;
+  background: var(--soft);
+}
+
+.rf-advantages__tabs button {
+  min-height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 0 20px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+
+.rf-advantages__tabs button svg {
+  flex: 0 0 auto;
+}
+
+.rf-advantages__tabs button.is-active {
+  border-color: rgba(231, 49, 14, .22);
+  background: #fff;
+  color: var(--red);
+}
+
+.rf-advantages__tabs button:focus-visible {
+  outline: 3px solid rgba(231, 49, 14, .28);
+  outline-offset: 2px;
+}
+
+.rf-advantages__stage {
+  min-height: 520px;
+  display: grid;
+  grid-template-columns: minmax(340px, .72fr) minmax(0, 1.28fr);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  background: var(--soft);
+}
+
+.rf-advantages__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(40px, 5vw, 72px);
+  background: #fff;
+}
+
+.rf-advantages__copy h3 {
+  max-width: 470px;
+  margin: 18px 0 0;
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -.035em;
+}
+
+.rf-advantages__copy p {
+  max-width: 470px;
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.rf-advantages__copy strong {
+  width: fit-content;
+  margin-top: 30px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.rf-advantages__media {
+  min-width: 0;
+  min-height: 520px;
+  overflow: hidden;
+  background: var(--soft);
+}
+
+.rf-advantages__media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  animation: material-in 420ms cubic-bezier(.2,.7,.2,1) both;
+}
+
 .software-proof,
 .ownership-support {
   padding: 48px max(36px, calc((100vw - 1280px) / 2));
@@ -6720,6 +6862,21 @@ body { color: var(--ink); }
 }
 
 @media (max-width: 900px) {
+  .rf-advantages__stage {
+    min-height: 0;
+    grid-template-columns: 1fr;
+    border-radius: 24px;
+  }
+
+  .rf-advantages__media {
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  .rf-advantages__copy {
+    min-height: 360px;
+  }
+
   .software-proof__story,
   .software-proof__story--reverse {
     grid-template-columns: 1fr;
@@ -6764,6 +6921,65 @@ body { color: var(--ink); }
 }
 
 @media (max-width: 640px) {
+  .rf-advantages {
+    padding: 32px 18px;
+  }
+
+  .rf-advantages__header {
+    margin-bottom: 24px;
+  }
+
+  .rf-advantages__header h2 {
+    font-size: 32px;
+  }
+
+  .rf-advantages__header p {
+    font-size: 15px;
+  }
+
+  .rf-advantages__tabs {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    margin-bottom: 16px;
+    padding: 5px;
+    border-radius: 24px;
+  }
+
+  .rf-advantages__tabs button {
+    min-height: 48px;
+    justify-content: flex-start;
+    padding: 0 18px;
+  }
+
+  .rf-advantages__stage {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .rf-advantages__media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .rf-advantages__copy {
+    min-height: 0;
+    padding: 28px 24px 32px;
+  }
+
+  .rf-advantages__copy h3 {
+    margin-top: 14px;
+    font-size: 28px;
+  }
+
+  .rf-advantages__copy p {
+    margin-top: 18px;
+    font-size: 15px;
+  }
+
+  .rf-advantages__copy strong {
+    margin-top: 22px;
+    padding-top: 18px;
+  }
+
   .software-proof,
   .ownership-support {
     padding: 32px 18px;

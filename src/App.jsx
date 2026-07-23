@@ -126,6 +126,42 @@ const powerProofs = [
   },
 ];
 
+const rfAdvantages = [
+  {
+    id: "detail",
+    tab: "Cleaner Detail",
+    eyebrow: "CLEANER DETAIL",
+    title: "Keep small details sharp—not scorched.",
+    copy: "Fine RF pulse control reduces overburn around small text, logos, photos and linework, so every finished piece looks closer to the design on screen.",
+    proof: "0.07 mm spot · Up to 2,000 DPI",
+    image: "xrf-detail-proof.webp",
+    alt: "Close-up proof of fine RF engraving detail on XRF Gen2",
+    icon: Target,
+  },
+  {
+    id: "speed",
+    tab: "Faster Response",
+    eyebrow: "FASTER RESPONSE",
+    title: "Move faster without leaving quality behind.",
+    copy: "RF energy switches on and off quickly, helping XRF hold clean edges and consistent contrast through real engraving work at up to 1,300 mm/s.",
+    proof: "1,300 mm/s · True 3.5G",
+    image: "xrf-internal-wide.jpg",
+    alt: "XRF Gen2 motion system built for fast, controlled engraving",
+    icon: ArrowClockwise,
+  },
+  {
+    id: "lifespan",
+    tab: "Longer Lifespan",
+    eyebrow: "LONGER LIFESPAN",
+    title: "Make more before the source needs attention.",
+    copy: "An air-cooled RF source rated for up to 30,000 hours keeps daily production simpler, with no water chiller and more time for the work makers want to ship.",
+    proof: "Up to 30,000 hours · Air cooled",
+    image: "xrf-dark-hero.webp",
+    alt: "XRF Gen2 RF platform shown in a professional workshop setting",
+    icon: ShieldCheck,
+  },
+];
+
 const projectEvidence = [
   {
     title: "One machine. A full product line.",
@@ -711,6 +747,7 @@ export function App() {
   const [activeMedia, setActiveMedia] = useState(0);
   const [activeProject, setActiveProject] = useState(0);
   const [activeMaterial, setActiveMaterial] = useState(0);
+  const [activeRfAdvantage, setActiveRfAdvantage] = useState(0);
   const [activePowerProof, setActivePowerProof] = useState(0);
   const [openFaq, setOpenFaq] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -1089,6 +1126,75 @@ export function App() {
                   </button>
                 );
               })}
+            </div>
+          </div>
+        </section>
+
+        <section className="rf-advantages" id="rf-advantages" data-reveal>
+          <div className="rf-advantages__inner">
+            <header className="rf-advantages__header">
+              <span className="eyebrow">WHY RF</span>
+              <h2>Why makers choose RF.</h2>
+              <p>Cleaner detail, faster response, and up to 30,000 hours of source life—built for products worth making and selling.</p>
+            </header>
+            <div className="rf-advantages__tabs" role="tablist" aria-label="Explore the advantages of RF laser technology">
+              {rfAdvantages.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <button
+                    type="button"
+                    role="tab"
+                    id={`rf-tab-${item.id}`}
+                    aria-selected={activeRfAdvantage === index}
+                    aria-controls="rf-advantage-panel"
+                    tabIndex={activeRfAdvantage === index ? 0 : -1}
+                    className={activeRfAdvantage === index ? "is-active" : ""}
+                    key={item.id}
+                    onClick={() => setActiveRfAdvantage(index)}
+                    onKeyDown={(event) => {
+                      const navigationKeys = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"];
+                      if (!navigationKeys.includes(event.key)) return;
+                      event.preventDefault();
+                      const lastIndex = rfAdvantages.length - 1;
+                      const nextIndex = event.key === "Home"
+                        ? 0
+                        : event.key === "End"
+                          ? lastIndex
+                          : event.key === "ArrowLeft" || event.key === "ArrowUp"
+                            ? (index - 1 + rfAdvantages.length) % rfAdvantages.length
+                            : (index + 1) % rfAdvantages.length;
+                      setActiveRfAdvantage(nextIndex);
+                      event.currentTarget.parentElement
+                        ?.querySelectorAll('[role="tab"]')
+                        [nextIndex]?.focus();
+                    }}
+                  >
+                    <Icon size={22} weight={activeRfAdvantage === index ? "bold" : "regular"} aria-hidden="true" />
+                    <span>{item.tab}</span>
+                  </button>
+                );
+              })}
+            </div>
+            <div
+              className="rf-advantages__stage"
+              id="rf-advantage-panel"
+              role="tabpanel"
+              aria-labelledby={`rf-tab-${rfAdvantages[activeRfAdvantage].id}`}
+              aria-live="polite"
+            >
+              <div className="rf-advantages__copy">
+                <span className="eyebrow">{rfAdvantages[activeRfAdvantage].eyebrow}</span>
+                <h3>{rfAdvantages[activeRfAdvantage].title}</h3>
+                <p>{rfAdvantages[activeRfAdvantage].copy}</p>
+                <strong>{rfAdvantages[activeRfAdvantage].proof}</strong>
+              </div>
+              <div className="rf-advantages__media">
+                <img
+                  key={rfAdvantages[activeRfAdvantage].id}
+                  src={asset(rfAdvantages[activeRfAdvantage].image)}
+                  alt={rfAdvantages[activeRfAdvantage].alt}
+                />
+              </div>
             </div>
           </div>
         </section>
