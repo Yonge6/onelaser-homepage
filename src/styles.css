@@ -6801,14 +6801,14 @@ body { color: var(--ink); }
 .ownership-support__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  gap: 16px;
 }
 
 .ownership-support__card {
   display: flex;
   min-width: 0;
-  min-height: 430px;
-  padding: 36px;
+  min-height: 0;
+  padding: 28px;
   flex-direction: column;
   border: 1px solid var(--line);
   border-radius: 32px;
@@ -6820,7 +6820,7 @@ body { color: var(--ink); }
   display: grid;
   grid-column: 1 / -1;
   grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr);
-  gap: 28px 56px;
+  gap: 24px 48px;
   align-items: start;
   background: #fff;
 }
@@ -6845,7 +6845,7 @@ body { color: var(--ink); }
 }
 
 .ownership-support__lead h3 {
-  margin: 34px 0 0;
+  margin: 24px 0 0;
   font-size: 30px;
   font-weight: 800;
   line-height: 1.06;
@@ -6853,8 +6853,8 @@ body { color: var(--ink); }
 }
 
 .ownership-support__details {
-  margin-top: auto;
-  padding-top: 28px;
+  margin-top: 24px;
+  padding-top: 0;
 }
 
 .ownership-support__card--wide .ownership-support__lead h3,
@@ -6871,7 +6871,7 @@ body { color: var(--ink); }
 }
 
 .ownership-support__details p {
-  margin: 16px 0 0;
+  margin: 12px 0 0;
   color: var(--muted);
   font-size: 15px;
   line-height: 1.62;
@@ -6927,12 +6927,12 @@ body { color: var(--ink); }
   }
 
   .ownership-support__card--wide .ownership-support__lead h3 {
-    margin-top: 34px;
+    margin-top: 24px;
   }
 
   .ownership-support__card--wide .ownership-support__details {
-    margin-top: 0;
-    padding-top: 28px;
+    margin-top: 24px;
+    padding-top: 0;
   }
 }
 
@@ -7045,13 +7045,13 @@ body { color: var(--ink); }
   }
 
   .ownership-support__card {
-    padding: 28px 24px;
+    padding: 24px 22px;
     border-radius: 24px;
   }
 
   .ownership-support__lead h3,
   .ownership-support__card--wide .ownership-support__lead h3 {
-    margin-top: 28px;
+    margin-top: 22px;
     font-size: 26px;
     line-height: 1.08;
   }
@@ -7385,6 +7385,29 @@ body { color: var(--ink); }
 .ownership-support__card,
 .ownership-support__card--wide {
   background: #fff;
+}
+
+.faq {
+  display: block;
+}
+
+.faq-heading {
+  margin-bottom: 32px;
+}
+
+.faq-heading h2 {
+  max-width: none;
+  font-size: var(--type-h2);
+}
+
+.faq-list {
+  width: 100%;
+}
+
+.faq-item p {
+  max-width: 880px;
+  margin: 0 0 24px;
+  padding-top: 4px;
 }
 
 @media (min-width: 1181px) {

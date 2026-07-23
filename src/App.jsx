@@ -26,6 +26,7 @@ import {
   Wine,
   X,
 } from "@phosphor-icons/react";
+import { CommercialCapabilities } from "./components/CommercialCapabilities.jsx";
 
 const asset = (name) => `${import.meta.env.BASE_URL}assets/${name}`;
 
@@ -162,41 +163,6 @@ const rfAdvantages = [
   },
 ];
 
-const projectEvidence = [
-  {
-    title: "One machine. A full product line.",
-    proof: "Wood · leather · tumblers · acrylic · coated metal",
-    copy: "Move from custom gifts to repeatable, premium products without changing platforms.",
-    image: "xrf-workshop-story.webp",
-    tag: "MADE TO SELL",
-    position: "50% 58%",
-  },
-  {
-    title: "More pieces in every setup.",
-    proof: "24 × 12 in true production area",
-    copy: "The universal material size fits everyday stock and repeatable batch layouts without trimming down the job first.",
-    image: "xrf-work-area-proof.webp",
-    tag: "BATCH PRODUCTION",
-    position: "50% 50%",
-  },
-  {
-    title: "Details your customers can inspect up close.",
-    proof: "Up to 2,000 DPI · 0.07 mm RF laser dot",
-    copy: "Fine marks, small type and tonal transitions stay crisp enough to make the finished product feel more valuable.",
-    image: "xrf-detail-proof.webp",
-    tag: "RF PRECISION",
-    position: "50% 50%",
-  },
-  {
-    title: "Print. Place. Cut. Done.",
-    proof: "IVS mark detection with live compensation",
-    copy: "Head-mounted vision corrects position and angle so printed contours need less manual calibration and create less waste.",
-    image: "ivs-print-cut-proof.webp",
-    tag: "INTELLIGENT VISION",
-    position: "50% 50%",
-  },
-];
-
 const tvFeature = {
   id: "8tn7O69iCnQ",
   title: "Fox News introduces OneLaser as a best holiday DIY gift",
@@ -312,7 +278,7 @@ const capabilityChapters = [
         title: "Print and cut, made easy.",
         copy: "The head-mounted Intelligent Vision System detects registration marks and compensates position and angle in real time—reducing calibration, waste and rework.",
         metrics: ["Mark detection", "Live compensation", "Less material waste"],
-        image: "ivs-print-cut-proof.webp",
+        image: "xrf-ivs.jpg",
       },
       {
         eyebrow: "ONE TOUCH OF INNOVATION",
@@ -345,7 +311,7 @@ const capabilityChapters = [
         title: "Turn long-format work into one continuous job.",
         copy: "The optional automatic Conveyor feeds material in sync with the job, stitching sections into one continuous result for signs, boards and repeating patterns.",
         metrics: ["Optional Conveyor", "Automatic feed", "Unlimited project length"],
-        image: "conveyor-proof.webp",
+        image: "xrf-dark-hero.webp",
       },
     ],
     support: [
@@ -630,8 +596,8 @@ function CapabilityBrowser({ onPlay }) {
   }, [activeChapter]);
 
   useEffect(() => {
-    if (window.location.hash !== "#capabilities") return;
-    const alignToCapabilities = () => jumpToNode(document.getElementById("capabilities"), 64);
+    if (window.location.hash !== "#capability-system") return;
+    const alignToCapabilities = () => jumpToNode(document.getElementById("capability-system"), 64);
     const timeout = window.setTimeout(alignToCapabilities, 350);
     window.addEventListener("load", alignToCapabilities, { once: true });
     return () => {
@@ -646,7 +612,7 @@ function CapabilityBrowser({ onPlay }) {
   }
 
   return (
-    <section className="capability-scroll" id="capabilities">
+    <section className="capability-scroll" id="capability-system">
       <div className="capability-scroll__layout">
         <nav className="capability-scroll__nav" aria-label="Explore XRF Gen2 advantages" ref={navRef}>
           {capabilityChapters.map((item, index) => (
@@ -747,7 +713,6 @@ function CapabilityBrowser({ onPlay }) {
 
 export function App() {
   const [activeMedia, setActiveMedia] = useState(0);
-  const [activeProject, setActiveProject] = useState(0);
   const [activeMaterial, setActiveMaterial] = useState(0);
   const [activeRfAdvantage, setActiveRfAdvantage] = useState(0);
   const [activePowerProof, setActivePowerProof] = useState(0);
@@ -1069,31 +1034,7 @@ export function App() {
           </button>
         </section>
 
-        <section className="section results" id="results" data-reveal>
-          <div className="section-heading section-heading--stack">
-            <span className="eyebrow">WHAT WILL YOU MAKE NEXT?</span>
-            <h2>Made to sell. Built to repeat.</h2>
-            <p>Start with the finished work customers pay for. Then trace every result back to the RF source, controlled motion and workflow that make it repeatable.</p>
-          </div>
-          <div className="project-showcase">
-            <div className="project-visual">
-              <img src={asset(projectEvidence[activeProject].image)} alt={projectEvidence[activeProject].title} style={{ objectPosition: projectEvidence[activeProject].position }} />
-            </div>
-            <div className="project-content">
-              <span className="eyebrow">{projectEvidence[activeProject].tag}</span>
-              <h3>{projectEvidence[activeProject].title}</h3>
-              <p>{projectEvidence[activeProject].copy}</p>
-              <strong className="project-proof">{projectEvidence[activeProject].proof}</strong>
-              <div className="project-pagination">
-                <button type="button" onClick={() => setActiveProject((activeProject - 1 + projectEvidence.length) % projectEvidence.length)} aria-label="Previous project"><CaretLeft size={21} /></button>
-                <div>
-                  {projectEvidence.map((item, index) => <button type="button" key={item.title} className={activeProject === index ? "is-active" : ""} onClick={() => setActiveProject(index)} aria-label={`Show ${item.title}`} />)}
-                </div>
-                <button type="button" onClick={() => setActiveProject((activeProject + 1) % projectEvidence.length)} aria-label="Next project"><CaretRight size={21} /></button>
-              </div>
-            </div>
-          </div>
-        </section>
+        <CommercialCapabilities asset={asset} />
 
         <section className="section materials" id="materials" data-reveal>
           <div className="section-heading section-heading--stack">
@@ -1364,7 +1305,7 @@ export function App() {
         </section>
 
         <section className="section faq" id="faq" data-reveal>
-          <div className="faq-heading"><span className="eyebrow">BUYING QUESTIONS</span><h2>Good answers before you commit.</h2></div>
+          <div className="section-heading section-heading--stack faq-heading"><span className="eyebrow">BUYING QUESTIONS</span><h2>Good answers before you commit.</h2></div>
           <div className="faq-list">
             {faqs.map((item, index) => (
               <div className="faq-item" key={item.q}>
