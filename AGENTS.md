@@ -85,3 +85,4 @@ When implementing from a selected generated mock, treat that image as the source
 - Keep the finished-product carousel image clean: do not overlay a `PROJECT PROOF` counter or similar production label on the project media; use the existing arrows and dots for navigation state.
 - On desktop, each sticky P0 story keeps the active left-hand copy and right-hand media in the same upper-middle horizontal band. Keep story steps close enough that switching never leaves a large blank interval between the copy and its corresponding media.
 - Do not show an announcement strip above the main navigation; the main header is the first visible site chrome.
+- Selling-point navigation must be genuinely scroll-linked: keep every chapter in document flow, update the sticky desktop rail / mobile horizontal rail from reading position, and let each rail item jump to its chapter. Do not simulate this with tabs that replace a single content panel.

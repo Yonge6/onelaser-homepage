@@ -250,17 +250,10 @@ const capabilityChapters = [
         metrics: ["1,300 mm/s", "True 3.5G", "Real engraving conditions"],
         image: "xrf-internal-wide.jpg",
       },
-      {
-        eyebrow: "FLAGSHIP MOTION",
-        title: "High speed with its own feedback loop.",
-        copy: "Closed-loop motors monitor position continuously while Hydra-derived steel wheels and embedded steel shafts maintain rigidity, accuracy and service life.",
-        metrics: ["Closed-loop feedback", "All-steel rolling axes", "≤ 0.01 mm"],
-        image: "xrf-gallery-07.jpg",
-      },
     ],
     support: [
+      { title: "High speed with its own feedback loop", copy: "Closed-loop motors monitor position continuously while Hydra-derived steel wheels and embedded steel shafts maintain rigidity, accuracy and service life.", image: "xrf-gallery-07.jpg" },
       { title: "20% lighter laser head", copy: "Less moving mass helps the head settle faster while carrying the integrated vision module.", image: "xrf-gallery-08.jpg" },
-      { title: "Built for sustained motion", copy: "Reinforced structure and precision-matched rolling components support repeatable daily production.", image: "xrf-gallery-10.jpg" },
     ],
     proofs: [
       { value: "1,300 mm/s", label: "Working speed", icon: ArrowClockwise },
@@ -342,14 +335,14 @@ const capabilityChapters = [
         metrics: ["Optional accessory", "Cut / engrave modes", "Automatic switching"],
         image: "smart-air-proof.webp",
       },
-      {
-        eyebrow: "PROTECTION BY DESIGN",
-        title: "Safety is the architecture.",
-        copy: "A Class 1 enclosure, lid interlock, isolated electronics bay, thermal response and automatic fire suppression protect the operator and the machine through every job.",
-        metrics: ["Class 1 design", "Lid interlock", "Automatic suppression"],
-        image: "xrf-open.jpg",
-      },
     ],
+    feature: {
+      eyebrow: "PROTECTION BY DESIGN",
+      title: "Safety is the architecture.",
+      copy: "A Class 1 enclosure, lid interlock, isolated electronics bay, thermal response and automatic fire suppression protect the operator and the machine through every job.",
+      metrics: ["Class 1 design", "Lid interlock", "Automatic suppression"],
+      image: "xrf-open.jpg",
+    },
     support: [
       { title: "Dust stays away from the beam", copy: "Sealed optical clearances and a steep-angle nozzle slow residue buildup around critical optics.", image: "xrf-gallery-09.jpg" },
       { title: "FumeGuard™ containment", copy: "A fully enclosed body monitors and channels smoke toward the exhaust path instead of the room.", image: "xrf-front.jpg" },
@@ -563,104 +556,156 @@ function ReviewVideoCard({ video, onPlay, index, total }) {
 
 function CapabilityBrowser({ onPlay }) {
   const [activeChapter, setActiveChapter] = useState(0);
-  const [activeSpotlight, setActiveSpotlight] = useState(0);
-  const chapter = capabilityChapters[activeChapter];
-  const spotlight = chapter.spotlights[activeSpotlight];
+  const chapterRefs = useRef([]);
+  const navRef = useRef(null);
+
+  function jumpToNode(node, offset) {
+    if (!node) return;
+    const root = document.documentElement;
+    const previousBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollTo({ top: window.scrollY + node.getBoundingClientRect().top - offset, behavior: "auto" });
+    requestAnimationFrame(() => { root.style.scrollBehavior = previousBehavior; });
+  }
+
+  useEffect(() => {
+    const chapters = chapterRefs.current.filter(Boolean);
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => Math.abs(a.boundingClientRect.top - 150) - Math.abs(b.boundingClientRect.top - 150));
+      if (visible[0]) setActiveChapter(Number(visible[0].target.dataset.chapterIndex));
+    }, { rootMargin: "-96px 0px -68% 0px", threshold: 0 });
+
+    chapters.forEach((chapter) => observer.observe(chapter));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const nav = navRef.current;
+    const activeButton = nav?.querySelector(`[data-chapter-nav="${activeChapter}"]`);
+    if (!nav || !activeButton || window.innerWidth > 760) return;
+    nav.scrollTo({
+      left: activeButton.offsetLeft - ((nav.clientWidth - activeButton.clientWidth) / 2),
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    });
+  }, [activeChapter]);
+
+  useEffect(() => {
+    if (window.location.hash !== "#capabilities") return;
+    const alignToCapabilities = () => jumpToNode(document.getElementById("capabilities"), 64);
+    const timeout = window.setTimeout(alignToCapabilities, 350);
+    window.addEventListener("load", alignToCapabilities, { once: true });
+    return () => {
+      window.clearTimeout(timeout);
+      window.removeEventListener("load", alignToCapabilities);
+    };
+  }, []);
 
   function selectChapter(index) {
     setActiveChapter(index);
-    setActiveSpotlight(0);
+    jumpToNode(chapterRefs.current[index], window.innerWidth <= 760 ? 136 : 100);
   }
 
   return (
-    <section className="capability-browser" id="capabilities" data-reveal>
-      <div className="capability-browser__intro">
+    <section className="capability-scroll" id="capabilities">
+      <div className="capability-scroll__intro">
         <span className="eyebrow">WHY XRF GEN2</span>
-        <h2>Five advantages. One production platform.</h2>
-        <p>Explore the result first, then the systems that make it repeatable. Each selling point appears once, at the visual weight it deserves.</p>
+        <h2>A guided tour of the systems behind every result.</h2>
+        <p>Follow six visual stories, then scan the supporting engineering proof without losing your place.</p>
       </div>
-      <div className="capability-browser__layout">
-        <nav className="capability-browser__nav" aria-label="Explore XRF Gen2 advantages">
+      <div className="capability-scroll__layout">
+        <nav className="capability-scroll__nav" aria-label="Explore XRF Gen2 advantages" ref={navRef}>
           {capabilityChapters.map((item, index) => (
             <button
               type="button"
               key={item.id}
               className={activeChapter === index ? "is-active" : ""}
               onClick={() => selectChapter(index)}
-              aria-pressed={activeChapter === index}
+              aria-current={activeChapter === index ? "step" : undefined}
+              data-chapter-nav={index}
             >
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{item.nav}</strong>
+              <span><i>{String(index + 1).padStart(2, "0")}</i><strong>{item.nav}</strong></span>
+              <small>{item.title}</small>
             </button>
           ))}
         </nav>
 
-        <article className="capability-browser__chapter" key={chapter.id}>
-          <header className="capability-browser__chapter-heading">
-            <span>{String(activeChapter + 1).padStart(2, "0")} / {String(capabilityChapters.length).padStart(2, "0")}</span>
-            <h3>{chapter.title}</h3>
-            <p>{chapter.summary}</p>
-          </header>
+        <div className="capability-scroll__chapters">
+          {capabilityChapters.map((chapter, chapterIndex) => (
+            <section
+              className="capability-scroll__chapter"
+              id={`capability-${chapter.id}`}
+              data-chapter-index={chapterIndex}
+              ref={(node) => { chapterRefs.current[chapterIndex] = node; }}
+              aria-labelledby={`capability-${chapter.id}-title`}
+              key={chapter.id}
+            >
+              <header className="capability-scroll__chapter-heading">
+                <span>{String(chapterIndex + 1).padStart(2, "0")} / {String(capabilityChapters.length).padStart(2, "0")}</span>
+                <div><small>{chapter.nav}</small><h3 id={`capability-${chapter.id}-title`}>{chapter.title}</h3></div>
+                <p>{chapter.summary}</p>
+              </header>
 
-          {chapter.spotlights.length > 1 && (
-            <div className="capability-browser__spotlight-tabs" role="tablist" aria-label={`${chapter.nav} key stories`}>
-              {chapter.spotlights.map((item, index) => (
-                <button
-                  type="button"
-                  role="tab"
-                  aria-selected={activeSpotlight === index}
-                  className={activeSpotlight === index ? "is-active" : ""}
-                  onClick={() => setActiveSpotlight(index)}
-                  key={item.title}
-                >
-                  {item.eyebrow}
-                </button>
-              ))}
-            </div>
-          )}
+              <div className="capability-scroll__stories">
+                {chapter.spotlights.map((spotlight, storyIndex) => (
+                  <article className="capability-scroll__story" key={spotlight.title}>
+                    <button
+                      type="button"
+                      className="capability-scroll__media"
+                      onClick={() => onPlay(spotlight.eyebrow, spotlight.title, asset(spotlight.image))}
+                      aria-label={`Open ${spotlight.title} full-size media preview`}
+                    >
+                      <img src={asset(spotlight.image)} alt={`${spotlight.title} XRF Gen2 proof`} />
+                      <span className="capability-scroll__play" aria-hidden="true"><Play size={25} weight="fill" /></span>
+                      <span className="capability-scroll__media-label"><span>VIDEO STORY · IMAGE PREVIEW</span><span>{String(storyIndex + 1).padStart(2, "0")} / {String(chapter.spotlights.length).padStart(2, "0")}</span></span>
+                    </button>
+                    <div className="capability-scroll__story-copy">
+                      <div><span className="eyebrow">{spotlight.eyebrow}</span><h4>{spotlight.title}</h4></div>
+                      <div><p>{spotlight.copy}</p><div>{spotlight.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div></div>
+                    </div>
+                  </article>
+                ))}
+              </div>
 
-          <button
-            type="button"
-            className="capability-browser__media"
-            onClick={() => onPlay(spotlight.eyebrow, spotlight.title, asset(spotlight.image))}
-            aria-label={`Open ${spotlight.title} full-size media preview`}
-          >
-            <img key={`${chapter.id}-${activeSpotlight}`} src={asset(spotlight.image)} alt={`${spotlight.title} XRF Gen2 proof`} />
-            <span className="capability-browser__play" aria-hidden="true"><Play size={25} weight="fill" /></span>
-            <span className="capability-browser__media-label"><span>VIDEO STORY · IMAGE PREVIEW</span><span>{String(activeSpotlight + 1).padStart(2, "0")} / {String(chapter.spotlights.length).padStart(2, "0")}</span></span>
-          </button>
+              {chapter.feature && (
+                <article className="capability-scroll__feature">
+                  <img src={asset(chapter.feature.image)} alt={`${chapter.feature.title} XRF Gen2 proof`} />
+                  <div>
+                    <span className="eyebrow">{chapter.feature.eyebrow}</span>
+                    <h4>{chapter.feature.title}</h4>
+                    <p>{chapter.feature.copy}</p>
+                    <div>{chapter.feature.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
+                  </div>
+                </article>
+              )}
 
-          <div className="capability-browser__spotlight-copy" aria-live="polite">
-            <span className="eyebrow">{spotlight.eyebrow}</span>
-            <h4>{spotlight.title}</h4>
-            <p>{spotlight.copy}</p>
-            <div>{spotlight.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
-          </div>
+              <div className="capability-scroll__support">
+                {chapter.support.map((item) => (
+                  <article key={item.title}>
+                    <img src={asset(item.image)} alt="" />
+                    <div><h4>{item.title}</h4><p>{item.copy}</p></div>
+                  </article>
+                ))}
+              </div>
 
-          <div className="capability-browser__support">
-            {chapter.support.map((item) => (
-              <article key={item.title}>
-                <img src={asset(item.image)} alt="" />
-                <div><h4>{item.title}</h4><p>{item.copy}</p></div>
-              </article>
-            ))}
-          </div>
+              <div className="capability-scroll__proofs">
+                {chapter.proofs.map(({ value, label, icon: Icon }) => (
+                  <article key={`${value}-${label}`}>
+                    <Icon size={24} weight="regular" aria-hidden="true" />
+                    <strong>{value}</strong>
+                    <span>{label}</span>
+                  </article>
+                ))}
+              </div>
 
-          <div className="capability-browser__proofs">
-            {chapter.proofs.map(({ value, label, icon: Icon }) => (
-              <article key={`${value}-${label}`}>
-                <Icon size={25} weight="regular" aria-hidden="true" />
-                <strong>{value}</strong>
-                <span>{label}</span>
-              </article>
-            ))}
-          </div>
-
-          <div className="capability-browser__details" aria-label={`${chapter.nav} additional details`}>
-            <span>More built in</span>
-            <div>{chapter.details.map((detail) => <span key={detail}>{detail}</span>)}</div>
-          </div>
-        </article>
+              <div className="capability-scroll__details" aria-label={`${chapter.nav} additional details`}>
+                <span>More built in</span>
+                <div>{chapter.details.map((detail) => <span key={detail}>{detail}</span>)}</div>
+              </div>
+            </section>
+          ))}
+        </div>
       </div>
     </section>
   );
