@@ -55,17 +55,6 @@ const media = [
   },
 ];
 
-const featureLinks = [
-  ["features", "Overview"],
-  ["results", "Results"],
-  ["materials", "Materials"],
-  ["power-guide", "38W / 70W"],
-  ["performance", "Why XRF"],
-  ["workflow", "Workflow"],
-  ["safety", "Safety"],
-  ["specs", "Specs"],
-];
-
 const materialCategories = [
   {
     id: "acrylic",
@@ -221,73 +210,158 @@ const reviewVideos = [
   { id: "yB_RQwZj5p8", title: "Mark Ellis reviews XRF Desktop at CES 2025", channel: "OneLaser", tag: "CES 2025 THIRD-PARTY PROOF" },
 ];
 
-const scrollStories = [
+const capabilityChapters = [
   {
-    id: "rf",
-    eyebrow: "3D PHOTO REALISTIC RF™",
-    title: "Photo-real, every time.",
-    copy: "Pulse-modulated RF energy through a finer spot produces photographic grayscale and deep relief up to 2,000 DPI. The sealed source is air-cooled and rated up to 30,000 hours.",
-    metrics: ["2,000 DPI", "Air cooled", "Up to 30,000 h"],
-    image: "power-38w-proof.webp",
+    id: "precision",
+    nav: "RF Precision",
+    title: "Make products worth a closer look.",
+    summary: "The RF source turns fine detail, tonal range and dimensional relief into a visible product advantage.",
+    spotlights: [
+      {
+        eyebrow: "3D PHOTO REALISTIC RF™",
+        title: "Photo-real, every time.",
+        copy: "Pulse-modulated RF energy through a finer 0.07 mm spot produces crisp small type, photographic grayscale and dimensional relief up to 2,000 DPI—without water cooling.",
+        metrics: ["2,000 DPI", "0.07 mm spot", "Up to 30,000 h"],
+        image: "power-38w-proof.webp",
+      },
+    ],
+    support: [
+      { title: "Tool-free optics care", copy: "Magnetic QuickSwitch™ lenses remove in seconds for fast cleaning and focal-length changes.", image: "xrf-gallery-09.jpg" },
+      { title: "Output that stays consistent", copy: "A sealed, factory-calibrated optical path helps the beam arrive true and stay true through daily production.", image: "xrf-detail-proof.webp" },
+    ],
+    proofs: [
+      { value: "Air cooled", label: "No water chiller", icon: Thermometer },
+      { value: "≤ 0.01 mm", label: "Repeat positioning", icon: Target },
+      { value: "2.5 in", label: "Standard focal lens", icon: CubeFocus },
+      { value: "38W / 70W", label: "Equal-fit RF options", icon: Fire },
+    ],
+    details: ["Optional 2 in lens", "Three-mirror optical path", "3× beam expander"],
   },
   {
-    id: "speed",
-    eyebrow: "TRUESPEED",
-    title: "Measured in real work. Not empty travel.",
-    copy: "Real 1,300 mm/s engraving speed and 3.5G acceleration are controlled by optimized DSP motion, closed-loop feedback, Hydra-derived steel axes and a 20% lighter head.",
-    metrics: ["1,300 mm/s", "34,335 mm/s²", "≤ 0.01 mm"],
-    image: "xrf-internal-wide.jpg",
-  },
-  {
-    id: "ivs",
-    eyebrow: "IVS PRINT & CUT",
-    title: "Print and cut, made easy.",
-    copy: "The head-mounted Intelligent Vision System detects registration marks and compensates position and angle in real time—reducing calibration, waste and rework.",
-    metrics: ["Mark detection", "Live compensation", "Less material waste"],
-    image: "ivs-print-cut-proof.webp",
+    id: "motion",
+    nav: "Speed & Motion",
+    title: "Turn speed into finished output.",
+    summary: "Measured working performance, closed-loop control and an all-steel motion system keep fast jobs useful—not merely fast.",
+    spotlights: [
+      {
+        eyebrow: "TRUESPEED",
+        title: "Measured in real work. Not empty travel.",
+        copy: "Real 1,300 mm/s engraving speed and True 3.5G acceleration shorten production time while optimized DSP control keeps the toolpath deliberate.",
+        metrics: ["1,300 mm/s", "True 3.5G", "Real engraving conditions"],
+        image: "xrf-internal-wide.jpg",
+      },
+      {
+        eyebrow: "FLAGSHIP MOTION",
+        title: "High speed with its own feedback loop.",
+        copy: "Closed-loop motors monitor position continuously while Hydra-derived steel wheels and embedded steel shafts maintain rigidity, accuracy and service life.",
+        metrics: ["Closed-loop feedback", "All-steel rolling axes", "≤ 0.01 mm"],
+        image: "xrf-gallery-07.jpg",
+      },
+    ],
+    support: [
+      { title: "20% lighter laser head", copy: "Less moving mass helps the head settle faster while carrying the integrated vision module.", image: "xrf-gallery-08.jpg" },
+      { title: "Built for sustained motion", copy: "Reinforced structure and precision-matched rolling components support repeatable daily production.", image: "xrf-gallery-10.jpg" },
+    ],
+    proofs: [
+      { value: "1,300 mm/s", label: "Working speed", icon: ArrowClockwise },
+      { value: "True 3.5G", label: "Working acceleration", icon: Anchor },
+      { value: "20% lighter", label: "New head design", icon: CubeTransparent },
+      { value: "Steel on steel", label: "Hydra-derived axes", icon: ShieldCheck },
+    ],
+    details: ["Leadshine X/Y motors", "Optimized DSP trajectory", "Position feedback at speed"],
   },
   {
     id: "workflow",
-    eyebrow: "ONE TOUCH OF INNOVATION",
-    title: "Out of the box, into creation.",
-    copy: "MakerBoost AI, the full touchscreen and XFocus autofocus remove setup friction—from one-click vector generation and material parameters to motion, alerts and live machine status.",
-    metrics: ["MakerBoost AI", "Full touchscreen", "XFocus autofocus"],
-    image: "xrf-touchscreen.jpg",
+    nav: "Smart Workflow",
+    title: "Make every setup decision clearer.",
+    summary: "Vision, software, autofocus and direct machine control reduce the guesswork between an idea and a finished job.",
+    spotlights: [
+      {
+        eyebrow: "IVS PRINT & CUT",
+        title: "Print and cut, made easy.",
+        copy: "The head-mounted Intelligent Vision System detects registration marks and compensates position and angle in real time—reducing calibration, waste and rework.",
+        metrics: ["Mark detection", "Live compensation", "Less material waste"],
+        image: "ivs-print-cut-proof.webp",
+      },
+      {
+        eyebrow: "ONE TOUCH OF INNOVATION",
+        title: "From design to done, in one clear flow.",
+        copy: "MakerBoost AI generates vectors and material parameters, XFocus™ handles focal distance, and the full touchscreen keeps motion, settings, alerts and machine status close at hand.",
+        metrics: ["MakerBoost AI", "XFocus™ autofocus", "Full touchscreen"],
+        image: "xrf-touchscreen.jpg",
+      },
+    ],
+    support: [
+      { title: "See the full bed", copy: "The 12MP lid camera supports full-frame positioning, contour capture and remote monitoring.", image: "xrf-ivs.jpg" },
+      { title: "Use the software you know", copy: "Work in LightBurn, RDWorks or MakerBoost AI on Windows and macOS.", image: "xrf-touchscreen.jpg" },
+    ],
+    proofs: [
+      { value: "12MP", label: "Top-cover camera", icon: Camera },
+      { value: "Sub-1 mW", label: "RedDot™ alignment", icon: Crosshair },
+      { value: "3 ways", label: "WiFi / USB / Ethernet", icon: WifiHigh },
+      { value: "Resume", label: "After power returns", icon: ArrowClockwise },
+    ],
+    details: ["AI / PDF / DXF / SVG / LBRN", "Bitmap formats supported", "Remote operation and monitoring"],
   },
   {
-    id: "expand",
-    eyebrow: "ONE CLICK. INFINITE LENGTH",
+    id: "expansion",
+    nav: "Business Expansion",
     title: "Start desktop. Grow beyond it.",
-    copy: "A true 24 × 12 inch bed handles everyday stock. Optional Riser Base, Rotary and automatic Conveyor unlock taller, cylindrical and continuous long-format work.",
-    metrics: ["24 × 12 in", "8.5 in with optional Riser", "Optional Conveyor"],
-    image: "conveyor-proof.webp",
+    summary: "A universal bed, optional height and automatic material handling let the same platform follow a wider product catalog.",
+    spotlights: [
+      {
+        eyebrow: "ONE CLICK. INFINITE LENGTH",
+        title: "Turn long-format work into one continuous job.",
+        copy: "The optional automatic Conveyor feeds material in sync with the job, stitching sections into one continuous result for signs, boards and repeating patterns.",
+        metrics: ["Optional Conveyor", "Automatic feed", "Unlimited project length"],
+        image: "conveyor-proof.webp",
+      },
+    ],
+    support: [
+      { title: "One size fits mainstream stock", copy: "The true 24 × 12 in working area handles the material size used across everyday custom-product work.", image: "xrf-work-area-proof.webp" },
+      { title: "Optional height for bigger objects", copy: "The optional Riser Base unlocks up to 8.5 in of work height for taller pieces and rotary workflows.", image: "xrf-open.jpg" },
+    ],
+    proofs: [
+      { value: "24 × 12 in", label: "True work area", icon: Target },
+      { value: "8.5 in", label: "With optional Riser", icon: CubeFocus },
+      { value: "Unlimited", label: "Pass-through length", icon: ArrowClockwise },
+      { value: "Optional", label: "Rotary workflow", icon: Anchor },
+    ],
+    details: ["Optional Riser Base", "Optional Rotary", "Optional Conveyor", "Optional Fume Extractor"],
   },
   {
-    id: "clean",
-    eyebrow: "CLEANER PRODUCTION",
-    title: "Right pressure. Every mode. Automatically.",
-    copy: "Optional Smart Air switches between high-pressure cutting and low-pressure engraving, while 3× extraction architecture and FumeGuard keep results and the workspace cleaner.",
-    metrics: ["Optional Smart Air", "3× extraction", "FumeGuard monitoring"],
-    image: "smart-air-proof.webp",
+    id: "protection",
+    nav: "Reliability & Safety",
+    title: "Run cleaner. Stay protected.",
+    summary: "Airflow, containment and protected critical systems work together to reduce residue, maintenance and production risk.",
+    spotlights: [
+      {
+        eyebrow: "SMART AIR ASSIST™ · OPTIONAL",
+        title: "Right pressure. Every mode. Automatically.",
+        copy: "Optional Smart Air changes between high-pressure cutting and low-pressure engraving so edges stay cleaner and fine surface detail keeps its contrast.",
+        metrics: ["Optional accessory", "Cut / engrave modes", "Automatic switching"],
+        image: "smart-air-proof.webp",
+      },
+      {
+        eyebrow: "PROTECTION BY DESIGN",
+        title: "Safety is the architecture.",
+        copy: "A Class 1 enclosure, lid interlock, isolated electronics bay, thermal response and automatic fire suppression protect the operator and the machine through every job.",
+        metrics: ["Class 1 design", "Lid interlock", "Automatic suppression"],
+        image: "xrf-open.jpg",
+      },
+    ],
+    support: [
+      { title: "Dust stays away from the beam", copy: "Sealed optical clearances and a steep-angle nozzle slow residue buildup around critical optics.", image: "xrf-gallery-09.jpg" },
+      { title: "FumeGuard™ containment", copy: "A fully enclosed body monitors and channels smoke toward the exhaust path instead of the room.", image: "xrf-front.jpg" },
+    ],
+    proofs: [
+      { value: "3×", label: "Extraction architecture", icon: Fire },
+      { value: "Class 1", label: "Enclosed operation", icon: ShieldCheck },
+      { value: "< 65 dB", label: "Load-following cooling", icon: Thermometer },
+      { value: "Auto stop", label: "Thermal response", icon: LockKey },
+    ],
+    details: ["Isolated electronics", "Protected focus path", "Debris drawer", "Dual-anchor laser mount", "Zero field alignment"],
   },
-];
-
-const engineeringProofs = [
-  { title: "3× extraction", copy: "Flow-matched dual-channel exhaust clears smoke and residue faster.", image: "xrf-front.jpg" },
-  { title: "Sealed electronics", copy: "The working area and optical-electrical zones stay isolated from dust.", image: "xrf-open.jpg" },
-  { title: "Under 65 dB", copy: "Load-following cooling reduces noise without giving up production power.", image: "xrf-gallery-06.jpg" },
-  { title: "Protected focus path", copy: "Cable routing and thermal isolation keep critical parts outside the hot zone.", image: "xrf-gallery-09.jpg" },
-];
-
-const microFeatures = [
-  { title: "12MP lid camera", copy: "Full-frame positioning and remote monitoring", icon: Camera },
-  { title: "RedDot™", copy: "Sub-1 mW guided alignment", icon: Crosshair },
-  { title: "WiFi / USB / Ethernet", copy: "Flexible connected control", icon: WifiHigh },
-  { title: "Power-off resume", copy: "Continue after power returns", icon: ArrowClockwise },
-  { title: "XFocus™", copy: "Integrated motorized autofocus", icon: CubeFocus },
-  { title: "Debris drawer", copy: "Pull-out cleanup access", icon: Trash },
-  { title: "Zero field alignment", copy: "Factory-calibrated optical path", icon: Target },
-  { title: "Dual-anchor mount", copy: "Laser-source alignment retention", icon: Anchor },
 ];
 
 const purchasePackages = [
@@ -464,65 +538,6 @@ function SpecGroup({ group }) {
   );
 }
 
-function StickyStory({ onPlay }) {
-  const [active, setActive] = useState(0);
-  const stepRefs = useRef([]);
-
-  useEffect(() => {
-    const observers = stepRefs.current.map((node, index) => {
-      if (!node) return null;
-      const observer = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) setActive(index);
-      }, { rootMargin: "-44% 0px -44%", threshold: 0.04 });
-      observer.observe(node);
-      return observer;
-    });
-    return () => observers.forEach((observer) => observer?.disconnect());
-  }, []);
-
-  const story = scrollStories[active];
-
-  return (
-    <section className="immersive-story" id="performance" style={{ "--story-scroll-height": `${120 + scrollStories.length * 72}vh`, "--story-count": scrollStories.length }}>
-      <div className="immersive-story__scene">
-        <div className="immersive-story__sticky">
-          <div className="immersive-story__progress" aria-label={`Chapter ${active + 1} of ${scrollStories.length}`}>
-            {scrollStories.map((item, index) => (
-              <button type="button" key={item.id} className={active === index ? "is-active" : ""} onClick={() => stepRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "center" })} aria-label={`Show ${item.title}`}><span /></button>
-            ))}
-          </div>
-          <div className="immersive-story__copy" key={story.id}>
-            <span className="eyebrow">{story.eyebrow}</span>
-            <h2>{story.title}</h2>
-            <p>{story.copy}</p>
-            <div className="inline-metrics">{story.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
-          </div>
-        </div>
-        <button
-          type="button"
-          className="immersive-story__step immersive-story__active-media is-active"
-          key={story.id}
-          onClick={() => onPlay(story.eyebrow, story.title, asset(story.image))}
-          aria-label={`Open ${story.title} video and full image preview`}
-        >
-          <img src={asset(story.image)} alt={`${story.title} XRF Gen2 feature view`} />
-          <span className="immersive-story__play" aria-hidden="true"><Play size={26} weight="fill" /></span>
-          <div className="immersive-story__media-label"><span>VIDEO STORY · IMAGE PREVIEW</span><span>{String(active + 1).padStart(2, "0")} / {String(scrollStories.length).padStart(2, "0")}</span></div>
-        </button>
-      </div>
-      <div className="immersive-story__steps" aria-hidden="true">
-        {scrollStories.map((item, index) => (
-          <span
-            ref={(node) => { stepRefs.current[index] = node; }}
-            className="immersive-story__sentinel"
-            key={item.id}
-          />
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function YouTubeCover({ video, onPlay, className = "" }) {
   return (
     <button type="button" className={`youtube-cover ${className}`.trim()} onClick={() => onPlay(video)} aria-label={`Play ${video.title} by ${video.channel}`}>
@@ -546,12 +561,116 @@ function ReviewVideoCard({ video, onPlay, index, total }) {
   );
 }
 
+function CapabilityBrowser({ onPlay }) {
+  const [activeChapter, setActiveChapter] = useState(0);
+  const [activeSpotlight, setActiveSpotlight] = useState(0);
+  const chapter = capabilityChapters[activeChapter];
+  const spotlight = chapter.spotlights[activeSpotlight];
+
+  function selectChapter(index) {
+    setActiveChapter(index);
+    setActiveSpotlight(0);
+  }
+
+  return (
+    <section className="capability-browser" id="capabilities" data-reveal>
+      <div className="capability-browser__intro">
+        <span className="eyebrow">WHY XRF GEN2</span>
+        <h2>Five advantages. One production platform.</h2>
+        <p>Explore the result first, then the systems that make it repeatable. Each selling point appears once, at the visual weight it deserves.</p>
+      </div>
+      <div className="capability-browser__layout">
+        <nav className="capability-browser__nav" aria-label="Explore XRF Gen2 advantages">
+          {capabilityChapters.map((item, index) => (
+            <button
+              type="button"
+              key={item.id}
+              className={activeChapter === index ? "is-active" : ""}
+              onClick={() => selectChapter(index)}
+              aria-pressed={activeChapter === index}
+            >
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{item.nav}</strong>
+            </button>
+          ))}
+        </nav>
+
+        <article className="capability-browser__chapter" key={chapter.id}>
+          <header className="capability-browser__chapter-heading">
+            <span>{String(activeChapter + 1).padStart(2, "0")} / {String(capabilityChapters.length).padStart(2, "0")}</span>
+            <h3>{chapter.title}</h3>
+            <p>{chapter.summary}</p>
+          </header>
+
+          {chapter.spotlights.length > 1 && (
+            <div className="capability-browser__spotlight-tabs" role="tablist" aria-label={`${chapter.nav} key stories`}>
+              {chapter.spotlights.map((item, index) => (
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={activeSpotlight === index}
+                  className={activeSpotlight === index ? "is-active" : ""}
+                  onClick={() => setActiveSpotlight(index)}
+                  key={item.title}
+                >
+                  {item.eyebrow}
+                </button>
+              ))}
+            </div>
+          )}
+
+          <button
+            type="button"
+            className="capability-browser__media"
+            onClick={() => onPlay(spotlight.eyebrow, spotlight.title, asset(spotlight.image))}
+            aria-label={`Open ${spotlight.title} full-size media preview`}
+          >
+            <img key={`${chapter.id}-${activeSpotlight}`} src={asset(spotlight.image)} alt={`${spotlight.title} XRF Gen2 proof`} />
+            <span className="capability-browser__play" aria-hidden="true"><Play size={25} weight="fill" /></span>
+            <span className="capability-browser__media-label"><span>VIDEO STORY · IMAGE PREVIEW</span><span>{String(activeSpotlight + 1).padStart(2, "0")} / {String(chapter.spotlights.length).padStart(2, "0")}</span></span>
+          </button>
+
+          <div className="capability-browser__spotlight-copy" aria-live="polite">
+            <span className="eyebrow">{spotlight.eyebrow}</span>
+            <h4>{spotlight.title}</h4>
+            <p>{spotlight.copy}</p>
+            <div>{spotlight.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
+          </div>
+
+          <div className="capability-browser__support">
+            {chapter.support.map((item) => (
+              <article key={item.title}>
+                <img src={asset(item.image)} alt="" />
+                <div><h4>{item.title}</h4><p>{item.copy}</p></div>
+              </article>
+            ))}
+          </div>
+
+          <div className="capability-browser__proofs">
+            {chapter.proofs.map(({ value, label, icon: Icon }) => (
+              <article key={`${value}-${label}`}>
+                <Icon size={25} weight="regular" aria-hidden="true" />
+                <strong>{value}</strong>
+                <span>{label}</span>
+              </article>
+            ))}
+          </div>
+
+          <div className="capability-browser__details" aria-label={`${chapter.nav} additional details`}>
+            <span>More built in</span>
+            <div>{chapter.details.map((detail) => <span key={detail}>{detail}</span>)}</div>
+          </div>
+        </article>
+      </div>
+    </section>
+  );
+}
+
 export function App() {
   const [activeMedia, setActiveMedia] = useState(0);
   const [activeProject, setActiveProject] = useState(0);
   const [activeMaterial, setActiveMaterial] = useState(0);
   const [activePowerProof, setActivePowerProof] = useState(0);
-  const [activeFeature, setActiveFeature] = useState("features");
   const [openFaq, setOpenFaq] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -581,16 +700,9 @@ export function App() {
     }, { threshold: 0.12, rootMargin: "0px 0px -8%" });
     revealNodes.forEach((node) => revealObserver.observe(node));
 
-    const trackedSections = featureLinks
-      .map(([id]) => document.getElementById(id))
-      .filter(Boolean);
     const updateProgress = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       setScrollProgress(max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0);
-      const currentSection = trackedSections.reduce((current, node) => (
-        node.getBoundingClientRect().top <= 190 ? node : current
-      ), null);
-      if (currentSection?.id) setActiveFeature(currentSection.id);
     };
     updateProgress();
     window.addEventListener("scroll", updateProgress, { passive: true });
@@ -603,11 +715,12 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    if (!youtubeVideo) return undefined;
+    if (!youtubeVideo && !videoModal) return undefined;
     const previousOverflow = document.body.style.overflow;
     const closeOnEscape = (event) => {
       if (event.key === "Escape") {
         setYoutubeVideo(null);
+        setVideoModal(null);
       }
     };
     document.body.style.overflow = "hidden";
@@ -616,7 +729,7 @@ export function App() {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", closeOnEscape);
     };
-  }, [youtubeVideo]);
+  }, [youtubeVideo, videoModal]);
 
   const selectedPurchasePackage = useMemo(() => {
     const selected = purchasePackages.find((item) => item.id === selectedPackageId) ?? purchasePackages[0];
@@ -674,11 +787,6 @@ export function App() {
     setVideoModal({ eyebrow, title, image });
   }
 
-  function jumpTo(sectionId) {
-    setActiveFeature(sectionId);
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
   function togglePurchaseAccessory(accessoryId) {
     setPurchaseAdded(false);
     setSelectedPurchaseAccessories((current) => current.includes(accessoryId)
@@ -699,9 +807,7 @@ export function App() {
         </button>
         <nav className={menuOpen ? "nav is-open" : "nav"} aria-label="Product navigation">
           <a href="#results" onClick={() => setMenuOpen(false)}>Results</a>
-          <a href="#performance" onClick={() => setMenuOpen(false)}>Performance</a>
-          <a href="#workflow" onClick={() => setMenuOpen(false)}>Workflow</a>
-          <a href="#safety" onClick={() => setMenuOpen(false)}>Safety</a>
+          <a href="#capabilities" onClick={() => setMenuOpen(false)}>Why XRF</a>
           <a href="#specs" onClick={() => setMenuOpen(false)}>Specs</a>
         </nav>
         <button className="header-cta" type="button" onClick={configure}>Configure</button>
@@ -861,14 +967,6 @@ export function App() {
           </div>
         </section>
 
-        <nav className="feature-nav" aria-label="Explore XRF Gen2 capabilities">
-          <div>
-            {featureLinks.map(([sectionId, label]) => (
-              <button type="button" key={sectionId} className={activeFeature === sectionId ? "is-active" : ""} onClick={() => jumpTo(sectionId)}>{label}</button>
-            ))}
-          </div>
-        </nav>
-
         <section className="feature-overview" id="features" data-reveal>
           <img src={asset("xrf-overview-hero-web.webp")} alt="OneLaser XRF Gen2 in a working studio with finished products and brand proof" />
           <img src={asset("xrf-profit-products-web.webp")} alt="Premium products and example business outputs made with the OneLaser XRF Gen2" />
@@ -1008,92 +1106,7 @@ export function App() {
           </div>
         </section>
 
-        <StickyStory onPlay={openStory} />
-
-        <section className="section workflow" id="workflow" data-reveal>
-          <div className="section-heading section-heading--stack">
-            <span className="eyebrow">ONE TOUCH OF INNOVATION</span>
-            <h2>Four decisions from design to done.</h2>
-            <p>MakerBoost AI, the lid camera, XFocus and the full touchscreen turn a professional RF workflow into four clear decisions.</p>
-          </div>
-          <div className="workflow-layout">
-            <div className="workflow-image">
-              <img src={asset("xrf-touchscreen.jpg")} alt="XRF Gen2 integrated touchscreen close-up" />
-              <span>FULL TOUCHSCREEN · MOTION · ALERTS · STATUS</span>
-            </div>
-            <ol className="workflow-steps">
-              <li><span>01</span><div><strong>Create</strong><p>Generate vectors and match material parameters in MakerBoost AI, or work in LightBurn and RDWorks.</p></div></li>
-              <li><span>02</span><div><strong>Place</strong><p>Use the 12MP lid camera and RedDot™ positioning to align artwork before material is spent.</p></div></li>
-              <li><span>03</span><div><strong>Focus</strong><p>XFocus™ moves the head to the detected material height automatically.</p></div></li>
-              <li><span>04</span><div><strong>Run</strong><p>Move the head, adjust parameters and read status, alarms and faults from the touchscreen.</p></div></li>
-            </ol>
-          </div>
-        </section>
-
-        <section className="section reliability" id="reliability" data-reveal>
-          <div className="section-heading section-heading--left">
-            <span className="eyebrow">ENGINEERED FOR RELIABILITY</span>
-            <h2>Less maintenance. More making.</h2>
-            <p>The engineering details work together to reduce cleaning interruptions, field alignment and unexpected downtime.</p>
-          </div>
-          <div className="reliability-grid">
-            <article className="reliability-visual">
-              <img src={asset("xrf-ivs.jpg")} alt="Close-up of XRF Gen2 laser head and motion system" />
-              <div><span>SEALED OPTICAL ARCHITECTURE</span><h3>Keep dust away from the beam.</h3></div>
-            </article>
-            <div className="benefit-list">
-              <article><span>01</span><div><h3>Tool-free optics care</h3><p>Magnetic QuickSwitch lenses make cleaning and swapping fast.</p></div></article>
-              <article><span>02</span><div><h3>Factory-locked geometry</h3><p>The calibrated optical path is designed to stay aligned through normal use.</p></div></article>
-              <article><span>03</span><div><h3>Protected focus system</h3><p>Thermal isolation and controlled cable routing keep critical parts away from the processing zone.</p></div></article>
-              <article><span>04</span><div><h3>Built for sustained motion</h3><p>Closed-loop motors, all-steel rolling axes and structural reinforcement support daily production.</p></div></article>
-            </div>
-          </div>
-        </section>
-
-        <section className="proof-system" data-reveal>
-          <div className="proof-system__heading">
-            <span className="eyebrow">ENGINEERING PROOF</span>
-            <h2>Small systems. One steadier machine.</h2>
-            <p>Each compact system removes a real source of residue, noise, drift or risk.</p>
-          </div>
-          <div className="proof-system__grid">
-            {engineeringProofs.map((item, index) => (
-              <article key={item.title}>
-                <div><img src={asset(item.image)} alt="" /></div>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{item.title}</h3>
-                <p>{item.copy}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="section safety" id="safety" data-reveal>
-          <div className="safety-intro">
-            <span className="eyebrow">BUILT-IN PROTECTION</span>
-            <h2>Protection built into every job.</h2>
-            <p>Safety is treated as an architecture: separation, containment, monitoring and automatic response—not a list of stickers.</p>
-          </div>
-          <div className="safety-stage"><img src={asset("xrf-open.jpg")} alt="Open XRF Gen2 showing its enclosed Class 1 work area" /></div>
-          <div className="safety-proof-grid">
-            <article><ShieldCheck size={28} weight="regular" /><div><h3>Class 1 enclosure</h3><p>A fully enclosed processing zone keeps normal operation contained.</p></div></article>
-            <article><LockKey size={28} weight="regular" /><div><h3>Lid interlock</h3><p>Opening the lid stops laser operation until the machine is safely sealed.</p></div></article>
-            <article><Fire size={28} weight="regular" /><div><h3>Automatic suppression</h3><p>The isolated electrical bay includes heat-triggered fire suppression.</p></div></article>
-            <article><Thermometer size={28} weight="regular" /><div><h3>Thermal response</h3><p>High-temperature detection raises an alert and stops laser output.</p></div></article>
-          </div>
-        </section>
-
-        <section className="micro-features" aria-label="Additional XRF Gen2 features" data-reveal>
-          <div className="micro-features__intro"><span className="eyebrow">MORE DETAILS, LESS NOISE</span><h2>Everything else, exactly where it belongs.</h2></div>
-          <div className="micro-features__rail">
-            {microFeatures.map(({ title, copy, icon: Icon }, index) => (
-              <article key={title}>
-                <div className="micro-feature__top"><Icon size={26} weight="regular" aria-hidden="true" /><span>{String(index + 1).padStart(2, "0")}</span></div>
-                <strong>{title}</strong><p>{copy}</p>
-              </article>
-            ))}
-          </div>
-        </section>
+        <CapabilityBrowser onPlay={openStory} />
 
         <section className="section specs" id="specs" data-reveal>
           <div className="section-heading section-heading--stack">
