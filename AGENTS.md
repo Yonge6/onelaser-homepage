@@ -90,3 +90,5 @@ When implementing from a selected generated mock, treat that image as the source
 - Do not place a separate introduction block above the selling-point chapters; the chapter content should begin immediately with the navigation and first proof story.
 - Customer-success videos belong inside the shared arrow-controlled review rail, not in a separate large two-card module.
 - Use the supplied `38W.webp` and `70W.webp` as the dedicated editorial power-proof images without replacing other precision-story assets that happen to reuse earlier power imagery.
+- Keep Software as a dedicated two-story module using the supplied `Makerboost.webp` and `Software Compatibility.webp`; preserve the user-supplied Software headlines and body copy verbatim, and remove shorter duplicate software claims from Smart Workflow.
+- Present Support as one dedicated three-part module covering the exact user-supplied 30-day return terms, 3-2-1 warranty and One Support engineer promise. Preserve that copy verbatim and do not repeat simplified warranty/support claims in adjacent modules.

@@ -6508,3 +6508,318 @@ body { color: var(--ink); }
   from { filter: saturate(.82) contrast(.98); transform: scale(1.025); }
   to { filter: saturate(1) contrast(1); transform: scale(1); }
 }
+
+/* 2026-07-23 dedicated software and ownership-support modules. */
+.software-proof,
+.ownership-support {
+  padding: 48px max(36px, calc((100vw - 1280px) / 2));
+  box-sizing: border-box;
+}
+
+.software-proof {
+  background: #f5f5f7;
+}
+
+.ownership-support {
+  background: #fff;
+}
+
+.software-proof__inner,
+.ownership-support__inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.software-proof__header,
+.ownership-support__header {
+  margin-bottom: 32px;
+}
+
+.software-proof__header .eyebrow,
+.ownership-support__header .eyebrow {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.software-proof__header h2,
+.ownership-support__header h2 {
+  max-width: 1100px;
+  margin: 0;
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -.045em;
+}
+
+.software-proof__stories {
+  display: grid;
+  gap: 20px;
+}
+
+.software-proof__story {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(360px, .75fr);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  background: #fff;
+}
+
+.software-proof__story--reverse {
+  grid-template-columns: minmax(360px, .75fr) minmax(0, 1.25fr);
+}
+
+.software-proof__story--reverse .software-proof__media {
+  grid-column: 2;
+}
+
+.software-proof__story--reverse .software-proof__copy {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.software-proof__media {
+  min-width: 0;
+  display: grid;
+  place-items: center;
+  background: #f5f5f7;
+}
+
+.software-proof__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 15 / 7;
+  object-fit: contain;
+}
+
+.software-proof__copy {
+  display: flex;
+  min-width: 0;
+  padding: clamp(32px, 4vw, 56px);
+  flex-direction: column;
+  justify-content: center;
+}
+
+.software-proof__index {
+  color: var(--red);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .1em;
+}
+
+.software-proof__quote {
+  margin-top: 18px;
+  color: var(--red);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.software-proof__copy h3 {
+  margin: 18px 0 0;
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -.035em;
+}
+
+.software-proof__quote + h3 {
+  margin-top: 10px;
+}
+
+.software-proof__copy p {
+  margin: 20px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.62;
+}
+
+.ownership-support__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.ownership-support__card {
+  display: flex;
+  min-width: 0;
+  min-height: 430px;
+  padding: 36px;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  background: #f5f5f7;
+}
+
+.ownership-support__card--wide {
+  min-height: 0;
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr);
+  gap: 28px 56px;
+  align-items: start;
+  background: #fff;
+}
+
+.ownership-support__card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--red);
+}
+
+.ownership-support__card--wide .ownership-support__card-top {
+  grid-column: 1 / -1;
+}
+
+.ownership-support__card-top span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .1em;
+}
+
+.ownership-support__lead h3 {
+  margin: 34px 0 0;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -.035em;
+}
+
+.ownership-support__details {
+  margin-top: auto;
+  padding-top: 28px;
+}
+
+.ownership-support__card--wide .ownership-support__lead h3,
+.ownership-support__card--wide .ownership-support__details {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.ownership-support__details h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.ownership-support__details p {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.62;
+}
+
+.ownership-support__details > p:first-child {
+  margin-top: 0;
+}
+
+@media (max-width: 900px) {
+  .software-proof__story,
+  .software-proof__story--reverse {
+    grid-template-columns: 1fr;
+  }
+
+  .software-proof__story--reverse .software-proof__media,
+  .software-proof__story--reverse .software-proof__copy {
+    grid-column: 1;
+  }
+
+  .software-proof__story--reverse .software-proof__media {
+    grid-row: 1;
+  }
+
+  .software-proof__story--reverse .software-proof__copy {
+    grid-row: 2;
+  }
+
+  .ownership-support__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ownership-support__card,
+  .ownership-support__card--wide {
+    min-height: 0;
+    grid-column: auto;
+  }
+
+  .ownership-support__card--wide {
+    display: flex;
+    gap: 0;
+  }
+
+  .ownership-support__card--wide .ownership-support__lead h3 {
+    margin-top: 34px;
+  }
+
+  .ownership-support__card--wide .ownership-support__details {
+    margin-top: 0;
+    padding-top: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .software-proof,
+  .ownership-support {
+    padding: 32px 18px;
+  }
+
+  .software-proof__header,
+  .ownership-support__header {
+    margin-bottom: 24px;
+  }
+
+  .software-proof__header h2,
+  .ownership-support__header h2 {
+    font-size: 32px;
+    line-height: 1.04;
+  }
+
+  .software-proof__story {
+    border-radius: 24px;
+  }
+
+  .software-proof__copy {
+    padding: 24px 22px 28px;
+  }
+
+  .software-proof__copy h3 {
+    font-size: 26px;
+    line-height: 1.08;
+  }
+
+  .software-proof__copy p {
+    font-size: 15px;
+  }
+
+  .ownership-support__card {
+    padding: 28px 24px;
+    border-radius: 24px;
+  }
+
+  .ownership-support__lead h3,
+  .ownership-support__card--wide .ownership-support__lead h3 {
+    margin-top: 28px;
+    font-size: 26px;
+    line-height: 1.08;
+  }
+
+  .ownership-support__details h4 {
+    font-size: 17px;
+  }
+
+  .ownership-support__details p {
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .software-proof__media img {
+    transition: none;
+  }
+}

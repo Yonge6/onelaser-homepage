@@ -269,7 +269,7 @@ const capabilityChapters = [
     id: "workflow",
     nav: "Smart Workflow",
     title: "Make every setup decision clearer.",
-    summary: "Vision, software, autofocus and direct machine control reduce the guesswork between an idea and a finished job.",
+    summary: "Vision, autofocus and direct machine control reduce the guesswork between an idea and a finished job.",
     spotlights: [
       {
         eyebrow: "IVS PRINT & CUT",
@@ -280,15 +280,15 @@ const capabilityChapters = [
       },
       {
         eyebrow: "ONE TOUCH OF INNOVATION",
-        title: "From design to done, in one clear flow.",
-        copy: "MakerBoost AI generates vectors and material parameters, XFocus™ handles focal distance, and the full touchscreen keeps motion, settings, alerts and machine status close at hand.",
-        metrics: ["MakerBoost AI", "XFocus™ autofocus", "Full touchscreen"],
+        title: "Focus and control, in one clear flow.",
+        copy: "XFocus™ handles focal distance while the full touchscreen keeps motion, settings, alerts and machine status close at hand.",
+        metrics: ["XFocus™ autofocus", "Full touchscreen", "Direct machine control"],
         image: "xrf-touchscreen.jpg",
       },
     ],
     support: [
       { title: "See the full bed", copy: "The 12MP lid camera supports full-frame positioning, contour capture and remote monitoring.", image: "xrf-ivs.jpg" },
-      { title: "Use the software you know", copy: "Work in LightBurn, RDWorks or MakerBoost AI on Windows and macOS.", image: "xrf-touchscreen.jpg" },
+      { title: "Control it from the machine", copy: "Adjust motion, job settings and machine status directly from the integrated touchscreen.", image: "xrf-touchscreen.jpg" },
     ],
     proofs: [
       { value: "12MP", label: "Top-cover camera", icon: Camera },
@@ -296,7 +296,7 @@ const capabilityChapters = [
       { value: "3 ways", label: "WiFi / USB / Ethernet", icon: WifiHigh },
       { value: "Resume", label: "After power returns", icon: ArrowClockwise },
     ],
-    details: ["AI / PDF / DXF / SVG / LBRN", "Bitmap formats supported", "Remote operation and monitoring"],
+    details: ["Automatic autofocus", "Real-time status and alerts", "Remote operation and monitoring"],
   },
   {
     id: "expansion",
@@ -1130,6 +1130,38 @@ export function App() {
 
         <CapabilityBrowser onPlay={openStory} />
 
+        <section className="software-proof" id="software" data-reveal>
+          <div className="software-proof__inner">
+            <header className="software-proof__header">
+              <span className="eyebrow">SOFTWARE</span>
+              <h2>&quot;Out of the box, into creation.&quot;</h2>
+            </header>
+            <div className="software-proof__stories">
+              <article className="software-proof__story">
+                <div className="software-proof__media">
+                  <img src={asset("software-makerboost.webp")} alt="MakerBoost AI software identity artwork" />
+                </div>
+                <div className="software-proof__copy">
+                  <span className="software-proof__index">01</span>
+                  <h3>MakerBoost AI Software — Deeply Tuned for XRF, Zero Learning Curve</h3>
+                  <p>MakerBoost AI is deeply integrated with the XRF platform — one-click AI vector generation and a material-matched parameter library take first-time users from unboxing to finished work in minutes.</p>
+                </div>
+              </article>
+              <article className="software-proof__story software-proof__story--reverse">
+                <div className="software-proof__media">
+                  <img src={asset("software-compatibility.webp")} alt="LightBurn and RDWorks software compatibility shown on a laptop" />
+                </div>
+                <div className="software-proof__copy">
+                  <span className="software-proof__index">02</span>
+                  <strong className="software-proof__quote">&quot;Your software. Your way.&quot;</strong>
+                  <h3>LightBurn / RDWorks / MakerBoost Compatible</h3>
+                  <p>Works with LightBurn, RDWorks, and MakerBoost AI — supporting formats including AI, PDF, DXF, HPGL, PLT, RD, SVG, LBRN, BMP, JPG, PNG, GIF, TIFF and more.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
         <section className="section specs" id="specs" data-reveal>
           <div className="section-heading section-heading--stack">
             <span className="eyebrow">COMPLETE DETAILS</span><h2>Specifications.</h2>
@@ -1175,22 +1207,41 @@ export function App() {
 
         <section className="facility-trust" data-reveal>
           <YouTubeCover video={decisionVideos.facility} onPlay={setYoutubeVideo} />
-          <div className="facility-trust__copy"><span className="eyebrow">ENGINEERING YOU CAN SEE</span><h2>Support you can reach.</h2><p>See the production capability behind the machine, then stay supported through ownership.</p></div>
-          <div className="facility-trust__proofs"><span>3-Year Warranty</span><span>Technical Support</span><span>Replacement Parts</span><span>Knowledge Base</span></div>
+          <div className="facility-trust__copy"><span className="eyebrow">ENGINEERING YOU CAN SEE</span><h2>Built behind the product.</h2><p>See the production capability, quality process and parts readiness behind every OneLaser machine.</p></div>
+          <div className="facility-trust__proofs"><span>Expanded Facility</span><span>Assembly</span><span>Quality Control</span><span>Parts Readiness</span></div>
         </section>
 
-        <section className="support-section" id="support" data-reveal>
-          <img src={asset("xrf-workshop-story.webp")} alt="OneLaser customer in a workshop beside XRF Gen2 and finished products" />
-          <div className="support-overlay">
-            <span className="eyebrow">ONE SUPPORT</span>
-            <h2>Real engineers.<br />Real experience.</h2>
-            <p>US-based engineers with 5+ years of average laser-industry experience help with setup, troubleshooting and long-term production support.</p>
-            <div className="support-proof">
-              <div><strong>30 days</strong><span>Satisfaction period*</span></div>
-              <div><strong>3–2–1</strong><span>Warranty structure</span></div>
-              <div><strong>US based</strong><span>Engineer support</span></div>
+        <section className="ownership-support" id="support" data-reveal>
+          <div className="ownership-support__inner">
+            <header className="ownership-support__header">
+              <span className="eyebrow">SUPPORT</span>
+              <h2>&quot;We built it to last. We back it to prove it.&quot;</h2>
+            </header>
+            <div className="ownership-support__grid">
+              <article className="ownership-support__card">
+                <div className="ownership-support__card-top"><Check size={26} weight="bold" aria-hidden="true" /><span>01</span></div>
+                <div className="ownership-support__lead"><h3>30-Day Money-Back Guarantee.</h3></div>
+                <div className="ownership-support__details">
+                  <h4>Support 30-Day Satisfaction Guarantee — Try It. Love It. Or Return It.</h4>
+                  <p>Take a full 30 days to get to know your XRF. If it's not the right fit for you, just reach out — we'll help you send it back, no hard feelings, no hassle. We'd rather you find the perfect machine than keep one that isn't. (Refunds are issued in full, less a 3% payment processing fee and round-trip shipping costs.)</p>
+                </div>
+              </article>
+              <article className="ownership-support__card">
+                <div className="ownership-support__card-top"><ShieldCheck size={26} weight="regular" aria-hidden="true" /><span>02</span></div>
+                <div className="ownership-support__lead"><h3>3-2-1 Warranty — 3-Year Frame / 2-Year Electronics / 1-Year Laser Source</h3></div>
+                <div className="ownership-support__details">
+                  <p>Every XRF is backed by our 3-2-1 warranty: three years on the frame and structure, two years on electronics, and one year on the laser source — among the strongest coverage in its class. It's not fine print; it's what confidence in our own build quality looks like.</p>
+                </div>
+              </article>
+              <article className="ownership-support__card ownership-support__card--wide">
+                <div className="ownership-support__card-top"><Star size={26} weight="regular" aria-hidden="true" /><span>03</span></div>
+                <div className="ownership-support__lead"><h3>&quot;One&quot; Support: &quot;Real engineers. Real experience.&quot;</h3></div>
+                <div className="ownership-support__details">
+                  <h4>US-Based Engineers, 5+ Years Average Industry Experience — Lifetime Support</h4>
+                  <p>When you call OneLaser, you talk to a US-based engineer with an average of over five years in the laser industry — people who've built, tuned, and repaired these machines, not script-readers. That experience means faster answers, first-call solutions, and real support. You're not just buying a machine; you're buying the team behind it.</p>
+                </div>
+              </article>
             </div>
-            <a href="#faq">Review support details</a>
           </div>
         </section>
 
