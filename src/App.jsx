@@ -111,7 +111,7 @@ const powerProofs = [
     title: "Fine detail for everyday production.",
     copy: "A precise RF source for photography, fine text, personalization and balanced daily output.",
     proof: "2,000 DPI detail · Air cooled · Up to 30,000 hours",
-    image: "power-38w-proof.webp",
+    image: "power-38w-result.webp",
     alt: "Fine RF engraving detail for 38W everyday production",
   },
   {
@@ -121,7 +121,7 @@ const powerProofs = [
     title: "More headroom for demanding work.",
     copy: "More RF output for deeper relief, high-DPI grayscale at speed and heavier production workloads.",
     proof: "Up to 50 kHz · Deeper relief · More cutting headroom",
-    image: "power-70w-proof.webp",
+    image: "power-70w-result.webp",
     alt: "Deep relief and batch production proof for higher-throughput 70W RF work",
   },
 ];
@@ -202,6 +202,8 @@ const decisionVideos = {
 };
 
 const reviewVideos = [
+  decisionVideos.business,
+  decisionVideos.businessFit,
   decisionVideos.performance,
   { id: "jNaj50MkKiE", title: "“I was wrong about OneLaser.”", channel: "Make or Break Shop", tag: "LONG-TERM PERSPECTIVE" },
   { id: "hwtVOBUCGxw", title: "Full XRF review", channel: "The Louisiana Hobby Guy", tag: "INDEPENDENT HANDS-ON REVIEW" },
@@ -609,11 +611,6 @@ function CapabilityBrowser({ onPlay }) {
 
   return (
     <section className="capability-scroll" id="capabilities">
-      <div className="capability-scroll__intro">
-        <span className="eyebrow">WHY XRF GEN2</span>
-        <h2>A guided tour of the systems behind every result.</h2>
-        <p>Follow six visual stories, then scan the supporting engineering proof without losing your place.</p>
-      </div>
       <div className="capability-scroll__layout">
         <nav className="capability-scroll__nav" aria-label="Explore XRF Gen2 advantages" ref={navRef}>
           {capabilityChapters.map((item, index) => (
@@ -626,7 +623,6 @@ function CapabilityBrowser({ onPlay }) {
               data-chapter-nav={index}
             >
               <span><i>{String(index + 1).padStart(2, "0")}</i><strong>{item.nav}</strong></span>
-              <small>{item.title}</small>
             </button>
           ))}
         </nav>
@@ -1097,25 +1093,6 @@ export function App() {
           </div>
         </section>
 
-        <section className="business-proof" id="business-proof" data-reveal>
-          <div className="section-heading section-heading--stack">
-            <span className="eyebrow">CUSTOMER SUCCESS</span>
-            <h2>Built to build a business.</h2>
-            <p>More than a creative tool&mdash;the XRF is designed to support real products, real orders and growing businesses.</p>
-          </div>
-          <div className="business-proof__grid">
-            <article className="business-proof__card">
-              <YouTubeCover video={decisionVideos.business} onPlay={setYoutubeVideo} />
-              <div><span className="eyebrow">FROM SIDE PROJECT TO SIX-FIGURE BUSINESS</span><h3>See how one maker built around real customer orders.</h3><p>A OneLaser customer turned laser production into a growing business and a more repeatable workflow.</p></div>
-            </article>
-            <article className="business-proof__card">
-              <YouTubeCover video={decisionVideos.businessFit} onPlay={setYoutubeVideo} />
-              <div><span className="eyebrow">SMALL BUSINESS · PRODUCTION</span><h3>Is the XRF right for your business?</h3><p>A buyer-focused view of fit, workflow and production potential.</p></div>
-            </article>
-          </div>
-          <small className="business-proof__disclaimer">Individual results vary. Business success depends on products, pricing, marketing, demand and execution.</small>
-        </section>
-
         <section className="power-guide" id="power-guide" data-reveal>
           <div className="power-guide__inner">
             <div className="section-heading section-heading--left">
@@ -1166,9 +1143,9 @@ export function App() {
         <section className="review-proof" id="reviews" aria-labelledby="review-proof-title" data-reveal>
           <div className="review-proof__header">
             <div className="section-heading section-heading--stack">
-              <span className="eyebrow">INDEPENDENT WORKSHOP REVIEWS</span>
-              <h2 id="review-proof-title">Real reviews. Real results.</h2>
-              <p>Hear from creators who tested OneLaser machines in real workshops and production environments.</p>
+              <span className="eyebrow">CUSTOMER SUCCESS · INDEPENDENT REVIEWS</span>
+              <h2 id="review-proof-title">Real stories. Real results.</h2>
+              <p>Hear from customers building with XRF and creators who tested OneLaser machines in real workshops.</p>
             </div>
             <div className="review-proof__controls" aria-label="Browse creator reviews">
               <button type="button" onClick={() => scrollReviewVideos(-1)} aria-label="Show previous creator reviews"><CaretLeft size={22} /></button>

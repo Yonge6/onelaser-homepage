@@ -86,3 +86,7 @@ When implementing from a selected generated mock, treat that image as the source
 - On desktop, each sticky P0 story keeps the active left-hand copy and right-hand media in the same upper-middle horizontal band. Keep story steps close enough that switching never leaves a large blank interval between the copy and its corresponding media.
 - Do not show an announcement strip above the main navigation; the main header is the first visible site chrome.
 - Selling-point navigation must be genuinely scroll-linked: keep every chapter in document flow, update the sticky desktop rail / mobile horizontal rail from reading position, and let each rail item jump to its chapter. Do not simulate this with tabs that replace a single content panel.
+- Keep the desktop selling-point rail flush to the far-left page edge like xTool P3. Each rail item is one line with only its number and selling-point name; do not add explanatory copy. Keep the existing horizontal swipe rail on mobile.
+- Do not place a separate introduction block above the selling-point chapters; the chapter content should begin immediately with the navigation and first proof story.
+- Customer-success videos belong inside the shared arrow-controlled review rail, not in a separate large two-card module.
+- Use the supplied `38W.webp` and `70W.webp` as the dedicated editorial power-proof images without replacing other precision-story assets that happen to reuse earlier power imagery.

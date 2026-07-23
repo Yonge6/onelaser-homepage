@@ -9,50 +9,19 @@
 /* 2026-07-23: scroll-linked capability narrative */
 .capability-scroll {
   scroll-margin-top: 64px;
-  padding: 64px 32px 48px;
+  padding: 48px 0;
   background: #fff;
   color: var(--ink);
 }
 
-.capability-scroll__intro,
 .capability-scroll__layout {
-  width: min(100%, 1280px);
-  margin: 0 auto;
-}
-
-.capability-scroll__intro {
-  padding-bottom: 48px;
-  border-bottom: 1px solid var(--divider);
-}
-
-.capability-scroll__intro .eyebrow {
-  display: block;
-  margin-bottom: 8px;
-}
-
-.capability-scroll__intro h2 {
-  max-width: 1080px;
-  margin: 0;
-  font-size: 48px;
-  font-weight: 800;
-  line-height: 1.02;
-  letter-spacing: -.045em;
-}
-
-.capability-scroll__intro p {
-  max-width: 820px;
-  margin: 12px 0 0;
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.55;
-}
-
-.capability-scroll__layout {
+  width: 100%;
   display: grid;
-  grid-template-columns: 248px minmax(0, 1fr);
-  gap: 56px;
+  grid-template-columns: clamp(200px, 16vw, 240px) minmax(0, 1040px);
+  gap: 40px;
   align-items: start;
-  padding-top: 48px;
+  padding-right: max(32px, calc((100vw - 1280px) / 2));
+  box-sizing: border-box;
 }
 
 .capability-scroll__nav {
@@ -61,14 +30,14 @@
   display: grid;
   align-self: start;
   border-top: 1px solid var(--divider);
+  border-right: 1px solid var(--divider);
 }
 
 .capability-scroll__nav button {
   position: relative;
-  display: grid;
-  gap: 7px;
-  min-height: 84px;
-  padding: 16px 12px 16px 16px;
+  display: block;
+  min-height: 56px;
+  padding: 17px 14px 17px 24px;
   border: 0;
   border-bottom: 1px solid var(--divider);
   background: transparent;
@@ -80,7 +49,7 @@
 
 .capability-scroll__nav button::before {
   position: absolute;
-  inset: 14px auto 14px 0;
+  inset: 10px auto 10px 0;
   width: 3px;
   background: transparent;
   content: "";
@@ -105,6 +74,7 @@
   display: flex;
   gap: 12px;
   align-items: baseline;
+  white-space: nowrap;
 }
 
 .capability-scroll__nav button i {
@@ -120,14 +90,6 @@
   font-size: 15px;
   font-weight: 800;
   line-height: 1.2;
-}
-
-.capability-scroll__nav button small {
-  padding-left: 34px;
-  color: inherit;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1.35;
 }
 
 .capability-scroll__chapters {
@@ -469,8 +431,9 @@
 
 @media (max-width: 1080px) {
   .capability-scroll__layout {
-    grid-template-columns: 218px minmax(0, 1fr);
-    gap: 32px;
+    grid-template-columns: 204px minmax(0, 1fr);
+    gap: 28px;
+    padding-right: 24px;
   }
 
   .capability-scroll__chapter-heading {
@@ -492,23 +455,10 @@
     padding: 32px 0;
   }
 
-  .capability-scroll__intro {
-    padding: 0 18px 28px;
-  }
-
-  .capability-scroll__intro h2 {
-    font-size: 32px;
-    line-height: 1.04;
-  }
-
-  .capability-scroll__intro p {
-    font-size: 15px;
-  }
-
   .capability-scroll__layout {
     display: block;
     width: 100%;
-    padding-top: 0;
+    padding-right: 0;
   }
 
   .capability-scroll__nav {
@@ -521,6 +471,7 @@
     padding: 9px 18px;
     overflow-x: auto;
     border-top: 0;
+    border-right: 0;
     border-bottom: 1px solid var(--divider);
     background: rgba(255, 255, 255, .95);
     scrollbar-width: none;
@@ -532,8 +483,9 @@
   }
 
   .capability-scroll__nav button {
-    flex: 0 0 174px;
-    min-height: 62px;
+    flex: 0 0 auto;
+    min-width: max-content;
+    min-height: 52px;
     padding: 10px 12px;
     border: 1px solid var(--divider);
     border-radius: 16px;
@@ -549,10 +501,6 @@
   .capability-scroll__nav button.is-active {
     border-color: var(--red);
     background: #fff3f0;
-  }
-
-  .capability-scroll__nav button small {
-    display: none;
   }
 
   .capability-scroll__chapters {
@@ -6392,7 +6340,7 @@ body { color: var(--ink); }
 
   .power-proof-stage__media {
     min-height: 0;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 3 / 2;
   }
 
   .power-proof-stage__copy {
