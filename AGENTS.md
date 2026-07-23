@@ -97,3 +97,7 @@ When implementing from a selected generated mock, treat that image as the source
 - Do not show a Support section eyebrow or standalone heading. In the warranty card, use `We built it to last. We back it to prove it.` as the large lead and move the 3-2-1 warranty line into the smaller bold supporting-copy position.
 - The production-facility video module uses the same large split-card anatomy, heading scale, spacing and proof-row treatment as the preceding `Considering an xTool P2? Watch this first.` module.
 - Do not show the final image CTA module after FAQ. The FAQ section should transition directly into the site footer.
+- Match the RF-advantage explainer to the long-form 38W/70W power-guide anatomy: full-width `#F5F5F7` band, 1280 px editorial grid, centered segmented control, and one large media-left/copy-right proof stage.
+- Keep each selling-point chapter on the full centered 1280 px content grid. On desktop the compact scroll-linked text rail floats at the far-left edge without consuming chapter width; chapter titles use 48 px type and their direct descriptions use 16 px type with the shared 8 px / 12 px heading rhythm.
+- In the standalone MakerBoost AI and Software modules, the secondary product/software claim is supporting copy at 16 px rather than a second large card heading; place it directly beneath the 48 px section title and above the 16 px body.
+- The xTool comparison and production-facility video cards use `#F5F5F7` surfaces. The Support section uses a `#F5F5F7` band with all three support cards on white surfaces.

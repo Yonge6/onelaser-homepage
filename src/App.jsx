@@ -1184,18 +1184,18 @@ export function App() {
               aria-labelledby={`rf-tab-${rfAdvantages[activeRfAdvantage].id}`}
               aria-live="polite"
             >
-              <div className="rf-advantages__copy">
-                <span className="eyebrow">{rfAdvantages[activeRfAdvantage].eyebrow}</span>
-                <h3>{rfAdvantages[activeRfAdvantage].title}</h3>
-                <p>{rfAdvantages[activeRfAdvantage].copy}</p>
-                <strong>{rfAdvantages[activeRfAdvantage].proof}</strong>
-              </div>
               <div className="rf-advantages__media">
                 <img
                   key={rfAdvantages[activeRfAdvantage].id}
                   src={asset(rfAdvantages[activeRfAdvantage].image)}
                   alt={rfAdvantages[activeRfAdvantage].alt}
                 />
+              </div>
+              <div className="rf-advantages__copy">
+                <span className="eyebrow">{rfAdvantages[activeRfAdvantage].eyebrow}</span>
+                <h3>{rfAdvantages[activeRfAdvantage].title}</h3>
+                <p>{rfAdvantages[activeRfAdvantage].copy}</p>
+                <strong>{rfAdvantages[activeRfAdvantage].proof}</strong>
               </div>
             </div>
           </div>
@@ -1246,8 +1246,8 @@ export function App() {
                 <h2>&quot;Out of the box, into creation.&quot;</h2>
               </header>
               <div className="makerboost-proof__copy">
-                <h3>MakerBoost AI Software — Deeply Tuned for XRF, Zero Learning Curve</h3>
-                <p>MakerBoost AI is deeply integrated with the XRF platform — one-click AI vector generation and a material-matched parameter library take first-time users from unboxing to finished work in minutes.</p>
+                <p className="makerboost-proof__subhead">MakerBoost AI Software — Deeply Tuned for XRF, Zero Learning Curve</p>
+                <p className="makerboost-proof__body">MakerBoost AI is deeply integrated with the XRF platform — one-click AI vector generation and a material-matched parameter library take first-time users from unboxing to finished work in minutes.</p>
               </div>
             </div>
             <div className="makerboost-proof__media">
@@ -1264,8 +1264,8 @@ export function App() {
             </header>
             <article className="software-compatibility__stage">
               <div className="software-compatibility__copy">
-                <h3>LightBurn / RDWorks / MakerBoost Compatible</h3>
-                <p>Works with LightBurn, RDWorks, and MakerBoost AI — supporting formats including AI, PDF, DXF, HPGL, PLT, RD, SVG, LBRN, BMP, JPG, PNG, GIF, TIFF and more.</p>
+                <p className="software-compatibility__subhead">LightBurn / RDWorks / MakerBoost Compatible</p>
+                <p className="software-compatibility__body">Works with LightBurn, RDWorks, and MakerBoost AI — supporting formats including AI, PDF, DXF, HPGL, PLT, RD, SVG, LBRN, BMP, JPG, PNG, GIF, TIFF and more.</p>
               </div>
               <div className="software-compatibility__media">
                 <img src={asset("software-compatibility.webp")} alt="LightBurn and RDWorks software compatibility shown on a laptop" />

@@ -7255,3 +7255,240 @@ body { color: var(--ink); }
     padding: 24px 22px 28px;
   }
 }
+
+/* 2026-07-23 shared UI normalization from the latest annotation pass. */
+.capability-scroll {
+  overflow: clip;
+}
+
+.rf-advantages {
+  padding-top: 48px;
+  padding-bottom: 48px;
+  background: #f5f5f7;
+}
+
+.rf-advantages__header {
+  max-width: none;
+  margin-bottom: 40px;
+}
+
+.rf-advantages__tabs {
+  width: min(100%, 720px);
+  gap: 4px;
+  margin: 0 auto 32px;
+  padding: 5px;
+  background: #e2e2e7;
+}
+
+.rf-advantages__tabs button {
+  min-height: 58px;
+  border: 0;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.rf-advantages__tabs button.is-active {
+  border: 0;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .06);
+}
+
+.rf-advantages__stage {
+  min-height: 620px;
+  grid-template-columns: minmax(0, 1.52fr) minmax(350px, .48fr);
+  background: #fff;
+}
+
+.rf-advantages__media {
+  min-height: 620px;
+  background: #fff;
+}
+
+.rf-advantages__copy {
+  padding: clamp(36px, 4vw, 64px);
+  background: #fff;
+}
+
+.rf-advantages__copy h3 {
+  margin-top: 18px;
+  font-size: 36px;
+  line-height: 1.04;
+  letter-spacing: -.025em;
+}
+
+.rf-advantages__copy p {
+  margin-top: 24px;
+}
+
+.rf-advantages__copy strong {
+  margin-top: 32px;
+  padding-top: 24px;
+}
+
+.makerboost-proof__copy,
+.software-compatibility__copy {
+  padding: 0;
+}
+
+.makerboost-proof__copy .makerboost-proof__subhead,
+.software-compatibility__copy .software-compatibility__subhead {
+  margin: 0;
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.45;
+  letter-spacing: -.01em;
+}
+
+.makerboost-proof__copy .makerboost-proof__body,
+.software-compatibility__copy .software-compatibility__body {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.software-compatibility__header {
+  margin-bottom: 24px;
+}
+
+.software-compatibility__stage {
+  display: block;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.software-compatibility__copy {
+  margin-bottom: 32px;
+}
+
+.software-compatibility__media {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  background: #fff;
+}
+
+.sales-video--competitor,
+.sales-video--facility {
+  background: #f5f5f7;
+}
+
+.ownership-support {
+  background: #f5f5f7;
+}
+
+.ownership-support__card,
+.ownership-support__card--wide {
+  background: #fff;
+}
+
+@media (min-width: 1181px) {
+  .capability-scroll__layout {
+    position: relative;
+    display: block;
+    width: min(1280px, calc(100% - 72px));
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .capability-scroll__nav {
+    z-index: 6;
+    width: 136px;
+    height: auto;
+    margin-bottom: -190px;
+    overflow: visible;
+    transform: translateX(calc(-1 * max(0px, (100vw - 1280px) / 2)));
+  }
+
+  .capability-scroll__nav button {
+    min-height: 38px;
+    padding: 8px 6px;
+  }
+
+  .capability-scroll__nav button strong {
+    font-size: 13px;
+  }
+
+  .capability-scroll__chapters {
+    width: 100%;
+  }
+
+  .capability-scroll__chapter {
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+  }
+
+  .capability-scroll__chapter-heading h3 {
+    font-size: 48px;
+  }
+
+  .capability-scroll__chapter-heading > p,
+  .capability-scroll__story-copy p {
+    font-size: 16px;
+  }
+
+  .makerboost-proof__copy .makerboost-proof__subhead,
+  .software-compatibility__copy .software-compatibility__subhead,
+  .software-compatibility__copy .software-compatibility__body {
+    max-width: none;
+    white-space: nowrap;
+  }
+
+  .makerboost-proof__copy .makerboost-proof__body {
+    max-width: none;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 900px) {
+  .rf-advantages__stage {
+    min-height: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .rf-advantages__media {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .rf-advantages__tabs {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    margin-bottom: 24px;
+    border-radius: 24px;
+  }
+
+  .rf-advantages__tabs button {
+    min-height: 48px;
+    justify-content: flex-start;
+    padding: 0 18px;
+    font-size: 14px;
+  }
+
+  .rf-advantages__stage {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rf-advantages__copy h3 {
+    font-size: 28px;
+  }
+
+  .makerboost-proof__copy .makerboost-proof__subhead,
+  .software-compatibility__copy .software-compatibility__subhead,
+  .makerboost-proof__copy .makerboost-proof__body,
+  .software-compatibility__copy .software-compatibility__body {
+    font-size: 15px;
+    white-space: normal;
+  }
+
+  .software-compatibility__media {
+    border-radius: 24px;
+  }
+}
