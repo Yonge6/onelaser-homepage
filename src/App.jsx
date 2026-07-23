@@ -595,22 +595,31 @@ function GenerationComparison() {
           <p><strong>More power. Higher precision. Greater reliability.</strong></p>
         </header>
 
-        <div className="generation-comparison__grid" role="list" aria-label="XRF Gen 1 and XRF Gen 2 feature comparison">
-          {generationComparisons.map((item) => (
-            <article className="generation-comparison__card" role="listitem" key={item.feature}>
-              <h3>{item.feature}</h3>
-              <div className="generation-comparison__values">
-                <div className="generation-comparison__gen1">
-                  <span>XRF Gen 1</span>
-                  <p>{item.gen1}</p>
-                </div>
-                <div className="generation-comparison__gen2">
-                  <span>XRF Gen 2</span>
-                  <p>{item.gen2}</p>
-                </div>
-              </div>
-            </article>
-          ))}
+        <div className="generation-comparison__table-wrap">
+          <table className="generation-comparison__table">
+            <caption className="sr-only">XRF Gen 1 and XRF Gen 2 feature comparison</caption>
+            <colgroup>
+              <col className="generation-comparison__feature-column" />
+              <col className="generation-comparison__gen1-column" />
+              <col className="generation-comparison__gen2-column" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col"><span className="sr-only">Feature</span></th>
+                <th scope="col">XRF Gen 1</th>
+                <th scope="col">XRF Gen 2</th>
+              </tr>
+            </thead>
+            <tbody>
+              {generationComparisons.map((item) => (
+                <tr key={item.feature}>
+                  <th scope="row">{item.feature}</th>
+                  <td className="generation-comparison__gen1" data-label="XRF Gen 1">{item.gen1}</td>
+                  <td className="generation-comparison__gen2" data-label="XRF Gen 2">{item.gen2}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
         <p className="generation-comparison__statement">Deeper 3D relief. Sharper grayscale. Steadier engraving. Cleaner production.</p>

@@ -57,6 +57,47 @@
 
 final result: passed
 
+## 2026-07-23 generation comparison table redesign
+
+### Evidence
+
+- Source visual truth: `/var/folders/vd/kws8fm5509l6b9hnywhd8yfr0000gn/T/codex-clipboard-c1780e93-0014-42de-9aba-c13f1c0a2751.png`.
+- Browser-rendered implementation: `qa/gen-comparison-table-implementation-desktop.png`.
+- Combined comparison input: `qa/gen-comparison-table-combined.png`.
+- Desktop viewport: 1586 × 1178 CSS px at device scale 1. The focused implementation capture is 1586 × 837 px.
+- Responsive checks: 768 × 1000 and 390 × 844 CSS px.
+- State: default page state with the generation comparison aligned below the fixed header.
+
+### Full-view and focused comparison
+
+- Replaced the six separate comparison cards with one continuous three-column table so every feature can be scanned horizontally from feature to Gen 1 to Gen 2.
+- The reference's black surface is intentionally translated to the approved `#F5F5F7` and white OneLaser surfaces. Its information hierarchy, row rhythm, column proportions and direct side-by-side reading pattern are preserved.
+- The reference's `Header`, `2 × 3 Comparison Grid` and `Bottom Statement` labels are treated as design-document annotations rather than customer-facing copy.
+- Gen 1 is consistently weakened with `#ECECEF` and secondary text. Gen 2 remains dominant through black bold copy and a continuous OneLaser-red column accent.
+
+### Required fidelity surfaces
+
+- Fonts and typography: passed. Official Certia remains in use; the 48 px desktop / 32 px mobile section heading hierarchy is unchanged.
+- Spacing and layout rhythm: passed. The table uses one continuous bordered surface, six aligned rows and a 25% / 31% / 44% desktop column structure. Mobile keeps the same reading order in one continuous stacked table.
+- Colors and visual tokens: passed. Structural surfaces remain white or `#F5F5F7`; Gen 1 uses light gray, and Gen 2 uses `#E7310E` plus black as requested.
+- Image quality and asset fidelity: not applicable; this text-only comparison introduces no visual assets.
+- Copy and content: passed. All six comparison claims and the bottom statement remain unchanged.
+
+### Responsive and browser verification
+
+- Desktop renders six rows and three columns at 1278 px table width with zero horizontal overflow.
+- Tablet at 768 px reports zero horizontal overflow and readable row wrapping.
+- Mobile at 390 px hides the desktop column header and exposes the same Gen 1 / Gen 2 labels inside each stacked feature row, with zero horizontal overflow.
+- Browser console contains no errors.
+
+### Findings and comparison history
+
+- Initial issue: the six-card layout forced readers to re-locate Gen 1 and Gen 2 labels in every card and made cross-feature scanning slower.
+- Fix: converted the component to one semantic table with persistent desktop column headings and responsive mobile data labels.
+- Post-fix result: the implementation matches the reference's direct row-comparison anatomy while preserving the OneLaser light-surface system. No actionable P0, P1 or P2 findings remain.
+
+final result: passed
+
 ## 2026-07-22 profit artwork replacement
 
 - Replaced the previous profit-and-product-output artwork with the latest user-supplied `/Users/yongyuan/Downloads/2.webp`.
