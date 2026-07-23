@@ -354,7 +354,10 @@ function ProductOpportunities({ asset }) {
                 {activeProduct.tags.map((tag) => <span key={tag}>{tag}</span>)}
               </div>
               <p className="product-detail__summary">{activeProduct.description}</p>
-              <p>{activeProduct.setupNote}</p>
+              <p className="product-detail__setup">
+                <small>Setup guidance</small>
+                <span>{activeProduct.setupNote}</span>
+              </p>
             </article>
             <ProductEconomics product={activeProduct} />
           </div>

@@ -285,7 +285,7 @@
   grid-template-rows: minmax(0, 1fr) auto;
   overflow: hidden;
   padding: 0;
-  border: 1px solid var(--line);
+  border: 2px solid var(--line);
   border-radius: 24px;
   background: #fff;
   color: var(--ink);
@@ -308,7 +308,7 @@
 
 .product-card.is-active {
   border-color: var(--red);
-  box-shadow: inset 0 0 0 1px var(--red);
+  box-shadow: none;
   background: #fff7f4;
   opacity: 1;
   transform: scale(1.012);
@@ -374,6 +374,8 @@
 .product-detail {
   min-width: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
   padding: 18px;
   border: 1px solid var(--line);
   border-radius: 20px;
@@ -384,7 +386,7 @@
 .product-detail__facts {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  gap: 20px;
 }
 
 .product-detail__facts > span {
@@ -401,14 +403,15 @@
 .product-detail__facts strong {
   display: block;
   margin-top: 4px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 800;
   line-height: 1.35;
 }
 
 .product-detail__facts .product-detail__price {
   color: var(--red);
-  font-size: 22px;
+  font-size: 32px;
+  font-weight: 900;
   line-height: 1;
 }
 
@@ -437,7 +440,34 @@
 }
 
 .product-detail > .product-detail__summary {
-  display: none;
+  margin-top: 14px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.product-detail > .product-detail__setup {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 12px;
+  margin-top: auto;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #fff7f4;
+}
+
+.product-detail__setup small {
+  color: var(--red);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.product-detail__setup span {
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.45;
 }
 
 .product-economics {
@@ -477,17 +507,18 @@
 .product-economics__metrics {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
+  gap: 8px;
   margin: 10px 0 0;
   overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: var(--line);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .product-economics__metrics > div {
   min-height: 56px;
   padding: 8px 10px;
+  border-radius: 14px;
   background: #f5f5f7;
 }
 
@@ -518,7 +549,7 @@
   gap: 3px;
   align-content: start;
   padding: 6px 0;
-  border-top: 1px solid var(--line);
+  border: 0;
 }
 
 .product-economics__details dd {
@@ -532,7 +563,7 @@
 .product-economics__disclaimer {
   margin: 4px 0 0;
   padding-top: 6px;
-  border-top: 1px solid var(--line);
+  border: 0;
   color: var(--muted);
   font-size: 12px;
   line-height: 1.35;
@@ -890,6 +921,12 @@
 
   .product-detail > .product-detail__summary {
     display: none;
+  }
+
+  .product-detail > .product-detail__setup {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    margin-top: 14px;
   }
 
   .product-economics {

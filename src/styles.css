@@ -3860,12 +3860,12 @@ h3 { font-weight: 800; }
 }
 
 .generation-comparison__table thead .generation-comparison__gen2-heading {
-  background: #fff;
+  background: #fff2ee;
   color: var(--red);
 }
 
 .generation-comparison__table thead .generation-comparison__gen1-heading {
-  background: #ececef;
+  background: #fff;
   color: var(--muted);
 }
 
@@ -3887,13 +3887,13 @@ h3 { font-weight: 800; }
 }
 
 .generation-comparison__table .generation-comparison__gen1 {
-  background: #ececef;
+  background: #fff;
   color: var(--muted);
   font-weight: 500;
 }
 
 .generation-comparison__table .generation-comparison__gen2 {
-  background: #fff;
+  background: #fff2ee;
   color: #000;
   font-weight: 800;
 }

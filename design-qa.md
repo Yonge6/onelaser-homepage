@@ -57,6 +57,30 @@
 
 final result: passed
 
+## 2026-07-23 product-detail and generation-surface polish
+
+### Source and implementation comparisons
+
+- Product panel comparison: `qa/annotation-round2-design-qa-products.png`.
+- Generation comparison: `qa/annotation-round2-design-qa-comparison.png`.
+- Both comparisons use the same 1489 × 1178 viewport and matching section/product state.
+
+### Product Opportunities
+
+- The selected product card uses one uniform 2 px OneLaser-red border around the image and copy; the inset shadow that made the copy edge appear heavier was removed.
+- Example selling price increased to 32 px / 900. Desktop detail copy now includes the concise approved product summary and anchors setup guidance in a pale-red footer so the left panel no longer reads as empty.
+- Economics metrics use two independent soft-gray tiles. Best-suited, required-setup and disclaimer content have no top, bottom or left divider lines.
+- Desktop detail and Economics cards remain equal at 264 px. At 390 × 844, the active card is 249 px, the selected panel scrolls into view after a tap, and document overflow is 0 px.
+
+### Gen 2 versus Gen 1
+
+- The full Gen 2 heading and body column use `rgb(255, 242, 238)` as one continuous pale-red selected surface.
+- The full Gen 1 heading and body column use white with subdued gray text.
+- Desktop and mobile retain feature → Gen 2 → Gen 1 order, with no red column rules and no horizontal overflow.
+- Browser console returned no warnings or errors during the mobile verification state.
+
+final result: passed
+
 ## 2026-07-23 comparison order and compact commerce pass
 
 ### Source and implementation comparison
