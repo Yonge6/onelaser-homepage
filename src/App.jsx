@@ -7,6 +7,7 @@ import {
   CaretDown,
   CaretLeft,
   CaretRight,
+  CaretUp,
   Check,
   Crosshair,
   CubeFocus,
@@ -186,7 +187,7 @@ const rfAdvantages = [
     title: "Move faster without leaving quality behind.",
     copy: "RF energy switches on and off quickly, helping XRF hold clean edges and consistent contrast through real engraving work at up to 1,300 mm/s.",
     proof: "1,300 mm/s · True 3.5G",
-    image: "xrf-internal-wide.jpg",
+    image: "rf-faster-response.webp",
     alt: "XRF Gen2 motion system built for fast, controlled engraving",
     icon: ArrowClockwise,
   },
@@ -197,7 +198,7 @@ const rfAdvantages = [
     title: "Make more before the source needs attention.",
     copy: "An air-cooled RF source rated for up to 30,000 hours keeps daily production simpler, with no water chiller and more time for the work makers want to ship.",
     proof: "Up to 30,000 hours · Air cooled",
-    image: "xrf-dark-hero.webp",
+    image: "rf-longer-lifespan.webp",
     alt: "XRF Gen2 RF platform shown in a professional workshop setting",
     icon: ShieldCheck,
   },
@@ -694,7 +695,15 @@ function CapabilityBrowser({ onPlay }) {
   return (
     <section className="capability-scroll" id="capability-system">
       <div className="capability-scroll__layout">
-        <nav className="capability-scroll__nav" aria-label="Explore XRF Gen2 advantages" ref={navRef}>
+        <nav
+          className="capability-scroll__nav"
+          aria-label="Explore XRF Gen2 advantages"
+          ref={navRef}
+          style={{
+            "--active-chapter": activeChapter,
+            "--chapter-count": capabilityChapters.length,
+          }}
+        >
           {capabilityChapters.map((item, index) => (
             <button
               type="button"
@@ -824,6 +833,8 @@ export function App() {
   const materialTabRefs = useRef([]);
   const materialTouchStartX = useRef(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [topButtonState, setTopButtonState] = useState("hidden");
+  const lastScrollYRef = useRef(0);
 
   useEffect(() => {
     materialCategories.forEach(({ image }) => {
@@ -858,8 +869,17 @@ export function App() {
     revealNodes.forEach((node) => revealObserver.observe(node));
 
     const updateProgress = () => {
+      const currentScrollY = window.scrollY;
       const max = document.documentElement.scrollHeight - window.innerHeight;
-      setScrollProgress(max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0);
+      setScrollProgress(max > 0 ? Math.min(100, (currentScrollY / max) * 100) : 0);
+      if (currentScrollY < 480) {
+        setTopButtonState("hidden");
+      } else if (currentScrollY < lastScrollYRef.current - 4) {
+        setTopButtonState("visible");
+      } else if (currentScrollY > lastScrollYRef.current + 4) {
+        setTopButtonState("muted");
+      }
+      lastScrollYRef.current = currentScrollY;
     };
     updateProgress();
     window.addEventListener("scroll", updateProgress, { passive: true });
@@ -868,6 +888,48 @@ export function App() {
       revealObserver.disconnect();
       window.removeEventListener("scroll", updateProgress);
       window.removeEventListener("resize", updateProgress);
+    };
+  }, []);
+
+  useEffect(() => {
+    const prepareImage = (image) => {
+      if (!(image instanceof HTMLImageElement)) return;
+      image.classList.toggle("is-image-ready", image.complete && image.naturalWidth > 0);
+      image.classList.toggle("is-image-error", image.complete && image.naturalWidth === 0);
+    };
+    const markReady = (event) => {
+      if (!(event.target instanceof HTMLImageElement)) return;
+      event.target.classList.add("is-image-ready");
+      event.target.classList.remove("is-image-error");
+    };
+    const markError = (event) => {
+      if (!(event.target instanceof HTMLImageElement)) return;
+      event.target.classList.add("is-image-error");
+      event.target.classList.remove("is-image-ready");
+    };
+    const imageObserver = new MutationObserver((records) => {
+      records.forEach((record) => {
+        if (record.type === "attributes") prepareImage(record.target);
+        record.addedNodes.forEach((node) => {
+          if (node instanceof HTMLImageElement) prepareImage(node);
+          if (node instanceof Element) node.querySelectorAll("img").forEach(prepareImage);
+        });
+      });
+    });
+
+    document.querySelectorAll("img").forEach(prepareImage);
+    document.addEventListener("load", markReady, true);
+    document.addEventListener("error", markError, true);
+    imageObserver.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["src", "srcset"],
+      childList: true,
+      subtree: true,
+    });
+    return () => {
+      document.removeEventListener("load", markReady, true);
+      document.removeEventListener("error", markError, true);
+      imageObserver.disconnect();
     };
   }, []);
 
@@ -1524,6 +1586,19 @@ export function App() {
         </div>
         <div className="site-footer__bottom"><span>© {new Date().getFullYear()} OneLaser. All rights reserved.</span><span>20472 Crescent Bay Dr, STE 104, Lake Forest, CA 92630</span><a href="#top">Back to top <ArrowUpRight size={13} /></a></div>
       </footer>
+
+      <button
+        type="button"
+        className={`back-to-top back-to-top--${topButtonState}`}
+        aria-label="Back to top"
+        onClick={() => window.scrollTo({
+          top: 0,
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        })}
+      >
+        <CaretUp size={17} weight="bold" aria-hidden="true" />
+        <span>TOP</span>
+      </button>
 
       <div className="sticky-buy" aria-label="Sticky purchase bar">
         <div><strong>{selectedPurchasePackage.name}</strong><span>{purchasePower} RF · {selectedPurchaseAccessories.length ? `${selectedPurchaseAccessories.length} optional item${selectedPurchaseAccessories.length > 1 ? "s" : ""}` : "Standalone configuration"}</span></div>

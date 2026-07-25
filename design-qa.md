@@ -57,6 +57,23 @@
 
 final result: passed
 
+## 2026-07-26 RF imagery, image loading and back-to-top controls
+
+### Asset and loading checks
+
+- Replaced the Faster Response and Longer Lifespan proof media with the supplied local WebP assets. Both load at non-zero natural dimensions and remain inside the existing fixed RF proof stage.
+- Every page image now receives a low-saturation `#E8E6E2` placeholder with a restrained moving highlight while its resource is unresolved. The class is removed from the loading state after a successful load, and failed images settle into the same neutral fallback instead of leaving a broken-image flash.
+- Browser evidence confirmed an unresolved lazy image uses `image-placeholder-drift`, the expected neutral gradient and `naturalWidth: 0`; a loaded RF image reports `is-image-ready`, non-zero natural dimensions and no remaining animation.
+- `prefers-reduced-motion` removes the placeholder movement while preserving the neutral loading surface.
+
+### Back-to-top and responsive checks
+
+- The floating `TOP` control stays hidden at the document start, becomes `8%` opacity with disabled pointer events while reading downward, and returns to full opacity after upward scrolling.
+- A direct click returns the page to `scrollY: 0`; the control then returns to its hidden state.
+- Desktop and 390 × 844 mobile viewports both report zero document-level horizontal overflow. The mobile control remains 48 × 48 px, clears the sticky purchase bar and stays within the right viewport gutter.
+
+final result: passed
+
 ## 2026-07-23 product-detail and generation-surface polish
 
 ### Source and implementation comparisons
@@ -78,6 +95,23 @@ final result: passed
 - The full Gen 1 heading and body column use white with subdued gray text.
 - Desktop and mobile retain feature → Gen 2 → Gen 1 order, with no red column rules and no horizontal overflow.
 - Browser console returned no warnings or errors during the mobile verification state.
+
+final result: passed
+
+## 2026-07-26 compact capability chapter rail
+
+### Reference and adaptation
+
+- Structural reference: the xTool P3 chapter rail uses a narrow vertical track, compact chapter labels and one short active-progress segment.
+- OneLaser adaptation keeps the page light, uses a subdued gray track, a OneLaser-red active segment, black active text and restrained gray inactive text.
+- The rail is inset from the viewport edge instead of touching it, while the 1280 px capability content grid remains unchanged.
+
+### Interaction and responsive checks
+
+- The desktop rail remains genuinely scroll-linked; clicking `Speed & Motion` updated the active chapter and moved the progress segment to index 1.
+- Desktop evidence at a 1750 × 1178 test viewport shows the 164 px rail centered vertically beside the chapter content with zero horizontal overflow.
+- Mobile 390 × 844 retains the existing horizontal swipe rail (`390 px` client width / `799 px` scroll width), keeps the active item visible after a direct chapter tap and reports zero document overflow.
+- Keyboard focus remains visible, and the progress-segment transition is disabled under `prefers-reduced-motion`.
 
 final result: passed
 

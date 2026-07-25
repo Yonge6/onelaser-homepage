@@ -7760,3 +7760,199 @@ body { color: var(--ink); }
   .site-footer__columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .site-footer__bottom { align-items: flex-start; flex-direction: column; gap: 8px; padding-bottom: 94px; }
 }
+
+/* 2026-07-26: compact xTool P3-inspired chapter rail, adapted to OneLaser. */
+@media (min-width: 1181px) {
+  .capability-scroll__nav {
+    --chapter-step: 44px;
+    position: sticky;
+    top: calc(50vh - 110px);
+    display: grid;
+    grid-auto-rows: 40px;
+    row-gap: 4px;
+    width: 164px;
+    margin-bottom: -216px;
+    padding: 0;
+    overflow: visible;
+    transform: translateX(calc(-1 * max(0px, (100vw - 1280px) / 2) + 28px));
+    isolation: isolate;
+  }
+
+  .capability-scroll__nav::before,
+  .capability-scroll__nav::after {
+    position: absolute;
+    left: 0;
+    border-radius: 999px;
+    content: "";
+    pointer-events: none;
+  }
+
+  .capability-scroll__nav::before {
+    z-index: -2;
+    top: 3px;
+    bottom: 3px;
+    width: 2px;
+    background: #d2d2d7;
+  }
+
+  .capability-scroll__nav::after {
+    z-index: -1;
+    top: 3px;
+    width: 3px;
+    height: 34px;
+    background: var(--red);
+    transform: translateY(calc(var(--active-chapter) * var(--chapter-step)));
+    transition: transform 280ms ease;
+  }
+
+  .capability-scroll__nav button {
+    min-height: 40px;
+    padding: 0 0 0 24px;
+    color: var(--muted);
+    transition: color 180ms ease;
+  }
+
+  .capability-scroll__nav button:hover {
+    color: var(--ink);
+  }
+
+  .capability-scroll__nav button.is-active {
+    color: var(--ink);
+  }
+
+  .capability-scroll__nav button strong {
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.25;
+    white-space: normal;
+  }
+
+  .capability-scroll__nav button.is-active strong {
+    font-weight: 800;
+  }
+
+  .capability-scroll__nav button:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .capability-scroll__nav::after {
+    transition: none;
+  }
+}
+
+/* Calm image loading feedback: visible only until image pixels are ready. */
+.site-shell img {
+  background-color: #e8e6e2;
+}
+
+.site-shell img:not(.is-image-ready):not(.is-image-error) {
+  background-image: linear-gradient(
+    105deg,
+    rgba(220, 218, 214, 0.72) 18%,
+    rgba(241, 239, 235, 0.9) 38%,
+    rgba(220, 218, 214, 0.72) 58%
+  );
+  background-position: 140% 0;
+  background-size: 220% 100%;
+  animation: image-placeholder-drift 1.6s ease-in-out infinite;
+}
+
+.site-shell img.is-image-ready {
+  background-image: none;
+  animation: none;
+}
+
+.site-shell img.is-image-error {
+  background-color: #e2dfda;
+  background-image: none;
+  animation: none;
+}
+
+@keyframes image-placeholder-drift {
+  0% { background-position: 140% 0; }
+  100% { background-position: -80% 0; }
+}
+
+.back-to-top {
+  position: fixed;
+  right: max(24px, calc((100vw - var(--max)) / 2));
+  bottom: 94px;
+  z-index: 45;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 1px;
+  width: 54px;
+  height: 54px;
+  padding: 0;
+  border: 1px solid var(--divider);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--ink);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(14px);
+  cursor: pointer;
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease,
+    visibility 220ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.back-to-top span {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.back-to-top:hover {
+  border-color: var(--red);
+  color: var(--red);
+  transform: translateY(-2px);
+}
+
+.back-to-top:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+}
+
+.back-to-top--hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+}
+
+.back-to-top--muted {
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.back-to-top--visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (max-width: 560px) {
+  .back-to-top {
+    right: 14px;
+    bottom: 82px;
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-shell img:not(.is-image-ready):not(.is-image-error) {
+    animation: none;
+  }
+
+  .back-to-top {
+    transition: none;
+  }
+}
