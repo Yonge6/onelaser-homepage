@@ -7487,7 +7487,12 @@ body { color: var(--ink); }
 
 .rf-advantages__media {
   min-height: 620px;
+  height: 620px;
   background: #fff;
+}
+
+.rf-advantages__media img {
+  object-position: center;
 }
 
 .rf-advantages__copy {
@@ -7661,7 +7666,10 @@ body { color: var(--ink); }
   }
 
   .rf-advantages__media {
+    width: 100%;
+    height: auto;
     min-height: 0;
+    aspect-ratio: 3 / 2;
   }
 }
 
@@ -7845,15 +7853,15 @@ body { color: var(--ink); }
 
 /* Calm image loading feedback: visible only until image pixels are ready. */
 .site-shell img {
-  background-color: #e8e6e2;
+  background-color: var(--image-placeholder-base, #e7ded5);
 }
 
 .site-shell img:not(.is-image-ready):not(.is-image-error) {
   background-image: linear-gradient(
     105deg,
-    rgba(220, 218, 214, 0.72) 18%,
-    rgba(241, 239, 235, 0.9) 38%,
-    rgba(220, 218, 214, 0.72) 58%
+    var(--image-placeholder-low, #d8c9bc) 18%,
+    var(--image-placeholder-high, #f3ece5) 38%,
+    var(--image-placeholder-low, #d8c9bc) 58%
   );
   background-position: 140% 0;
   background-size: 220% 100%;
@@ -7866,7 +7874,7 @@ body { color: var(--ink); }
 }
 
 .site-shell img.is-image-error {
-  background-color: #e2dfda;
+  background-color: var(--image-placeholder-base, #e7ded5);
   background-image: none;
   animation: none;
 }

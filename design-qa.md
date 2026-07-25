@@ -395,3 +395,19 @@ final result: passed
 - Desktop 1489 × 1178 and mobile 390 × 844 previews report zero horizontal overflow. Mobile navigation opens as a contained panel and all four accessory images load with non-zero natural dimensions.
 
 final result: passed
+
+## 2026-07-26 RF media framing and seven-color loading palette
+
+### RF media consistency
+
+- Cleaner Detail, Faster Response and Longer Lifespan each render inside the same 856 × 620 px desktop media frame.
+- All three images use centered `object-fit: cover`, allowing excess source-image area to crop without changing the stage or adjacent copy dimensions.
+- The 390 px mobile viewport uses one consistent 3:2 media frame (`352 × 234.66 px`) and reports zero document-level horizontal overflow.
+
+### Loading palette
+
+- The loading system assigns every image one stable color from seven low-saturation palettes: warm stone, sage, blue-gray, dusty rose, lavender, muted teal and sand.
+- Browser verification found all seven palette bases in the rendered page. A still-pending lazy image retained its assigned dusty-rose surface and the restrained `image-placeholder-drift` animation.
+- Loaded and failed images retain the existing ready/error behavior, and `prefers-reduced-motion` continues to disable loading movement.
+
+final result: passed

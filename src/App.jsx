@@ -892,8 +892,28 @@ export function App() {
   }, []);
 
   useEffect(() => {
+    const placeholderPalettes = [
+      ["#e7ded5", "#d8c9bc", "#f3ece5"],
+      ["#dfe5df", "#cbd8cf", "#edf2ed"],
+      ["#dde4e8", "#c7d4db", "#edf2f4"],
+      ["#e8dfdf", "#d9c8ca", "#f4ebeb"],
+      ["#e5e0e9", "#d3cadb", "#f1edf4"],
+      ["#e1e6e3", "#cbd7d2", "#eff3f1"],
+      ["#e8e2d7", "#d8cdbb", "#f4efe6"],
+    ];
+    const assignPlaceholderPalette = (image) => {
+      const seed = `${image.getAttribute("src") || ""}|${image.alt || ""}`;
+      const hash = [...seed].reduce((value, character) => (
+        ((value << 5) - value + character.charCodeAt(0)) | 0
+      ), 0);
+      const [base, low, high] = placeholderPalettes[Math.abs(hash) % placeholderPalettes.length];
+      image.style.setProperty("--image-placeholder-base", base);
+      image.style.setProperty("--image-placeholder-low", low);
+      image.style.setProperty("--image-placeholder-high", high);
+    };
     const prepareImage = (image) => {
       if (!(image instanceof HTMLImageElement)) return;
+      assignPlaceholderPalette(image);
       image.classList.toggle("is-image-ready", image.complete && image.naturalWidth > 0);
       image.classList.toggle("is-image-error", image.complete && image.naturalWidth === 0);
     };
