@@ -426,6 +426,7 @@ const officialAccessories = [
     msrp: 199,
     description: "Professional laser layout, control and production software for Windows and macOS.",
     image: "accessory-lightburn.png",
+    imageScale: 1.08,
     source: "https://www.1laser.com/products/lightburn-software-pro-license-key",
   },
   {
@@ -435,6 +436,7 @@ const officialAccessories = [
     msrp: 799,
     description: "Optional continuous-feed workflow for long-format projects. Must be used with the X Series Riser Base.",
     image: "accessory-conveyor.jpg",
+    imageScale: 1.34,
     source: "https://www.1laser.com/products/onelaser-automatic-conveyor-feeder",
   },
   {
@@ -444,6 +446,7 @@ const officialAccessories = [
     msrp: 249.99,
     description: "Optional automated dual-mode airflow with real-time pressure monitoring for cutting and engraving.",
     image: "accessory-air-assist.jpg",
+    imageScale: 1.58,
     source: "https://www.1laser.com/products/air-assist-for-laser-engraver-cutter",
   },
   {
@@ -453,6 +456,7 @@ const officialAccessories = [
     msrp: 34.99,
     description: "Optional replacement kit for the magnetic lens system on X Series laser engravers.",
     image: "accessory-lens-kit.jpg",
+    imageScale: 2.8,
     source: "https://www.1laser.com/products/magswitch-lens-holder-replacement-kit",
   },
 ];
@@ -1417,7 +1421,12 @@ export function App() {
                   return (
                     <label className={selected ? "purchase-accessory is-selected" : "purchase-accessory"} key={item.id}>
                       <input type="checkbox" checked={selected} onChange={() => togglePurchaseAccessory(item.id)} />
-                      <img src={asset(item.image)} alt={item.name} />
+                      <span
+                        className="purchase-accessory__media"
+                        style={{ "--accessory-image-scale": item.imageScale }}
+                      >
+                        <img src={asset(item.image)} alt={item.name} />
+                      </span>
                       <span><strong>{item.name}</strong><small>OPTIONAL</small><p>{item.description}</p></span>
                       <span className="purchase-accessory__price"><strong>{formatMoney(item.price)}</strong><del>{formatMoney(item.msrp)}</del></span>
                     </label>

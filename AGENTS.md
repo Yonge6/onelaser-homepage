@@ -135,3 +135,6 @@ When implementing from a selected generated mock, treat that image as the source
 - Keep lead-generation actions such as `Book a live demo` in the dedicated mid-funnel next-step module; do not repeat them inside the Hero purchase controls.
 - Present published XRF owner feedback in one horizontal scroll-snap rail with previous/next arrows: three cards on desktop, two on tablet and a partial next card on mobile. Use customer-facing wording such as `What XRF owners say.` rather than internal sourcing language.
 - Use the user-supplied transparent OneLaser SVG as the footer logo so the mark sits cleanly on the `#F5F5F7` surface without a baked-in background.
+- In the xTool comparison table, the OneLaser XRF Gen2 header cell uses a stronger pale-red surface than the Gen2 body column so the header remains visibly distinct without introducing a red rule.
+- On tablet and mobile, the capability chapter navigation stacks below the global journey navigation; the two sticky rails must never overlap or cover the active chapter content.
+- Frequently-bought-together accessory thumbnails fill their image crop edge to edge with no CSS padding or letterboxing.
