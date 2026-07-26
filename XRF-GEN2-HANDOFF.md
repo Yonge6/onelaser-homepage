@@ -47,7 +47,8 @@
 
 ### 中段线索出口
 
-- `Book a live demo` → OneLaser 官方 Demo Host 页面。
+- `Book a live demo` → OneLaser 官方 Demo Host 页面，仅保留在 Specifications 后的
+  中段线索模块，不在 Hero 购买区重复显示。
 - `Talk to an engineer` → OneLaser 官方免费 30 分钟销售咨询。
 - 邮件捕获使用 Shopify contact form，可选择完整参数书、上市优惠或免费雕刻样品。
 - Trade-Up 横幅使用官方 XRF `up to $300` 与 24 小时内邮件回复信息。
@@ -55,10 +56,19 @@
 ### 站内证明
 
 - `45 reviews` 不再把访客带离当前页面，改为跳到站内 Reviews。
-- Reviews 增加三条带名字与身份的咨询反馈，并将文字评价放在视频卡片之后。
+- Reviews 在视频卡片之后展示六条来自 OneLaser 官方 XRF 页面、带姓名与身份的
+  真实用户反馈摘要；文字评价使用桌面三卡、平板双卡、移动端露出下一卡的横向
+  scroll-snap 轨道，并提供前后箭头。
 - xTool P2 对比改成硬参数表，覆盖光源、速度、加速度、细节、冷却 / 寿命、
-  质保和起售价。
+  质保和起售价；表头使用独立浅灰底，OneLaser 数据列继续使用淡红强调。
 - FAQ 增加标准 110V 插座、运费 / 发货时间和 70W 加 $500 三个高频问题。
+
+### 品牌与购买细节
+
+- Footer 使用用户提供的透明底 OneLaser SVG：
+  `public/assets/onelaser-logo-transparent.svg`。
+- Hero 购买区只保留 `Add to Cart`、`Buy with SHOP` 与保障微文案；Demo / 咨询等
+  线索出口集中在中段模块。
 
 ### 埋点
 
@@ -70,10 +80,11 @@
 
 ## 文件
 
-- `src/App.jsx`：转化路径、浮动章节导航、真实出口、表单、Trade-Up、评论、
+- `src/App.jsx`：转化路径、浮动章节导航、真实出口、表单、Trade-Up、六条评论、
   硬参数对比、FAQ 和事件触发。
 - `src/analytics.js`：GA4 / Meta Pixel 初始化与统一事件层。
-- `src/styles.css`：导航、线索卡、Trade-Up、评论、对比表与响应式样式。
+- `src/styles.css`：导航、线索卡、Trade-Up、横向评论轨道、对比表与响应式样式。
+- `public/assets/onelaser-logo-transparent.svg`：用户提供的透明底 Footer Logo。
 - `.env.example`：分析平台环境变量示例。
 - `AGENTS.md`：已记录本轮长期设计与转化规则。
 
@@ -84,7 +95,7 @@
 - Certia 字体在本地预览返回 HTTP 200；Vite 的字体路径提示为已有运行时解析提示。
 - 本地预览：`http://127.0.0.1:5173/xrf-gen2-listing/`。
 - 桌面浏览器已检查 Hero、章节导航、三条线索路径、Trade-Up、参数对比、
-  评论和 sticky purchase bar。
+  六条评论横向切换、透明 Footer Logo 和 sticky purchase bar。
 - 章节导航跳转后 active 状态与章节计数正确。
 - 真实链接、Shopify contact form 字段和购买保障微文案已做 DOM 验证。
 - 浏览器控制台没有本轮新增 error / warning。

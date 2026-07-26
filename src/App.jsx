@@ -582,19 +582,34 @@ const journeySections = [
 
 const consultationFeedback = [
   {
-    name: "Anthony L.",
-    role: "First-time laser buyer",
-    quote: "The OneLaser specialist answered the questions that were holding me back and made the next step feel clear and low-pressure.",
+    name: "James Kirk",
+    role: "XRF owner",
+    quote: "Smooth, solid, relatively quiet and accurate—the XRF brought the joy back into creating.",
   },
   {
-    name: "James R.",
-    role: "Designer",
-    quote: "The consultation helped match the machine to my work and added practical ideas for expanding the business around it.",
+    name: "Thomas M. Eichhorn",
+    role: "XRF owner",
+    quote: "Fast, easy to operate and built solidly, with sales and technical support that respond quickly.",
   },
   {
-    name: "Sarah T.",
-    role: "DIY creator",
-    quote: "The engineer understood what I wanted to make and turned the conversation into useful, actionable guidance.",
+    name: "McKael Stapel",
+    role: "Leather-patch business owner",
+    quote: "Leather-patch jobs run two to three times faster than my larger laser, and the RF detail is incredible.",
+  },
+  {
+    name: "Colby Sechelski",
+    role: "Full-time engraving business owner",
+    quote: "Crisp engravings, precise cuts and clean edges have held up in my full-time engraving business.",
+  },
+  {
+    name: "DonInCanada",
+    role: "XRF owner",
+    quote: "The machine feels commercial-grade, repeatable and accurate, with U.S. support that helps solve issues quickly.",
+  },
+  {
+    name: "Kaydee",
+    role: "First-time laser owner",
+    quote: "As a beginner, I could count on timely support; the machine quality and communication exceeded my expectations.",
   },
 ];
 
@@ -889,6 +904,7 @@ export function App() {
   const thumbnailRailRef = useRef(null);
   const heroMediaTouchStartX = useRef(null);
   const reviewVideoRailRef = useRef(null);
+  const consultationFeedbackRailRef = useRef(null);
   const materialTabRefs = useRef([]);
   const materialTouchStartX = useRef(null);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -1158,6 +1174,15 @@ export function App() {
     reviewVideoRailRef.current?.scrollBy({ left: direction * 420, behavior: "smooth" });
   }
 
+  function scrollConsultationFeedback(direction) {
+    const rail = consultationFeedbackRailRef.current;
+    if (!rail) return;
+    const firstCard = rail.querySelector("blockquote");
+    const cardWidth = firstCard?.getBoundingClientRect().width ?? 360;
+    const gap = Number.parseFloat(getComputedStyle(rail).columnGap || getComputedStyle(rail).gap) || 12;
+    rail.scrollBy({ left: direction * (cardWidth + gap), behavior: "smooth" });
+  }
+
   function selectMaterial(index, { focus = false } = {}) {
     const nextIndex = (index + materialCategories.length) % materialCategories.length;
     setActiveMaterial(nextIndex);
@@ -1420,15 +1445,6 @@ export function App() {
                 onClick={handleShopPayCheckout}
               >
                 Buy with SHOP <ArrowUpRight size={16} />
-              </a>
-              <a
-                className="secondary-cta secondary-cta--link"
-                href="https://www.1laser.com/pages/find-demo-host?utm_source=xrf-gen2-listing&utm_medium=product-page&utm_campaign=xrf-gen2-demo"
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => trackLead("find-demo-host", "book_live_demo")}
-              >
-                Book a live demo <ArrowUpRight size={16} />
               </a>
               <p className="purchase-assurance">30-Day Money-Back · 3-2-1 Warranty · Ships from California</p>
             </div>
@@ -1781,12 +1797,18 @@ export function App() {
           <div className="review-proof__rail" ref={reviewVideoRailRef}>
             {reviewVideos.map((video, index) => <ReviewVideoCard video={video} onPlay={setYoutubeVideo} index={index} total={reviewVideos.length} key={video.id} />)}
           </div>
-          <div className="consultation-feedback" aria-label="OneLaser consultation feedback">
+          <div className="consultation-feedback" aria-label="OneLaser XRF owner reviews">
             <div className="consultation-feedback__intro">
-              <strong>Named customer feedback, kept on this page.</strong>
-              <span>From OneLaser's sales-consultation program</span>
+              <div>
+                <strong>What XRF owners say.</strong>
+                <span>Customer feedback published by OneLaser</span>
+              </div>
+              <div className="consultation-feedback__controls" aria-label="Browse XRF owner reviews">
+                <button type="button" onClick={() => scrollConsultationFeedback(-1)} aria-label="Show previous XRF owner reviews"><CaretLeft size={20} /></button>
+                <button type="button" onClick={() => scrollConsultationFeedback(1)} aria-label="Show more XRF owner reviews"><CaretRight size={20} /></button>
+              </div>
             </div>
-            <div className="consultation-feedback__grid">
+            <div className="consultation-feedback__grid" ref={consultationFeedbackRailRef}>
               {consultationFeedback.map((item) => (
                 <blockquote key={item.name}>
                   <div className="consultation-feedback__stars" aria-label="5 out of 5 stars">
@@ -1889,7 +1911,7 @@ export function App() {
       <footer className="site-footer">
         <div className="site-footer__inner">
           <div className="site-footer__brand">
-            <a href="#top" className="site-footer__logo" aria-label="Back to OneLaser XRF Gen2 top"><img src={asset("onelaser-logo.png")} alt="OneLaser" /></a>
+            <a href="#top" className="site-footer__logo" aria-label="Back to OneLaser XRF Gen2 top"><img src={asset("onelaser-logo-transparent.svg")} alt="OneLaser" /></a>
             <p>Professional laser production for creators, studios and growing custom-product businesses.</p>
             <div className="site-footer__contact">
               <a href="tel:+16268004130"><Phone size={16} weight="bold" />626-800-4130</a>
