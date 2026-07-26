@@ -1,79 +1,98 @@
 # XRF Gen2 页面交接记录
 
-更新时间：2026-07-23（Asia/Shanghai）
+更新时间：2026-07-26（Asia/Shanghai）
 
-## 新任务直接执行
+## 唯一历史入口
 
-继续完成 XRF Gen2 侧边卖点导航改造，验收后发布 GitHub Pages。不要读取旧任务 `019f7ed4-396d-7ca3-8081-503b6c7b852b`；该日志超过 8.6 GB。
+后续任务只从本文件、`AGENTS.md` 和当前仓库状态继续。不要读取或引用旧任务
+`019f7ed4-396d-7ca3-8081-503b6c7b852b`。
 
-## 用户目标
+线上页面：
 
-- 参考 xTool P3 的侧面卖点导航与内容层级，但使用 OneLaser 白底视觉体系。
-- 按卖点表组织内容：重要卖点用大图/16:9 媒体，中等卖点用中图，小卖点用小卡或图标，次要参数只轻量带过。
-- 全页卖点不得重复；可以删除、改造或增加旧模块。
-- 桌面使用左侧纵向导航，移动端使用可横向滑动的导航。
-- 最终必须完成本地浏览器验收、提交、推送并验证现有 GitHub Pages。
+- `https://yonge6.github.io/xrf-gen2-listing/`
 
-## 设计与数据源
+仓库与分支：
 
-必须先读：
+- GitHub：`Yonge6/xrf-gen2-listing`
+- 分支：`main`
 
-1. `AGENTS.md`
-2. `UI-SPEC.md`
-3. `/Users/yongyuan/Downloads/XRF Gen2 卖点参数发布汇总.xlsx`
-   - 使用 `XRF Gen2 卖点` 与 `XRF Gen2 Specs-1`
-   - 禁止使用 `参数作废`
-4. `/Users/yongyuan/Downloads/OneLaser Web UI Guideline.pdf`
+## 当前页面状态
 
-当前页面数据规则：
+页面已经完成从单一购买页向完整 XRF Gen2 商业落地页的扩展，保留 OneLaser
+白色 / `#F5F5F7` 视觉体系、Certia 字体、真实产品资产、38W / 70W 平等选择和
+唯一 Hero 配置流程。
 
-- 性能统一使用 `1,300 mm/s` 与 `True 3.5G`；它们覆盖工作簿中的旧 `1,200 mm/s` / `3G`。
-- 38W 与 70W 是不同工作需求的平等选择。
-- Smart Air、Riser Base、Conveyor、Rotary、Fume Extractor 和可选镜片必须明确标为 optional。
-- 不得向顾客显示 P0/P1/P2/P3 内部标签。
+当前主要模块：
 
-## 当前代码状态
+1. Hero 产品图库、价格、功率、套装、可选配件和持续可见购买条。
+2. 免费现场演示、免费 30 分钟工程师咨询和 XRF Gen2 资料 / 样品线索表单。
+3. XRF Trade-Up 入口。
+4. Finished Products、Product Opportunities、Materials、Why RF、38W / 70W、
+   Gen 2 / Gen 1、卖点章节、MakerBoost、Software、Specs、Reviews、Support、FAQ。
+5. 滚过首屏后出现的 12 章节浮动导航，显示当前位置并可直接跳转。
+6. 向上滚动时显示、向下滚动时弱化的 TOP 悬浮按钮。
+7. 七种低饱和占位色与轻量图片加载动画。
 
-分支：`main`，远端：`origin/main`。
+## 2026-07-26 转化改造
 
-线上最后提交仍为：`b9791a9 Refine XRF proof media and overview video`。
+### 购买路径
 
-当前未提交改动：
+- 删除假的 `Added to configuration` 状态。
+- 删除不具备真实 Shop Pay 结账能力的 `Buy with SHOP` 按钮。
+- 38W 使用 `Continue to purchase`，记录 AddToCart / InitiateCheckout 后进入
+  OneLaser 官方 XRF 商品页。
+- 70W 使用 `Talk to an engineer about 70W`，进入官方销售咨询页。
+- Hero 与 sticky CTA 下均显示：
+  `30-Day Money-Back · 3-2-1 Warranty · Ships from California`。
 
-- `src/App.jsx`
-  - 新增 `capabilityChapters` 数据结构。
-  - 新增 `CapabilityBrowser` 组件。
-  - 五个章节：RF Precision、Speed & Motion、Smart Workflow、Business Expansion、Reliability & Safety。
-  - 章节内部按“大媒体 → 两张中型解释卡 → 四张小型证明卡 → 一行细节”呈现。
-  - 已从实际页面 JSX 中移除旧的 StickyStory、Workflow、Reliability、Engineering Proof、Safety、Micro Features 重复模块。
-  - 顶部导航已改为 Results / Why XRF / Specs。
-- `src/styles.css`
-  - 新增侧边能力浏览器完整桌面/移动样式、选中态、16:9 媒体、响应式横向导航、动效和 reduced-motion。
-  - 移动端锚点已校正到 56 px 固定头部下方。
+### 中段线索出口
 
-注意：旧 `scrollStories` 数据和 `StickyStory` 函数仍是未调用的死代码，下一步应删除；相关旧 CSS 可以暂留，避免扩大风险，也可在发布前做最小清理。
+- `Book a live demo` → OneLaser 官方 Demo Host 页面。
+- `Talk to an engineer` → OneLaser 官方免费 30 分钟销售咨询。
+- 邮件捕获使用 Shopify contact form，可选择完整参数书、上市优惠或免费雕刻样品。
+- Trade-Up 横幅使用官方 XRF `up to $300` 与 24 小时内邮件回复信息。
 
-## 已完成验证
+### 站内证明
+
+- `45 reviews` 不再把访客带离当前页面，改为跳到站内 Reviews。
+- Reviews 增加三条带名字与身份的咨询反馈。
+- xTool P2 对比改成硬参数表，覆盖光源、速度、加速度、细节、冷却 / 寿命、
+  质保和起售价。
+- FAQ 增加标准 110V 插座、运费 / 发货时间和 70W 加 $500 三个高频问题。
+
+### 埋点
+
+- 新增 `src/analytics.js`。
+- 支持 GA4 与 Meta Pixel；通过 `VITE_GA4_ID`、`VITE_META_PIXEL_ID` 配置。
+- 已埋 ViewContent、功率选择、套装选择、配件选择、章节导航、Lead、
+  AddToCart 和 InitiateCheckout。
+- `.env.example` 只保留变量名，不在仓库中虚构或泄漏真实 ID。
+
+## 文件
+
+- `src/App.jsx`：转化路径、浮动章节导航、真实出口、表单、Trade-Up、评论、
+  硬参数对比、FAQ 和事件触发。
+- `src/analytics.js`：GA4 / Meta Pixel 初始化与统一事件层。
+- `src/styles.css`：导航、线索卡、Trade-Up、评论、对比表与响应式样式。
+- `.env.example`：分析平台环境变量示例。
+- `AGENTS.md`：已记录本轮长期设计与转化规则。
+
+## 验证
 
 - `npm run build`：通过。
 - `git diff --check`：通过。
-- 本地预览：`http://localhost:5173/xrf-gen2-listing/`。
-- 桌面 1440 × 1000：侧栏、主媒体、章节切换正常。
-- 移动 390 × 844：横向导航、章节切换、锚点对齐正常。
-- Smart Workflow 内部主故事切换正常。
-- 媒体预览弹窗打开/关闭正常。
-- 浏览器控制台：无 error / warning。
+- Certia 字体在本地预览返回 HTTP 200；Vite 的字体路径提示为已有运行时解析提示。
+- 本地预览：`http://127.0.0.1:5173/xrf-gen2-listing/`。
+- 桌面浏览器已检查 Hero、章节导航、三条线索路径、Trade-Up、参数对比、
+  评论和 sticky purchase bar。
+- 章节导航跳转后 active 状态与章节计数正确。
+- 真实链接、Shopify contact form 字段和购买保障微文案已做 DOM 验证。
+- 浏览器控制台没有本轮新增 error / warning。
 
-## 下一步完成门
+## 后续规则
 
-1. 删除 `src/App.jsx` 中未使用的 `scrollStories` 和 `StickyStory`。
-2. 重新运行 `npm run build`、`git diff --check`，搜索旧 `1,200 mm/s`、`3G` 和顾客可见 P0–P3。
-3. 再做一次桌面与移动视觉检查，重点检查五个章节、横向导航、媒体弹窗和 sticky purchase bar。
-4. 只提交 `src/App.jsx`、`src/styles.css`、本交接文件；不要擅自提交当前大量未跟踪的 `qa/*.png`。
-5. 提交并推送 `main` 到 `Yonge6/xrf-gen2-listing`。
-6. 验证线上页面：`https://yonge6.github.io/xrf-gen2-listing/`，确认新侧边导航已出现、资源返回正常、移动端可用。
-
-## 工作区保护
-
-- 当前大量未跟踪 `qa/*.png` 是既有 QA 资产，不删除、不覆盖、不默认提交。
-- 不要再次读取旧任务日志或旧任务完整历史；本文件是唯一交接入口。
+- 没有稳定的 38W / 70W Shopify variant 直达结账链接前，不伪装成已加入购物车。
+- 获得真实 GA4 Measurement ID 与 Meta Pixel ID 后，通过部署环境配置，不写死在源码。
+- 如果接入 Calendly，直接替换现有官方咨询 / Demo URL，不改变卡片结构。
+- 如果接入 Judge.me，替换当前三条站内反馈，但保留 Reviews 页内闭环。
+- 不提交、删除或覆盖现有未跟踪 `qa/*.png`。

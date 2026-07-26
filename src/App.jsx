@@ -34,6 +34,7 @@ import {
   X,
 } from "@phosphor-icons/react";
 import { CommercialCapabilities } from "./components/CommercialCapabilities.jsx";
+import { initializeAnalytics, trackEvent } from "./analytics.js";
 
 const asset = (name) => `${import.meta.env.BASE_URL}assets/${name}`;
 const MATERIAL_AUTOPLAY_DELAY = 6000;
@@ -549,6 +550,61 @@ const faqs = [
     q: "What support is available after purchase?",
     a: "OneLaser provides US-based engineer support and a 3-2-1 warranty: three years on the frame, two years on electronics and one year on the laser source.",
   },
+  {
+    q: "Does XRF Gen2 plug into a standard outlet?",
+    a: "Yes. The US configuration is designed for a standard 110V single-phase outlet, so it does not require the dedicated high-voltage service common to many larger metal laser systems. Confirm the final regional electrical configuration and circuit capacity before installation.",
+  },
+  {
+    q: "How much is shipping, and when will my XRF arrive?",
+    a: "OneLaser publishes fixed shipping rates for the lower 48 states. Orders typically require 3–5 business days for processing, with average delivery in 3–14 business days after payment. Final freight cost and timing depend on the destination, configuration and carrier conditions.",
+  },
+  {
+    q: "Why does the 70W configuration cost $500 more?",
+    a: "The 70W source is exactly $500 above the equivalent 38W configuration. Both use the same professional XRF Gen2 platform: choose 38W for fine-detail everyday production, or 70W for heavier workloads, deeper relief and more cutting headroom.",
+  },
+];
+
+const journeySections = [
+  { id: "top", label: "Overview" },
+  { id: "next-step", label: "Decide" },
+  { id: "capabilities", label: "What you can make" },
+  { id: "materials", label: "Materials" },
+  { id: "rf-advantages", label: "Why RF" },
+  { id: "generation-comparison", label: "Gen2 upgrade" },
+  { id: "capability-system", label: "Features" },
+  { id: "software", label: "Software" },
+  { id: "specs", label: "Specs" },
+  { id: "reviews", label: "Reviews" },
+  { id: "support", label: "Support" },
+  { id: "faq", label: "FAQ" },
+];
+
+const consultationFeedback = [
+  {
+    name: "Anthony L.",
+    role: "First-time laser buyer",
+    quote: "The OneLaser specialist answered the questions that were holding me back and made the next step feel clear and low-pressure.",
+  },
+  {
+    name: "James R.",
+    role: "Designer",
+    quote: "The consultation helped match the machine to my work and added practical ideas for expanding the business around it.",
+  },
+  {
+    name: "Sarah T.",
+    role: "DIY creator",
+    quote: "The engineer understood what I wanted to make and turned the conversation into useful, actionable guidance.",
+  },
+];
+
+const competitorRows = [
+  ["Laser source", "38W / 70W sealed RF metal tube", "55W CO₂ glass tube"],
+  ["Max engraving speed", "1,300 mm/s", "600 mm/s"],
+  ["Acceleration", "True 3.5G", "Not published on the P2 spec page"],
+  ["Detail", "Up to 2,000 DPI · 0.07 mm laser dot", "0.01 mm processing precision"],
+  ["Cooling & source life", "Air cooled · up to 30,000 hours", "Water cooled · 6,000–8,000 hours"],
+  ["Warranty", "3-year frame · 2-year electronics · 1-year source", "12-month main components · 6-month laser tube"],
+  ["Starting price", "$3,999 for 38W Standalone", "$3,999 for P2 Standalone"],
 ];
 
 function SpecGroup({ group }) {
@@ -825,7 +881,8 @@ export function App() {
   const [selectedPackageId, setSelectedPackageId] = useState("standalone");
   const [purchasePower, setPurchasePower] = useState("38W");
   const [selectedPurchaseAccessories, setSelectedPurchaseAccessories] = useState([]);
-  const [purchaseAdded, setPurchaseAdded] = useState(false);
+  const [activeJourneySection, setActiveJourneySection] = useState("top");
+  const [journeyVisible, setJourneyVisible] = useState(false);
   const [videoModal, setVideoModal] = useState(null);
   const [youtubeVideo, setYoutubeVideo] = useState(null);
   const thumbnailRailRef = useRef(null);
@@ -835,6 +892,16 @@ export function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [topButtonState, setTopButtonState] = useState("hidden");
   const lastScrollYRef = useRef(0);
+
+  useEffect(() => {
+    initializeAnalytics();
+    trackEvent("view_content", {
+      content_name: "OneLaser XRF Gen2",
+      content_category: "Laser engraver",
+      value: 3999,
+      currency: "USD",
+    });
+  }, []);
 
   useEffect(() => {
     materialCategories.forEach(({ image }) => {
@@ -872,6 +939,13 @@ export function App() {
       const currentScrollY = window.scrollY;
       const max = document.documentElement.scrollHeight - window.innerHeight;
       setScrollProgress(max > 0 ? Math.min(100, (currentScrollY / max) * 100) : 0);
+      const readingLine = currentScrollY + 156;
+      const currentSection = journeySections.reduce((active, section) => {
+        const node = document.getElementById(section.id);
+        const absoluteTop = node ? node.getBoundingClientRect().top + currentScrollY : Number.POSITIVE_INFINITY;
+        return absoluteTop <= readingLine ? section.id : active;
+      }, "top");
+      setActiveJourneySection(currentSection);
       if (currentScrollY < 480) {
         setTopButtonState("hidden");
       } else if (currentScrollY < lastScrollYRef.current - 4) {
@@ -879,6 +953,7 @@ export function App() {
       } else if (currentScrollY > lastScrollYRef.current + 4) {
         setTopButtonState("muted");
       }
+      setJourneyVisible(currentScrollY > Math.max(640, window.innerHeight * 0.72));
       lastScrollYRef.current = currentScrollY;
     };
     updateProgress();
@@ -997,6 +1072,50 @@ export function App() {
     document.getElementById("purchase-options")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
+  function handleJourneyNavigation(section) {
+    trackEvent("navigate_section", { section_id: section.id, section_name: section.label });
+    document.getElementById(section.id)?.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      block: "start",
+    });
+  }
+
+  function handlePurchase() {
+    const productUrl = new URL("https://www.1laser.com/products/onelaser-xrf-desktop-laser-machine");
+    productUrl.searchParams.set("utm_source", "xrf-gen2-listing");
+    productUrl.searchParams.set("utm_medium", "product-page");
+    productUrl.searchParams.set("utm_campaign", "xrf-gen2-launch");
+    productUrl.searchParams.set("utm_content", `${purchasePower.toLowerCase()}-${selectedPackageId}`);
+
+    const eventParameters = {
+      content_name: `XRF Gen2 ${purchasePower} ${selectedPurchasePackage.name}`,
+      content_ids: [`xrf-gen2-${purchasePower.toLowerCase()}-${selectedPackageId}`],
+      content_type: "product",
+      value: purchaseTotal,
+      currency: "USD",
+      quantity,
+      accessory_count: selectedPurchaseAccessories.length,
+    };
+
+    if (purchasePower === "70W") {
+      trackEvent("generate_lead", { ...eventParameters, lead_type: "70w_purchase_consultation" });
+      window.open("https://www.1laser.com/pages/sales-consultation?utm_source=xrf-gen2-listing&utm_medium=product-page&utm_campaign=xrf-gen2-70w", "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    trackEvent("add_to_cart", eventParameters);
+    trackEvent("begin_checkout", eventParameters);
+    window.open(productUrl.toString(), "_blank", "noopener,noreferrer");
+  }
+
+  function trackLead(destination, leadType) {
+    trackEvent("generate_lead", {
+      content_name: "OneLaser XRF Gen2",
+      lead_type: leadType,
+      destination,
+    });
+  }
+
   function selectMedia(index) {
     setActiveMedia(index);
     const item = media[index];
@@ -1053,10 +1172,11 @@ export function App() {
   }
 
   function togglePurchaseAccessory(accessoryId) {
-    setPurchaseAdded(false);
-    setSelectedPurchaseAccessories((current) => current.includes(accessoryId)
-      ? current.filter((id) => id !== accessoryId)
-      : [...current, accessoryId]);
+    setSelectedPurchaseAccessories((current) => {
+      const selected = !current.includes(accessoryId);
+      trackEvent("select_accessory", { accessory_id: accessoryId, selected });
+      return selected ? [...current, accessoryId] : current.filter((id) => id !== accessoryId);
+    });
   }
 
   return (
@@ -1083,6 +1203,30 @@ export function App() {
           <button className="header-cta" type="button" onClick={configure}>Configure <CaretDown size={15} weight="bold" /></button>
         </div>
       </header>
+
+      <nav className={journeyVisible ? "journey-nav is-visible" : "journey-nav"} aria-label="Explore XRF Gen2 page sections">
+        <div className="journey-nav__inner">
+          <span className="journey-nav__label">Explore XRF Gen2</span>
+          <div className="journey-nav__rail">
+            {journeySections.map((section, index) => (
+              <button
+                type="button"
+                className={activeJourneySection === section.id ? "is-active" : ""}
+                aria-current={activeJourneySection === section.id ? "location" : undefined}
+                onClick={() => handleJourneyNavigation(section)}
+                key={section.id}
+              >
+                <span>{section.label}</span>
+                <small>{String(index + 1).padStart(2, "0")}</small>
+              </button>
+            ))}
+          </div>
+          <span className="journey-nav__count">
+            {String(Math.max(1, journeySections.findIndex(({ id }) => id === activeJourneySection) + 1)).padStart(2, "0")}
+            <i>/</i>{String(journeySections.length).padStart(2, "0")}
+          </span>
+        </div>
+      </nav>
 
       <main id="main">
         <section className="hero section" id="top">
@@ -1132,7 +1276,7 @@ export function App() {
                 {[0, 1, 2, 3, 4].map((item) => <Star size={18} weight="fill" key={item} />)}
               </span>
               <strong>4.93</strong>
-              <a href="https://www.1laser.com/products/onelaser-xrf-desktop-laser-machine#judgeme_product_reviews" target="_blank" rel="noreferrer">45 reviews</a>
+              <a href="#reviews">45 reviews</a>
             </div>
 
             <ul className="hero-highlights">
@@ -1170,7 +1314,16 @@ export function App() {
                 ].map((item) => {
                   const selected = purchasePower === item.id;
                   return (
-                    <button type="button" className={selected ? "purchase-power is-selected" : "purchase-power"} key={item.id} onClick={() => { setPurchasePower(item.id); setPurchaseAdded(false); }} aria-pressed={selected}>
+                    <button
+                      type="button"
+                      className={selected ? "purchase-power is-selected" : "purchase-power"}
+                      key={item.id}
+                      onClick={() => {
+                        setPurchasePower(item.id);
+                        trackEvent("select_power", { power: item.id, value: item.id === "70W" ? 4499 : 3999, currency: "USD" });
+                      }}
+                      aria-pressed={selected}
+                    >
                       <span><strong>{item.title}</strong>{item.badge && <small>{item.badge}</small>}</span>
                       <p>{item.copy}</p>
                     </button>
@@ -1189,7 +1342,10 @@ export function App() {
                       type="button"
                       className={selected ? "official-package is-selected" : "official-package"}
                       key={item.id}
-                      onClick={() => { setSelectedPackageId(item.id); setPurchaseAdded(false); }}
+                      onClick={() => {
+                        setSelectedPackageId(item.id);
+                        trackEvent("select_package", { package_id: item.id, power: purchasePower });
+                      }}
                       aria-pressed={selected}
                     >
                       <div className="official-package__top">
@@ -1226,16 +1382,104 @@ export function App() {
               </div>
               <div className="purchase-actions purchase-actions--hero">
                 <div className="quantity-control" aria-label="Purchase quantity">
-                  <button type="button" aria-label="Decrease quantity" onClick={() => { setQuantity((value) => Math.max(1, value - 1)); setPurchaseAdded(false); }}><Minus size={15} /></button>
+                  <button type="button" aria-label="Decrease quantity" onClick={() => setQuantity((value) => Math.max(1, value - 1))}><Minus size={15} /></button>
                   <strong>{quantity}</strong>
-                  <button type="button" aria-label="Increase quantity" onClick={() => { setQuantity((value) => value + 1); setPurchaseAdded(false); }}><Plus size={15} /></button>
+                  <button type="button" aria-label="Increase quantity" onClick={() => setQuantity((value) => value + 1)}><Plus size={15} /></button>
                 </div>
-                <button type="button" className="primary-cta" onClick={() => setPurchaseAdded(true)}>{purchaseAdded ? "Added to configuration" : "Add to Cart"}</button>
+                <button type="button" className="primary-cta" onClick={handlePurchase}>
+                  {purchasePower === "70W" ? "Talk to an engineer about 70W" : "Continue to purchase"}
+                </button>
               </div>
-              <a className="secondary-cta secondary-cta--link secondary-cta--shop" href="https://www.1laser.com/products/onelaser-xrf-desktop-laser-machine" target="_blank" rel="noreferrer">Buy with SHOP</a>
+              <a
+                className="secondary-cta secondary-cta--link"
+                href="https://www.1laser.com/pages/find-demo-host?utm_source=xrf-gen2-listing&utm_medium=product-page&utm_campaign=xrf-gen2-demo"
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => trackLead("find-demo-host", "book_live_demo")}
+              >
+                Book a live demo <ArrowUpRight size={16} />
+              </a>
+              <p className="purchase-assurance">30-Day Money-Back · 3-2-1 Warranty · Ships from California</p>
             </div>
 
           </div>
+        </section>
+
+        <section className="decision-paths" id="next-step" aria-labelledby="decision-paths-title" data-reveal>
+          <div className="decision-paths__heading">
+            <span className="eyebrow">NOT READY TO CHECK OUT?</span>
+            <h2 id="decision-paths-title">Choose the next step that helps you decide.</h2>
+            <p>See the machine live, speak with an experienced engineer, or get the information you need to evaluate XRF Gen2 on your own time.</p>
+          </div>
+          <div className="decision-paths__grid">
+            <a
+              className="decision-path"
+              href="https://www.1laser.com/pages/find-demo-host?utm_source=xrf-gen2-listing&utm_medium=product-page&utm_campaign=xrf-gen2-demo"
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => trackLead("find-demo-host", "book_live_demo")}
+            >
+              <span><Play size={22} weight="fill" /></span>
+              <strong>Book a live demo</strong>
+              <p>See XRF in action and ask questions around the work you want to make.</p>
+              <i>Find a demo host <ArrowUpRight size={15} /></i>
+            </a>
+            <a
+              className="decision-path"
+              href="https://www.1laser.com/pages/sales-consultation?utm_source=xrf-gen2-listing&utm_medium=product-page&utm_campaign=xrf-gen2-consultation"
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => trackLead("sales-consultation", "talk_to_engineer")}
+            >
+              <span><Phone size={22} weight="bold" /></span>
+              <strong>Talk to an engineer</strong>
+              <p>Get a free 30-minute consultation focused on your products, workflow and setup.</p>
+              <i>Schedule a consultation <ArrowUpRight size={15} /></i>
+            </a>
+            <form
+              className="decision-path decision-path--capture"
+              action="https://www.1laser.com/contact#ContactForm"
+              method="post"
+              target="_blank"
+              onSubmit={() => trackLead("shopify-contact", "email_capture")}
+            >
+              <input type="hidden" name="form_type" value="contact" />
+              <input type="hidden" name="utf8" value="✓" />
+              <input type="hidden" name="contact[subject]" value="XRF Gen2 website lead" />
+              <span><EnvelopeSimple size={22} weight="bold" /></span>
+              <strong>Get the Gen2 launch kit</strong>
+              <p>Choose the launch offer, complete specification sheet, or a free engraving-sample request.</p>
+              <label>
+                <span className="sr-only">Choose what you want to receive</span>
+                <select name="contact[body]" defaultValue="Send me the complete XRF Gen2 specification sheet">
+                  <option>Send me the complete XRF Gen2 specification sheet</option>
+                  <option>Tell me about XRF Gen2 launch offers</option>
+                  <option>I want to request a free engraving sample</option>
+                </select>
+              </label>
+              <label className="decision-path__email">
+                <span className="sr-only">Email address</span>
+                <input type="email" name="contact[email]" placeholder="Work email" required />
+                <button type="submit" aria-label="Send my XRF Gen2 request"><ArrowUpRight size={17} /></button>
+              </label>
+            </form>
+          </div>
+        </section>
+
+        <section className="trade-up-banner" aria-labelledby="trade-up-title" data-reveal>
+          <div>
+            <span className="eyebrow">TRADE UP TO XRF</span>
+            <h2 id="trade-up-title">Have an old laser? Get up to $300 in XRF trade-up credit.</h2>
+            <p>Tell OneLaser what you own today and get a trade-up response by email—usually within 24 hours.</p>
+          </div>
+          <a
+            href="https://www.1laser.com/pages/trade-up?utm_source=xrf-gen2-listing&utm_medium=product-page&utm_campaign=xrf-gen2-trade-up"
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => trackLead("trade-up", "trade_up")}
+          >
+            Check my trade-up value <ArrowUpRight size={16} />
+          </a>
         </section>
 
         <section className="feature-overview" id="features" data-reveal>
@@ -1503,6 +1747,23 @@ export function App() {
               <button type="button" onClick={() => scrollReviewVideos(1)} aria-label="Show more creator reviews"><CaretRight size={22} /></button>
             </div>
           </div>
+          <div className="consultation-feedback" aria-label="OneLaser consultation feedback">
+            <div className="consultation-feedback__intro">
+              <strong>Named customer feedback, kept on this page.</strong>
+              <span>From OneLaser's sales-consultation program</span>
+            </div>
+            <div className="consultation-feedback__grid">
+              {consultationFeedback.map((item) => (
+                <blockquote key={item.name}>
+                  <div className="consultation-feedback__stars" aria-label="5 out of 5 stars">
+                    {[0, 1, 2, 3, 4].map((star) => <Star size={14} weight="fill" key={star} />)}
+                  </div>
+                  <p>“{item.quote}”</p>
+                  <footer><strong>{item.name}</strong><span>{item.role}</span></footer>
+                </blockquote>
+              ))}
+            </div>
+          </div>
           <div className="review-proof__rail" ref={reviewVideoRailRef}>
             {reviewVideos.map((video, index) => <ReviewVideoCard video={video} onPlay={setYoutubeVideo} index={index} total={reviewVideos.length} key={video.id} />)}
           </div>
@@ -1513,14 +1774,22 @@ export function App() {
           <div className="sales-video__copy">
             <span className="eyebrow">A FAIR SIDE-BY-SIDE</span>
             <h2>Considering an xTool P2? Watch this first.</h2>
-            <p>See how the OneLaser XRF compares when speed, detail, laser source and production workflow matter.</p>
-            <dl className="comparison-proof">
-              <div><dt>Laser source</dt><dd>RF metal tube for fine detail and consistent output</dd></div>
-              <div><dt>Throughput</dt><dd>Built for higher-speed repeatable production</dd></div>
-              <div><dt>Cooling</dt><dd>Air-cooled RF architecture</dd></div>
-              <div><dt>Workflow</dt><dd>Designed for serious makers and growing businesses</dd></div>
-            </dl>
-            <blockquote>Hobby machines help you start creating. The XRF is designed to help you keep producing.</blockquote>
+            <p>Compare published specifications directly—source, speed, acceleration, detail, warranty and price.</p>
+            <div className="measured-comparison" role="region" aria-label="OneLaser XRF and xTool P2 published specification comparison" tabIndex="0">
+              <table>
+                <thead>
+                  <tr><th scope="col">Published specification</th><th scope="col">OneLaser XRF Gen2</th><th scope="col">xTool P2</th></tr>
+                </thead>
+                <tbody>
+                  {competitorRows.map(([label, xrf, p2]) => (
+                    <tr key={label}><th scope="row">{label}</th><td>{xrf}</td><td>{p2}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="measured-comparison__note">
+              Published specifications checked against official OneLaser and xTool product/support pages. Confirm current package contents before purchase.
+            </p>
           </div>
         </section>
 
@@ -1621,8 +1890,15 @@ export function App() {
       </button>
 
       <div className="sticky-buy" aria-label="Sticky purchase bar">
-        <div><strong>{selectedPurchasePackage.name}</strong><span>{purchasePower} RF · {selectedPurchaseAccessories.length ? `${selectedPurchaseAccessories.length} optional item${selectedPurchaseAccessories.length > 1 ? "s" : ""}` : "Standalone configuration"}</span></div>
-        <div className="sticky-buy__price"><span><strong>{formatMoney(purchaseTotal)}</strong><del>{formatMoney(purchaseMsrpTotal)}</del></span><button type="button" onClick={() => setPurchaseAdded(true)}>{purchaseAdded ? "Added" : "Add to Cart"}</button></div>
+        <div>
+          <strong>{selectedPurchasePackage.name}</strong>
+          <span>{purchasePower} RF · {selectedPurchaseAccessories.length ? `${selectedPurchaseAccessories.length} optional item${selectedPurchaseAccessories.length > 1 ? "s" : ""}` : "Standalone configuration"}</span>
+          <small>30-Day Money-Back · 3-2-1 Warranty · Ships from California</small>
+        </div>
+        <div className="sticky-buy__price">
+          <span><strong>{formatMoney(purchaseTotal)}</strong><del>{formatMoney(purchaseMsrpTotal)}</del></span>
+          <button type="button" onClick={handlePurchase}>{purchasePower === "70W" ? "Talk to an engineer" : "Continue to purchase"}</button>
+        </div>
       </div>
 
       {videoModal && (
