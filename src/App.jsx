@@ -886,6 +886,7 @@ export function App() {
   const [videoModal, setVideoModal] = useState(null);
   const [youtubeVideo, setYoutubeVideo] = useState(null);
   const thumbnailRailRef = useRef(null);
+  const heroMediaTouchStartX = useRef(null);
   const reviewVideoRailRef = useRef(null);
   const materialTabRefs = useRef([]);
   const materialTouchStartX = useRef(null);
@@ -1133,6 +1134,19 @@ export function App() {
     setActiveMedia((current) => (current + direction + media.length) % media.length);
   }
 
+  function handleHeroMediaTouchStart(event) {
+    heroMediaTouchStartX.current = event.changedTouches[0]?.clientX ?? null;
+  }
+
+  function handleHeroMediaTouchEnd(event) {
+    const startX = heroMediaTouchStartX.current;
+    const endX = event.changedTouches[0]?.clientX;
+    heroMediaTouchStartX.current = null;
+
+    if (startX == null || endX == null || Math.abs(endX - startX) < 44) return;
+    stepMedia(endX < startX ? 1 : -1);
+  }
+
   function scrollThumbnails(direction) {
     thumbnailRailRef.current?.scrollBy({ left: direction * 330, behavior: "smooth" });
   }
@@ -1231,8 +1245,15 @@ export function App() {
       <main id="main">
         <section className="hero section" id="top">
           <div className="hero-media">
-            <div className="media-stage">
-              <img src={media[activeMedia].src} alt={media[activeMedia].alt} />
+            <div
+              className="media-stage"
+              aria-label="XRF Gen2 product gallery"
+              aria-roledescription="carousel"
+              onTouchStart={handleHeroMediaTouchStart}
+              onTouchEnd={handleHeroMediaTouchEnd}
+              onTouchCancel={() => { heroMediaTouchStartX.current = null; }}
+            >
+              <img src={media[activeMedia].src} alt={media[activeMedia].alt} draggable="false" />
               <span className="media-count">{String(activeMedia + 1).padStart(2, "0")} / {String(media.length).padStart(2, "0")}</span>
               <button type="button" className="media-arrow media-arrow--previous" aria-label="Previous product view" onClick={() => stepMedia(-1)}><CaretLeft size={25} /></button>
               <button type="button" className="media-arrow media-arrow--next" aria-label="Next product view" onClick={() => stepMedia(1)}><CaretRight size={25} /></button>
