@@ -130,3 +130,5 @@ When implementing from a selected generated mock, treat that image as the source
 - Distribute image-loading placeholders across seven stable low-saturation hues rather than one pure gray. Keep each image's assigned hue stable across renders so loading never flashes between colors.
 - Keep all three RF-advantage images in one identical fixed media frame. Use centered `object-fit: cover` cropping on desktop and the same 3:2 media ratio on tablet/mobile.
 - Hero gallery assets are square and must render edge to edge inside the square main stage with no internal padding, letterboxing or hover crop. Keep the complete square source frame visible; on touch devices, swiping the main stage changes the active image while the thumbnail rail remains horizontally swipeable.
+- Keep `Add to Cart` as the primary Hero and sticky purchase action. Show `Buy with SHOP` as the purple accelerated-checkout action when it points to the user-approved direct Shop Pay checkout URL.
+- Place the mid-funnel next-step module and Trade-Up banner immediately after Specifications and before Reviews. Inside Reviews, show the creator/customer video rail before the named written feedback.

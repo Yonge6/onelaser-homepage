@@ -38,6 +38,7 @@ import { initializeAnalytics, trackEvent } from "./analytics.js";
 
 const asset = (name) => `${import.meta.env.BASE_URL}assets/${name}`;
 const MATERIAL_AUTOPLAY_DELAY = 6000;
+const SHOP_PAY_CHECKOUT_URL = "https://shop.app/checkout/74787487778/cn/hWNEuAMTTmYTB2rCEwCxHTE2/en-us/shoppay_login?_mcs=3.AMPS&_r=AQAByVbynU7atLKciNromD2tDcEbj-gOEig5dFzqa6QdGhg&redirect_source=direct_checkout_product&tracking_unique=614e268f-4b89-47aa-8a8e-31caa20c20fe&tracking_visit=3a8f583a-5dce-4171-a572-a5f40399d946&_cs=3.AMPS";
 
 const media = [
   { src: asset("xrf-hero.jpg"), alt: "XRF Gen2 closed three-quarter product render", label: "Studio" },
@@ -566,7 +567,6 @@ const faqs = [
 
 const journeySections = [
   { id: "top", label: "Overview" },
-  { id: "next-step", label: "Decide" },
   { id: "capabilities", label: "What you can make" },
   { id: "materials", label: "Materials" },
   { id: "rf-advantages", label: "Why RF" },
@@ -574,6 +574,7 @@ const journeySections = [
   { id: "capability-system", label: "Features" },
   { id: "software", label: "Software" },
   { id: "specs", label: "Specs" },
+  { id: "next-step", label: "Decide" },
   { id: "reviews", label: "Reviews" },
   { id: "support", label: "Support" },
   { id: "faq", label: "FAQ" },
@@ -1081,14 +1082,8 @@ export function App() {
     });
   }
 
-  function handlePurchase() {
-    const productUrl = new URL("https://www.1laser.com/products/onelaser-xrf-desktop-laser-machine");
-    productUrl.searchParams.set("utm_source", "xrf-gen2-listing");
-    productUrl.searchParams.set("utm_medium", "product-page");
-    productUrl.searchParams.set("utm_campaign", "xrf-gen2-launch");
-    productUrl.searchParams.set("utm_content", `${purchasePower.toLowerCase()}-${selectedPackageId}`);
-
-    const eventParameters = {
+  function getPurchaseEventParameters() {
+    return {
       content_name: `XRF Gen2 ${purchasePower} ${selectedPurchasePackage.name}`,
       content_ids: [`xrf-gen2-${purchasePower.toLowerCase()}-${selectedPackageId}`],
       content_type: "product",
@@ -1097,16 +1092,24 @@ export function App() {
       quantity,
       accessory_count: selectedPurchaseAccessories.length,
     };
+  }
 
-    if (purchasePower === "70W") {
-      trackEvent("generate_lead", { ...eventParameters, lead_type: "70w_purchase_consultation" });
-      window.open("https://www.1laser.com/pages/sales-consultation?utm_source=xrf-gen2-listing&utm_medium=product-page&utm_campaign=xrf-gen2-70w", "_blank", "noopener,noreferrer");
-      return;
-    }
+  function handleAddToCart() {
+    const productUrl = new URL("https://www.1laser.com/products/onelaser-xrf-desktop-laser-machine");
+    productUrl.searchParams.set("utm_source", "xrf-gen2-listing");
+    productUrl.searchParams.set("utm_medium", "product-page");
+    productUrl.searchParams.set("utm_campaign", "xrf-gen2-launch");
+    productUrl.searchParams.set("utm_content", `${purchasePower.toLowerCase()}-${selectedPackageId}`);
 
-    trackEvent("add_to_cart", eventParameters);
-    trackEvent("begin_checkout", eventParameters);
+    trackEvent("add_to_cart", getPurchaseEventParameters());
     window.open(productUrl.toString(), "_blank", "noopener,noreferrer");
+  }
+
+  function handleShopPayCheckout() {
+    trackEvent("begin_checkout", {
+      ...getPurchaseEventParameters(),
+      checkout_type: "shop_pay",
+    });
   }
 
   function trackLead(destination, leadType) {
@@ -1407,10 +1410,17 @@ export function App() {
                   <strong>{quantity}</strong>
                   <button type="button" aria-label="Increase quantity" onClick={() => setQuantity((value) => value + 1)}><Plus size={15} /></button>
                 </div>
-                <button type="button" className="primary-cta" onClick={handlePurchase}>
-                  {purchasePower === "70W" ? "Talk to an engineer about 70W" : "Continue to purchase"}
-                </button>
+                <button type="button" className="primary-cta" onClick={handleAddToCart}>Add to Cart</button>
               </div>
+              <a
+                className="secondary-cta secondary-cta--link secondary-cta--shop"
+                href={SHOP_PAY_CHECKOUT_URL}
+                target="_blank"
+                rel="noreferrer"
+                onClick={handleShopPayCheckout}
+              >
+                Buy with SHOP <ArrowUpRight size={16} />
+              </a>
               <a
                 className="secondary-cta secondary-cta--link"
                 href="https://www.1laser.com/pages/find-demo-host?utm_source=xrf-gen2-listing&utm_medium=product-page&utm_campaign=xrf-gen2-demo"
@@ -1424,83 +1434,6 @@ export function App() {
             </div>
 
           </div>
-        </section>
-
-        <section className="decision-paths" id="next-step" aria-labelledby="decision-paths-title" data-reveal>
-          <div className="decision-paths__heading">
-            <span className="eyebrow">NOT READY TO CHECK OUT?</span>
-            <h2 id="decision-paths-title">Choose the next step that helps you decide.</h2>
-            <p>See the machine live, speak with an experienced engineer, or get the information you need to evaluate XRF Gen2 on your own time.</p>
-          </div>
-          <div className="decision-paths__grid">
-            <a
-              className="decision-path"
-              href="https://www.1laser.com/pages/find-demo-host?utm_source=xrf-gen2-listing&utm_medium=product-page&utm_campaign=xrf-gen2-demo"
-              target="_blank"
-              rel="noreferrer"
-              onClick={() => trackLead("find-demo-host", "book_live_demo")}
-            >
-              <span><Play size={22} weight="fill" /></span>
-              <strong>Book a live demo</strong>
-              <p>See XRF in action and ask questions around the work you want to make.</p>
-              <i>Find a demo host <ArrowUpRight size={15} /></i>
-            </a>
-            <a
-              className="decision-path"
-              href="https://www.1laser.com/pages/sales-consultation?utm_source=xrf-gen2-listing&utm_medium=product-page&utm_campaign=xrf-gen2-consultation"
-              target="_blank"
-              rel="noreferrer"
-              onClick={() => trackLead("sales-consultation", "talk_to_engineer")}
-            >
-              <span><Phone size={22} weight="bold" /></span>
-              <strong>Talk to an engineer</strong>
-              <p>Get a free 30-minute consultation focused on your products, workflow and setup.</p>
-              <i>Schedule a consultation <ArrowUpRight size={15} /></i>
-            </a>
-            <form
-              className="decision-path decision-path--capture"
-              action="https://www.1laser.com/contact#ContactForm"
-              method="post"
-              target="_blank"
-              onSubmit={() => trackLead("shopify-contact", "email_capture")}
-            >
-              <input type="hidden" name="form_type" value="contact" />
-              <input type="hidden" name="utf8" value="✓" />
-              <input type="hidden" name="contact[subject]" value="XRF Gen2 website lead" />
-              <span><EnvelopeSimple size={22} weight="bold" /></span>
-              <strong>Get the Gen2 launch kit</strong>
-              <p>Choose the launch offer, complete specification sheet, or a free engraving-sample request.</p>
-              <label>
-                <span className="sr-only">Choose what you want to receive</span>
-                <select name="contact[body]" defaultValue="Send me the complete XRF Gen2 specification sheet">
-                  <option>Send me the complete XRF Gen2 specification sheet</option>
-                  <option>Tell me about XRF Gen2 launch offers</option>
-                  <option>I want to request a free engraving sample</option>
-                </select>
-              </label>
-              <label className="decision-path__email">
-                <span className="sr-only">Email address</span>
-                <input type="email" name="contact[email]" placeholder="Work email" required />
-                <button type="submit" aria-label="Send my XRF Gen2 request"><ArrowUpRight size={17} /></button>
-              </label>
-            </form>
-          </div>
-        </section>
-
-        <section className="trade-up-banner" aria-labelledby="trade-up-title" data-reveal>
-          <div>
-            <span className="eyebrow">TRADE UP TO XRF</span>
-            <h2 id="trade-up-title">Have an old laser? Get up to $300 in XRF trade-up credit.</h2>
-            <p>Tell OneLaser what you own today and get a trade-up response by email—usually within 24 hours.</p>
-          </div>
-          <a
-            href="https://www.1laser.com/pages/trade-up?utm_source=xrf-gen2-listing&utm_medium=product-page&utm_campaign=xrf-gen2-trade-up"
-            target="_blank"
-            rel="noreferrer"
-            onClick={() => trackLead("trade-up", "trade_up")}
-          >
-            Check my trade-up value <ArrowUpRight size={16} />
-          </a>
         </section>
 
         <section className="feature-overview" id="features" data-reveal>
@@ -1756,6 +1689,83 @@ export function App() {
           </div>
         </section>
 
+        <section className="decision-paths" id="next-step" aria-labelledby="decision-paths-title" data-reveal>
+          <div className="decision-paths__heading">
+            <span className="eyebrow">NOT READY TO CHECK OUT?</span>
+            <h2 id="decision-paths-title">Choose the next step that helps you decide.</h2>
+            <p>See the machine live, speak with an experienced engineer, or get the information you need to evaluate XRF Gen2 on your own time.</p>
+          </div>
+          <div className="decision-paths__grid">
+            <a
+              className="decision-path"
+              href="https://www.1laser.com/pages/find-demo-host?utm_source=xrf-gen2-listing&utm_medium=product-page&utm_campaign=xrf-gen2-demo"
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => trackLead("find-demo-host", "book_live_demo")}
+            >
+              <span><Play size={22} weight="fill" /></span>
+              <strong>Book a live demo</strong>
+              <p>See XRF in action and ask questions around the work you want to make.</p>
+              <i>Find a demo host <ArrowUpRight size={15} /></i>
+            </a>
+            <a
+              className="decision-path"
+              href="https://www.1laser.com/pages/sales-consultation?utm_source=xrf-gen2-listing&utm_medium=product-page&utm_campaign=xrf-gen2-consultation"
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => trackLead("sales-consultation", "talk_to_engineer")}
+            >
+              <span><Phone size={22} weight="bold" /></span>
+              <strong>Talk to an engineer</strong>
+              <p>Get a free 30-minute consultation focused on your products, workflow and setup.</p>
+              <i>Schedule a consultation <ArrowUpRight size={15} /></i>
+            </a>
+            <form
+              className="decision-path decision-path--capture"
+              action="https://www.1laser.com/contact#ContactForm"
+              method="post"
+              target="_blank"
+              onSubmit={() => trackLead("shopify-contact", "email_capture")}
+            >
+              <input type="hidden" name="form_type" value="contact" />
+              <input type="hidden" name="utf8" value="✓" />
+              <input type="hidden" name="contact[subject]" value="XRF Gen2 website lead" />
+              <span><EnvelopeSimple size={22} weight="bold" /></span>
+              <strong>Get the Gen2 launch kit</strong>
+              <p>Choose the launch offer, complete specification sheet, or a free engraving-sample request.</p>
+              <label>
+                <span className="sr-only">Choose what you want to receive</span>
+                <select name="contact[body]" defaultValue="Send me the complete XRF Gen2 specification sheet">
+                  <option>Send me the complete XRF Gen2 specification sheet</option>
+                  <option>Tell me about XRF Gen2 launch offers</option>
+                  <option>I want to request a free engraving sample</option>
+                </select>
+              </label>
+              <label className="decision-path__email">
+                <span className="sr-only">Email address</span>
+                <input type="email" name="contact[email]" placeholder="Work email" required />
+                <button type="submit" aria-label="Send my XRF Gen2 request"><ArrowUpRight size={17} /></button>
+              </label>
+            </form>
+          </div>
+        </section>
+
+        <section className="trade-up-banner" aria-labelledby="trade-up-title" data-reveal>
+          <div>
+            <span className="eyebrow">TRADE UP TO XRF</span>
+            <h2 id="trade-up-title">Have an old laser? Get up to $300 in XRF trade-up credit.</h2>
+            <p>Tell OneLaser what you own today and get a trade-up response by email—usually within 24 hours.</p>
+          </div>
+          <a
+            href="https://www.1laser.com/pages/trade-up?utm_source=xrf-gen2-listing&utm_medium=product-page&utm_campaign=xrf-gen2-trade-up"
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => trackLead("trade-up", "trade_up")}
+          >
+            Check my trade-up value <ArrowUpRight size={16} />
+          </a>
+        </section>
+
         <section className="review-proof" id="reviews" aria-labelledby="review-proof-title" data-reveal>
           <div className="review-proof__header">
             <div className="section-heading section-heading--stack">
@@ -1767,6 +1777,9 @@ export function App() {
               <button type="button" onClick={() => scrollReviewVideos(-1)} aria-label="Show previous creator reviews"><CaretLeft size={22} /></button>
               <button type="button" onClick={() => scrollReviewVideos(1)} aria-label="Show more creator reviews"><CaretRight size={22} /></button>
             </div>
+          </div>
+          <div className="review-proof__rail" ref={reviewVideoRailRef}>
+            {reviewVideos.map((video, index) => <ReviewVideoCard video={video} onPlay={setYoutubeVideo} index={index} total={reviewVideos.length} key={video.id} />)}
           </div>
           <div className="consultation-feedback" aria-label="OneLaser consultation feedback">
             <div className="consultation-feedback__intro">
@@ -1784,9 +1797,6 @@ export function App() {
                 </blockquote>
               ))}
             </div>
-          </div>
-          <div className="review-proof__rail" ref={reviewVideoRailRef}>
-            {reviewVideos.map((video, index) => <ReviewVideoCard video={video} onPlay={setYoutubeVideo} index={index} total={reviewVideos.length} key={video.id} />)}
           </div>
         </section>
 
@@ -1918,7 +1928,7 @@ export function App() {
         </div>
         <div className="sticky-buy__price">
           <span><strong>{formatMoney(purchaseTotal)}</strong><del>{formatMoney(purchaseMsrpTotal)}</del></span>
-          <button type="button" onClick={handlePurchase}>{purchasePower === "70W" ? "Talk to an engineer" : "Continue to purchase"}</button>
+          <button type="button" onClick={handleAddToCart}>Add to Cart</button>
         </div>
       </div>
 

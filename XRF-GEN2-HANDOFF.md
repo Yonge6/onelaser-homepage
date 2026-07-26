@@ -25,8 +25,8 @@
 当前主要模块：
 
 1. Hero 产品图库、价格、功率、套装、可选配件和持续可见购买条。
-2. 免费现场演示、免费 30 分钟工程师咨询和 XRF Gen2 资料 / 样品线索表单。
-3. XRF Trade-Up 入口。
+2. 免费现场演示、免费 30 分钟工程师咨询和 XRF Gen2 资料 / 样品线索表单，位于 Specifications 之后。
+3. XRF Trade-Up 入口，紧接上述线索模块并位于 Reviews 之前。
 4. Finished Products、Product Opportunities、Materials、Why RF、38W / 70W、
    Gen 2 / Gen 1、卖点章节、MakerBoost、Software、Specs、Reviews、Support、FAQ。
 5. 滚过首屏后出现的 12 章节浮动导航，显示当前位置并可直接跳转。
@@ -38,10 +38,10 @@
 ### 购买路径
 
 - 删除假的 `Added to configuration` 状态。
-- 删除不具备真实 Shop Pay 结账能力的 `Buy with SHOP` 按钮。
-- 38W 使用 `Continue to purchase`，记录 AddToCart / InitiateCheckout 后进入
-  OneLaser 官方 XRF 商品页。
-- 70W 使用 `Talk to an engineer about 70W`，进入官方销售咨询页。
+- Hero 和 sticky bar 的主按钮统一恢复为 `Add to Cart`，记录 AddToCart 后进入
+  OneLaser 官方 XRF 商品页，并保留当前功率、套装和可选配件的 UTM / analytics 上下文。
+- Hero 恢复紫色 `Buy with SHOP`，使用用户在 2026-07-26 提供的真实 Shop Pay
+  direct-checkout URL，点击记录 InitiateCheckout。
 - Hero 与 sticky CTA 下均显示：
   `30-Day Money-Back · 3-2-1 Warranty · Ships from California`。
 
@@ -55,7 +55,7 @@
 ### 站内证明
 
 - `45 reviews` 不再把访客带离当前页面，改为跳到站内 Reviews。
-- Reviews 增加三条带名字与身份的咨询反馈。
+- Reviews 增加三条带名字与身份的咨询反馈，并将文字评价放在视频卡片之后。
 - xTool P2 对比改成硬参数表，覆盖光源、速度、加速度、细节、冷却 / 寿命、
   质保和起售价。
 - FAQ 增加标准 110V 插座、运费 / 发货时间和 70W 加 $500 三个高频问题。
@@ -92,7 +92,8 @@
 ## 后续规则
 
 - Hero 后续使用正方形图片；主舞台必须 1:1 满版、零内边距、无留白且不做 hover 放大裁切。手机与平板可直接在主舞台左右滑动切图，缩略图轨道继续支持横向滑动。
-- 没有稳定的 38W / 70W Shopify variant 直达结账链接前，不伪装成已加入购物车。
+- `Buy with SHOP` 使用用户明确提供的 direct-checkout URL；不要替换为猜测的
+  Shopify variant。`Add to Cart` 保持真实外跳，不模拟前端已加入状态。
 - 获得真实 GA4 Measurement ID 与 Meta Pixel ID 后，通过部署环境配置，不写死在源码。
 - 如果接入 Calendly，直接替换现有官方咨询 / Demo URL，不改变卡片结构。
 - 如果接入 Judge.me，替换当前三条站内反馈，但保留 Reviews 页内闭环。
