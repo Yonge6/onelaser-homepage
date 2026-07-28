@@ -268,12 +268,12 @@ const capabilityChapters = [
         title: "Photo-real, every time.",
         copy: "Pulse-modulated RF energy through a finer 0.07 mm spot produces crisp small type, photographic grayscale and dimensional relief up to 2,000 DPI—without water cooling.",
         metrics: ["2,000 DPI", "0.07 mm spot", "Up to 30,000 h"],
-        image: "power-38w-proof.webp",
+        image: "capability-precision-main.webp",
       },
     ],
     support: [
-      { title: "Tool-free optics care", copy: "Magnetic QuickSwitch™ lenses remove in seconds for fast cleaning and focal-length changes.", image: "xrf-gallery-09.jpg" },
-      { title: "Output that stays consistent", copy: "A sealed, factory-calibrated optical path helps the beam arrive true and stay true through daily production.", image: "xrf-detail-proof.webp" },
+      { title: "Tool-free optics care", copy: "Magnetic QuickSwitch™ lenses remove in seconds for fast cleaning and focal-length changes.", image: "capability-tool-free-optics-care.webp" },
+      { title: "Output that stays consistent", copy: "A sealed, factory-calibrated optical path helps the beam arrive true and stay true through daily production.", image: "capability-output-consistent.webp" },
     ],
     proofs: [
       { value: "Air cooled", label: "No water chiller", icon: Thermometer },
