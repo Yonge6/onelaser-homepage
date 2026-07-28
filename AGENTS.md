@@ -140,3 +140,4 @@ When implementing from a selected generated mock, treat that image as the source
 - On tablet and mobile, the capability chapter navigation stacks below the global journey navigation; the two sticky rails must never overlap or cover the active chapter content.
 - Frequently-bought-together accessory thumbnails fill their image crop edge to edge with no CSS padding or letterboxing.
 - Speed & Motion selling-point chapter uses one four-option segmented material control for Wood, Acrylic, Slate and Leather, following the former power-selector interaction anatomy; do not show or switch 38W/70W inside this chapter. Lower motion support uses compact icon proof tiles rather than image cards.
+- Speed & Motion materials and Why RF tabs share one centered segmented-control visual: a `#E2E2E7` outer pill, white active pill with black text and restrained shadow, and no red active border. On mobile both remain one horizontally swipeable row and never wrap into multiple rows.

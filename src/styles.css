@@ -8972,3 +8972,76 @@ body { color: var(--ink); }
     transition: none;
   }
 }
+
+/* 2026-07-28: one centered segmented-control treatment for material and RF tabs. */
+.speed-motion-proof__materials,
+.rf-advantages__tabs {
+  width: min(100%, 720px);
+  margin-right: auto;
+  margin-left: auto;
+  gap: 4px;
+  padding: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e2e2e7;
+}
+
+.speed-motion-proof__materials button,
+.rf-advantages__tabs button {
+  min-height: 58px;
+  padding: 0 20px;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 800;
+  transition: background-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+
+.speed-motion-proof__materials button:hover,
+.rf-advantages__tabs button:hover {
+  color: var(--ink);
+}
+
+.speed-motion-proof__materials button.is-active,
+.rf-advantages__tabs button.is-active {
+  border: 0;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .06);
+}
+
+@media (max-width: 760px) {
+  .speed-motion-proof__materials,
+  .rf-advantages__tabs {
+    display: flex;
+    width: 100%;
+    max-width: none;
+    gap: 4px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-radius: 999px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .speed-motion-proof__materials::-webkit-scrollbar,
+  .rf-advantages__tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .speed-motion-proof__materials button,
+  .rf-advantages__tabs button {
+    flex: 0 0 auto;
+    min-width: max-content;
+    min-height: 48px;
+    padding: 0 18px;
+    justify-content: center;
+    font-size: 14px;
+    scroll-snap-align: start;
+  }
+}
