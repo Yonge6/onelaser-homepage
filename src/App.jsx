@@ -342,7 +342,7 @@ const capabilityChapters = [
         title: "Print and cut, made easy.",
         copy: "The head-mounted Intelligent Vision System detects registration marks and compensates position and angle in real time—reducing calibration, waste and rework.",
         metrics: ["Mark detection", "Live compensation", "Less material waste"],
-        image: "xrf-ivs.jpg",
+        image: "smart-workflow-print-cut.webp",
       },
       {
         title: "Focus and control, in one clear flow.",
