@@ -120,3 +120,12 @@
   原图的内置留白分别做克制缩放，让产品图在 58 px / 52 px 缩略图内满版呈现。
 - `npm run build` 与 `git diff --check` 均通过；Certia 字体仍只有既有的运行时路径提示。
 - 本地浏览器已检查桌面对比表与四张配件缩略图，未发现新增控制台或构建错误。
+
+## 2026-07-28 模块删减
+
+- 已移除 `#capabilities` 中 `Ready to build your next product line?` / `BUILD YOUR NEXT PRODUCT LINE`
+  CTA 卡片。
+- Product Opportunities 下方现在只保留 `The workflow behind repeatable results.`
+  四点能力连接区，并直接过渡到 Materials gallery。
+- `AGENTS.md` 已记录：不要在 Product Opportunities / workflow bridge 区域恢复该 CTA；
+  中段 demo / consultation / email lead 与 Trade-Up 模块继续保留在 Specifications 之后。

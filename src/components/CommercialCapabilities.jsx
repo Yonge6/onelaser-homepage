@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowClockwise,
-  ArrowUpRight,
   CaretLeft,
   CaretRight,
   CubeFocus,
@@ -368,17 +367,6 @@ function ProductOpportunities({ asset }) {
 }
 
 function WorkflowBridge() {
-  const prefersReducedMotion = useReducedMotion();
-
-  function handleAnchorClick(event, targetId) {
-    const target = document.getElementById(targetId);
-    if (!target) return;
-    event.preventDefault();
-    const top = window.scrollY + target.getBoundingClientRect().top - 88;
-    window.history.replaceState(null, "", `#${targetId}`);
-    window.scrollTo({ top, behavior: prefersReducedMotion ? "auto" : "smooth" });
-  }
-
   return (
     <div className="workflow-bridge">
       <section className="workflow-bridge__proof" aria-labelledby="workflow-bridge-title">
@@ -398,22 +386,6 @@ function WorkflowBridge() {
               </article>
             );
           })}
-        </div>
-      </section>
-
-      <section className="commercial-cta" aria-labelledby="commercial-cta-title">
-        <div>
-          <span className="eyebrow">BUILD YOUR NEXT PRODUCT LINE</span>
-          <h2 id="commercial-cta-title">Ready to build your next product line?</h2>
-          <p>Explore the XRF Gen2 platform, compare configurations and choose the setup that fits the work you want to make.</p>
-        </div>
-        <div className="commercial-cta__actions">
-          <a href="#purchase-options" onClick={(event) => handleAnchorClick(event, "purchase-options")}>
-            Explore XRF Gen2 <ArrowUpRight size={18} aria-hidden="true" />
-          </a>
-          <a href="#power-guide" onClick={(event) => handleAnchorClick(event, "power-guide")}>
-            Compare configurations
-          </a>
         </div>
       </section>
     </div>

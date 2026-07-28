@@ -34,16 +34,14 @@
 
 .commercial-hero__header .eyebrow,
 .product-opportunities__header .eyebrow,
-.workflow-bridge__proof .eyebrow,
-.commercial-cta .eyebrow {
+.workflow-bridge__proof .eyebrow {
   display: block;
   margin-bottom: 8px;
 }
 
 .commercial-hero__header h2,
 .product-opportunities__header h2,
-.workflow-bridge__proof > header h2,
-.commercial-cta h2 {
+.workflow-bridge__proof > header h2 {
   margin: 0;
   font-size: 48px;
   font-weight: 800;
@@ -53,8 +51,7 @@
 
 .commercial-hero__header p,
 .product-opportunities__header p,
-.workflow-bridge__proof > header p,
-.commercial-cta > div:first-child > p {
+.workflow-bridge__proof > header p {
   max-width: 1180px;
   margin: 12px 0 0;
   color: var(--muted);
@@ -616,62 +613,10 @@
   line-height: 1.55;
 }
 
-.commercial-cta {
-  min-height: 320px;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 56px;
-  align-items: center;
-  margin-top: 48px;
-  padding: 54px 56px;
-  border-radius: 32px;
-  background: #f5f5f7;
-}
-
-.commercial-cta h2 {
-  max-width: none;
-}
-
-.commercial-cta__actions {
-  display: grid;
-  gap: 12px;
-  min-width: 224px;
-}
-
-.commercial-cta__actions a {
-  min-height: 54px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 0 22px;
-  border: 1px solid var(--ink);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--ink);
-  font-size: 14px;
-  font-weight: 800;
-  text-decoration: none;
-  transition: border-color 280ms ease, background-color 280ms ease, color 280ms ease;
-}
-
-.commercial-cta__actions a:first-child {
-  border-color: var(--red);
-  background: var(--red);
-  color: #fff;
-}
-
-.commercial-cta__actions a:hover {
-  border-color: var(--red-dark);
-  background: var(--red-dark);
-  color: #fff;
-}
-
 .commercial-carousel:focus-visible,
 .product-opportunities__tabs button:focus-visible,
 .product-card:focus-visible,
-.commercial-carousel__controls button:focus-visible,
-.commercial-cta__actions a:focus-visible {
+.commercial-carousel__controls button:focus-visible {
   outline: 3px solid rgba(231, 49, 14, .32);
   outline-offset: 3px;
 }
@@ -733,12 +678,6 @@
   }
 }
 
-@media (min-width: 1280px) {
-  .commercial-cta h2 {
-    white-space: nowrap;
-  }
-}
-
 @media (max-width: 900px) {
   .commercial-carousel {
     min-height: 0;
@@ -762,14 +701,6 @@
     min-height: 0;
   }
 
-  .commercial-cta {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .commercial-cta__actions {
-    width: min(100%, 360px);
-  }
 }
 
 @media (max-width: 640px) {
@@ -796,16 +727,14 @@
 
   .commercial-hero__header h2,
   .product-opportunities__header h2,
-  .workflow-bridge__proof > header h2,
-  .commercial-cta h2 {
+  .workflow-bridge__proof > header h2 {
     font-size: 32px;
     line-height: 1.04;
   }
 
   .commercial-hero__header p,
   .product-opportunities__header p,
-  .workflow-bridge__proof > header p,
-  .commercial-cta > div:first-child > p {
+  .workflow-bridge__proof > header p {
     font-size: 15px;
   }
 
@@ -979,21 +908,6 @@
     margin-top: 20px;
   }
 
-  .commercial-cta {
-    min-height: 0;
-    gap: 28px;
-    margin-top: 32px;
-    padding: 34px 24px;
-    border-radius: 24px;
-  }
-
-  .commercial-cta__actions {
-    width: 100%;
-  }
-
-  .commercial-cta__actions a {
-    width: 100%;
-  }
 }
 
 @media (hover: hover) {
@@ -1016,7 +930,6 @@
   .commercial-carousel__dots button,
   .product-opportunities__tabs button,
   .product-opportunities__tabs button::after,
-  .commercial-cta__actions a,
   .product-card__media img {
     transition: none;
   }
