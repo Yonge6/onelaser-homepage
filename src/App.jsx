@@ -257,6 +257,41 @@ const reviewVideos = [
   { id: "yB_RQwZj5p8", title: "Mark Ellis reviews XRF Desktop at CES 2025", channel: "OneLaser", tag: "CES 2025 THIRD-PARTY PROOF" },
 ];
 
+const speedMotionMaterials = [
+  {
+    id: "wood",
+    label: "Wood",
+    title: "Controlled motion for detailed wood work.",
+    copy: "Closed-loop motion keeps the toolpath under feedback through detailed engraving and repeatable passes on wood.",
+    image: "material-wood.webp",
+    icon: Tree,
+  },
+  {
+    id: "acrylic",
+    label: "Acrylic",
+    title: "Measured speed for acrylic work.",
+    copy: "The all-steel, Hydra-derived axes support the same measured motion platform across acrylic engraving and cutting work.",
+    image: "material-acrylic.webp",
+    icon: CubeTransparent,
+  },
+  {
+    id: "slate",
+    label: "Slate",
+    title: "Responsive motion for crisp surface detail.",
+    copy: "Closed-loop control keeps the planned path under feedback while the RF source marks detailed slate surfaces.",
+    image: "material-glass-stone.webp",
+    icon: Target,
+  },
+  {
+    id: "leather",
+    label: "Leather",
+    title: "Less moving mass for personalized runs.",
+    copy: "A 20% lighter laser head reduces moving mass across personalized leather engraving and cutting work.",
+    image: "material-leather.webp",
+    icon: Handbag,
+  },
+];
+
 const capabilityChapters = [
   {
     id: "precision",
@@ -287,26 +322,15 @@ const capabilityChapters = [
     id: "motion",
     nav: "Speed & Motion",
     title: "Turn speed into finished output.",
-    summary: "Measured working performance, closed-loop control and an all-steel motion system keep fast jobs useful—not merely fast.",
-    spotlights: [
-      {
-        title: "Measured in real work. Not empty travel.",
-        copy: "Real 1,300 mm/s engraving speed and True 3.5G acceleration shorten production time while optimized DSP control keeps the toolpath deliberate.",
-        metrics: ["1,300 mm/s", "True 3.5G", "Real engraving conditions"],
-        image: "xrf-internal-wide.jpg",
-      },
-    ],
+    summary: "Measured working performance, closed-loop control and all-steel, Hydra-derived axes keep fast jobs under feedback.",
+    speedProof: true,
+    spotlights: [],
     support: [
-      { title: "High speed with its own feedback loop", copy: "Closed-loop motors monitor position continuously while Hydra-derived steel wheels and embedded steel shafts maintain rigidity, accuracy and service life.", image: "xrf-gallery-07.jpg" },
-      { title: "20% lighter laser head", copy: "Less moving mass helps the head settle faster while carrying the integrated vision module.", image: "xrf-gallery-08.jpg" },
+      { title: "High speed with its own feedback loop", copy: "Closed-loop motion monitors position while all-steel, Hydra-derived axes carry the toolpath.", icon: ArrowClockwise },
+      { title: "20% lighter laser head", copy: "The lighter head reduces moving mass across the XRF motion platform.", icon: CubeTransparent },
     ],
-    proofs: [
-      { value: "1,300 mm/s", label: "Working speed", icon: ArrowClockwise },
-      { value: "True 3.5G", label: "Working acceleration", icon: Anchor },
-      { value: "20% lighter", label: "New head design", icon: CubeTransparent },
-      { value: "Steel on steel", label: "Hydra-derived axes", icon: ShieldCheck },
-    ],
-    details: ["Leadshine X/Y motors", "Optimized DSP trajectory", "Position feedback at speed"],
+    proofs: [],
+    details: [],
   },
   {
     id: "workflow",
@@ -715,6 +739,108 @@ function GenerationComparison() {
   );
 }
 
+function SpeedMotionProof({ onPlay }) {
+  const [activeMaterial, setActiveMaterial] = useState(0);
+  const [activePower, setActivePower] = useState("38W");
+  const materialTabRefs = useRef([]);
+  const selectedMaterial = speedMotionMaterials[activeMaterial];
+
+  function handleMaterialKeyDown(event, index) {
+    const navigationKeys = ["ArrowLeft", "ArrowRight", "Home", "End"];
+    if (!navigationKeys.includes(event.key)) return;
+    event.preventDefault();
+    const lastIndex = speedMotionMaterials.length - 1;
+    const nextIndex = event.key === "Home"
+      ? 0
+      : event.key === "End"
+        ? lastIndex
+        : event.key === "ArrowLeft"
+          ? (index - 1 + speedMotionMaterials.length) % speedMotionMaterials.length
+          : (index + 1) % speedMotionMaterials.length;
+    setActiveMaterial(nextIndex);
+    materialTabRefs.current[nextIndex]?.focus();
+  }
+
+  return (
+    <article className="speed-motion-proof">
+      <div className="speed-motion-proof__controls">
+        <div
+          className="speed-motion-proof__materials"
+          role="tablist"
+          aria-label="Explore XRF speed and motion by material"
+        >
+          {speedMotionMaterials.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activeMaterial === index}
+                aria-controls="speed-motion-panel"
+                className={activeMaterial === index ? "is-active" : ""}
+                key={item.id}
+                ref={(node) => { materialTabRefs.current[index] = node; }}
+                onClick={() => setActiveMaterial(index)}
+                onKeyDown={(event) => handleMaterialKeyDown(event, index)}
+              >
+                <Icon size={20} weight={activeMaterial === index ? "bold" : "regular"} aria-hidden="true" />
+                <span>{item.label}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="speed-motion-proof__power" role="tablist" aria-label="Select RF power profile">
+          {["38W", "70W"].map((power) => (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activePower === power}
+              className={activePower === power ? "is-active" : ""}
+              key={power}
+              onClick={() => setActivePower(power)}
+            >
+              {power} RF
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div
+        className="speed-motion-proof__stage"
+        id="speed-motion-panel"
+        role="tabpanel"
+        aria-live="polite"
+      >
+        <button
+          type="button"
+          className="speed-motion-proof__media"
+          onClick={() => onPlay(selectedMaterial.title, asset(selectedMaterial.image))}
+          aria-label={`Open ${selectedMaterial.label} speed and motion proof image`}
+        >
+          <img
+            key={selectedMaterial.id}
+            src={asset(selectedMaterial.image)}
+            alt={`${selectedMaterial.label} products made with the OneLaser XRF Gen2`}
+          />
+          <span className="capability-scroll__play" aria-hidden="true"><Play size={25} weight="fill" /></span>
+        </button>
+
+        <div className="speed-motion-proof__copy">
+          <span className="speed-motion-proof__profile">{activePower} RF profile · same motion platform</span>
+          <h4>{selectedMaterial.title}</h4>
+          <p>{selectedMaterial.copy}</p>
+          <div className="speed-motion-proof__metrics" aria-label="Confirmed XRF Gen2 motion performance">
+            <div><strong>1,300</strong><span>mm/s working speed</span></div>
+            <div><strong>True 3.5G</strong><span>Working acceleration</span></div>
+          </div>
+          <p className="speed-motion-proof__foundation">Closed-loop motion · all-steel, Hydra-derived axes · 20% lighter laser head</p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 function CapabilityBrowser({ onPlay }) {
   const [activeChapter, setActiveChapter] = useState(0);
   const chapterRefs = useRef([]);
@@ -811,6 +937,7 @@ function CapabilityBrowser({ onPlay }) {
               </header>
 
               <div className="capability-scroll__stories">
+                {chapter.speedProof && <SpeedMotionProof onPlay={onPlay} />}
                 {chapter.spotlights.map((spotlight, storyIndex) => (
                   <article className="capability-scroll__story" key={spotlight.title}>
                     <button
@@ -850,29 +977,35 @@ function CapabilityBrowser({ onPlay }) {
                 </article>
               )}
 
-              <div className="capability-scroll__support">
+              <div className={chapter.support.some((item) => item.icon) ? "capability-scroll__support capability-scroll__support--icons" : "capability-scroll__support"}>
                 {chapter.support.map((item) => (
                   <article key={item.title}>
-                    <img src={asset(item.image)} alt="" />
+                    {item.icon
+                      ? <span className="capability-scroll__support-icon" aria-hidden="true"><item.icon size={28} weight="regular" /></span>
+                      : <img src={asset(item.image)} alt="" />}
                     <div><h4>{item.title}</h4><p>{item.copy}</p></div>
                   </article>
                 ))}
               </div>
 
-              <div className="capability-scroll__proofs">
-                {chapter.proofs.map(({ value, label, icon: Icon }) => (
-                  <article key={`${value}-${label}`}>
-                    <Icon size={24} weight="regular" aria-hidden="true" />
-                    <strong>{value}</strong>
-                    <span>{label}</span>
-                  </article>
-                ))}
-              </div>
+              {chapter.proofs.length > 0 && (
+                <div className="capability-scroll__proofs">
+                  {chapter.proofs.map(({ value, label, icon: Icon }) => (
+                    <article key={`${value}-${label}`}>
+                      <Icon size={24} weight="regular" aria-hidden="true" />
+                      <strong>{value}</strong>
+                      <span>{label}</span>
+                    </article>
+                  ))}
+                </div>
+              )}
 
-              <div className="capability-scroll__details" aria-label={`${chapter.nav} additional details`}>
-                <span>More built in</span>
-                <div>{chapter.details.map((detail) => <span key={detail}>{detail}</span>)}</div>
-              </div>
+              {chapter.details.length > 0 && (
+                <div className="capability-scroll__details" aria-label={`${chapter.nav} additional details`}>
+                  <span>More built in</span>
+                  <div>{chapter.details.map((detail) => <span key={detail}>{detail}</span>)}</div>
+                </div>
+              )}
             </section>
           ))}
         </div>
