@@ -821,7 +821,6 @@ function CapabilityBrowser({ onPlay }) {
                     >
                       <img src={asset(spotlight.image)} alt={`${spotlight.title} XRF Gen2 proof`} />
                       <span className="capability-scroll__play" aria-hidden="true"><Play size={25} weight="fill" /></span>
-                      <span className="capability-scroll__media-label"><span>VIDEO STORY · IMAGE PREVIEW</span><span>{String(storyIndex + 1).padStart(2, "0")} / {String(chapter.spotlights.length).padStart(2, "0")}</span></span>
                     </button>
                     <div className="capability-scroll__story-copy">
                       <h4>{spotlight.title}</h4>
@@ -842,7 +841,6 @@ function CapabilityBrowser({ onPlay }) {
                   >
                     <img src={asset(chapter.feature.image)} alt={`${chapter.feature.title} XRF Gen2 proof`} />
                     <span className="capability-scroll__play" aria-hidden="true"><Play size={25} weight="fill" /></span>
-                    <span className="capability-scroll__media-label"><span>VIDEO STORY · IMAGE PREVIEW</span><span>01 / 01</span></span>
                   </button>
                   <div className="capability-scroll__story-copy">
                     <h4>{chapter.feature.title}</h4>

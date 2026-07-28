@@ -203,25 +203,6 @@
   transform: translate(-50%, -50%) scale(1.05);
 }
 
-.capability-scroll__media-label {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-  left: 16px;
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 11px 14px;
-  border: 1px solid rgba(210, 210, 215, .82);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, .9);
-  color: var(--ink);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .06em;
-  backdrop-filter: blur(12px);
-}
-
 .capability-scroll__story-copy {
   display: grid;
   grid-template-columns: minmax(270px, .9fr) minmax(320px, 1.1fr);
@@ -502,19 +483,6 @@
 
   .capability-scroll__media {
     border-radius: 24px;
-  }
-
-  .capability-scroll__media-label {
-    right: 9px;
-    bottom: 9px;
-    left: 9px;
-    padding: 8px 10px;
-  }
-
-  .capability-scroll__media-label span:first-child {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   .capability-scroll__play {
