@@ -741,7 +741,6 @@ function GenerationComparison() {
 
 function SpeedMotionProof({ onPlay }) {
   const [activeMaterial, setActiveMaterial] = useState(0);
-  const [activePower, setActivePower] = useState("38W");
   const materialTabRefs = useRef([]);
   const selectedMaterial = speedMotionMaterials[activeMaterial];
 
@@ -790,20 +789,6 @@ function SpeedMotionProof({ onPlay }) {
           })}
         </div>
 
-        <div className="speed-motion-proof__power" role="tablist" aria-label="Select RF power profile">
-          {["38W", "70W"].map((power) => (
-            <button
-              type="button"
-              role="tab"
-              aria-selected={activePower === power}
-              className={activePower === power ? "is-active" : ""}
-              key={power}
-              onClick={() => setActivePower(power)}
-            >
-              {power} RF
-            </button>
-          ))}
-        </div>
       </div>
 
       <div
@@ -827,7 +812,7 @@ function SpeedMotionProof({ onPlay }) {
         </button>
 
         <div className="speed-motion-proof__copy">
-          <span className="speed-motion-proof__profile">{activePower} RF profile · same motion platform</span>
+          <span className="speed-motion-proof__profile">Measured speed · closed-loop motion</span>
           <h4>{selectedMaterial.title}</h4>
           <p>{selectedMaterial.copy}</p>
           <div className="speed-motion-proof__metrics" aria-label="Confirmed XRF Gen2 motion performance">

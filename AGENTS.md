@@ -139,4 +139,4 @@ When implementing from a selected generated mock, treat that image as the source
 - In the xTool comparison table, the OneLaser XRF Gen2 header cell uses a stronger pale-red surface than the Gen2 body column so the header remains visibly distinct without introducing a red rule.
 - On tablet and mobile, the capability chapter navigation stacks below the global journey navigation; the two sticky rails must never overlap or cover the active chapter content.
 - Frequently-bought-together accessory thumbnails fill their image crop edge to edge with no CSS padding or letterboxing.
-- Speed & Motion selling-point chapter uses a compact material-speed proof with Wood, Acrylic, Slate and Leather plus a 38W/70W segmented profile switch; lower motion support uses compact icon proof tiles rather than image cards.
+- Speed & Motion selling-point chapter uses one four-option segmented material control for Wood, Acrylic, Slate and Leather, following the former power-selector interaction anatomy; do not show or switch 38W/70W inside this chapter. Lower motion support uses compact icon proof tiles rather than image cards.
