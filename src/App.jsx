@@ -263,7 +263,7 @@ const speedMotionMaterials = [
     label: "Wood",
     title: "Controlled motion for detailed wood work.",
     copy: "Closed-loop motion keeps the toolpath under feedback through detailed engraving and repeatable passes on wood.",
-    image: "material-wood.webp",
+    image: "speed-motion-wood.webp",
     icon: Tree,
   },
   {
@@ -271,7 +271,7 @@ const speedMotionMaterials = [
     label: "Acrylic",
     title: "Measured speed for acrylic work.",
     copy: "The all-steel, Hydra-derived axes support the same measured motion platform across acrylic engraving and cutting work.",
-    image: "material-acrylic.webp",
+    image: "speed-motion-acrylic.webp",
     icon: CubeTransparent,
   },
   {
@@ -279,7 +279,7 @@ const speedMotionMaterials = [
     label: "Slate",
     title: "Responsive motion for crisp surface detail.",
     copy: "Closed-loop control keeps the planned path under feedback while the RF source marks detailed slate surfaces.",
-    image: "material-glass-stone.webp",
+    image: "speed-motion-slate.webp",
     icon: Target,
   },
   {
@@ -287,7 +287,7 @@ const speedMotionMaterials = [
     label: "Leather",
     title: "Less moving mass for personalized runs.",
     copy: "A 20% lighter laser head reduces moving mass across personalized leather engraving and cutting work.",
-    image: "material-leather.webp",
+    image: "speed-motion-leather.webp",
     icon: Handbag,
   },
 ];
@@ -806,7 +806,7 @@ function SpeedMotionProof({ onPlay }) {
           <img
             key={selectedMaterial.id}
             src={asset(selectedMaterial.image)}
-            alt={`${selectedMaterial.label} products made with the OneLaser XRF Gen2`}
+            alt={`${selectedMaterial.label} speed and motion comparison for the OneLaser XRF Gen2`}
           />
           <span className="capability-scroll__play" aria-hidden="true"><Play size={25} weight="fill" /></span>
         </button>

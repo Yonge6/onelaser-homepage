@@ -5,9 +5,9 @@ export const capabilitySlides = [
     title: "One machine. A full product line.",
     description: "Move from personalized gifts to repeatable premium products without changing platforms.",
     meta: "Drinkware · home décor · gifts · accessories · branded goods",
-    image: "xrf-workshop-story.webp",
+    image: "commercial-product-line.webp",
     imagePosition: "50% 58%",
-    alt: "Maker standing beside an XRF Gen2 with engraved drinkware, wood, leather and acrylic products",
+    alt: "Maker presenting engraved wood products beside the OneLaser XRF Gen2",
   },
   {
     id: "premium-personalization",
