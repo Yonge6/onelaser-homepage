@@ -353,8 +353,8 @@ const capabilityChapters = [
       },
     ],
     support: [
-      { title: "See the full bed", copy: "The 12MP lid camera supports full-frame positioning, contour capture and remote monitoring.", image: "smart-workflow-see-full-bed.webp" },
-      { title: "Control it from the machine", copy: "Adjust motion, job settings and machine status directly from the integrated touchscreen.", image: "smart-workflow-control-machine.webp" },
+      { title: "See the full bed", copy: "The 12MP lid camera supports full-frame positioning, contour capture and remote monitoring.", image: "smart-workflow-see-full-bed.webp?v=20260729" },
+      { title: "Control it from the machine", copy: "Adjust motion, job settings and machine status directly from the integrated touchscreen.", image: "smart-workflow-control-machine.webp?v=20260729" },
     ],
     proofs: [
       { value: "12MP", label: "Top-cover camera", icon: Camera },
