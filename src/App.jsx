@@ -348,7 +348,7 @@ const capabilityChapters = [
         title: "Focus and control, in one clear flow.",
         copy: "XFocus™ handles focal distance while the full touchscreen keeps motion, settings, alerts and machine status close at hand.",
         metrics: ["XFocus™ autofocus", "Full touchscreen", "Direct machine control"],
-        image: "xrf-touchscreen.jpg",
+        image: "smart-workflow-focus-control-cover.jpg",
         youtubeId: "MHxh6s6Xs9o",
       },
     ],
