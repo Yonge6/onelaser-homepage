@@ -349,6 +349,7 @@ const capabilityChapters = [
         copy: "XFocus™ handles focal distance while the full touchscreen keeps motion, settings, alerts and machine status close at hand.",
         metrics: ["XFocus™ autofocus", "Full touchscreen", "Direct machine control"],
         image: "xrf-touchscreen.jpg",
+        youtubeId: "MHxh6s6Xs9o",
       },
     ],
     support: [
@@ -928,8 +929,10 @@ function CapabilityBrowser({ onPlay }) {
                     <button
                       type="button"
                       className="capability-scroll__media"
-                      onClick={() => onPlay(spotlight.title, asset(spotlight.image))}
-                      aria-label={`Open ${spotlight.title} full-size media preview`}
+                      onClick={() => spotlight.youtubeId
+                        ? onPlay({ id: spotlight.youtubeId, title: spotlight.title, channel: "OneLaser", tag: "SMART WORKFLOW" })
+                        : onPlay(spotlight.title, asset(spotlight.image))}
+                      aria-label={spotlight.youtubeId ? `Play ${spotlight.title} video` : `Open ${spotlight.title} full-size media preview`}
                     >
                       <img src={asset(spotlight.image)} alt={`${spotlight.title} XRF Gen2 proof`} />
                       <span className="capability-scroll__play" aria-hidden="true"><Play size={25} weight="fill" /></span>
@@ -1330,6 +1333,10 @@ export function App() {
   }
 
   function openStory(title, image) {
+    if (typeof title === "object" && title?.id) {
+      setYoutubeVideo(title);
+      return;
+    }
     setVideoModal({ title, image });
   }
 
