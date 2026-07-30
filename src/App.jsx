@@ -374,12 +374,12 @@ const capabilityChapters = [
         title: "Turn long-format work into one continuous job.",
         copy: "The optional automatic Conveyor feeds material in sync with the job, stitching sections into one continuous result for signs, boards and repeating patterns.",
         metrics: ["Optional Conveyor", "Automatic feed", "Unlimited project length"],
-        image: "xrf-dark-hero.webp",
+        image: "business-expansion-continuous-job.webp",
       },
     ],
     support: [
-      { title: "One size fits mainstream stock", copy: "The true 24 × 12 in working area handles the material size used across everyday custom-product work.", image: "xrf-work-area-proof.webp" },
-      { title: "Optional height for bigger objects", copy: "The optional Riser Base unlocks up to 8.5 in of work height for taller pieces and rotary workflows.", image: "xrf-open.jpg" },
+      { title: "One size fits mainstream stock", copy: "The true 24 × 12 in working area handles the material size used across everyday custom-product work.", image: "business-expansion-mainstream-stock.webp" },
+      { title: "Optional height for bigger objects", copy: "The optional Riser Base unlocks up to 8.5 in of work height for taller pieces and rotary workflows.", image: "business-expansion-optional-height.webp" },
     ],
     proofs: [
       { value: "24 × 12 in", label: "True work area", icon: Target },
