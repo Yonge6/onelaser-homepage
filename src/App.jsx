@@ -399,7 +399,7 @@ const capabilityChapters = [
         title: "Right pressure. Every mode. Automatically.",
         copy: "Optional Smart Air changes between high-pressure cutting and low-pressure engraving so edges stay cleaner and fine surface detail keeps its contrast.",
         metrics: ["Optional accessory", "Cut / engrave modes", "Automatic switching"],
-        image: "smart-air-proof.webp",
+        image: "reliability-safety-run-cleaner.webp",
       },
     ],
     feature: {
@@ -946,34 +946,36 @@ function CapabilityBrowser({ onPlay }) {
                 ))}
               </div>
 
-              {chapter.feature && (
-                <article className="capability-scroll__feature capability-scroll__story">
-                  <button
-                    type="button"
-                    className="capability-scroll__media"
-                    onClick={() => onPlay(chapter.feature.title, asset(chapter.feature.image))}
-                    aria-label={`Open ${chapter.feature.title} full-size media preview`}
-                  >
-                    <img src={asset(chapter.feature.image)} alt={`${chapter.feature.title} XRF Gen2 proof`} />
-                    <span className="capability-scroll__play" aria-hidden="true"><Play size={25} weight="fill" /></span>
-                  </button>
-                  <div className="capability-scroll__story-copy">
-                    <h4>{chapter.feature.title}</h4>
-                    <p>{chapter.feature.copy}</p>
-                    <div>{chapter.feature.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
-                  </div>
-                </article>
-              )}
-
-              <div className={chapter.support.some((item) => item.icon) ? "capability-scroll__support capability-scroll__support--icons" : "capability-scroll__support"}>
-                {chapter.support.map((item) => (
-                  <article key={item.title}>
-                    {item.icon
-                      ? <span className="capability-scroll__support-icon" aria-hidden="true"><item.icon size={28} weight="regular" /></span>
-                      : <img src={asset(item.image)} alt="" />}
-                    <div><h4>{item.title}</h4><p>{item.copy}</p></div>
+              <div className={chapter.id === "protection" ? "capability-scroll__media-showcase capability-scroll__media-showcase--compact" : "capability-scroll__media-showcase"}>
+                {chapter.feature && (
+                  <article className="capability-scroll__feature capability-scroll__story">
+                    <button
+                      type="button"
+                      className="capability-scroll__media"
+                      onClick={() => onPlay(chapter.feature.title, asset(chapter.feature.image))}
+                      aria-label={`Open ${chapter.feature.title} full-size media preview`}
+                    >
+                      <img src={asset(chapter.feature.image)} alt={`${chapter.feature.title} XRF Gen2 proof`} />
+                      <span className="capability-scroll__play" aria-hidden="true"><Play size={25} weight="fill" /></span>
+                    </button>
+                    <div className="capability-scroll__story-copy">
+                      <h4>{chapter.feature.title}</h4>
+                      <p>{chapter.feature.copy}</p>
+                      <div>{chapter.feature.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
+                    </div>
                   </article>
-                ))}
+                )}
+
+                <div className={chapter.support.some((item) => item.icon) ? "capability-scroll__support capability-scroll__support--icons" : "capability-scroll__support"}>
+                  {chapter.support.map((item) => (
+                    <article key={item.title}>
+                      {item.icon
+                        ? <span className="capability-scroll__support-icon" aria-hidden="true"><item.icon size={28} weight="regular" /></span>
+                        : <img src={asset(item.image)} alt="" />}
+                      <div><h4>{item.title}</h4><p>{item.copy}</p></div>
+                    </article>
+                  ))}
+                </div>
               </div>
 
               {chapter.proofs.length > 0 && (
