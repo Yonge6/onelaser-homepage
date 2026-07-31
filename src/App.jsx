@@ -409,8 +409,18 @@ const capabilityChapters = [
       image: "xrf-open.jpg",
     },
     support: [
-      { title: "Dust stays away from the beam", copy: "Sealed optical clearances and a steep-angle nozzle slow residue buildup around critical optics.", image: "xrf-gallery-09.jpg" },
-      { title: "FumeGuard™ containment", copy: "A fully enclosed body monitors and channels smoke toward the exhaust path instead of the room.", image: "xrf-front.jpg" },
+      {
+        title: "Dust stays away from the beam",
+        copy: "Sealed optical clearances and a steep-angle nozzle slow residue buildup around critical optics.",
+        metrics: ["Sealed clearances", "Steep-angle nozzle", "Protected focus path"],
+        image: "xrf-gallery-09.jpg",
+      },
+      {
+        title: "FumeGuard™ containment",
+        copy: "A fully enclosed body monitors and channels smoke toward the exhaust path instead of the room.",
+        metrics: ["Fully enclosed", "Smoke channeling", "Exhaust path"],
+        image: "xrf-front.jpg",
+      },
     ],
     proofs: [
       { value: "3×", label: "Extraction architecture", icon: Fire },
@@ -972,7 +982,15 @@ function CapabilityBrowser({ onPlay }) {
                       {item.icon
                         ? <span className="capability-scroll__support-icon" aria-hidden="true"><item.icon size={28} weight="regular" /></span>
                         : <img src={asset(item.image)} alt="" />}
-                      <div><h4>{item.title}</h4><p>{item.copy}</p></div>
+                      <div>
+                        <h4>{item.title}</h4>
+                        <p>{item.copy}</p>
+                        {item.metrics && (
+                          <div className="capability-scroll__support-tags">
+                            {item.metrics.map((metric) => <span key={metric}>{metric}</span>)}
+                          </div>
+                        )}
+                      </div>
                     </article>
                   ))}
                 </div>
