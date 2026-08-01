@@ -404,21 +404,18 @@ const capabilityChapters = [
     ],
     feature: {
       title: "Protection isn't a feature. It's the architecture.",
-      copy: "Thermally Isolated Focus + Full-Travel Cable Management",
-      metrics: ["Constant clearance", "Isolated focus", "Full-travel cables"],
+      copy: "Cables stay clear of the head's full motion path, while the focus system sits outside the processing zone in a thermally isolated, semi-enclosed shield.",
       image: "xrf-open.jpg",
     },
     support: [
       {
         title: "Fire protection that acts before you can.",
-        copy: "Auto Fire Suppression — Electronics Bay, Instant Response",
-        metrics: ["Flame / heat sensing", "Dual nozzles", "338°F / 170°C"],
+        copy: "Thermal-sensing suppression responds to flame or 338°F (170°C) heat. Dual nozzles flood the electronics bay to stop fire at the source.",
         image: "xrf-gallery-09.jpg",
       },
       {
         title: "FDA Class 1: top-tier performance, zero exposure.",
-        copy: "FDA Class 1 Laser Design — Fully Shielded Operation",
-        metrics: ["FDA Class 1", "Fully shielded", "Homes · studios · classrooms"],
+        copy: "A fully shielded FDA Class 1 laser design prevents exposure to harmful radiation, supporting use in homes, studios and classrooms.",
         image: "xrf-front.jpg",
       },
     ],
@@ -971,7 +968,9 @@ function CapabilityBrowser({ onPlay }) {
                     <div className="capability-scroll__story-copy">
                       <h4>{chapter.feature.title}</h4>
                       <p>{chapter.feature.copy}</p>
-                      <div>{chapter.feature.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
+                      {chapter.feature.metrics?.length > 0 && (
+                        <div>{chapter.feature.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
+                      )}
                     </div>
                   </article>
                 )}
@@ -985,7 +984,7 @@ function CapabilityBrowser({ onPlay }) {
                       <div>
                         <h4>{item.title}</h4>
                         <p>{item.copy}</p>
-                        {item.metrics && (
+                        {item.metrics?.length > 0 && (
                           <div className="capability-scroll__support-tags">
                             {item.metrics.map((metric) => <span key={metric}>{metric}</span>)}
                           </div>
