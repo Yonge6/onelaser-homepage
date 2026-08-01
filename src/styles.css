@@ -299,9 +299,11 @@
 }
 
 #capability-protection .capability-scroll__feature {
+  display: flex;
   min-width: 0;
   margin: 0;
   padding: 0;
+  flex-direction: column;
   overflow: hidden;
   border: 1px solid var(--divider);
   border-radius: 24px;
@@ -316,19 +318,25 @@
 }
 
 #capability-protection .capability-scroll__feature .capability-scroll__story-copy {
+  display: grid;
+  width: 100%;
+  flex: 1;
   grid-template-columns: 1fr;
-  gap: 10px;
-  padding: 16px;
+  grid-template-rows: auto minmax(66px, 1fr) auto;
+  gap: 8px;
+  padding: 18px 16px 16px;
 }
 
-#capability-protection .capability-scroll__feature .capability-scroll__story-copy h4 {
+#capability-protection .capability-scroll__feature .capability-scroll__story-copy h4,
+#capability-protection .capability-scroll__support h4 {
   max-width: none;
   margin: 0;
-  font-size: 22px;
-  line-height: 1.12;
+  font-size: 20px;
+  line-height: 1.15;
 }
 
 #capability-protection .capability-scroll__feature .capability-scroll__story-copy p {
+  margin: 0;
   font-size: 14px;
   line-height: 1.5;
   overflow-wrap: anywhere;
@@ -336,7 +344,10 @@
 }
 
 #capability-protection .capability-scroll__feature .capability-scroll__story-copy > div {
-  margin-top: 2px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 6px;
 }
 
 #capability-protection .capability-scroll__support {
@@ -344,8 +355,10 @@
 }
 
 #capability-protection .capability-scroll__support article {
+  display: flex;
   min-width: 0;
   padding: 0;
+  flex-direction: column;
   overflow: hidden;
   border: 1px solid var(--divider);
   border-radius: 24px;
@@ -353,34 +366,53 @@
 }
 
 #capability-protection .capability-scroll__support article > div {
-  padding: 16px;
-}
-
-#capability-protection .capability-scroll__support h4 {
-  font-size: 20px;
+  display: grid;
+  width: 100%;
+  flex: 1;
+  grid-template-rows: auto minmax(66px, 1fr) auto;
+  gap: 8px;
+  padding: 18px 16px 16px;
 }
 
 #capability-protection .capability-scroll__support p {
-  margin-top: 6px;
+  margin: 0;
   overflow-wrap: anywhere;
   white-space: normal;
 }
 
 #capability-protection .capability-scroll__support-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 6px;
 }
 
-#capability-protection .capability-scroll__support-tags span {
-  padding: 7px 11px;
+#capability-protection .capability-scroll__support-tags span,
+#capability-protection .capability-scroll__feature .capability-scroll__story-copy > div span {
+  display: grid;
+  min-height: 42px;
+  padding: 6px 7px;
+  place-items: center;
   border: 1px solid var(--divider);
   border-radius: 999px;
   background: #fff;
   color: var(--ink);
   font-size: 12px;
   font-weight: 700;
+  line-height: 1.15;
+  text-align: center;
+}
+
+@media (min-width: 761px) and (max-width: 1080px) {
+  #capability-protection .capability-scroll__feature .capability-scroll__story-copy,
+  #capability-protection .capability-scroll__support article > div {
+    grid-template-rows: auto minmax(126px, 1fr) auto;
+  }
+
+  #capability-protection .capability-scroll__feature .capability-scroll__story-copy > div,
+  #capability-protection .capability-scroll__support-tags {
+    grid-template-columns: 1fr;
+  }
 }
 
 .capability-scroll__proofs {
@@ -637,6 +669,8 @@
 
   #capability-protection .capability-scroll__feature .capability-scroll__story-copy,
   #capability-protection .capability-scroll__support article > div {
+    grid-template-rows: auto auto auto;
+    gap: 8px;
     padding: 14px;
   }
 
@@ -652,6 +686,7 @@
   }
 
   #capability-protection .capability-scroll__feature .capability-scroll__story-copy > div {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 6px;
     margin-top: 8px;
   }
@@ -662,8 +697,14 @@
   }
 
   #capability-protection .capability-scroll__support-tags {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 6px;
     margin-top: 8px;
+  }
+
+  #capability-protection .capability-scroll__feature .capability-scroll__story-copy > div span:nth-child(3),
+  #capability-protection .capability-scroll__support-tags span:nth-child(3) {
+    grid-column: 1 / -1;
   }
 
   .capability-scroll__proofs {
