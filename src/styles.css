@@ -8664,6 +8664,12 @@ body { color: var(--ink); }
 
 /* 2026-07-26: compact xTool P3-inspired chapter rail, adapted to OneLaser. */
 @media (min-width: 1181px) {
+  .capability-scroll__chapters {
+    --chapter-rail-clearance: clamp(0px, calc(832px - 50vw), 192px);
+    width: calc(100% - var(--chapter-rail-clearance));
+    margin-left: var(--chapter-rail-clearance);
+  }
+
   .capability-scroll__nav {
     --chapter-step: 44px;
     position: sticky;
