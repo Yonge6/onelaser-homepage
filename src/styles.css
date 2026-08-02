@@ -935,6 +935,7 @@ main [id] {
 .decision-paths__heading h2 {
   margin: 8px 0 12px;
   font-size: 48px;
+  font-weight: 800;
   line-height: 1.04;
   letter-spacing: -0.035em;
 }
@@ -986,6 +987,7 @@ main [id] {
 .decision-path > strong {
   margin-top: 24px;
   font-size: 24px;
+  font-weight: 800;
   line-height: 1.15;
 }
 
@@ -1075,6 +1077,7 @@ main [id] {
 .trade-up-banner h2 {
   margin: 7px 0 8px;
   font-size: 30px;
+  font-weight: 800;
   line-height: 1.12;
   letter-spacing: -0.025em;
 }
@@ -8282,6 +8285,7 @@ body { color: var(--ink); }
   }
 
   #capability-precision .capability-scroll__story-copy p,
+  #capability-protection .capability-scroll__stories .capability-scroll__story-copy p,
   #capability-workflow .capability-scroll__story-copy p {
     overflow-wrap: anywhere;
     white-space: normal;

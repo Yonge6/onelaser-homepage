@@ -254,7 +254,6 @@ const reviewVideos = [
   { id: "hwtVOBUCGxw", title: "Full XRF review", channel: "The Louisiana Hobby Guy", tag: "INDEPENDENT HANDS-ON REVIEW" },
   { id: "87PrP4Vigzo", title: "Before you buy the XRF", channel: "Velf Creations", tag: "COMPLETE BUYER OVERVIEW" },
   { id: "zHtW_nGm19U", title: "Pro desktop laser at a budget price", channel: "Make or Break Shop", tag: "CREATOR REVIEW" },
-  { id: "yB_RQwZj5p8", title: "Mark Ellis reviews XRF Desktop at CES 2025", channel: "OneLaser", tag: "CES 2025 THIRD-PARTY PROOF" },
 ];
 
 const speedMotionMaterials = [
@@ -371,8 +370,8 @@ const capabilityChapters = [
       },
     ],
     support: [
-      { title: "One size fits mainstream stock", copy: "The true 24 × 12 in working area handles the material size used across everyday custom-product work.", image: "business-expansion-mainstream-stock.webp" },
-      { title: "Optional height for bigger objects", copy: "The optional Riser Base unlocks up to 8.5 in of work height for taller pieces and rotary workflows.", image: "business-expansion-optional-height.webp" },
+      { title: "One size fits most materials.", copy: "The 25.59\" × 13.78\" (650×350mm) honeycomb table gives you a true 24\" × 12\" engraving area — the most universal material size there is, so full sheets load and run without trimming.", image: "business-expansion-mainstream-stock.webp" },
+      { title: "Desktop footprint. Big-project capability.", copy: "Any object within 24 × 12 × 8.5 inches — paired with the rotary attachment — can be engraved on the XRF: a class-leading working envelope for a desktop machine. The optional Base Boost™ add-on unlocks the full 8.5 inches of height for tall workpieces, 40oz tumblers and rotary jobs, and opens straight-through access for stock up to 8.5 inches thick — long boards and oversized sheets simply slide through, with no length limit. All while improving airflow, debris management, visibility and access.", image: "business-expansion-optional-height.webp" },
     ],
     proofs: [
       { value: "24 × 12 in", label: "True work area", icon: Target },
@@ -389,8 +388,8 @@ const capabilityChapters = [
     summary: "Airflow, containment and protected critical systems work together to reduce residue, maintenance and production risk.",
     spotlights: [
       {
-        title: "Right pressure. Every mode. Automatically.",
-        copy: "Optional Smart Air changes between high-pressure cutting and low-pressure engraving so edges stay cleaner and fine surface detail keeps its contrast.",
+        title: "Smart Air Assist™: Right pressure. Every mode. Automatically.",
+        copy: "The optional Smart Air Assist automatically switches between high-pressure cutting and low-pressure engraving. Clean, char-free cuts on thick stock; crisp, high-contrast engravings on delicate surfaces — leather, wood, acrylic and more, no manual adjustment needed.",
         metrics: ["Optional accessory", "Cut / engrave modes", "Automatic switching"],
         image: "reliability-safety-run-cleaner.webp",
       },
@@ -1811,7 +1810,6 @@ export function App() {
                 <h2>Out of the box, into creation.</h2>
               </header>
               <div className="makerboost-proof__copy">
-                <p className="makerboost-proof__subhead">MakerBoost AI Software — Deeply Tuned for XRF, Zero Learning Curve</p>
                 <p className="makerboost-proof__body">MakerBoost AI is deeply integrated with the XRF platform — one-click AI vector generation and a material-matched parameter library take first-time users from unboxing to finished work in minutes.</p>
               </div>
             </div>
@@ -1829,7 +1827,6 @@ export function App() {
             </header>
             <article className="software-compatibility__stage">
               <div className="software-compatibility__copy">
-                <p className="software-compatibility__subhead">LightBurn / RDWorks / MakerBoost Compatible</p>
                 <p className="software-compatibility__body">Works with LightBurn, RDWorks, and MakerBoost AI — supporting formats including AI, PDF, DXF, HPGL, PLT, RD, SVG, LBRN, BMP, JPG, PNG, GIF, TIFF and more.</p>
               </div>
               <div className="software-compatibility__media">
@@ -2012,7 +2009,6 @@ export function App() {
                 <div className="ownership-support__card-top"><Check size={26} weight="bold" aria-hidden="true" /><span>01</span></div>
                 <div className="ownership-support__lead"><h3>30-Day Money-Back Guarantee.</h3></div>
                 <div className="ownership-support__details">
-                  <h4>Support 30-Day Satisfaction Guarantee — Try It. Love It. Or Return It.</h4>
                   <p>Take a full 30 days to get to know your XRF. If it's not the right fit for you, just reach out — we'll help you send it back, no hard feelings, no hassle. We'd rather you find the perfect machine than keep one that isn't. (Refunds are issued in full, less a 3% payment processing fee and round-trip shipping costs.)</p>
                 </div>
               </article>
@@ -2020,7 +2016,6 @@ export function App() {
                 <div className="ownership-support__card-top"><ShieldCheck size={26} weight="regular" aria-hidden="true" /><span>02</span></div>
                 <div className="ownership-support__lead"><h3>We built it to last. We back it to prove it.</h3></div>
                 <div className="ownership-support__details">
-                  <h4>3-2-1 Warranty — 3-Year Frame / 2-Year Electronics / 1-Year Laser Source</h4>
                   <p>Every XRF is backed by our 3-2-1 warranty: three years on the frame and structure, two years on electronics, and one year on the laser source — among the strongest coverage in its class. It's not fine print; it's what confidence in our own build quality looks like.</p>
                 </div>
               </article>
@@ -2028,7 +2023,6 @@ export function App() {
                 <div className="ownership-support__card-top"><Star size={26} weight="regular" aria-hidden="true" /><span>03</span></div>
                 <div className="ownership-support__lead"><h3>&quot;One&quot; Support: &quot;Real engineers. Real experience.&quot;</h3></div>
                 <div className="ownership-support__details">
-                  <h4>US-Based Engineers, 5+ Years Average Industry Experience — Lifetime Support</h4>
                   <p>When you call OneLaser, you talk to a US-based engineer with an average of over five years in the laser industry — people who've built, tuned, and repaired these machines, not script-readers. That experience means faster answers, first-call solutions, and real support. You're not just buying a machine; you're buying the team behind it.</p>
                 </div>
               </article>
