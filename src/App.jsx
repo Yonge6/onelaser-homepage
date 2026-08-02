@@ -300,8 +300,8 @@ const capabilityChapters = [
     summary: "The RF source turns fine detail, tonal range and dimensional relief into a visible product advantage.",
     spotlights: [
       {
-        title: "Photo-real, every time.",
-        copy: "Pulse-modulated RF energy through a finer 0.07 mm spot produces crisp small type, photographic grayscale and dimensional relief up to 2,000 DPI—without water cooling.",
+        title: "PowerMax 70™: More power. More materials. More possible.",
+        copy: "38W and 70W RF Option — The XRF's Biggest Power Upgrade Yet",
         metrics: ["2,000 DPI", "0.07 mm spot", "Up to 30,000 h"],
         image: "capability-precision-main.webp",
       },
@@ -340,7 +340,7 @@ const capabilityChapters = [
     spotlights: [
       {
         title: "Print and cut, made easy.",
-        copy: "The head-mounted Intelligent Vision System detects registration marks and compensates position and angle in real time—reducing calibration, waste and rework.",
+        copy: "An integrated vision camera in the laser head performs real-time Mark-point recognition and cut-path compensation — closed-loop visual registration that delivers precision contour cutting with minimal manual calibration.",
         metrics: ["Mark detection", "Live compensation", "Less material waste"],
         image: "smart-workflow-print-cut.webp",
       },
@@ -747,7 +747,7 @@ function GenerationComparison() {
   );
 }
 
-function SpeedMotionProof({ onPlay }) {
+function SpeedMotionProof() {
   const [activeMaterial, setActiveMaterial] = useState(0);
   const materialTabRefs = useRef([]);
   const selectedMaterial = speedMotionMaterials[activeMaterial];
@@ -805,19 +805,13 @@ function SpeedMotionProof({ onPlay }) {
         role="tabpanel"
         aria-live="polite"
       >
-        <button
-          type="button"
-          className="speed-motion-proof__media"
-          onClick={() => onPlay(selectedMaterial.title, asset(selectedMaterial.image))}
-          aria-label={`Open ${selectedMaterial.label} speed and motion proof image`}
-        >
+        <div className="speed-motion-proof__media">
           <img
             key={selectedMaterial.id}
             src={asset(selectedMaterial.image)}
             alt={`${selectedMaterial.label} speed and motion comparison for the OneLaser XRF Gen2`}
           />
-          <span className="capability-scroll__play" aria-hidden="true"><Play size={25} weight="fill" /></span>
-        </button>
+        </div>
 
         <div className="speed-motion-proof__copy">
           <span className="speed-motion-proof__profile">Measured speed · closed-loop motion</span>
@@ -930,7 +924,7 @@ function CapabilityBrowser({ onPlay }) {
               </header>
 
               <div className="capability-scroll__stories">
-                {chapter.speedProof && <SpeedMotionProof onPlay={onPlay} />}
+                {chapter.speedProof && <SpeedMotionProof />}
                 {chapter.spotlights.map((spotlight, storyIndex) => (
                   <article className="capability-scroll__story" key={spotlight.title}>
                     <button
