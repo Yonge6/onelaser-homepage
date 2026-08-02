@@ -183,6 +183,14 @@
   transform: scale(1.012);
 }
 
+.capability-scroll__media--static {
+  cursor: default;
+}
+
+.capability-scroll__media--static:hover > img {
+  transform: none;
+}
+
 .capability-scroll__play {
   position: absolute;
   inset: 50% auto auto 50%;

@@ -956,15 +956,21 @@ function CapabilityBrowser({ onPlay }) {
               <div className={chapter.id === "protection" ? "capability-scroll__media-showcase capability-scroll__media-showcase--compact" : "capability-scroll__media-showcase"}>
                 {chapter.feature && (
                   <article className="capability-scroll__feature capability-scroll__story">
-                    <button
-                      type="button"
-                      className="capability-scroll__media"
-                      onClick={() => onPlay(chapter.feature.title, asset(chapter.feature.image))}
-                      aria-label={`Open ${chapter.feature.title} full-size media preview`}
-                    >
-                      <img src={asset(chapter.feature.image)} alt={`${chapter.feature.title} XRF Gen2 proof`} />
-                      <span className="capability-scroll__play" aria-hidden="true"><Play size={25} weight="fill" /></span>
-                    </button>
+                    {chapter.id === "protection" ? (
+                      <div className="capability-scroll__media capability-scroll__media--static">
+                        <img src={asset(chapter.feature.image)} alt={`${chapter.feature.title} XRF Gen2 proof`} />
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        className="capability-scroll__media"
+                        onClick={() => onPlay(chapter.feature.title, asset(chapter.feature.image))}
+                        aria-label={`Open ${chapter.feature.title} full-size media preview`}
+                      >
+                        <img src={asset(chapter.feature.image)} alt={`${chapter.feature.title} XRF Gen2 proof`} />
+                        <span className="capability-scroll__play" aria-hidden="true"><Play size={25} weight="fill" /></span>
+                      </button>
+                    )}
                     <div className="capability-scroll__story-copy">
                       <h4>{chapter.feature.title}</h4>
                       <p>{chapter.feature.copy}</p>

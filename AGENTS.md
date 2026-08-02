@@ -150,5 +150,6 @@ When implementing from a selected generated mock, treat that image as the source
 - Reliability & Safety keeps all three compact safety cards on one shared anatomy: media runs flush to the card edge, while title size, copy row and padding align across the grid and body copy wraps without clipping.
 - On mid-size desktop viewports, the floating selling-point rail must reserve enough left clearance that its labels never overlap the chapter grid or the first proof card.
 - Reliability & Safety's compact three-card grid uses one supplied selling-point slogan plus a concise body distilled from the supplied detailed description; do not show proof tags on these three cards.
+- The first compact Reliability & Safety card is static media: do not show a play control, open a media preview, or apply clickable-video behavior.
 - Speed & Motion uses the four supplied comparison artworks `speed-motion-wood.webp`, `speed-motion-acrylic.webp`, `speed-motion-slate.webp` and `speed-motion-leather.webp` for the matching material tabs. Its two red metric values cap at 26 px with Certia 800 weight, while retaining the existing smaller responsive floor.
 - The first Product Opportunities commercial-capability slide, `One machine. A full product line.`, uses the supplied `commercial-product-line.webp` workshop image.
