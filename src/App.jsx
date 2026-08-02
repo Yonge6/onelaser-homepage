@@ -301,7 +301,7 @@ const capabilityChapters = [
     spotlights: [
       {
         title: "PowerMax 70™: More power. More materials. More possible.",
-        copy: "38W and 70W RF Option — The XRF's Biggest Power Upgrade Yet",
+        copy: "The XRF Gen 2 now offers a true 70W RF tube — the most powerful RF source in any desktop-class laser. With nearly double the output of the 38W tube and pulse frequencies up to 50kHz, flat engraving runs at super high DPI without giving up speed, 3D relief comes out visibly deeper and more dimensional, grayscale renders sharper — and cutting capacity moves up a full class.",
         metrics: ["2,000 DPI", "0.07 mm spot", "Up to 30,000 h"],
         image: "capability-precision-main.webp",
       },

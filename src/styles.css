@@ -8281,6 +8281,7 @@ body { color: var(--ink); }
     letter-spacing: -.01em;
   }
 
+  #capability-precision .capability-scroll__story-copy p,
   #capability-workflow .capability-scroll__story-copy p {
     overflow-wrap: anywhere;
     white-space: normal;
