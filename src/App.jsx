@@ -405,18 +405,18 @@ const capabilityChapters = [
     feature: {
       title: "Protection isn't a feature. It's the architecture.",
       copy: "Cables stay clear of the head's full motion path, while the focus system sits outside the processing zone in a thermally isolated, semi-enclosed shield.",
-      image: "xrf-open.jpg",
+      image: "safety-architecture.webp",
     },
     support: [
       {
         title: "Fire protection that acts before you can.",
         copy: "Thermal-sensing suppression responds to flame or 338°F (170°C) heat. Dual nozzles flood the electronics bay to stop fire at the source.",
-        image: "xrf-gallery-09.jpg",
+        image: "safety-fire-protection.webp",
       },
       {
         title: "FDA Class 1: top-tier performance, zero exposure.",
         copy: "A fully shielded FDA Class 1 laser design prevents exposure to harmful radiation, supporting use in homes, studios and classrooms.",
-        image: "xrf-front.jpg",
+        image: "safety-class1.webp",
       },
     ],
     proofs: [
