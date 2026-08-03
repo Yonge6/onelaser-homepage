@@ -12,8 +12,10 @@ import {
   CubeFocus,
   CubeTransparent,
   EnvelopeSimple,
+  Factory,
   Fire,
   Handbag,
+  Headset,
   List,
   LockKey,
   MapPin,
@@ -29,6 +31,7 @@ import {
   Thermometer,
   Trash,
   Tree,
+  UsersThree,
   WifiHigh,
   Wine,
   X,
@@ -42,6 +45,8 @@ const SHOP_PAY_CHECKOUT_URL = "https://shop.app/checkout/74787487778/cn/hWNEuAMT
 const MORE_PAYMENT_OPTIONS_URL = "https://www.1laser.com/checkouts/cn/hWNFDEgkFFn7mUPFRRYyKSUk/en-us?_r=AQABaYabrgt4_zE5xCBjG54Ntjdc4M8Mb9-Rj995_l3u&skip_shop_pay=true";
 const SALES_CALL_URL = "https://www.1laser.com/products/sales-consultation-call";
 const BROCHURE_URL = "https://webforms.pipedrive.com/f/ckzBDiOdWxvKiAs4kk7LLCTIRbPsdg46WE8RFicSySaVdIPVjKrCYkIjSZEgd9bdM7";
+const COMMUNITY_URL = "https://www.1laser.com/pages/laser-engraving-community";
+const SUPPORT_URL = "https://www.1laser.com/pages/contact-us";
 
 const media = Array.from({ length: 23 }, (_, index) => {
   const number = String(index + 1).padStart(2, "0");
@@ -1442,10 +1447,24 @@ export function App() {
               <a href={BROCHURE_URL} target="_blank" rel="noreferrer" onClick={() => trackLead("xrf-brochure", "download_brochure")}>Download Brochure <ArrowUpRight size={15} /></a>
             </div>
             <div className="hero-assurance-grid" aria-label="Purchase and support benefits">
-              <span><ArrowClockwise size={20} /><strong>30-Day Money-Back</strong><small>Try XRF with confidence.</small></span>
-              <span><ShieldCheck size={20} /><strong>3-2-1 Warranty</strong><small>Frame · electronics · laser source.</small></span>
-              <span><MapPin size={20} /><strong>Ships from California</strong><small>US-based fulfillment.</small></span>
-              <span><Phone size={20} /><strong>US-Based Support</strong><small>One Support engineer team.</small></span>
+              <a className="hero-assurance-card hero-assurance-card--link" href={COMMUNITY_URL} target="_blank" rel="noreferrer" onClick={() => trackLead("onelaser-community", "hero_assurance_community")}>
+                <UsersThree size={32} weight="light" aria-hidden="true" />
+                <strong>Join the Best Community in Industry!</strong>
+                <ArrowUpRight className="hero-assurance-card__arrow" size={15} aria-hidden="true" />
+              </a>
+              <a className="hero-assurance-card hero-assurance-card--link" href={SUPPORT_URL} target="_blank" rel="noreferrer" onClick={() => trackLead("onelaser-support", "hero_assurance_support")}>
+                <Headset size={32} weight="light" aria-hidden="true" />
+                <strong>100% U.S.-Based Engineers with Lifetime Support</strong>
+                <ArrowUpRight className="hero-assurance-card__arrow" size={15} aria-hidden="true" />
+              </a>
+              <div className="hero-assurance-card">
+                <ShieldCheck size={32} weight="light" aria-hidden="true" />
+                <strong>3-2-1 Warranty: Unmatched Reliability</strong>
+              </div>
+              <div className="hero-assurance-card">
+                <Factory size={32} weight="light" aria-hidden="true" />
+                <strong>Designed, Engineered, and Perfected in the USA!</strong>
+              </div>
             </div>
           </div>
 
