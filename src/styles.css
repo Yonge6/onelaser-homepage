@@ -903,14 +903,6 @@ main [id] {
   font-weight: 500;
 }
 
-.purchase-assurance {
-  margin: 10px 0 0;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 650;
-  text-align: center;
-}
-
 .secondary-cta--link {
   grid-template-columns: auto auto;
   align-content: center;
@@ -1432,11 +1424,6 @@ main [id] {
   .purchase-actions--hero .primary-cta {
     padding-inline: 12px;
     font-size: 12px;
-  }
-
-  .purchase-assurance {
-    font-size: 12px;
-    line-height: 1.4;
   }
 
   .decision-paths {

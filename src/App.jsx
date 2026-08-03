@@ -1616,7 +1616,6 @@ export function App() {
                 Buy with SHOP <ArrowUpRight size={16} />
               </a>
               <a className="more-payment-options" href={MORE_PAYMENT_OPTIONS_URL} target="_blank" rel="noreferrer" onClick={() => trackEvent("begin_checkout", { ...getPurchaseEventParameters(), checkout_type: "more_payment_options" })}>More payment options <ArrowUpRight size={14} /></a>
-              <p className="purchase-assurance">30-Day Money-Back · 3-2-1 Warranty · Ships from California</p>
             </div>
 
           </div>
