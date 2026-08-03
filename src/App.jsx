@@ -39,8 +39,11 @@ import { initializeAnalytics, trackEvent } from "./analytics.js";
 const asset = (name) => `${import.meta.env.BASE_URL}assets/${name}`;
 const MATERIAL_AUTOPLAY_DELAY = 6000;
 const SHOP_PAY_CHECKOUT_URL = "https://shop.app/checkout/74787487778/cn/hWNEuAMTTmYTB2rCEwCxHTE2/en-us/shoppay_login?_mcs=3.AMPS&_r=AQAByVbynU7atLKciNromD2tDcEbj-gOEig5dFzqa6QdGhg&redirect_source=direct_checkout_product&tracking_unique=614e268f-4b89-47aa-8a8e-31caa20c20fe&tracking_visit=3a8f583a-5dce-4171-a572-a5f40399d946&_cs=3.AMPS";
+const MORE_PAYMENT_OPTIONS_URL = "https://www.1laser.com/checkouts/cn/hWNFDEgkFFn7mUPFRRYyKSUk/en-us?_r=AQABaYabrgt4_zE5xCBjG54Ntjdc4M8Mb9-Rj995_l3u&skip_shop_pay=true";
+const SALES_CALL_URL = "https://www.1laser.com/products/sales-consultation-call";
+const BROCHURE_URL = "https://webforms.pipedrive.com/f/ckzBDiOdWxvKiAs4kk7LLCTIRbPsdg46WE8RFicSySaVdIPVjKrCYkIjSZEgd9bdM7";
 
-const media = Array.from({ length: 22 }, (_, index) => {
+const media = Array.from({ length: 23 }, (_, index) => {
   const number = String(index + 1).padStart(2, "0");
   return {
     src: asset(`xrf-hero-${number}.webp`),
@@ -417,7 +420,7 @@ const purchasePackages = [
     msrp: 6499,
     badge: "CURRENT OFFER",
     description: "38W RF desktop laser with 1,300 mm/s motion, True 3.5G acceleration and a 24 × 12 in workspace.",
-    detail: "The New King of Desktop Lasers",
+    detail: "The King of RF Desktop Lasers",
   },
   {
     id: "riser",
@@ -1434,6 +1437,16 @@ export function App() {
                 <span><Play size={16} weight="fill" /></span>
               </button>
             </div>
+            <div className="hero-media-actions" aria-label="XRF Gen2 information and consultation">
+              <a href={SALES_CALL_URL} target="_blank" rel="noreferrer" onClick={() => trackLead("sales-consultation-call", "book_free_call")}>Book A Free Call <ArrowUpRight size={15} /></a>
+              <a href={BROCHURE_URL} target="_blank" rel="noreferrer" onClick={() => trackLead("xrf-brochure", "download_brochure")}>Download Brochure <ArrowUpRight size={15} /></a>
+            </div>
+            <div className="hero-assurance-grid" aria-label="Purchase and support benefits">
+              <span><ArrowClockwise size={20} /><strong>30-Day Money-Back</strong><small>Try XRF with confidence.</small></span>
+              <span><ShieldCheck size={20} /><strong>3-2-1 Warranty</strong><small>Frame · electronics · laser source.</small></span>
+              <span><MapPin size={20} /><strong>Ships from California</strong><small>US-based fulfillment.</small></span>
+              <span><Phone size={20} /><strong>US-Based Support</strong><small>One Support engineer team.</small></span>
+            </div>
           </div>
 
           <div className="purchase-panel">
@@ -1469,6 +1482,10 @@ export function App() {
             <div className="financing-line">
               <strong>0% APR · or as low as $194/mo with Affirm</strong>
               <a href="https://www.1laser.com/pages/financing" target="_blank" rel="noreferrer">See if you qualify <CaretRight size={15} /></a>
+            </div>
+            <div className="financing-more">
+              <span>More Financing Options</span>
+              <a href="https://www.1laser.com/pages/financing" target="_blank" rel="noreferrer">Click here <ArrowUpRight size={14} /></a>
             </div>
 
             <div className="purchase-options" id="purchase-options">
@@ -1570,6 +1587,7 @@ export function App() {
               >
                 Buy with SHOP <ArrowUpRight size={16} />
               </a>
+              <a className="more-payment-options" href={MORE_PAYMENT_OPTIONS_URL} target="_blank" rel="noreferrer" onClick={() => trackEvent("begin_checkout", { ...getPurchaseEventParameters(), checkout_type: "more_payment_options" })}>More payment options <ArrowUpRight size={14} /></a>
               <p className="purchase-assurance">30-Day Money-Back · 3-2-1 Warranty · Ships from California</p>
             </div>
 
@@ -1821,6 +1839,7 @@ export function App() {
           <div className="section-heading section-heading--stack">
             <span className="eyebrow">COMPLETE DETAILS</span><h2>Specifications.</h2>
             <p>Core published specifications for the XRF Gen2 platform. Final bundle content and electrical requirements should be confirmed at checkout.</p>
+            <a className="specs-brochure" href={BROCHURE_URL} target="_blank" rel="noreferrer" onClick={() => trackLead("xrf-brochure", "download_brochure")}>Download Brochure <ArrowUpRight size={16} /></a>
           </div>
           <div className="spec-list">
             {specs.map((group) => <SpecGroup group={group} key={group.title} />)}
