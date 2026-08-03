@@ -1,3 +1,7 @@
+# Legacy XRF Gen2 handoff
+
+Routine continuation must use `CURRENT.md` and `AGENTS.md`. This file is retained only for targeted historical investigation and should not be read in full by default.
+
 # XRF Gen2 页面交接记录
 
 更新时间：2026-07-26（Asia/Shanghai）

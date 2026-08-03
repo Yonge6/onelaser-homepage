@@ -1,167 +1,105 @@
-# Prototype Instructions
+# XRF Gen2 Prototype Instructions
 
-Run the local server yourself and open the preview in the browser available to this environment. Do not give the user server-start instructions when you can run it.
+## Continuation and token-efficiency protocol
 
-Before making substantial visual changes, use the Product Design plugin's `get-context` skill when the visual source is unclear or no longer matches the current goal. When the user gives durable prototype-specific design feedback, preferences, or decisions, record them in `AGENTS.md`.
+- Continue in `/Users/yongyuan/Documents/XRF Gen2 网页` using the saved project directly. Do not create a worktree for routine continuation; this checkout intentionally contains untracked QA evidence.
+- Read `CURRENT.md` first and treat it as the only routine handoff. Do not replay old Codex tasks, rollout JSONL files, or the legacy `XRF-GEN2-HANDOFF.md` unless the user explicitly requests historical investigation.
+- The complete pre-compaction decision history is archived at `docs/decisions/AGENTS-2026-08-03-full.md`. Never read it in full during normal work. When an exact section rule, asset mapping, or user-supplied sentence is needed, use one narrow `rg -n` query and read only the matching lines.
+- Keep this file canonical and compact. When new durable feedback supersedes an existing rule, edit or replace that rule instead of appending a duplicate. Archive displaced detail only when it remains useful.
+- Prefer medium reasoning for routine copy, asset, CSS and component changes. Reserve high reasoning for architecture, difficult regressions, security-sensitive work or conflicting requirements.
+- Keep tool output narrow: use `./scripts/compact-status.sh`, `git diff --stat`, `git diff --check` and focused `rg`. Do not print all untracked `qa/*.png`, full-page DOM, large diffs or whole source files unless necessary.
+- Batch one coherent request through: inspect once, patch once, run `npm run verify` once, check one desktop and one 390 px mobile surface when UI changed, then commit/push and verify the live page when publication is requested.
+- Save temporary screenshots and visual references under ignored `references/incoming/`; inspect the saved path instead of re-extracting Base64 from task logs. Move only approved production assets into `public/assets/`.
+- Preserve every existing untracked `qa/*.png`. Do not stage, rename, overwrite or delete them unless the user explicitly asks.
 
-When implementing from a selected generated mock, treat that image as the source of truth for layout, component anatomy, density, spacing, color, typography, visible content, and hierarchy.
+## Working rules
 
-## XRF Gen2 design decisions
+- Run the local server and open the preview yourself. Do not give the user server-start instructions when the environment can run it.
+- Before substantial visual changes, use Product Design `get-context` only when the source is unclear or no longer matches the goal. A selected user mock or supplied image is the source of truth for layout, anatomy, density, spacing, color, typography, visible content and hierarchy.
+- Make the smallest scoped change that satisfies the request. Preserve unrelated user work and avoid opportunistic refactors.
+- For public-release work, distinguish local build, deployment and live-page validation. A commit or successful workflow alone is not production proof.
 
-- Use OMTech Polar 2 as the purchase-structure reference: product media on the left, configuration and purchase decisions on the right.
-- Use xTool P3 as the visual-language reference: premium white surfaces, generous whitespace, large product imagery, restrained dividers, and minimal shadow.
-- OneLaser red-orange is reserved for the primary CTA, selected states, and a few proof accents; the page remains predominantly white, warm gray, and black.
-- Treat the supplied `XRF Gen2 卖点参数发布汇总.xlsx` as the product-copy and specification source of truth.
-- P0 stories use large video-shaped sections. Until final video exists, use the approved neutral color-block treatment with real XRF renders and a visible `VIDEO PLACEHOLDER` label.
-- P1 receives large explanatory visuals; P2 appears as compact proof tiles; P3 belongs in specifications and FAQ.
-- Always label Smart Air, Riser Base, Conveyor, Rotary, Fume Extractor, and optional lenses as optional when shown.
-- Present 38W and 70W as equal-fit choices for different work, never as weak versus premium.
-- Use the official Certia brand font for every web text style. Ship the required font files with the prototype so the public page does not depend on locally installed fonts.
-- Page background surfaces must be white or `#F5F5F7`; do not use black as a section, card, announcement, or information-panel background.
-- Keep the hero product stage and every product thumbnail square. Do not show the `PRODUCT VIEW`, overview-video bar, render caption, or platform caption around the hero image.
-- Product media is a scrollable gallery with more than four square thumbnails. Keep a partial next thumbnail visible so desktop and mobile users understand they can swipe horizontally for additional real XRF renders.
-- The desktop hero follows the xTool P3 media anatomy: a 660 × 660 main stage with previous/next controls and a visible counter, plus 70 × 70 image thumbnails with their own previous/next controls and a separate overview-video slot. Retain OneLaser colors, copy and product assets.
-- Use bold Certia weights for every major page heading.
-- Below the hero, use OMTech Polar 2 interaction patterns as a structural reference—sticky capability navigation, switchable benefit explanations, project proof browsing, media stories, configuration, specification and FAQ controls—but redesign the presentation and content for OneLaser rather than reproducing OMTech branding or assets.
-- Structural backgrounds must resolve to exactly white or `#F5F5F7`; neutral borders, overlays and real image tones may use additional values only where functionally necessary.
-- Use the shared UI system in `UI-SPEC.md` for typography, spacing, radius, dividers, buttons, cards, selected states and responsive behavior. Product H1 is 32 px / 800 on desktop and mobile; editorial section headings use 48 px / 800 desktop and 32 px / 800 mobile; body text uses 14–16 px / 400–500.
-- All customer-facing prices use OneLaser red. Do not invent reviews, discount amounts, inventory urgency, delivery dates, financing rates or accessory prices when the product workbook does not provide them.
-- The PDP configuration flow may borrow the interaction anatomy of xTool package selectors, optional add-on cards, quantity controls and sticky purchase bars, but must preserve equal-fit 38W/70W framing and explicit optional-accessory labels.
-- Treat `/Users/yongyuan/Downloads/OneLaser Web UI Guideline.pdf` as the current visual-system source of truth. Use OneLaser red `#E7310E`, action red `#D92D0D`, white and `#F5F5F7` surfaces, `#000000` primary text, `#6B6B70` secondary text, `#D2D2D7` borders, 24–32 px media/card radii, and pill primary actions.
-- Use the official guideline's benefit-first sequence: Customer Benefit → Product Feature → Technical Proof → Real Result. Each section should communicate one primary message and no more than one primary plus one secondary action.
-- Use bright Insta360-style motion through sticky storytelling, progressive chapter indicators, restrained image zoom, metric reveals and slight vertical section reveals. Do not use excessive parallax, forced horizontal page scrolling, red flashes, blocking animations or autoplay sound. Always provide a reduced-motion path.
-- Organize the page by the current `XRF Gen2 卖点` and `XRF Gen2 Specs-1` sheets. P0 becomes dynamic story content, P1 gets large visual modules, P2 gets compact proof cards, and P3 stays in specifications/FAQ. Never use the `参数作废` sheet.
-- Use `https://www.1laser.com/products/onelaser-xrf-desktop-laser-machine` as the current commercial-data source for the hero: rating, current 38W price, MSRP, financing copy, packages, accessory names/prices, returns, warranty and support. The workbook remains the feature/specification source when the official sales page does not cover a Gen2 claim.
-- The hero purchase flow follows xTool P3's decision order while remaining visually OneLaser: product title and evidence, official price/MSRP, equal-fit 38W/70W power selector, package selector, optional frequently-bought-together cards, quantity/CTA and bottom sticky purchase bar.
-- The user-authorized 70W new-product price is exactly $500 above the equivalent 38W configuration. Therefore Standalone is $3,999 / $4,499 and Riser Base is $4,499 / $4,999 for 38W / 70W respectively, unless newer direct user or official pricing supersedes it.
-- Customer-facing text must never render below 12 px at any breakpoint; small labels may use tracking and weight for hierarchy instead of smaller type.
-- Keep the XRF Gen2 at-a-glance module static with no internal interaction. Place the supplied workshop proof image immediately above the supplied capability-collage image, then place the pair immediately before the FOX proof module. Both images run edge to edge with zero outer padding and zero gap on `#141414`; until dedicated mobile assets arrive, scale the desktop images proportionally without cropping.
-- Keep project-result media at a fixed 4:3 aspect ratio across desktop and mobile so switching projects never shifts the page layout.
-- Keep the long-form 38W/70W proof independent from purchase configuration: use one display-only segmented control on a full-width `#F5F5F7` band to switch between one large 38W proof image and one large 70W proof image. This control must never update the hero power selector, cart or sticky total.
-- Every P0 story and video placeholder uses a horizontal 16:9 stage.
-- Present safety as one wide 16:9 product image followed by compact proof cards; avoid abstract safety-zone diagrams.
-- The hero purchase panel is the only configuration flow. Do not repeat a second full configurator below the storytelling content.
-- Hero highlight bullets use 12 px type. MSRP is gray, while the final price remains OneLaser red. Financing links use blue.
-- Do not show a separate `Compare 38W / 70W` link in the hero or the four-metric proof rail below it.
-- The secondary hero purchase action reads `Buy with SHOP` and uses a `#5532EB` purple surface with white text.
-- Power choice cards communicate use-case fit only and do not repeat prices. The hero final price uses Certia Black 900.
-- Do not show the three-column trust strip or the commercial-source note below hero purchase actions.
-- Selected power and package cards are communicated only through the red border and pale-red surface; never repeat `SELECTED`, a checkmark, or a `Selected here` label inside the choice UI.
-- The hero starts with the product H1 and keeps compact top spacing; do not show the `ONELASER XRF™` / `PROFESSIONAL RF DESKTOP LASER` kicker row.
-- The at-a-glance overview is the one explicit dark-band exception: use the supplied long-form artwork on `#141414`; all other structural page surfaces remain white or `#F5F5F7`.
-- P0/video images must use `object-fit: contain` with no active/hover crop so the complete 16:9 frame stays visible.
-- The 38W/70W proof stage grows fluidly to the 1280 px content maximum on larger viewports. Project media always stays at a centered 4:3 stage with consistent dimensions, and the whole image-plus-copy carousel clips to a shared 32 px desktop / 24 px mobile outer radius.
-- The page narrative is workbook-led: finished results first, equal-fit 38W/70W choice second, then six non-duplicative P0 image/video stories, followed by P1 workflow/reliability, P2 compact engineering proof, P3 one-line details, support, specifications and FAQ.
-- Never expose internal priority codes such as `P0`, `P1`, `P2` or `P3` to customers. Priority determines media size and page weight only.
-- Use the supplied July 2026 XRF workshop, dark product, work-area and fine-detail images as the primary product-proof assets. Do not replace product-faithful supplied imagery with generic AI visuals when a real approved asset already fits the slot.
-- Customer-facing placeholder language should read `VIDEO PREVIEW` or `VIDEO STORY · IMAGE PREVIEW`, not unfinished-production language such as `REPLACEABLE MEDIA` or `VIDEO PLACEHOLDER`.
-- Keep the power guide, reliability, safety and micro-feature introductions left aligned; use one consistent editorial axis for narrative section headings.
-- Keep the desktop project-proof carousel at a fixed height with stable previous/next controls. Reduce its secondary headline scale so the proof image remains the dominant visual.
-- Make every P0 story media stage directly clickable and keyboard accessible, opening the existing full-size 16:9 media preview until production videos replace the stills.
-- Safety uses a full-viewport-width `#F5F5F7` background band with its content aligned to the 1280 px page grid.
-- Put narrative descriptions directly beneath their left-aligned titles instead of using a split heading/copy layout. Keep short workflow headings and reliability support copy on one line on desktop when the 1280 px grid permits, with normal responsive wrapping below 1180 px.
-- Distribute YouTube proof across the buying journey instead of using one large video collection: FOX media proof after the hero; hobby-laser comparison after core benefits; customer success after finished-product proof; independent reviews after specifications; xTool P2 comparison before late-stage trust; production-facility proof beside warranty/support.
-- Treat the FOX & Friends Weekend feature as a standalone early-page `As Seen on TV` social-proof module. Use only the wording `Featured on FOX & Friends Weekend`, with `As Seen on TV` and `FOX & Friends Weekend` tags; do not show a date and never imply FOX gave XRF an award.
-- Direct page video proof should focus on brand credibility, measurable production performance, customer business outcomes, independent long-term reviews, fair competitor comparison and visible engineering/support. Keep tutorials, setup, calibration, maintenance and pure unboxings out of the sales journey.
-- Load YouTube only after interaction: every default state uses a lazy 16:9 static cover, and all sections reuse the same accessible in-page player with close button, overlay close, Escape close and playback removal on close. Creator-review videos live in one arrow-controlled carousel; do not add a separate `View More Creator Reviews` action.
-- Add a dedicated materials gallery after finished-product proof. Use a stable, switchable proof stage for Acrylic, Wood, Leather, Glass & Stone and Coated Metal; each state must show finished products rather than raw material swatches, keep the stage dimensions fixed, pair every material tab with a distinct Phosphor line icon, and use only a red underline to communicate the active tab.
-- Generated imagery is allowed only to fill workbook-led proof gaps. Preserve approved real XRF renders wherever the machine itself is visible, compress generated assets to WebP, and keep every generated image tied to a specific claim such as material capability, 38W micro-detail, 70W relief/throughput, IVS compensation, optional Smart Air or optional Conveyor.
-- Center the 38W/70W power guide on the 1280 px editorial axis, while the safety band spans the full viewport and centers its inner content on that same axis. Engineering-proof headings remain on one line on desktop when they fit. Keep a clear gap between FOX copy and video, and place the same centered translucent-black play button on every P0 media stage.
-- Power-proof detail titles use the card-heading scale (36 px desktop / 28 px mobile), and desktop sticky-story copy begins at the same top edge as the active media stage.
-- Give all eight compact micro-feature tiles distinct Phosphor line icons. Icons use the OneLaser red accent and remain secondary to the feature title.
-- Use one compact vertical rhythm across the sales narrative: 48 px desktop and 32 px mobile for standard section boundaries unless the sticky story needs additional scroll range. This replaces the earlier 96 px / 64 px standard; adjacent sales modules should never rely on extra blank spacer bands.
-- All video-proof section headings use the same 48 px / 800 desktop and 32 px / 800 mobile type standard. Adjacent video cards must have identical 16:9 media, card anatomy, copy spacing and visual weight.
-- A clickable video cover is the only play action in its module. Do not repeat separate text buttons such as `Watch the full test`, `Watch his story` or `Open video preview`.
-- All centered video play controls use a black surface at 20% opacity with a white play glyph; never use a red play-control circle.
-- On desktop, narrative headings and their direct descriptions stay on one line when they fit the 1280 px grid. All section introductions share the same 1280 px left axis and wrap normally below 1180 px.
-- Customer-facing performance data is now `1,300 mm/s` and `True 3.5G`; remove every older `1,200 mm/s` and `3G` reference from hero proof, package copy, story copy, metrics and specifications.
-- Use a compact, repeatable section-heading rhythm: 8 px from eyebrow to title and 12 px from title to supporting copy. Adjacent modules must not repeat the same claim or the same lead asset; each section must add a distinct proof layer.
-- The Hero overview video uses the official OneLaser YouTube video `F1ZJvoeANgk`. Ship its static cover locally and open it through the shared lazy in-page YouTube player; do not show a placeholder in this slot.
-- Do not keep a standalone hobby-laser performance video module near the top of the page. Include that proof as the first item in the arrow-controlled independent-review video rail instead.
-- Place the supplied profit-and-product-output artwork immediately above the supplied at-a-glance capability collage. Both images render edge to edge on the same `#141414` band with no padding or gap between them.
-- P0 chapter changes use a restrained crossfade, slight upward settle and subtle image scale reset while copy and media remain locked on one horizontal scene. Disable this motion under `prefers-reduced-motion`.
-- Render the two supplied at-a-glance images at their intrinsic aspect ratios with no inherited 16:9 frame, padding, gap or letterboxing above or below either image.
-- In the desktop P0 scroll story, the active copy and active 16:9 media form one sticky scene and stay vertically centered on the same horizontal line; offscreen chapters act only as scroll triggers and must not push the visible media out of alignment.
-- Keep the finished-product carousel image clean: do not overlay a `PROJECT PROOF` counter or similar production label on the project media; use the existing arrows and dots for navigation state.
-- On desktop, each sticky P0 story keeps the active left-hand copy and right-hand media in the same upper-middle horizontal band. Keep story steps close enough that switching never leaves a large blank interval between the copy and its corresponding media.
-- Do not show an announcement strip above the main navigation; the main header is the first visible site chrome.
-- Selling-point navigation must be genuinely scroll-linked: keep every chapter in document flow, update the sticky desktop rail / mobile horizontal rail from reading position, and let each rail item jump to its chapter. Do not simulate this with tabs that replace a single content panel.
-- Keep the desktop selling-point rail compact and slightly inset from the viewport edge, following the xTool P3 chapter-rail anatomy without copying its dark theme. Use one subdued vertical track with a short OneLaser-red active segment; each item shows only the selling-point name with no number, border or card container. Keep the existing horizontal swipe rail on mobile, also without numbers.
-- Do not place a separate introduction block above the selling-point chapters; the chapter content should begin immediately with the navigation and first proof story.
-- Do not show bottom media label pills such as `VIDEO STORY · IMAGE PREVIEW` or per-media counters on selling-point chapter media; keep these stages clean with only the play control when clickable.
-- Customer-success videos belong inside the shared arrow-controlled review rail, not in a separate large two-card module.
-- Use the supplied `38W.webp` and `70W.webp` as the dedicated editorial power-proof images without replacing other precision-story assets that happen to reuse earlier power imagery.
-- Keep MakerBoost AI as its own standalone module using the supplied `Makerboost.webp` and the exact user-supplied `Out of the box, into creation.` copy. Present `Your software. Your way.` and the supplied `Software Compatibility.webp` in a separate following module; never combine the two into one shared card group. Remove shorter duplicate software claims from Smart Workflow.
-- Present Support as one dedicated three-part module covering the exact user-supplied 30-day return terms, 3-2-1 warranty and One Support engineer promise. Each card uses one lead title followed directly by its detailed body; do not restore intermediate bold subheads or repeat simplified warranty/support claims in adjacent modules.
-- Place a dedicated three-advantage RF explainer immediately above `Choose the power that fits your work.` Cover cleaner engraving detail, faster RF response and up to 30,000 hours of source life in maker-facing language, using XRF-specific proof values and equal-fit 38W/70W framing.
-- Use normal stacked editorial copy in MakerBoost AI, Software compatibility and every selling-point module: title first, body directly below, with no intentional desktop line breaks when the 1280 px grid can hold the text.
-- Do not show a Support section eyebrow or standalone heading. In the warranty card, use `We built it to last. We back it to prove it.` as the large lead and keep the 3-2-1 warranty details in the direct body copy.
-- The production-facility video module uses the same large split-card anatomy, heading scale, spacing and proof-row treatment as the preceding `Considering an xTool P2? Watch this first.` module.
-- Do not show the final image CTA module after FAQ. The FAQ section should transition directly into the site footer.
-- Match the RF-advantage explainer to the long-form 38W/70W power-guide anatomy: full-width `#F5F5F7` band, 1280 px editorial grid, centered segmented control, and one large media-left/copy-right proof stage.
-- Keep each selling-point chapter on the full centered 1280 px content grid. On desktop the compact scroll-linked text rail floats near the left viewport edge without consuming chapter width; chapter titles use 48 px type and their direct descriptions use 16 px type with the shared 8 px / 12 px heading rhythm.
-- Standalone MakerBoost AI and Software compatibility modules do not show secondary subhead claims; keep only the section title, direct body copy and supplied media.
-- After removing those secondary subheads, keep the direct MakerBoost AI and Software body copy exactly 12 px below the main title; do not retain subhead-era spacer margins or padding.
-- The xTool comparison and production-facility video cards use `#F5F5F7` surfaces. The Support section uses a `#F5F5F7` band with all three support cards on white surfaces.
-- `#capabilities` is the commercial imagination module answering “What can I actually make and sell with this machine?” Its required sequence is Finished Products → Product Categories → Materials & Processes → illustrative Example Economics → confirmed XRF capabilities → CTA. Keep the later engineering chapter browser as a separate `#capability-system` section.
-- Commercial product economics are illustrative models only. Store every figure in one data object, label the panel `ILLUSTRATIVE EXAMPLE`, keep the full visible disclaimer, and never use guaranteed-income language or present potential hourly output as a promise.
-- Product-opportunity content must explicitly identify rotary requirements and laser-compatible surfaces. Never imply cylindrical work needs no Rotary attachment or that bare metal can be directly deep-engraved by the RF CO₂ source; use powder-coated, anodized, coated or otherwise laser-compatible wording.
-- Product-opportunity photography must use clean local product imagery with all copy and economics rendered as accessible HTML. Do not ship an image containing embedded pricing/labels as the UI, hotlink low-quality placeholders or fabricate the XRF machine design.
-- The commercial Hero carousel pauses on hover/focus/touch, resets timing after manual navigation, supports keyboard arrows and touch swipe, and disables autoplay under `prefers-reduced-motion`. Category tabs remain one horizontal scrollable row on mobile with no page overflow.
-- Do not reuse `conveyor-proof.webp` or `ivs-print-cut-proof.webp`; the user rejected both images and they have been removed from the asset library. Until dedicated replacements arrive, use approved existing XRF imagery rather than recreating either composition.
-- Keep the Support cards compact: no fixed tall card height or large empty spacer between the heading and details. Lay out FAQ like Specifications, with a standard stacked section heading above one full-width accordion list.
-- Keep Product Opportunities concise: show each category name only in the category tabs, show only product names in the compact product selector, and keep material, process, tags and setup guidance in the selected-product detail. Do not repeat the selected product name in the adjacent Economics header.
-- The Materials autoplay indicator is a single 1 px red progress line below the tabs.
-- Render the standalone Software headings exactly as `Out of the box, into creation.` and `Your software. Your way.` without quotation marks.
-- Place one standalone `XRF GEN 2 VS. GEN 1` upgrade comparison immediately after the 38W / 70W power guide and before the selling-point chapters. Use one continuous three-column desktop comparison table with feature, Gen 2 and Gen 1 columns so Gen 2 reads first and Gen 1 stays on the right. Give the entire Gen 2 column a pale-red selected surface with red-and-black emphasis; keep the entire Gen 1 column white with subdued gray text and no red divider lines. Stack Gen 2 before Gen 1 inside each feature comparison on mobile.
-- Center the desktop selling-point navigation vertically in the viewport, inset it enough that the progress track does not touch the viewport edge, and constrain it to the capability section; retain the horizontal sticky rail on mobile.
-- Do not show per-story eyebrow/kicker labels inside the selling-point chapters. Present the Safety feature with the same media-first, title, body and proof-pill hierarchy used by the other stories.
-- Product Opportunities keeps four category tabs and shows three independent image-led product cards per category, with imagery occupying about 70% of each card. Each product owns its own `image` field; missing assets use the shared neutral placeholder rather than another product's image. The selected card uses a OneLaser-red border and slight scale while the others are subdued, and all three cards drive one shared compact detail/economics panel below. On mobile, shorten the cards and detail panel, omit the redundant product summary, and bring the selected detail panel into view after a direct card tap.
-- Keep the selected Product Opportunities card outline uniformly 2 px around image and copy. In the shared detail panel, make the example selling price visually prominent, use the approved product summary on desktop, and anchor setup guidance in a compact pale-red footer. The Economics panel uses spacing and separate soft metric tiles instead of internal gray divider lines.
-- The active Materials tab uses OneLaser red for its icon, label and index while retaining the single 1 px red autoplay/progress line below the tab row.
-- Do not show the `Ready to build your next product line?` CTA inside the Product Opportunities / workflow bridge area; the workflow proof should transition directly into the Materials gallery.
-- Run the Materials gallery like an editorial slideshow: six-second autoplay, pause on hover/focus/touch, timer reset after manual navigation, keyboard and swipe controls, a red progress rail below the material tabs, and no autoplay under `prefers-reduced-motion`.
-- Purchase CTAs must perform a real next step and never simulate an `Added` state. Send the available 38W configuration into the official OneLaser purchase flow; until an official stable 70W checkout target exists, route 70W interest to the engineer-consultation flow. Do not show `Buy with SHOP` unless it opens a real accelerated checkout.
-- After the initial product view, keep a compact scroll-linked journey navigator below the main header so visitors can see and jump between the major page chapters without losing the persistent price/purchase bar.
-- The XRF page must offer mid-funnel exits in addition to purchase: official live demo, engineer consultation, an email capture for launch offers/specification sheet/sample requests, and the official XRF trade-up lead form.
-- Analytics integrations use environment-provided `VITE_GA4_ID` and `VITE_META_PIXEL_ID`. Track ViewContent, power/package/accessory choices, purchase-intent clicks, lead actions and section navigation without shipping fabricated tracking IDs.
-- Keep review traffic on the page. Pair the creator-video rail with named, clearly labeled OneLaser feedback, and use published numeric comparisons—not adjective-only rows—in the xTool P2 decision module.
-- Show `30-Day Money-Back · 3-2-1 Warranty · Ships from California` at the purchase decision point. FAQ must cover standard-outlet requirements, current shipping/processing expectations and the exact $500 70W price delta.
-- Provide one compact floating `TOP` control above the sticky purchase bar. Hide it near the page top, reduce it to near-transparent and non-interactive while the visitor scrolls down, and restore full visibility when the visitor scrolls up.
-- Every page image uses a low-saturation neutral placeholder with a subtle loading motion until its pixels are ready. Stop the motion after load, retain a calm neutral fallback on error, and disable placeholder motion under `prefers-reduced-motion`.
-- Distribute image-loading placeholders across seven stable low-saturation hues rather than one pure gray. Keep each image's assigned hue stable across renders so loading never flashes between colors.
-- Keep all three RF-advantage images in one identical fixed media frame. Use centered `object-fit: cover` cropping on desktop and the same 3:2 media ratio on tablet/mobile.
-- Hero gallery assets are square and must render edge to edge inside the square main stage with no internal padding, letterboxing or hover crop. Keep the complete square source frame visible; on touch devices, swiping the main stage changes the active image while the thumbnail rail remains horizontally swipeable.
-- Keep `Add to Cart` as the primary Hero and sticky purchase action. Show `Buy with SHOP` as the purple accelerated-checkout action when it points to the user-approved direct Shop Pay checkout URL.
-- Place the mid-funnel next-step module and Trade-Up banner immediately after Specifications and before Reviews. Inside Reviews, show the creator/customer video rail before the named written feedback.
-- Use Certia 800 for the mid-funnel decision heading, all three decision-card titles and the Trade-Up title. Do not include the Mark Ellis CES 2025 clip in the review-video rail.
-- Keep lead-generation actions such as `Book a live demo` in the dedicated mid-funnel next-step module; do not repeat them inside the Hero purchase controls.
-- Present published XRF owner feedback in one horizontal scroll-snap rail with previous/next arrows: three cards on desktop, two on tablet and a partial next card on mobile. Use customer-facing wording such as `What XRF owners say.` rather than internal sourcing language.
-- Use the user-supplied transparent OneLaser SVG as the footer logo so the mark sits cleanly on the `#F5F5F7` surface without a baked-in background.
-- In the xTool comparison table, the OneLaser XRF Gen2 header cell uses a stronger pale-red surface than the Gen2 body column so the header remains visibly distinct without introducing a red rule.
-- On tablet and mobile, the capability chapter navigation stacks below the global journey navigation; the two sticky rails must never overlap or cover the active chapter content.
-- Frequently-bought-together accessory thumbnails fill their image crop edge to edge with no CSS padding or letterboxing.
-- Speed & Motion selling-point chapter uses one four-option segmented material control for Wood, Acrylic, Slate and Leather, following the former power-selector interaction anatomy; do not show or switch 38W/70W inside this chapter. Lower motion support uses compact icon proof tiles rather than image cards.
-- Speed & Motion materials and Why RF tabs share one centered segmented-control visual: a `#E2E2E7` outer pill, white active pill with black text and restrained shadow, and no red active border. On mobile both remain one horizontally swipeable row and never wrap into multiple rows.
-- Smart Workflow's first `Print and cut, made easy.` story uses the supplied `Make every setup decision clearer.` IVS / print-and-cut artwork as `smart-workflow-print-cut.webp`; keep the rest of the chapter unchanged unless new assets are supplied.
-- Smart Workflow's `Print and cut, made easy.` body copy is `An integrated vision camera in the laser head performs real-time Mark-point recognition and cut-path compensation — closed-loop visual registration that delivers precision contour cutting with minimal manual calibration.` Let this paragraph wrap normally on desktop whenever it exceeds the available editorial width.
-- Smart Workflow does not show a separate `Focus and control, in one clear flow.` story or its video. Fold its `XFocus™ autofocus`, `Full touchscreen` and `Direct machine control` selling points into the compact proof rail that begins with the 12MP camera proof.
-- Smart Workflow's lower support cards use the supplied `smart-workflow-see-full-bed.webp` and `smart-workflow-control-machine.webp` images. Their customer-facing titles are `Precision in every pixel.` and `"One" Touch of Innovation.` with the exact user-supplied detailed descriptions; do not restore the older `See the full bed` or `Control it from the machine` copy.
-- Business Expansion maps supplied image filenames directly to their matching stories: `business-expansion-continuous-job.webp` for `Turn long-format work into one continuous job.`, `business-expansion-mainstream-stock.webp` for `One size fits most materials.`, and `business-expansion-optional-height.webp` for `Desktop footprint. Big-project capability.` Keep the user-supplied detailed descriptions for the latter two, including the exact work-area dimensions and explicit optional Base Boost™ / Rotary framing.
-- Reliability & Safety uses the supplied `Run cleaner. Stay protected.` artwork as `reliability-safety-run-cleaner.webp` for the `Smart Air Assist™: Right pressure. Every mode. Automatically.` story. Preserve the explicit optional framing and allow its detailed supporting paragraph to wrap normally on desktop.
-- Reliability & Safety presents `Protection isn't a feature. It's the architecture.`, `Fire protection that acts before you can.` and `FDA Class 1: top-tier performance, zero exposure.` as one compact three-card media grid on desktop/tablet and compact image-left copy-right cards on mobile; do not restore the former full-width feature image and large stacked support imagery.
-- Reliability & Safety keeps all three compact safety cards on one shared anatomy: media runs flush to the card edge, while title size, copy row and padding align across the grid and body copy wraps without clipping.
-- On mid-size desktop viewports, the floating selling-point rail must reserve enough left clearance that its labels never overlap the chapter grid or the first proof card.
-- Reliability & Safety's compact three-card grid uses one supplied selling-point slogan plus a concise body distilled from the supplied detailed description; do not show proof tags on these three cards.
-- The first compact Reliability & Safety card is static media: do not show a play control, open a media preview, or apply clickable-video behavior.
-- Reliability & Safety maps the supplied card artwork by title: `safety-architecture.webp` for `Protection isn't a feature. It's the architecture.`, `safety-fire-protection.webp` for `Fire protection that acts before you can.`, and `safety-class1.webp` for `FDA Class 1: top-tier performance, zero exposure.`
-- Speed & Motion uses the four supplied comparison artworks `speed-motion-wood.webp`, `speed-motion-acrylic.webp`, `speed-motion-slate.webp` and `speed-motion-leather.webp` for the matching material tabs. Its two red metric values cap at 26 px with Certia 800 weight, while retaining the existing smaller responsive floor.
-- Speed & Motion comparison media is static imagery only: do not show a play control or open the shared video/image modal. Render each artwork at its intrinsic 1756:988 ratio and keep the adjacent proof copy compact enough that the media column never gains an empty letterbox area below the image.
-- RF Precision's main story title is `PowerMax 70™: More power. More materials. More possible.` with the supporting paragraph `The XRF Gen 2 now offers a true 70W RF tube — the most powerful RF source in any desktop-class laser. With nearly double the output of the 38W tube and pulse frequencies up to 50kHz, flat engraving runs at super high DPI without giving up speed, 3D relief comes out visibly deeper and more dimensional, grayscale renders sharper — and cutting capacity moves up a full class.`; retain its existing media and metric proof chips and allow this long paragraph to wrap normally on desktop.
-- RF Precision's first support card is titled `Magnetic QuickSwitch™` and uses the exact supporting copy `Effortlessly swap magnetic focus lenses with no tools needed — fast, easy, and accessible for everyone. Routine optics care takes seconds, not a teardown.`
-- The first Product Opportunities commercial-capability slide, `One machine. A full product line.`, uses the supplied `commercial-product-line.webp` workshop image.
-- The standalone `Your software. Your way.` module uses the supplied `SOFTWARE.webp` artwork as `software-compatibility.webp`; replacing this asset must not alter the module copy or layout.
-- The Hero product gallery uses the 23 supplied square images `XRF01.webp` through `XRF23.webp` in numbered order. Its main counter and thumbnail rail cover exactly those 23 product images; remove the legacy placeholder gallery assets and keep the official overview video as a separate slot outside the 23-image count.
-- The first and third images in the static `#features` overview sequence use the supplied `1.webp` and `3.webp` artwork respectively, while the existing middle profit-and-products image remains unchanged.
-- Below the Hero gallery, keep `Book A Free Call` and `Download Brochure` as two side-by-side actions followed by a compact 2x2 benefit grid for returns, warranty, California fulfillment and US support.
-- Keep Hero gallery arrows subdued until hover or keyboard focus, and expose the brochure action again in Specifications.
+## Sources of truth
+
+Use sources in this order:
+
+1. Direct user feedback and supplied approved assets.
+2. `/Users/yongyuan/Downloads/OneLaser Web UI Guideline.pdf` and `UI-SPEC.md` for the visual system.
+3. `XRF Gen2 卖点参数发布汇总.xlsx`, specifically `XRF Gen2 卖点` and `XRF Gen2 Specs-1`, for features and specifications. Never use `参数作废`.
+4. `https://www.1laser.com/products/onelaser-xrf-desktop-laser-machine` for current commercial facts not covered by the workbook.
+5. `docs/decisions/AGENTS-2026-08-03-full.md` only through a narrow search when exact legacy detail is required.
+
+Do not invent reviews, discounts, urgency, shipping dates, accessory pricing, financing rates, performance gaps or checkout targets. Revalidate time-sensitive commercial facts before changing them.
+
+## Core visual system
+
+- Use official Certia files shipped with the prototype. Major headings use Certia 800; Hero price uses Certia Black 900.
+- Structural surfaces are exactly white or `#F5F5F7`, except the approved at-a-glance artwork band on `#141414`. Use `#000`, `#6B6B70`, `#D2D2D7`, OneLaser red `#E7310E`, action red `#D92D0D`, 24–32 px media/card radii and pill primary actions.
+- Reserve red for the primary CTA, selected states, prices and a few proof accents. Selected configuration cards use only a red border plus pale-red surface; no checkmark or `SELECTED` label.
+- Product H1 is 32 px / 800 at all breakpoints. Editorial headings are 48 px desktop and 32 px mobile; body is 14–16 px. No customer-facing text may be below 12 px.
+- Standard section boundaries are 48 px desktop and 32 px mobile. Heading rhythm is 8 px eyebrow-to-title and 12 px title-to-body. Avoid blank spacer bands.
+- Follow benefit-first storytelling: Customer Benefit → Product Feature → Technical Proof → Real Result. Each section has one primary message and no more than one primary plus one secondary action.
+
+## Hero and purchase flow
+
+- Structure follows OMTech Polar 2 media-left / purchase-right anatomy with xTool P3-like premium whitespace, but retains OneLaser content, assets and branding.
+- Start with the H1; no announcement strip or Hero kicker row. Keep the page header as the first chrome.
+- The desktop Hero has a 660 × 660 square stage, counter, previous/next controls, 70 × 70 square thumbnails with their own controls, and a separate overview-video slot. All 23 supplied `xrf-hero-01.webp` through `xrf-hero-23.webp` images are square, edge-to-edge, uncropped and unpadded. Main media and thumbnail rails swipe independently on touch.
+- Hero arrows are subdued until hover or keyboard focus. The overview slot uses local cover `xrf-overview-video-cover.jpg` and YouTube `F1ZJvoeANgk` through the shared lazy modal.
+- Below the gallery, keep side-by-side `Book A Free Call` and `Download Brochure` actions, then a compact 2×2 grid for 30-day returns, 3-2-1 warranty, California fulfillment and US support.
+- Purchase order is title/evidence → official price/MSRP → equal-fit 38W/70W selector → package → optional add-ons → quantity/actions. Power cards describe use-case fit and do not repeat prices.
+- Prices are red; MSRP is gray; financing links are blue. 38W/70W pricing is Standalone $3,999/$4,499 and Riser Base $4,499/$4,999 unless newer direct or official pricing supersedes it.
+- Every accessory is explicitly optional. Frequently-bought-together images fill their crop edge-to-edge.
+- Keep `Add to Cart` as the primary Hero/sticky action with restrained prompting motion and a reduced-motion fallback. It must open the official 38W purchase flow. Until an official stable 70W checkout exists, route 70W interest to engineer consultation.
+- Show `Buy with SHOP` only while it points to the approved direct Shop Pay URL. Keep `More payment options` on its approved checkout URL. Never simulate an `Added` state.
+- Show `30-Day Money-Back · 3-2-1 Warranty · Ships from California` at the decision point. Keep the brochure action in Specifications too.
+- The Hero is the only full configurator. Do not add another configurator later in the page.
+
+## Page narrative and navigation
+
+- Current sequence: finished results and Product Opportunities → Materials → RF advantages → equal-fit 38W/70W guide → Gen 2 vs Gen 1 → scroll-linked selling-point chapters → MakerBoost → Software → Specifications → decision paths and Trade-Up → reviews/comparisons → Support → FAQ → footer.
+- `#capabilities` answers “What can I make and sell?”; `#capability-system` remains the separate engineering chapter browser.
+- The major journey navigator appears below the main header after the initial product view. Selling-point navigation is genuinely scroll-linked: every chapter stays in document flow, the desktop rail floats near the left viewport edge, and mobile uses one horizontal sticky rail below the journey navigation. The rails must never overlap content.
+- No separate introduction above selling-point chapters, no internal `P0/P1/P2/P3` labels, no per-story eyebrow, no media counter pills and no `VIDEO STORY · IMAGE PREVIEW` pill on chapter media.
+- P0 and video stages are 16:9 with `object-fit: contain`; clickable stages are keyboard accessible and open the shared preview. Desktop sticky copy and media remain vertically aligned in one scene. Reduced motion disables crossfades/settle motion.
+- Project-result media stays fixed 4:3. The finished-product carousel uses arrows/dots without a `PROJECT PROOF` overlay.
+
+## Confirmed claims and content safety
+
+- Customer-facing motion data is exactly `1,300 mm/s` and `True 3.5G`; remove older `1,200 mm/s` or `3G` references.
+- Supported proof includes closed-loop motion, Hydra-derived all-steel axes, a 20% lighter head, up to 2,000 DPI, ≤0.01 mm positioning, 0.07 mm spot, RF response and up to 30,000 source hours when supported by the workbook.
+- Present 38W and 70W as equal-fit choices. The long-form power proof is display-only and never changes Hero configuration, cart or sticky total.
+- Generated imagery may fill a workbook-led proof gap only. Use supplied real XRF renders whenever the machine appears, tie each generated image to one claim, and ship WebP.
+- Commercial economics are illustrative only: keep figures in one data object, label `ILLUSTRATIVE EXAMPLE`, retain the disclaimer and never imply guaranteed income.
+- State Rotary requirements for cylindrical work. Never imply bare metal can be directly deep-engraved by the RF CO₂ source; use powder-coated, anodized, coated or otherwise laser-compatible wording.
+
+## Section-specific canonical rules
+
+- At-a-glance uses the supplied profit/output artwork immediately above the capability collage on one edge-to-edge `#141414` band, intrinsic aspect ratios, zero gap, padding, crop or letterbox.
+- Product Opportunities has four horizontal category tabs and three independent image-led cards per category. Each card owns its image; missing media uses the neutral placeholder. One shared compact detail/economics panel follows. Mobile scrolls the selected detail into view after direct card taps.
+- Materials is a fixed-stage editorial slideshow with distinct Phosphor icons, red active icon/label/index, one 1 px progress line, six-second autoplay, pause/reset controls, keyboard/swipe support and reduced-motion disablement.
+- Why RF and Speed & Motion use the same centered segmented pill: `#E2E2E7` outer surface, white active pill, black text, restrained shadow, no red active border; mobile stays one horizontal non-wrapping row.
+- Speed & Motion switches Wood/Acrylic/Slate/Leather only—never 38W/70W—and uses `speed-motion-*.webp`. The two lower motion proofs are compact icon tiles. Metric values cap at 26 px / 800.
+- RF advantages use one full-width `#F5F5F7` band and consistent 3:2 media frames. The power guide uses supplied `38W.webp` and `70W.webp`; the Gen 2/Gen 1 table follows immediately with Gen 2 first and pale-red emphasis.
+- Smart Workflow starts with `smart-workflow-print-cut.webp`; XFocus, touchscreen and direct control live in its compact proof rail rather than a duplicate story. Lower cards use the supplied full-bed/control-machine assets and approved copy.
+- MakerBoost and Software remain separate modules using `Makerboost.webp` and `software-compatibility.webp`, with titles `Out of the box, into creation.` and `Your software. Your way.` Body copy sits 12 px below the title.
+- Reliability & Safety uses the approved Smart Air artwork plus three compact supplied safety cards. Desktop/tablet is a compact grid; mobile is image-left/copy-right. Preserve explicit optional framing and do not restore the old large stacked layout.
+- Support is one `#F5F5F7` band with three compact white cards: exact 30-day return terms, 3-2-1 warranty and One Support engineer promise. No Support eyebrow/standalone heading or duplicated intermediate subheads.
+- Reviews keep creator/customer video proof in one arrow-controlled rail, followed by named owner feedback in a horizontal scroll-snap rail: three cards desktop, two tablet, partial next card mobile. Keep review traffic on-page and omit the Mark Ellis CES 2025 clip.
+- xTool P2 comparison uses published numeric facts and the established split-card anatomy. FAQ follows the Specifications heading pattern and must cover outlet requirements, current shipping/processing expectations and the exact $500 70W delta. FAQ transitions directly to the footer.
+
+## Video, motion, loading and accessibility
+
+- Load YouTube only after interaction. Default states use local/static 16:9 covers and the shared accessible player with close button, overlay close, Escape close and iframe removal on close.
+- A clickable cover is the only play action; no duplicate watch button. Play controls are centered translucent black at 20% opacity with a white glyph, never red.
+- Carousels pause on hover/focus/touch, reset after manual navigation, support keyboard arrows and swipe, and disable autoplay under `prefers-reduced-motion`.
+- All images use one of seven stable low-saturation placeholders with subtle loading motion, stop after real pixels load, keep a calm error fallback and disable placeholder motion under reduced motion.
+- Provide a compact `TOP` control above the sticky purchase bar: hidden near the top, nearly transparent/non-interactive while scrolling down, visible while scrolling up.
+- Verify desktop and 390 px mobile for overflow, sticky-rail stacking, touch targets, 12 px text floor, loaded natural image dimensions and console errors.
+
+## Analytics and release gates
+
+- Analytics use environment-provided `VITE_GA4_ID` and `VITE_META_PIXEL_ID`; never fabricate IDs. Track ViewContent, power/package/accessory choices, purchase intent, lead actions and section navigation.
+- Mid-funnel exits include official live demo, engineer consultation, email capture for offers/spec/sample and official Trade-Up. Keep them after Specifications and before Reviews; do not duplicate them in Hero purchase controls beyond the approved gallery actions.
+- Before delivery run `npm run verify`. If `node` is missing, prepend `/Users/yongyuan/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin` to `PATH`; do not search the machine for another runtime. For UI changes run one focused desktop and one 390 px mobile browser check; wait for images to be complete with real natural dimensions.
+- When publication is in scope, commit only target files, push `main`, wait for GitHub Pages, and validate `https://yonge6.github.io/xrf-gen2-listing/?v=<commit>` plus any new asset route. Report local/build, deployment and live proof separately.
