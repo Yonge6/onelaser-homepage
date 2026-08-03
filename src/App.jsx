@@ -118,7 +118,7 @@ const powerProofs = [
     eyebrow: "38W RF · FINE DETAIL",
     title: "Fine detail for everyday production.",
     copy: "A precise RF source for photography, fine text, personalization and balanced daily output.",
-    proof: "2,000 DPI detail · Air cooled · Up to 30,000 hours",
+    proof: "2,000 DPI detail · Air-cooled · Up to 30,000 hours",
     image: "power-38w-result.webp",
     alt: "Fine RF engraving detail for 38W everyday production",
   },
@@ -196,7 +196,7 @@ const rfAdvantages = [
     eyebrow: "LONGER LIFESPAN",
     title: "Make more before the source needs attention.",
     copy: "An air-cooled RF source rated for up to 30,000 hours keeps daily production simpler, with no water chiller and more time for the work makers want to ship.",
-    proof: "Up to 30,000 hours · Air cooled",
+    proof: "Up to 30,000 hours · Air-cooled",
     image: "rf-longer-lifespan.webp",
     alt: "XRF Gen2 RF platform shown in a professional workshop setting",
     icon: ShieldCheck,
@@ -257,8 +257,8 @@ const speedMotionMaterials = [
   {
     id: "wood",
     label: "Wood",
-    title: "Controlled motion for detailed wood work.",
-    copy: "Closed-loop motion keeps the toolpath under feedback through detailed engraving and repeatable passes on wood.",
+    title: "Controlled motion for detailed woodwork.",
+    copy: "Closed-loop motion keeps the toolpath under closed-loop control through detailed engraving and repeatable passes on wood.",
     image: "speed-motion-wood.webp",
     icon: Tree,
   },
@@ -274,7 +274,7 @@ const speedMotionMaterials = [
     id: "slate",
     label: "Slate",
     title: "Responsive motion for crisp surface detail.",
-    copy: "Closed-loop control keeps the planned path under feedback while the RF source marks detailed slate surfaces.",
+    copy: "Closed-loop control keeps the planned path on course while the RF source marks detailed slate surfaces.",
     image: "speed-motion-slate.webp",
     icon: Target,
   },
@@ -296,8 +296,8 @@ const capabilityChapters = [
     summary: "The RF source turns fine detail, tonal range and dimensional relief into a visible product advantage.",
     spotlights: [
       {
-        title: "PowerMax 70™: More power. More materials. More possible.",
-        copy: "The XRF Gen 2 now offers a true 70W RF tube — the most powerful RF source in any desktop-class laser. With nearly double the output of the 38W tube and pulse frequencies up to 50kHz, flat engraving runs at super high DPI without giving up speed, 3D relief comes out visibly deeper and more dimensional, grayscale renders sharper — and cutting capacity moves up a full class.",
+        title: "PowerMax 70™: More power. More materials. More possibilities.",
+        copy: "The XRF Gen2 now offers a true 70W RF tube—the most powerful RF source in any desktop-class laser. With nearly double the output of the 38W tube and pulse frequencies up to 50 kHz, it delivers ultra-high-DPI flat engraving without sacrificing speed, visibly deeper 3D relief, sharper grayscale and greater cutting capacity.",
         metrics: ["2,000 DPI", "0.07 mm spot", "Up to 30,000 h"],
         image: "capability-precision-main.webp",
       },
@@ -307,7 +307,7 @@ const capabilityChapters = [
       { title: "Output that stays consistent", copy: "A sealed, factory-calibrated optical path helps the beam arrive true and stay true through daily production.", image: "capability-output-consistent.webp" },
     ],
     proofs: [
-      { value: "Air cooled", label: "No water chiller", icon: Thermometer },
+      { value: "Air-cooled", label: "No water chiller", icon: Thermometer },
       { value: "≤ 0.01 mm", label: "Repeat positioning", icon: Target },
       { value: "2.5 in", label: "Standard focal lens", icon: CubeFocus },
       { value: "38W / 70W", label: "Equal-fit RF options", icon: Fire },
@@ -318,7 +318,7 @@ const capabilityChapters = [
     id: "motion",
     nav: "Speed & Motion",
     title: "Turn speed into finished output.",
-    summary: "Measured working performance, closed-loop control and all-steel, Hydra-derived axes keep fast jobs under feedback.",
+    summary: "Measured working performance, closed-loop control and all-steel, Hydra-derived axes keep fast jobs under closed-loop control.",
     speedProof: true,
     spotlights: [],
     support: [
@@ -343,7 +343,7 @@ const capabilityChapters = [
     ],
     support: [
       { title: "Precision in every pixel.", copy: "A high-precision camera captures every detail of the bed — grab contours, position with pinpoint alignment, and monitor your job remotely from anywhere.", image: "smart-workflow-see-full-bed.webp?v=20260803" },
-      { title: "\"One\" Touch of Innovation.", copy: "More than just one giant button — the intuitive OneLaser touch-screen puts precise head movement, parameter adjustment, and real-time machine status at your fingertips, with clear alarm and fault prompts the moment you need them.", image: "smart-workflow-control-machine.webp?v=20260803" },
+      { title: "\"One\" Touch of Innovation.", copy: "More than just one giant button — the intuitive OneLaser touchscreen puts precise head movement, parameter adjustment, and real-time machine status at your fingertips, with clear alarm and fault prompts the moment you need them.", image: "smart-workflow-control-machine.webp?v=20260803" },
     ],
     proofs: [
       { value: "12MP", label: "Top-cover camera · XFocus™ autofocus", icon: Camera },
@@ -361,14 +361,14 @@ const capabilityChapters = [
     spotlights: [
       {
         title: "Turn long-format work into one continuous job.",
-        copy: "The optional automatic Conveyor feeds material in sync with the job, stitching sections into one continuous result for signs, boards and repeating patterns.",
+        copy: "The optional automatic conveyor feeds material in sync with the job, stitching sections into one continuous result for signs, boards and repeating patterns.",
         metrics: ["Optional Conveyor", "Automatic feed", "Unlimited project length"],
         image: "business-expansion-continuous-job.webp",
       },
     ],
     support: [
-      { title: "One size fits most materials.", copy: "The 25.59\" × 13.78\" (650×350mm) honeycomb table gives you a true 24\" × 12\" engraving area — the most universal material size there is, so full sheets load and run without trimming.", image: "business-expansion-mainstream-stock.webp" },
-      { title: "Desktop footprint. Big-project capability.", copy: "Any object within 24 × 12 × 8.5 inches — paired with the rotary attachment — can be engraved on the XRF: a class-leading working envelope for a desktop machine. The optional Base Boost™ add-on unlocks the full 8.5 inches of height for tall workpieces, 40oz tumblers and rotary jobs, and opens straight-through access for stock up to 8.5 inches thick — long boards and oversized sheets simply slide through, with no length limit. All while improving airflow, debris management, visibility and access.", image: "business-expansion-optional-height.webp" },
+      { title: "One size fits most materials.", copy: "The 25.59\" × 13.78\" (650 × 350 mm) honeycomb table gives you a true 24\" × 12\" engraving area — the most universal material size there is, so full sheets load and run without trimming.", image: "business-expansion-mainstream-stock.webp" },
+      { title: "Desktop footprint. Big-project capability.", copy: "Any object within 24 × 12 × 8.5 inches — paired with the rotary attachment — can be engraved on the XRF: a class-leading working envelope for a desktop machine. The optional Base Boost™ add-on unlocks the full 8.5 inches of height for tall workpieces, 40 oz tumblers and rotary jobs, and opens straight-through access for stock up to 8.5 inches thick — long boards and oversized sheets simply slide through, with no length limit. All while improving airflow, debris management, visibility and access.", image: "business-expansion-optional-height.webp" },
     ],
     proofs: [
       { value: "24 × 12 in", label: "True work area", icon: Target },
@@ -386,7 +386,7 @@ const capabilityChapters = [
     spotlights: [
       {
         title: "Smart Air Assist™: Right pressure. Every mode. Automatically.",
-        copy: "The optional Smart Air Assist automatically switches between high-pressure cutting and low-pressure engraving. Clean, char-free cuts on thick stock; crisp, high-contrast engravings on delicate surfaces — leather, wood, acrylic and more, no manual adjustment needed.",
+        copy: "The optional Smart Air Assist automatically switches between high-pressure cutting and low-pressure engraving. It delivers clean, char-free cuts on thick stock and crisp, high-contrast engravings on delicate surfaces—including leather, wood and acrylic—with no manual adjustment needed.",
         metrics: ["Optional accessory", "Cut / engrave modes", "Automatic switching"],
         image: "reliability-safety-run-cleaner.webp",
       },
@@ -493,7 +493,7 @@ const specs = [
     title: "Laser source",
     rows: [
       ["RF metal tube", "38W / 70W"],
-      ["Cooling", "Air cooled"],
+      ["Cooling", "Air-cooled"],
       ["Rated lifespan", "Up to 30,000 hours"],
       ["Laser type", "Sealed CO₂ RF metal tube, 10.6 μm"],
     ],
@@ -574,7 +574,7 @@ const faqs = [
   },
   {
     q: "What support is available after purchase?",
-    a: "OneLaser provides US-based engineer support and a 3-2-1 warranty: three years on the frame, two years on electronics and one year on the laser source.",
+    a: "OneLaser provides U.S.-based engineer support and a 3-2-1 warranty: three years on the frame, two years on electronics and one year on the laser source.",
   },
   {
     q: "Does XRF Gen2 plug into a standard outlet?",
@@ -643,8 +643,8 @@ const competitorRows = [
   ["Max engraving speed", "1,300 mm/s", "600 mm/s"],
   ["Acceleration", "True 3.5G", "Not published on the P2 spec page"],
   ["Detail", "Up to 2,000 DPI · 0.07 mm laser dot", "0.01 mm processing precision"],
-  ["Cooling & source life", "Air cooled · up to 30,000 hours", "Water cooled · 6,000–8,000 hours"],
-  ["Warranty", "3-year frame · 2-year electronics · 1-year source", "12-month main components · 6-month laser tube"],
+  ["Cooling & source life", "Air-cooled · up to 30,000 hours", "Water-cooled · 6,000–8,000 hours"],
+  ["Warranty", "3-year frame · 2-year electronics · 1-year source", "12-month coverage on main components · 6-month coverage on the laser tube"],
   ["Starting price", "$3,999 for 38W Standalone", "$3,999 for P2 Standalone"],
 ];
 
@@ -705,7 +705,7 @@ function GenerationComparison() {
 
         <div className="generation-comparison__table-wrap">
           <table className="generation-comparison__table">
-            <caption className="sr-only">XRF Gen 1 and XRF Gen 2 feature comparison</caption>
+            <caption className="sr-only">XRF Gen 1 and XRF Gen2 feature comparison</caption>
             <colgroup>
               <col className="generation-comparison__feature-column" />
               <col className="generation-comparison__gen2-column" />
@@ -714,7 +714,7 @@ function GenerationComparison() {
             <thead>
               <tr>
                 <th scope="col"><span className="sr-only">Feature</span></th>
-                <th scope="col" className="generation-comparison__gen2-heading">XRF Gen 2</th>
+                <th scope="col" className="generation-comparison__gen2-heading">XRF Gen2</th>
                 <th scope="col" className="generation-comparison__gen1-heading">XRF Gen 1</th>
               </tr>
             </thead>
@@ -722,7 +722,7 @@ function GenerationComparison() {
               {generationComparisons.map((item) => (
                 <tr key={item.feature}>
                   <th scope="row">{item.feature}</th>
-                  <td className="generation-comparison__gen2" data-label="XRF Gen 2">{item.gen2}</td>
+                  <td className="generation-comparison__gen2" data-label="XRF Gen2">{item.gen2}</td>
                   <td className="generation-comparison__gen1" data-label="XRF Gen 1">{item.gen1}</td>
                 </tr>
               ))}
@@ -1463,7 +1463,7 @@ export function App() {
               </a>
               <a className="hero-assurance-card hero-assurance-card--link" href={SUPPORT_URL} target="_blank" rel="noreferrer" onClick={() => trackLead("onelaser-support", "hero_assurance_support")}>
                 <Headset size={28} weight="light" aria-hidden="true" />
-                <strong>100% U.S.-Based Engineers with Lifetime Support</strong>
+                <strong>100% U.S.-based Engineers with Lifetime Support</strong>
                 <ArrowUpRight className="hero-assurance-card__arrow" size={15} aria-hidden="true" />
               </a>
               <div className="hero-assurance-card">
@@ -1493,7 +1493,7 @@ export function App() {
               <li><strong>1,300 mm/s + True 3.5G:</strong> real working speed with 34,335 mm/s² acceleration.</li>
               <li><strong>Professional detail:</strong> up to 2,000 DPI, 0.07 mm laser dot and ≤ 0.01 mm repeat positioning.</li>
               <li><strong>Desktop production area:</strong> 23.6 × 11.8 in working bed with a full-frame top-cover camera.</li>
-              <li><strong>Class 1 design:</strong> enclosed processing with US-based engineer support.</li>
+              <li><strong>Class 1 design:</strong> enclosed processing with U.S.-based engineer support.</li>
             </ul>
 
             <div className="official-price">
@@ -1889,7 +1889,7 @@ export function App() {
             >
               <span><Play size={22} weight="fill" /></span>
               <strong>Book a live demo</strong>
-              <p>See XRF in action and ask questions around the work you want to make.</p>
+              <p>See XRF in action and ask questions about the work you want to make.</p>
               <i>Find a demo host <ArrowUpRight size={15} /></i>
             </a>
             <a
@@ -1916,7 +1916,7 @@ export function App() {
               <input type="hidden" name="contact[subject]" value="XRF Gen2 website lead" />
               <span><EnvelopeSimple size={22} weight="bold" /></span>
               <strong>Get the Gen2 launch kit</strong>
-              <p>Choose the launch offer, complete specification sheet, or a free engraving-sample request.</p>
+              <p>Choose whether you want launch-offer updates, the complete specification sheet, or a free engraving sample.</p>
               <label>
                 <span className="sr-only">Choose what you want to receive</span>
                 <select name="contact[body]" defaultValue="Send me the complete XRF Gen2 specification sheet">
@@ -2018,7 +2018,7 @@ export function App() {
           <YouTubeCover video={decisionVideos.facility} onPlay={setYoutubeVideo} />
           <div className="sales-video__copy">
             <span className="eyebrow">ENGINEERING YOU CAN SEE</span>
-            <h2>Built behind the product.</h2>
+            <h2>The capability behind the product.</h2>
             <p>See the production capability, quality process and parts readiness behind every OneLaser machine.</p>
             <dl className="comparison-proof">
               <div><dt>Facility</dt><dd>Expanded production capacity</dd></div>
@@ -2048,9 +2048,9 @@ export function App() {
               </article>
               <article className="ownership-support__card ownership-support__card--wide">
                 <div className="ownership-support__card-top"><Star size={26} weight="regular" aria-hidden="true" /><span>03</span></div>
-                <div className="ownership-support__lead"><h3>&quot;One&quot; Support: &quot;Real engineers. Real experience.&quot;</h3></div>
+                <div className="ownership-support__lead"><h3>One Support. Real engineers. Real experience.</h3></div>
                 <div className="ownership-support__details">
-                  <p>When you call OneLaser, you talk to a US-based engineer with an average of over five years in the laser industry — people who've built, tuned, and repaired these machines, not script-readers. That experience means faster answers, first-call solutions, and real support. You're not just buying a machine; you're buying the team behind it.</p>
+                  <p>When you call OneLaser, you talk to a U.S.-based engineer with more than five years of laser-industry experience on average—people who've built, tuned and repaired these machines, not script readers. That experience means faster answers, first-call solutions and real support. You're not just buying a machine; you're buying the team behind it.</p>
                 </div>
               </article>
             </div>
