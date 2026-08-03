@@ -685,6 +685,11 @@
     border-radius: 0;
   }
 
+  #capability-protection .capability-scroll__feature .capability-scroll__media--static > img {
+    object-fit: cover;
+    object-position: center;
+  }
+
   #capability-protection .capability-scroll__feature .capability-scroll__story-copy,
   #capability-protection .capability-scroll__support article > div {
     grid-template-rows: auto auto;
