@@ -2276,18 +2276,34 @@ img {
   align-items: center;
   justify-content: center;
   gap: 7px;
-  border: 1px solid var(--ink);
-  border-radius: 999px;
+  padding: 0 18px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: #f5f5f7;
   color: var(--ink);
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 750;
   text-align: center;
+  transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
-.hero-media-actions a:first-child {
-  border-color: var(--red);
-  background: var(--red);
-  color: #fff;
+.hero-media-actions a svg {
+  color: #8a8a90;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.hero-media-actions a:hover,
+.hero-media-actions a:focus-visible {
+  border-color: #d2d2d7;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+.hero-media-actions a:hover svg,
+.hero-media-actions a:focus-visible svg {
+  color: var(--ink);
+  transform: translate(2px, -2px);
 }
 
 .hero-assurance-grid {
