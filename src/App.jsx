@@ -11,6 +11,7 @@ import {
   Check,
   CubeFocus,
   CubeTransparent,
+  DownloadSimple,
   EnvelopeSimple,
   Factory,
   Fire,
@@ -1443,26 +1444,34 @@ export function App() {
               </button>
             </div>
             <div className="hero-media-actions" aria-label="XRF Gen2 information and consultation">
-              <a href={SALES_CALL_URL} target="_blank" rel="noreferrer" onClick={() => trackLead("sales-consultation-call", "book_free_call")}>Book A Free Call <ArrowUpRight size={15} /></a>
-              <a href={BROCHURE_URL} target="_blank" rel="noreferrer" onClick={() => trackLead("xrf-brochure", "download_brochure")}>Download Brochure <ArrowUpRight size={15} /></a>
+              <a className="hero-assurance-card hero-assurance-card--link" href={SALES_CALL_URL} target="_blank" rel="noreferrer" onClick={() => trackLead("sales-consultation-call", "book_free_call")}>
+                <Phone size={28} weight="light" aria-hidden="true" />
+                <strong>Book A Free Call</strong>
+                <ArrowUpRight className="hero-assurance-card__arrow" size={15} aria-hidden="true" />
+              </a>
+              <a className="hero-assurance-card hero-assurance-card--link" href={BROCHURE_URL} target="_blank" rel="noreferrer" onClick={() => trackLead("xrf-brochure", "download_brochure")}>
+                <DownloadSimple size={28} weight="light" aria-hidden="true" />
+                <strong>Download Brochure</strong>
+                <ArrowUpRight className="hero-assurance-card__arrow" size={15} aria-hidden="true" />
+              </a>
             </div>
             <div className="hero-assurance-grid" aria-label="Purchase and support benefits">
               <a className="hero-assurance-card hero-assurance-card--link" href={COMMUNITY_URL} target="_blank" rel="noreferrer" onClick={() => trackLead("onelaser-community", "hero_assurance_community")}>
-                <UsersThree size={32} weight="light" aria-hidden="true" />
+                <UsersThree size={28} weight="light" aria-hidden="true" />
                 <strong>Join the Best Community in Industry!</strong>
                 <ArrowUpRight className="hero-assurance-card__arrow" size={15} aria-hidden="true" />
               </a>
               <a className="hero-assurance-card hero-assurance-card--link" href={SUPPORT_URL} target="_blank" rel="noreferrer" onClick={() => trackLead("onelaser-support", "hero_assurance_support")}>
-                <Headset size={32} weight="light" aria-hidden="true" />
+                <Headset size={28} weight="light" aria-hidden="true" />
                 <strong>100% U.S.-Based Engineers with Lifetime Support</strong>
                 <ArrowUpRight className="hero-assurance-card__arrow" size={15} aria-hidden="true" />
               </a>
               <div className="hero-assurance-card">
-                <ShieldCheck size={32} weight="light" aria-hidden="true" />
+                <ShieldCheck size={28} weight="light" aria-hidden="true" />
                 <strong>3-2-1 Warranty: Unmatched Reliability</strong>
               </div>
               <div className="hero-assurance-card">
-                <Factory size={32} weight="light" aria-hidden="true" />
+                <Factory size={28} weight="light" aria-hidden="true" />
                 <strong>Designed, Engineered, and Perfected in the USA!</strong>
               </div>
             </div>
