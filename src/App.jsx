@@ -1469,7 +1469,7 @@ export function App() {
               <li><strong>38W / 70W RF tube:</strong> up to 30,000 hours, air-cooled.</li>
               <li><strong>1,200 mm/s + True 3.5G:</strong> 34,335 mm/s² acceleration.</li>
               <li><strong>Professional detail:</strong> 2,000 DPI · 0.07 mm dot · ≤ 0.01 mm repeat.</li>
-              <li><strong>Work area:</strong> 23.6 × 11.8 in bed · full-frame top camera.</li>
+              <li><strong>Work area:</strong> 24 × 12 in bed · full-frame top camera.</li>
             </ul>
 
             <div className="official-price">
