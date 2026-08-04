@@ -28,11 +28,19 @@ const currencyFormatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0,
 });
 
+const paymentFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+
 function ProductEconomics({ product, equipmentInvestment }) {
   const economics = economicsExamples[product.economicsId];
+  const monthlySales = economics.monthlySales ?? economicsAssumptions.monthlySales;
   const marginRate = Number.parseInt(economics.margin, 10) / 100;
   const profitPerItem = economics.unitPrice * marginRate;
-  const monthlyNetProfit = profitPerItem * economicsAssumptions.monthlySales;
+  const monthlyNetProfit = profitPerItem * monthlySales;
   const annualNetProfit = monthlyNetProfit * 12;
   const paybackMonths = equipmentInvestment / monthlyNetProfit;
 
@@ -56,7 +64,11 @@ function ProductEconomics({ product, equipmentInvestment }) {
           <div><dt>Example margin</dt><dd>{economics.margin}</dd></div>
         </dl>
         <p className="product-economics__assumptions">
-          Based on {economicsAssumptions.monthlySales} illustrative sales/mo. and a {currencyFormatter.format(equipmentInvestment)} equipment investment.
+          Based on {monthlySales} illustrative sales/mo. and a {currencyFormatter.format(equipmentInvestment)} equipment investment.
+        </p>
+        <p className="product-economics__payment">
+          <span>24-month price reference: {paymentFormatter.format(equipmentInvestment / 24)}/mo.</span>
+          <strong>vs. {currencyFormatter.format(monthlyNetProfit)} illustrative monthly net profit</strong>
         </p>
         <dl className="product-economics__details">
           <div><dt>Best suited for</dt><dd>{economics.bestFor}</dd></div>
@@ -273,7 +285,8 @@ function WorkflowBridge() {
 
 export function CommercialCapabilities({ asset, equipmentInvestment }) {
   return (
-    <section className="commercial-capabilities" id="capabilities" aria-label="XRF Gen2 commercial capabilities">
+    <section className="commercial-capabilities" id="roi-materials" aria-label="XRF Gen2 ROI and material opportunities">
+      <span className="commercial-capabilities__anchor" id="capabilities" aria-hidden="true" />
       <span className="commercial-capabilities__anchor" id="results" aria-hidden="true" />
       <ProductOpportunities asset={asset} equipmentInvestment={equipmentInvestment} />
       <WorkflowBridge />

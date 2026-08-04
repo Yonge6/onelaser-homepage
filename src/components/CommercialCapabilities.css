@@ -564,6 +564,28 @@
   line-height: 1.4;
 }
 
+.product-economics__payment {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: #fff7f4;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.product-economics__payment span {
+  color: var(--red);
+  font-weight: 800;
+}
+
+.product-economics__payment strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
 .product-economics__details {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

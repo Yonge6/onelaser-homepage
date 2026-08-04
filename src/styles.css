@@ -3693,6 +3693,17 @@ h3 { font-weight: 800; }
   font-weight: 650;
 }
 
+.spec-row > div {
+  display: grid;
+  gap: 4px;
+}
+
+.spec-row small {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
 .faq {
   display: grid;
   grid-template-columns: 0.75fr 1.25fr;

@@ -185,7 +185,7 @@ const rfAdvantages = [
     title: "Move faster without leaving quality behind.",
     copy: "RF energy switches on and off quickly, helping XRF hold clean edges and consistent contrast through real engraving work at up to 1,200 mm/s.",
     proof: "1,200 mm/s · True 3.5G",
-    image: "rf-faster-response.webp",
+    image: "rf-faster-response-v2.webp",
     alt: "XRF Gen2 motion system built for fast, controlled engraving",
     icon: ArrowClockwise,
   },
@@ -242,14 +242,17 @@ const decisionVideos = {
   },
 };
 
-const reviewVideos = [
-  decisionVideos.business,
-  decisionVideos.businessFit,
+const authorityVideos = [
   decisionVideos.performance,
   { id: "jNaj50MkKiE", title: "“I was wrong about OneLaser.”", channel: "Make or Break Shop", tag: "LONG-TERM PERSPECTIVE" },
   { id: "hwtVOBUCGxw", title: "Full XRF review", channel: "The Louisiana Hobby Guy", tag: "INDEPENDENT HANDS-ON REVIEW" },
   { id: "87PrP4Vigzo", title: "Before you buy the XRF", channel: "Velf Creations", tag: "COMPLETE BUYER OVERVIEW" },
   { id: "zHtW_nGm19U", title: "Pro desktop laser at a budget price", channel: "Make or Break Shop", tag: "CREATOR REVIEW" },
+];
+
+const customerStoryVideos = [
+  decisionVideos.business,
+  decisionVideos.businessFit,
 ];
 
 const speedMotionMaterials = [
@@ -387,7 +390,7 @@ const capabilityChapters = [
         title: "Smart Air Assist™: Right pressure. Every mode. Automatically.",
         copy: "The optional Smart Air Assist automatically switches between high-pressure cutting and low-pressure engraving. It delivers clean, char-free cuts on thick stock and crisp, high-contrast engravings on delicate surfaces—including leather, wood and acrylic—with no manual adjustment needed.",
         metrics: ["Optional accessory", "Cut / engrave modes", "Automatic switching"],
-        image: "reliability-safety-run-cleaner.webp",
+        image: "reliability-safety-run-cleaner-v2.webp",
       },
     ],
     feature: {
@@ -498,10 +501,10 @@ const specs = [
   {
     title: "Performance",
     rows: [
-      ["Real working speed", "1,200 mm/s"],
-      ["Real working acceleration", "3.5G"],
-      ["Positioning accuracy", "≤ 0.01 mm"],
-      ["Maximum scanning precision", "2,000 DPI"],
+      ["Real working speed", "1,200 mm/s", "Working result; compare test conditions, not headline travel-speed claims."],
+      ["Real working acceleration", "3.5G", "Working acceleration; confirm material, path and test conditions."],
+      ["Positioning accuracy", "≤ 0.01 mm", "Repeat positioning; distinct from laser spot size and image DPI."],
+      ["Maximum scanning precision", "2,000 DPI", "Output resolution; distinct from mechanical positioning accuracy."],
     ],
   },
   {
@@ -588,16 +591,13 @@ const faqs = [
 ];
 
 const journeySections = [
-  { id: "capabilities", label: "What you can make" },
-  { id: "materials", label: "Materials" },
-  { id: "rf-advantages", label: "Why RF" },
-  { id: "generation-comparison", label: "Gen2 upgrade" },
-  { id: "capability-system", label: "Features" },
-  { id: "software", label: "Software" },
+  { id: "why-xrf", label: "Why XRF" },
+  { id: "features", label: "Features" },
+  { id: "roi-materials", label: "ROI & Materials" },
   { id: "specs", label: "Specs" },
+  { id: "compare", label: "Compare" },
   { id: "reviews", label: "Reviews" },
-  { id: "support", label: "Support" },
-  { id: "faq", label: "FAQ" },
+  { id: "faq-support", label: "FAQ & Support" },
 ];
 
 const consultationFeedback = [
@@ -653,10 +653,10 @@ function SpecGroup({ group }) {
       </button>
       {open && (
         <div className="spec-group__rows">
-          {group.rows.map(([label, value]) => (
+          {group.rows.map(([label, value, context]) => (
             <div className="spec-row" key={label}>
               <span>{label}</span>
-              <strong>{value}</strong>
+              <div><strong>{value}</strong>{context && <small>{context}</small>}</div>
             </div>
           ))}
         </div>
@@ -850,8 +850,8 @@ function CapabilityBrowser({ onPlay }) {
   }, [activeChapter]);
 
   useEffect(() => {
-    if (window.location.hash !== "#capability-system") return;
-    const alignToCapabilities = () => jumpToNode(document.getElementById("capability-system"), 64);
+    if (!["#features", "#capability-system"].includes(window.location.hash)) return;
+    const alignToCapabilities = () => jumpToNode(document.getElementById("features"), 64);
     const timeout = window.setTimeout(alignToCapabilities, 350);
     window.addEventListener("load", alignToCapabilities, { once: true });
     return () => {
@@ -866,7 +866,8 @@ function CapabilityBrowser({ onPlay }) {
   }
 
   return (
-    <section className="capability-scroll" id="capability-system">
+    <section className="capability-scroll" id="features">
+      <span className="commercial-capabilities__anchor" id="capability-system" aria-hidden="true" />
       <div className="capability-scroll__layout">
         <nav
           className="capability-scroll__nav"
@@ -1015,7 +1016,7 @@ export function App() {
   const [selectedPackageId, setSelectedPackageId] = useState("standalone");
   const [purchasePower, setPurchasePower] = useState("38W");
   const [selectedPurchaseAccessories, setSelectedPurchaseAccessories] = useState([]);
-  const [activeJourneySection, setActiveJourneySection] = useState("capabilities");
+  const [activeJourneySection, setActiveJourneySection] = useState("why-xrf");
   const [journeyVisible, setJourneyVisible] = useState(false);
   const [videoModal, setVideoModal] = useState(null);
   const [youtubeVideo, setYoutubeVideo] = useState(null);
@@ -1080,7 +1081,7 @@ export function App() {
         const node = document.getElementById(section.id);
         const absoluteTop = node ? node.getBoundingClientRect().top + currentScrollY : Number.POSITIVE_INFINITY;
         return absoluteTop <= readingLine ? section.id : active;
-      }, "capabilities");
+      }, "why-xrf");
       setActiveJourneySection(currentSection);
       if (currentScrollY < 480) {
         setTopButtonState("hidden");
@@ -1601,7 +1602,7 @@ export function App() {
           </div>
         </section>
 
-        <section className="feature-overview" id="features" data-reveal>
+        <section className="feature-overview" id="why-xrf" data-reveal>
           <img src={asset("feature-overview-hero.webp")} alt="OneLaser XRF Gen2 in a working studio with finished products and brand proof" />
           <img src={asset("xrf-profit-products-web.webp")} alt="Premium products and example business outputs made with the OneLaser XRF Gen2" />
           <img src={asset("feature-overview-capabilities-v2.webp")} alt="XRF Gen2 feature overview covering RF precision, power options, motion, workflow, safety and support" />
@@ -1623,80 +1624,31 @@ export function App() {
           </button>
         </section>
 
-        <CommercialCapabilities asset={asset} equipmentInvestment={selectedPurchasePackage.price} />
-
-        <section className="section materials" id="materials" data-reveal>
-          <div className="section-heading section-heading--stack">
-            <span className="eyebrow">MATERIALS THAT BECOME PRODUCTS</span>
-            <h2>One platform. More ways to create value.</h2>
-            <p>Explore real product categories XRF Gen2 can turn into premium, repeatable work for gifts, retail and custom orders.</p>
+        <section className="review-proof authority-proof" aria-labelledby="authority-proof-title" data-reveal>
+          <div className="review-proof__header">
+            <div className="section-heading section-heading--stack">
+              <span className="eyebrow">INDUSTRY &amp; MEDIA VALIDATION</span>
+              <h2 id="authority-proof-title">Why professionals take XRF seriously.</h2>
+              <p>Start with independent hands-on evaluations and performance testing from experienced laser reviewers.</p>
+            </div>
           </div>
-          <div
-            className="material-gallery"
-            role="region"
-            aria-roledescription="carousel"
-            aria-label="XRF Gen2 finished-product material gallery"
-            onMouseEnter={() => setMaterialPaused(true)}
-            onMouseLeave={resumeMaterialAutoplay}
-            onFocusCapture={() => setMaterialPaused(true)}
-            onBlurCapture={(event) => {
-              if (!event.currentTarget.contains(event.relatedTarget)) resumeMaterialAutoplay();
-            }}
-            onTouchStart={(event) => {
-              materialTouchStartX.current = event.changedTouches[0]?.clientX ?? null;
-              setMaterialPaused(true);
-            }}
-            onTouchEnd={(event) => {
-              const endX = event.changedTouches[0]?.clientX;
-              if (materialTouchStartX.current !== null && endX !== undefined) {
-                const distance = endX - materialTouchStartX.current;
-                if (Math.abs(distance) > 48) selectMaterial(activeMaterial + (distance > 0 ? -1 : 1));
-              }
-              materialTouchStartX.current = null;
-              resumeMaterialAutoplay();
-            }}
-            onTouchCancel={() => {
-              materialTouchStartX.current = null;
-              resumeMaterialAutoplay();
-            }}
-          >
-            <div id="material-gallery-stage" className="material-gallery__stage" aria-live={materialPaused ? "polite" : "off"}>
-              <img key={materialCategories[activeMaterial].id} src={asset(materialCategories[activeMaterial].image)} alt={`${materialCategories[activeMaterial].label} products created for XRF Gen2 material proof`} />
-              <div className="material-gallery__copy">
-                <span>{materialCategories[activeMaterial].label}</span>
-                <h3>{materialCategories[activeMaterial].title}</h3>
-                <p>{materialCategories[activeMaterial].copy}</p>
-                <strong>{materialCategories[activeMaterial].proof}</strong>
-              </div>
-            </div>
-            <div className="material-tabs" role="tablist" aria-label="Explore XRF Gen2 material categories">
-              {materialCategories.map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <button
-                    type="button"
-                    role="tab"
-                    aria-selected={activeMaterial === index}
-                    aria-controls="material-gallery-stage"
-                    className={activeMaterial === index ? "is-active" : ""}
-                    key={item.id}
-                    ref={(node) => { materialTabRefs.current[index] = node; }}
-                    onClick={() => selectMaterial(index)}
-                    onKeyDown={(event) => handleMaterialKeyDown(event, index)}
-                  >
-                    <span className="material-tab__label"><Icon size={23} weight="regular" aria-hidden="true" /><span>{item.label}</span></span>
-                    <small>{String(index + 1).padStart(2, "0")}</small>
-                  </button>
-                );
-              })}
-            </div>
-            <div className="material-progress" aria-hidden="true">
-              <span
-                key={`${activeMaterial}-${materialTimerEpoch}`}
-                className={materialPaused ? "is-paused" : ""}
-                style={{ "--material-progress-duration": `${MATERIAL_AUTOPLAY_DELAY}ms` }}
-              />
-            </div>
+          <div className="review-proof__rail">
+            {authorityVideos.map((video, index) => <ReviewVideoCard video={video} onPlay={setYoutubeVideo} index={index} total={authorityVideos.length} key={video.id} />)}
+          </div>
+        </section>
+
+        <section className="sales-video sales-video--facility authority-facility" data-reveal>
+          <YouTubeCover video={decisionVideos.facility} onPlay={setYoutubeVideo} />
+          <div className="sales-video__copy">
+            <span className="eyebrow">ENGINEERING YOU CAN SEE</span>
+            <h2>The capability behind the product.</h2>
+            <p>See the production capability, quality process and parts readiness behind every OneLaser machine.</p>
+            <dl className="comparison-proof">
+              <div><dt>Facility</dt><dd>Expanded production capacity</dd></div>
+              <div><dt>Assembly</dt><dd>Built and tuned by OneLaser</dd></div>
+              <div><dt>Quality control</dt><dd>Checked before delivery</dd></div>
+              <div><dt>Parts readiness</dt><dd>Support beyond setup</dd></div>
+            </dl>
           </div>
         </section>
 
@@ -1842,6 +1794,83 @@ export function App() {
           </div>
         </section>
 
+        <CommercialCapabilities asset={asset} equipmentInvestment={selectedPurchasePackage.price} />
+
+        <section className="section materials" id="materials" data-reveal>
+          <div className="section-heading section-heading--stack">
+            <span className="eyebrow">MATERIALS THAT BECOME BUSINESSES</span>
+            <h2>From material choice to sellable work.</h2>
+            <p>Explore material-led product categories through the orders, pricing potential and repeatable workflows they can support.</p>
+          </div>
+          <div
+            className="material-gallery"
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="XRF Gen2 finished-product material gallery"
+            onMouseEnter={() => setMaterialPaused(true)}
+            onMouseLeave={resumeMaterialAutoplay}
+            onFocusCapture={() => setMaterialPaused(true)}
+            onBlurCapture={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) resumeMaterialAutoplay();
+            }}
+            onTouchStart={(event) => {
+              materialTouchStartX.current = event.changedTouches[0]?.clientX ?? null;
+              setMaterialPaused(true);
+            }}
+            onTouchEnd={(event) => {
+              const endX = event.changedTouches[0]?.clientX;
+              if (materialTouchStartX.current !== null && endX !== undefined) {
+                const distance = endX - materialTouchStartX.current;
+                if (Math.abs(distance) > 48) selectMaterial(activeMaterial + (distance > 0 ? -1 : 1));
+              }
+              materialTouchStartX.current = null;
+              resumeMaterialAutoplay();
+            }}
+            onTouchCancel={() => {
+              materialTouchStartX.current = null;
+              resumeMaterialAutoplay();
+            }}
+          >
+            <div id="material-gallery-stage" className="material-gallery__stage" aria-live={materialPaused ? "polite" : "off"}>
+              <img key={materialCategories[activeMaterial].id} src={asset(materialCategories[activeMaterial].image)} alt={`${materialCategories[activeMaterial].label} products created for XRF Gen2 material proof`} />
+              <div className="material-gallery__copy">
+                <span>{materialCategories[activeMaterial].label}</span>
+                <h3>{materialCategories[activeMaterial].title}</h3>
+                <p>{materialCategories[activeMaterial].copy}</p>
+                <strong>{materialCategories[activeMaterial].proof}</strong>
+              </div>
+            </div>
+            <div className="material-tabs" role="tablist" aria-label="Explore XRF Gen2 material categories">
+              {materialCategories.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={activeMaterial === index}
+                    aria-controls="material-gallery-stage"
+                    className={activeMaterial === index ? "is-active" : ""}
+                    key={item.id}
+                    ref={(node) => { materialTabRefs.current[index] = node; }}
+                    onClick={() => selectMaterial(index)}
+                    onKeyDown={(event) => handleMaterialKeyDown(event, index)}
+                  >
+                    <span className="material-tab__label"><Icon size={23} weight="regular" aria-hidden="true" /><span>{item.label}</span></span>
+                    <small>{String(index + 1).padStart(2, "0")}</small>
+                  </button>
+                );
+              })}
+            </div>
+            <div className="material-progress" aria-hidden="true">
+              <span
+                key={`${activeMaterial}-${materialTimerEpoch}`}
+                className={materialPaused ? "is-paused" : ""}
+                style={{ "--material-progress-duration": `${MATERIAL_AUTOPLAY_DELAY}ms` }}
+              />
+            </div>
+          </div>
+        </section>
+
         <section className="section specs" id="specs" data-reveal>
           <div className="section-heading section-heading--stack">
             <span className="eyebrow">COMPLETE DETAILS</span><h2>Specifications.</h2>
@@ -1850,6 +1879,71 @@ export function App() {
           </div>
           <div className="spec-list">
             {specs.map((group) => <SpecGroup group={group} key={group.title} />)}
+          </div>
+        </section>
+
+        <section className="sales-video sales-video--competitor" id="compare" data-reveal>
+          <span className="commercial-capabilities__anchor" id="comparison-proof" aria-hidden="true" />
+          <YouTubeCover video={decisionVideos.competitor} onPlay={setYoutubeVideo} />
+          <div className="sales-video__copy">
+            <span className="eyebrow">A FAIR SIDE-BY-SIDE</span>
+            <h2>Considering an xTool P2? Watch this first.</h2>
+            <p>Compare published specifications directly—source, speed, acceleration, detail, warranty and price.</p>
+            <div className="measured-comparison" role="region" aria-label="OneLaser XRF and xTool P2 published specification comparison" tabIndex="0">
+              <table>
+                <thead>
+                  <tr><th scope="col">Published specification</th><th scope="col">OneLaser XRF Gen2</th><th scope="col">xTool P2</th></tr>
+                </thead>
+                <tbody>
+                  {competitorRows.map(([label, xrf, p2]) => (
+                    <tr key={label}><th scope="row">{label}</th><td>{xrf}</td><td>{p2}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="measured-comparison__note">
+              Source basis: official OneLaser and xTool product/support pages. Published figures may use different test conditions; confirm current configurations and source pages before relying on a comparison.
+            </p>
+          </div>
+        </section>
+
+        <section className="review-proof" id="reviews" aria-labelledby="review-proof-title" data-reveal>
+          <div className="review-proof__header">
+            <div className="section-heading section-heading--stack">
+              <span className="eyebrow">CUSTOMER SUCCESS · OWNER STORIES</span>
+              <h2 id="review-proof-title">Real businesses. Real results.</h2>
+              <p>See how business owners use XRF in their workflow, then hear directly from customers who bought and built with it.</p>
+            </div>
+            <div className="review-proof__controls" aria-label="Browse customer stories">
+              <button type="button" onClick={() => scrollReviewVideos(-1)} aria-label="Show previous customer story"><CaretLeft size={22} /></button>
+              <button type="button" onClick={() => scrollReviewVideos(1)} aria-label="Show more customer stories"><CaretRight size={22} /></button>
+            </div>
+          </div>
+          <div className="review-proof__rail" ref={reviewVideoRailRef}>
+            {customerStoryVideos.map((video, index) => <ReviewVideoCard video={video} onPlay={setYoutubeVideo} index={index} total={customerStoryVideos.length} key={video.id} />)}
+          </div>
+          <div className="consultation-feedback" aria-label="OneLaser XRF owner reviews">
+            <div className="consultation-feedback__intro">
+              <div>
+                <strong>What XRF owners say.</strong>
+                <span>Customer feedback published by OneLaser</span>
+              </div>
+              <div className="consultation-feedback__controls" aria-label="Browse XRF owner reviews">
+                <button type="button" onClick={() => scrollConsultationFeedback(-1)} aria-label="Show previous XRF owner reviews"><CaretLeft size={20} /></button>
+                <button type="button" onClick={() => scrollConsultationFeedback(1)} aria-label="Show more XRF owner reviews"><CaretRight size={20} /></button>
+              </div>
+            </div>
+            <div className="consultation-feedback__grid" ref={consultationFeedbackRailRef}>
+              {consultationFeedback.map((item) => (
+                <blockquote key={item.name}>
+                  <div className="consultation-feedback__stars" aria-label="5 out of 5 stars">
+                    {[0, 1, 2, 3, 4].map((star) => <Star size={14} weight="fill" key={star} />)}
+                  </div>
+                  <p>“{item.quote}”</p>
+                  <footer><strong>{item.name}</strong><span>{item.role}</span></footer>
+                </blockquote>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -1930,86 +2024,8 @@ export function App() {
           </a>
         </section>
 
-        <section className="review-proof" id="reviews" aria-labelledby="review-proof-title" data-reveal>
-          <div className="review-proof__header">
-            <div className="section-heading section-heading--stack">
-              <span className="eyebrow">CUSTOMER SUCCESS · INDEPENDENT REVIEWS</span>
-              <h2 id="review-proof-title">Real stories. Real results.</h2>
-              <p>Hear from customers building with XRF and creators who tested OneLaser machines in real workshops.</p>
-            </div>
-            <div className="review-proof__controls" aria-label="Browse creator reviews">
-              <button type="button" onClick={() => scrollReviewVideos(-1)} aria-label="Show previous creator reviews"><CaretLeft size={22} /></button>
-              <button type="button" onClick={() => scrollReviewVideos(1)} aria-label="Show more creator reviews"><CaretRight size={22} /></button>
-            </div>
-          </div>
-          <div className="review-proof__rail" ref={reviewVideoRailRef}>
-            {reviewVideos.map((video, index) => <ReviewVideoCard video={video} onPlay={setYoutubeVideo} index={index} total={reviewVideos.length} key={video.id} />)}
-          </div>
-          <div className="consultation-feedback" aria-label="OneLaser XRF owner reviews">
-            <div className="consultation-feedback__intro">
-              <div>
-                <strong>What XRF owners say.</strong>
-                <span>Customer feedback published by OneLaser</span>
-              </div>
-              <div className="consultation-feedback__controls" aria-label="Browse XRF owner reviews">
-                <button type="button" onClick={() => scrollConsultationFeedback(-1)} aria-label="Show previous XRF owner reviews"><CaretLeft size={20} /></button>
-                <button type="button" onClick={() => scrollConsultationFeedback(1)} aria-label="Show more XRF owner reviews"><CaretRight size={20} /></button>
-              </div>
-            </div>
-            <div className="consultation-feedback__grid" ref={consultationFeedbackRailRef}>
-              {consultationFeedback.map((item) => (
-                <blockquote key={item.name}>
-                  <div className="consultation-feedback__stars" aria-label="5 out of 5 stars">
-                    {[0, 1, 2, 3, 4].map((star) => <Star size={14} weight="fill" key={star} />)}
-                  </div>
-                  <p>“{item.quote}”</p>
-                  <footer><strong>{item.name}</strong><span>{item.role}</span></footer>
-                </blockquote>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="sales-video sales-video--competitor" id="comparison-proof" data-reveal>
-          <YouTubeCover video={decisionVideos.competitor} onPlay={setYoutubeVideo} />
-          <div className="sales-video__copy">
-            <span className="eyebrow">A FAIR SIDE-BY-SIDE</span>
-            <h2>Considering an xTool P2? Watch this first.</h2>
-            <p>Compare published specifications directly—source, speed, acceleration, detail, warranty and price.</p>
-            <div className="measured-comparison" role="region" aria-label="OneLaser XRF and xTool P2 published specification comparison" tabIndex="0">
-              <table>
-                <thead>
-                  <tr><th scope="col">Published specification</th><th scope="col">OneLaser XRF Gen2</th><th scope="col">xTool P2</th></tr>
-                </thead>
-                <tbody>
-                  {competitorRows.map(([label, xrf, p2]) => (
-                    <tr key={label}><th scope="row">{label}</th><td>{xrf}</td><td>{p2}</td></tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <p className="measured-comparison__note">
-              Published specifications checked against official OneLaser and xTool product/support pages. Confirm current package contents before purchase.
-            </p>
-          </div>
-        </section>
-
-        <section className="sales-video sales-video--facility" data-reveal>
-          <YouTubeCover video={decisionVideos.facility} onPlay={setYoutubeVideo} />
-          <div className="sales-video__copy">
-            <span className="eyebrow">ENGINEERING YOU CAN SEE</span>
-            <h2>The capability behind the product.</h2>
-            <p>See the production capability, quality process and parts readiness behind every OneLaser machine.</p>
-            <dl className="comparison-proof">
-              <div><dt>Facility</dt><dd>Expanded production capacity</dd></div>
-              <div><dt>Assembly</dt><dd>Built and tuned by OneLaser</dd></div>
-              <div><dt>Quality control</dt><dd>Checked before delivery</dd></div>
-              <div><dt>Parts readiness</dt><dd>Support beyond setup</dd></div>
-            </dl>
-          </div>
-        </section>
-
-        <section className="ownership-support" id="support" data-reveal>
+        <section className="ownership-support" id="faq-support" data-reveal>
+          <span className="commercial-capabilities__anchor" id="support" aria-hidden="true" />
           <div className="ownership-support__inner">
             <div className="ownership-support__grid">
               <article className="ownership-support__card">
