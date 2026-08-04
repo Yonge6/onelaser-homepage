@@ -13,7 +13,6 @@ import {
   CubeTransparent,
   DownloadSimple,
   EnvelopeSimple,
-  Factory,
   Fire,
   Handbag,
   Headset,
@@ -32,7 +31,6 @@ import {
   Thermometer,
   Trash,
   Tree,
-  UsersThree,
   WifiHigh,
   Wine,
   X,
@@ -46,17 +44,18 @@ const SHOP_PAY_CHECKOUT_URL = "https://shop.app/checkout/74787487778/cn/hWNEuAMT
 const MORE_PAYMENT_OPTIONS_URL = "https://www.1laser.com/checkouts/cn/hWNFDEgkFFn7mUPFRRYyKSUk/en-us?_r=AQABaYabrgt4_zE5xCBjG54Ntjdc4M8Mb9-Rj995_l3u&skip_shop_pay=true";
 const SALES_CALL_URL = "https://www.1laser.com/products/sales-consultation-call";
 const BROCHURE_URL = "https://webforms.pipedrive.com/f/ckzBDiOdWxvKiAs4kk7LLCTIRbPsdg46WE8RFicSySaVdIPVjKrCYkIjSZEgd9bdM7";
-const COMMUNITY_URL = "https://www.1laser.com/pages/laser-engraving-community";
 const SUPPORT_URL = "https://www.1laser.com/pages/contact-us";
 
-const media = Array.from({ length: 23 }, (_, index) => {
-  const number = String(index + 1).padStart(2, "0");
-  return {
-    src: asset(`xrf-hero-${number}.webp`),
-    alt: `OneLaser XRF Gen2 product view ${number}`,
-    label: `Product ${number}`,
-  };
-});
+const media = Array.from({ length: 23 }, (_, index) => index + 1)
+  .filter((number) => ![16, 17, 18].includes(number))
+  .map((mediaNumber) => {
+    const number = String(mediaNumber).padStart(2, "0");
+    return {
+      src: asset(`xrf-hero-${number}.webp`),
+      alt: `OneLaser XRF Gen2 product view ${number}`,
+      label: `Product ${number}`,
+    };
+  });
 
 const heroOverviewVideo = {
   src: asset("xrf-overview-video-cover.jpg"),
@@ -1432,7 +1431,7 @@ export function App() {
                 <span><Play size={16} weight="fill" /></span>
               </button>
             </div>
-            <div className="hero-media-actions" aria-label="XRF Gen2 information and consultation">
+            <div className="hero-assurance-grid" aria-label="XRF Gen2 information, consultation, and support benefits">
               <a className="hero-assurance-card hero-assurance-card--link" href={SALES_CALL_URL} target="_blank" rel="noreferrer" onClick={() => trackLead("sales-consultation-call", "book_free_call")}>
                 <Phone size={28} weight="light" aria-hidden="true" />
                 <strong>Book A Free Call</strong>
@@ -1443,13 +1442,6 @@ export function App() {
                 <strong>Download Brochure</strong>
                 <ArrowUpRight className="hero-assurance-card__arrow" size={15} aria-hidden="true" />
               </a>
-            </div>
-            <div className="hero-assurance-grid" aria-label="Purchase and support benefits">
-              <a className="hero-assurance-card hero-assurance-card--link" href={COMMUNITY_URL} target="_blank" rel="noreferrer" onClick={() => trackLead("onelaser-community", "hero_assurance_community")}>
-                <UsersThree size={28} weight="light" aria-hidden="true" />
-                <strong>Join the Best Community in Industry!</strong>
-                <ArrowUpRight className="hero-assurance-card__arrow" size={15} aria-hidden="true" />
-              </a>
               <a className="hero-assurance-card hero-assurance-card--link" href={SUPPORT_URL} target="_blank" rel="noreferrer" onClick={() => trackLead("onelaser-support", "hero_assurance_support")}>
                 <Headset size={28} weight="light" aria-hidden="true" />
                 <strong>100% U.S.-based Engineers with Lifetime Support</strong>
@@ -1457,11 +1449,7 @@ export function App() {
               </a>
               <div className="hero-assurance-card">
                 <ShieldCheck size={28} weight="light" aria-hidden="true" />
-                <strong>3-2-1 Warranty: Unmatched Reliability</strong>
-              </div>
-              <div className="hero-assurance-card">
-                <Factory size={28} weight="light" aria-hidden="true" />
-                <strong>Designed, Engineered, and Perfected in the USA!</strong>
+                <strong>Max 3-Year Warranty: Unmatched Reliability</strong>
               </div>
             </div>
           </div>
