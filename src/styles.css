@@ -2050,7 +2050,10 @@ img {
   font-size: 12px;
 }
 
-.financing-line > strong { font-weight: 760; }
+.financing-line > strong {
+  font-size: 18px;
+  font-weight: 760;
+}
 .financing-line a {
   display: inline-flex;
   align-items: center;

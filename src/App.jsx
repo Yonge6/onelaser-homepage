@@ -1484,7 +1484,7 @@ export function App() {
               </div>
             </div>
             <div className="financing-line">
-              <strong>0% APR · or as low as $194/mo with Affirm</strong>
+              <strong>$194/mo. for 60 months</strong>
               <a href="https://www.1laser.com/pages/financing" target="_blank" rel="noreferrer">See if you qualify <CaretRight size={15} /></a>
             </div>
             <div className="financing-more">
