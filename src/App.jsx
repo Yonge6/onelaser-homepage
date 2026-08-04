@@ -424,7 +424,6 @@ const purchasePackages = [
     price: 3999,
     msrp: 6499,
     badge: "CURRENT OFFER",
-    description: "38W RF desktop laser with 1,200 mm/s motion, True 3.5G acceleration and a 24 × 12 in workspace.",
     detail: "The King of RF Desktop Lasers",
   },
   {
@@ -433,7 +432,6 @@ const purchasePackages = [
     price: 4499,
     msrp: 6999,
     badge: "EXPANDED HEIGHT",
-    description: "Adds the optional Riser Base for taller objects and expanded rotary workflows.",
     detail: "Includes optional Riser Base",
   },
 ];
@@ -1526,6 +1524,9 @@ export function App() {
               <div className="official-packages">
                 {purchasePackages.map((item) => {
                   const selected = selectedPackageId === item.id;
+                  const powerAdjustment = purchasePower === "70W" ? 500 : 0;
+                  const packagePrice = item.price + powerAdjustment;
+                  const packageMsrp = item.msrp + powerAdjustment;
                   return (
                     <button
                       type="button"
@@ -1539,9 +1540,12 @@ export function App() {
                     >
                       <div className="official-package__top">
                         <span><small>{item.badge}</small><strong>{item.name}</strong></span>
-                        <span><strong>{formatMoney(item.price + (purchasePower === "70W" ? 500 : 0))}</strong><del>{formatMoney(item.msrp + (purchasePower === "70W" ? 500 : 0))}</del></span>
+                        <span>
+                          <strong>{formatMoney(packagePrice)}</strong>
+                          <span className="official-package__monthly">{formatMoney(packagePrice / 24)}/mo. for 24 months</span>
+                          <em>Save {formatMoney(packageMsrp - packagePrice)}</em>
+                        </span>
                       </div>
-                      <p>{item.description.replace("38W", purchasePower)}</p>
                       <div className="official-package__detail"><Check size={17} weight="bold" /><span>{item.detail}</span></div>
                     </button>
                   );

@@ -2151,7 +2151,7 @@ img {
 
 .official-package {
   width: 100%;
-  padding: 20px;
+  padding: 16px;
   border: 1px solid var(--line);
   border-radius: 12px;
   background: #fff;
@@ -2161,8 +2161,8 @@ img {
 
 .official-package:hover { border-color: #aaa9a4; }
 .official-package.is-selected { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
-.official-package__top { display: flex; justify-content: space-between; gap: 24px; }
-.official-package__top > span { display: flex; flex-direction: column; align-items: flex-start; gap: 7px; }
+.official-package__top { display: flex; justify-content: space-between; gap: 16px; }
+.official-package__top > span { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
 .official-package__top > span:last-child { align-items: flex-end; }
 .official-package__top small {
   display: inline-block;
@@ -2177,9 +2177,9 @@ img {
 .official-package.is-selected .official-package__top small { background: var(--red); color: #fff; }
 .official-package__top strong { font-size: 16px; font-weight: 800; }
 .official-package__top > span:last-child strong { color: var(--red); font-size: 18px; }
-.official-package__top del { color: #989894; font-size: 12px; }
-.official-package > p { margin: 16px 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
-.official-package__detail { display: flex; align-items: center; gap: 8px; padding-top: 13px; border-top: 1px solid var(--line); font-size: 12px; font-weight: 700; }
+.official-package__monthly { color: var(--muted); font-size: 12px; font-weight: 650; white-space: nowrap; }
+.official-package__top em { padding: 4px 7px; border-radius: 5px; background: var(--red); color: #fff; font-size: 11px; font-style: normal; font-weight: 800; }
+.official-package__detail { display: flex; align-items: center; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 12px; font-weight: 700; }
 .official-package__detail svg { color: var(--red); }
 
 .purchase-section-heading--accessories { margin-top: 28px; }
@@ -8487,6 +8487,7 @@ body { color: var(--ink); }
 
 .official-price__msrp > strong {
   font-size: 24px;
+  font-weight: 800;
 }
 
 .purchase-total > strong,
