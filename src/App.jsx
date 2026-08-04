@@ -1482,7 +1482,7 @@ export function App() {
               </div>
             </div>
             <div className="financing-line">
-              <strong><span>$194/mo.</span> for 24 months</strong>
+              <strong><span>$166.63/mo.</span> for 24 months</strong>
               <a href="https://www.1laser.com/pages/financing" target="_blank" rel="noreferrer">See if you qualify <CaretRight size={15} /></a>
             </div>
             <div className="financing-more">
@@ -1497,7 +1497,7 @@ export function App() {
               <div className="purchase-power-options">
                 {[
                   { id: "38W", title: "38W RF", copy: "Fine detail & everyday production" },
-                  { id: "70W", title: "70W RF", copy: "Deeper relief & higher throughput", badge: "NEW" },
+                  { id: "70W", title: "70W RF", copy: "Deeper relief & higher throughput" },
                 ].map((item) => {
                   const selected = purchasePower === item.id;
                   return (
