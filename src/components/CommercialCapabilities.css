@@ -519,6 +519,16 @@
   background: #f5f5f7;
 }
 
+.product-economics__metrics > .product-economics__payback {
+  grid-column: 1 / -1;
+  display: flex;
+  min-height: 62px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #fff2ee;
+}
+
 .product-economics dt {
   color: var(--muted);
   font-size: 12px;
@@ -531,6 +541,27 @@
   color: var(--ink);
   font-size: 19px;
   font-weight: 800;
+}
+
+.product-economics__metrics .product-economics__payback dd {
+  flex: 0 0 auto;
+  color: var(--red);
+  font-size: 28px;
+  line-height: 1;
+}
+
+.product-economics__payback dd small {
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.product-economics__assumptions {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
 .product-economics__details {

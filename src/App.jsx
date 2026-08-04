@@ -367,7 +367,7 @@ const capabilityChapters = [
     ],
     support: [
       { title: "One size fits most materials.", copy: "The 25.59\" × 13.78\" (650 × 350 mm) honeycomb table gives you a true 24\" × 12\" engraving area — the most universal material size there is, so full sheets load and run without trimming.", image: "business-expansion-mainstream-stock.webp" },
-      { title: "Desktop footprint. Big-project capability.", copy: "Any object within 24 × 12 × 8.5 inches — paired with the rotary attachment — can be engraved on the XRF: a class-leading working envelope for a desktop machine. The optional Base Boost™ add-on unlocks the full 8.5 inches of height for tall workpieces, 40 oz tumblers and rotary jobs, and opens straight-through access for stock up to 8.5 inches thick — long boards and oversized sheets simply slide through, with no length limit. All while improving airflow, debris management, visibility and access.", image: "business-expansion-optional-height.webp" },
+      { title: "Desktop footprint. Big-project capability.", copy: "Any object within 24 × 12 × 8.5 inches — paired with the rotary attachment — can be engraved on the XRF: a class-leading working envelope for a desktop machine. The optional Base Boost™ add-on unlocks the full 8.5 inches of height for tall workpieces, 40 oz tumblers and rotary jobs, and opens straight-through access for stock up to 8.5 inches thick — long boards and oversized sheets simply slide through, with no length limit. All while improving airflow, debris management, visibility and access.", image: "business-expansion-optional-height-v2.webp" },
     ],
     proofs: [
       { value: "24 × 12 in", label: "True work area", icon: Target },
@@ -1604,7 +1604,7 @@ export function App() {
         <section className="feature-overview" id="features" data-reveal>
           <img src={asset("feature-overview-hero.webp")} alt="OneLaser XRF Gen2 in a working studio with finished products and brand proof" />
           <img src={asset("xrf-profit-products-web.webp")} alt="Premium products and example business outputs made with the OneLaser XRF Gen2" />
-          <img src={asset("feature-overview-capabilities.webp")} alt="XRF Gen2 capabilities overview including RF precision, 38W and 70W power, 1,200 millimeters per second motion, IVS, workflow, safety and support" />
+          <img src={asset("feature-overview-capabilities-v2.webp")} alt="XRF Gen2 feature overview covering RF precision, power options, motion, workflow, safety and support" />
         </section>
 
         <section className="tv-proof" aria-labelledby="tv-proof-title" data-reveal>
@@ -1623,7 +1623,7 @@ export function App() {
           </button>
         </section>
 
-        <CommercialCapabilities asset={asset} />
+        <CommercialCapabilities asset={asset} equipmentInvestment={selectedPurchasePackage.price} />
 
         <section className="section materials" id="materials" data-reveal>
           <div className="section-heading section-heading--stack">

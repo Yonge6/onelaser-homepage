@@ -190,6 +190,7 @@ export const products = {
 
 export const economicsExamples = {
   "engraved-jewelry-box": {
+    unitPrice: 59,
     sellingPrice: "$59",
     margin: "76%",
     hourlyOutput: "$118/hr",
@@ -197,6 +198,7 @@ export const economicsExamples = {
     requiredSetup: "Flat fixture with a laser-compatible wood or leatherette box",
   },
   "leather-wallet": {
+    unitPrice: 39,
     sellingPrice: "$39",
     margin: "80%",
     hourlyOutput: "$156/hr",
@@ -204,6 +206,7 @@ export const economicsExamples = {
     requiredSetup: "Laser-safe leather or leatherette with tested engraving settings",
   },
   "custom-keychains": {
+    unitPrice: 16,
     sellingPrice: "$16 each",
     margin: "74%",
     hourlyOutput: "$384/hr",
@@ -211,6 +214,7 @@ export const economicsExamples = {
     requiredSetup: "Flat wood, laser-compatible acrylic or coated-metal blanks",
   },
   "photo-wall-panel": {
+    unitPrice: 119,
     sellingPrice: "$119",
     margin: "82%",
     hourlyOutput: "$238/hr",
@@ -218,6 +222,7 @@ export const economicsExamples = {
     requiredSetup: "Flat wood panel with validated grayscale and finishing settings",
   },
   "house-number-sign": {
+    unitPrice: 79,
     sellingPrice: "$79",
     margin: "78%",
     hourlyOutput: "$158/hr",
@@ -225,6 +230,7 @@ export const economicsExamples = {
     requiredSetup: "Flat wood or laser-compatible acrylic plus separate weather finishing",
   },
   "walnut-serving-board": {
+    unitPrice: 69,
     sellingPrice: "$69",
     margin: "72%",
     hourlyOutput: "$207/hr",
@@ -232,6 +238,7 @@ export const economicsExamples = {
     requiredSetup: "Flat engraving setup with tested wood and finishing workflow",
   },
   "custom-tumbler": {
+    unitPrice: 39,
     sellingPrice: "$39",
     margin: "72%",
     hourlyOutput: "$156/hr",
@@ -239,6 +246,7 @@ export const economicsExamples = {
     requiredSetup: "Rotary attachment and a powder-coated, laser-compatible tumbler",
   },
   "coated-metal-tags": {
+    unitPrice: 19,
     sellingPrice: "$19",
     margin: "80%",
     hourlyOutput: "$114/hr",
@@ -246,6 +254,7 @@ export const economicsExamples = {
     requiredSetup: "Anodized or coated laser-compatible blanks for surface engraving",
   },
   "rocks-glass": {
+    unitPrice: 24,
     sellingPrice: "$24",
     margin: "75%",
     hourlyOutput: "$96/hr",
@@ -253,6 +262,7 @@ export const economicsExamples = {
     requiredSetup: "Rotary attachment and laser-compatible glassware",
   },
   "wine-bottle": {
+    unitPrice: 59,
     sellingPrice: "$59",
     margin: "79%",
     hourlyOutput: "$118/hr",
@@ -260,6 +270,7 @@ export const economicsExamples = {
     requiredSetup: "Rotary attachment and a coated or laser-compatible bottle surface",
   },
   "leather-patch-cap": {
+    unitPrice: 39,
     sellingPrice: "$39",
     margin: "63%",
     hourlyOutput: "$234/hr",
@@ -267,12 +278,17 @@ export const economicsExamples = {
     requiredSetup: "Laser-safe leatherette patch production plus separate cap attachment",
   },
   "acrylic-counter-sign": {
+    unitPrice: 49,
     sellingPrice: "$49",
     margin: "76%",
     hourlyOutput: "$147/hr",
     bestFor: "Retail counters, hospitality displays and local business branding",
     requiredSetup: "Flat laser-compatible acrylic plus separate stand or assembly",
   },
+};
+
+export const economicsAssumptions = {
+  monthlySales: 24,
 };
 
 export const productCategories = [
@@ -329,4 +345,4 @@ export const workflowCapabilities = [
   },
 ];
 
-export const economicsDisclaimer = "Illustrative examples only. Actual pricing, costs, margins and production output vary by design, material, setup, labor, sales channel and local market conditions.";
+export const economicsDisclaimer = "Illustrative estimates only, not guaranteed income. Actual pricing, costs, sales volume, profitability and payback vary by design, material, setup, labor, sales channel and market demand.";

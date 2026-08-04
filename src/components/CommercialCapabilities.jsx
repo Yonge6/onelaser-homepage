@@ -1,14 +1,12 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import {
   ArrowClockwise,
-  CaretLeft,
-  CaretRight,
   CubeFocus,
   ShieldCheck,
   Target,
 } from "@phosphor-icons/react";
 import {
-  capabilitySlides,
+  economicsAssumptions,
   economicsDisclaimer,
   economicsExamples,
   productCategories,
@@ -17,8 +15,6 @@ import {
 } from "../data/commercialCapabilities.js";
 import "./CommercialCapabilities.css";
 
-const AUTOPLAY_DELAY = 6500;
-
 const workflowIcons = {
   precision: Target,
   motion: ArrowClockwise,
@@ -26,145 +22,19 @@ const workflowIcons = {
   production: ShieldCheck,
 };
 
-function useReducedMotion() {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => (
-    typeof window !== "undefined"
-      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      : false
-  ));
+const currencyFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 0,
+});
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
-    updatePreference();
-    mediaQuery.addEventListener("change", updatePreference);
-    return () => mediaQuery.removeEventListener("change", updatePreference);
-  }, []);
-
-  return prefersReducedMotion;
-}
-
-function CommercialHero({ asset }) {
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [timerEpoch, setTimerEpoch] = useState(0);
-  const touchStartX = useRef(null);
-  const prefersReducedMotion = useReducedMotion();
-  const slide = capabilitySlides[activeSlide];
-
-  function showSlide(index, { manual = true } = {}) {
-    const nextIndex = (index + capabilitySlides.length) % capabilitySlides.length;
-    setActiveSlide(nextIndex);
-    if (manual) setTimerEpoch((current) => current + 1);
-  }
-
-  function stepSlide(direction, options) {
-    showSlide(activeSlide + direction, options);
-  }
-
-  useEffect(() => {
-    if (prefersReducedMotion || isPaused) return undefined;
-    const timeout = window.setTimeout(() => {
-      setActiveSlide((current) => (current + 1) % capabilitySlides.length);
-    }, AUTOPLAY_DELAY);
-    return () => window.clearTimeout(timeout);
-  }, [activeSlide, isPaused, prefersReducedMotion, timerEpoch]);
-
-  function handleKeyDown(event) {
-    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
-    event.preventDefault();
-    stepSlide(event.key === "ArrowLeft" ? -1 : 1);
-  }
-
-  function handleTouchStart(event) {
-    touchStartX.current = event.changedTouches[0]?.clientX ?? null;
-    setIsPaused(true);
-  }
-
-  function handleTouchEnd(event) {
-    const endX = event.changedTouches[0]?.clientX;
-    if (touchStartX.current !== null && endX !== undefined) {
-      const distance = endX - touchStartX.current;
-      if (Math.abs(distance) > 48) stepSlide(distance > 0 ? -1 : 1);
-    }
-    touchStartX.current = null;
-    setIsPaused(false);
-  }
-
-  return (
-    <div className="commercial-hero">
-      <header className="commercial-hero__header">
-        <span className="eyebrow">WHAT WILL YOU MAKE NEXT?</span>
-        <h2>Made to sell. Built to repeat.</h2>
-        <p>Start with the finished work customers pay for. Then see how RF precision, controlled motion and a repeatable workflow help turn one-off ideas into products you can make again and again.</p>
-      </header>
-
-      <div
-        className="commercial-carousel"
-        role="region"
-        aria-roledescription="carousel"
-        aria-label="XRF Gen2 commercial product capabilities"
-        tabIndex="0"
-        onKeyDown={handleKeyDown}
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-        onFocusCapture={() => setIsPaused(true)}
-        onBlurCapture={(event) => {
-          if (!event.currentTarget.contains(event.relatedTarget)) setIsPaused(false);
-        }}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        onTouchCancel={() => {
-          touchStartX.current = null;
-          setIsPaused(false);
-        }}
-      >
-        <div className="commercial-carousel__visual">
-          <img
-            key={slide.id}
-            src={asset(slide.image)}
-            alt={slide.alt}
-            style={{ objectPosition: slide.imagePosition }}
-            width="1920"
-            height="1080"
-            decoding="async"
-          />
-        </div>
-        <article className="commercial-carousel__content" aria-live="polite" aria-atomic="true">
-          <div key={slide.id} className="commercial-carousel__copy">
-            <span className="eyebrow">{slide.eyebrow}</span>
-            <h3>{slide.title}</h3>
-            <p>{slide.description}</p>
-            <strong>{slide.meta}</strong>
-          </div>
-          <div className="commercial-carousel__controls">
-            <button type="button" onClick={() => stepSlide(-1)} aria-label="Show previous commercial capability">
-              <CaretLeft size={22} aria-hidden="true" />
-            </button>
-            <div className="commercial-carousel__dots" aria-label="Choose commercial capability slide">
-              {capabilitySlides.map((item, index) => (
-                <button
-                  type="button"
-                  key={item.id}
-                  className={index === activeSlide ? "is-active" : ""}
-                  onClick={() => showSlide(index)}
-                  aria-label={`Show slide ${index + 1}: ${item.title}`}
-                  aria-current={index === activeSlide ? "true" : undefined}
-                />
-              ))}
-            </div>
-            <button type="button" onClick={() => stepSlide(1)} aria-label="Show next commercial capability">
-              <CaretRight size={22} aria-hidden="true" />
-            </button>
-          </div>
-        </article>
-      </div>
-    </div>
-  );
-}
-
-function ProductEconomics({ product }) {
+function ProductEconomics({ product, equipmentInvestment }) {
   const economics = economicsExamples[product.economicsId];
+  const marginRate = Number.parseInt(economics.margin, 10) / 100;
+  const profitPerItem = economics.unitPrice * marginRate;
+  const monthlyNetProfit = profitPerItem * economicsAssumptions.monthlySales;
+  const annualNetProfit = monthlyNetProfit * 12;
+  const paybackMonths = equipmentInvestment / monthlyNetProfit;
 
   return (
     <aside className="product-economics" aria-live="polite" aria-atomic="true">
@@ -172,13 +42,22 @@ function ProductEconomics({ product }) {
         <header>
           <div>
             <span>ILLUSTRATIVE EXAMPLE</span>
-            <h4>Example product economics</h4>
+            <h4>Illustrative return snapshot</h4>
           </div>
         </header>
         <dl className="product-economics__metrics">
+          <div className="product-economics__payback">
+            <dt>Estimated equipment payback</dt>
+            <dd>{paybackMonths.toFixed(1)} <small>months</small></dd>
+          </div>
+          <div><dt>Profit per item</dt><dd>{currencyFormatter.format(profitPerItem)}</dd></div>
+          <div><dt>Monthly net profit</dt><dd>{currencyFormatter.format(monthlyNetProfit)}</dd></div>
+          <div><dt>Annual net profit</dt><dd>{currencyFormatter.format(annualNetProfit)}</dd></div>
           <div><dt>Example margin</dt><dd>{economics.margin}</dd></div>
-          <div><dt>Potential hourly output</dt><dd>{economics.hourlyOutput}</dd></div>
         </dl>
+        <p className="product-economics__assumptions">
+          Based on {economicsAssumptions.monthlySales} illustrative sales/mo. and a {currencyFormatter.format(equipmentInvestment)} equipment investment.
+        </p>
         <dl className="product-economics__details">
           <div><dt>Best suited for</dt><dd>{economics.bestFor}</dd></div>
           <div><dt>Required setup</dt><dd>{economics.requiredSetup}</dd></div>
@@ -189,7 +68,7 @@ function ProductEconomics({ product }) {
   );
 }
 
-function ProductOpportunities({ asset }) {
+function ProductOpportunities({ asset, equipmentInvestment }) {
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
   const [activeProductId, setActiveProductId] = useState(productCategories[0].productIds[0]);
   const categoryTabRefs = useRef([]);
@@ -358,7 +237,7 @@ function ProductOpportunities({ asset }) {
                 <span>{activeProduct.setupNote}</span>
               </p>
             </article>
-            <ProductEconomics product={activeProduct} />
+            <ProductEconomics product={activeProduct} equipmentInvestment={equipmentInvestment} />
           </div>
         </div>
       </div>
@@ -392,12 +271,11 @@ function WorkflowBridge() {
   );
 }
 
-export function CommercialCapabilities({ asset }) {
+export function CommercialCapabilities({ asset, equipmentInvestment }) {
   return (
     <section className="commercial-capabilities" id="capabilities" aria-label="XRF Gen2 commercial capabilities">
       <span className="commercial-capabilities__anchor" id="results" aria-hidden="true" />
-      <CommercialHero asset={asset} />
-      <ProductOpportunities asset={asset} />
+      <ProductOpportunities asset={asset} equipmentInvestment={equipmentInvestment} />
       <WorkflowBridge />
     </section>
   );

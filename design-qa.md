@@ -57,6 +57,46 @@
 
 final result: passed
 
+## 2026-08-04 product-return snapshot and capability cleanup
+
+### Evidence
+
+- Source visual truth: `/var/folders/vd/kws8fm5509l6b9hnywhd8yfr0000gn/T/codex-clipboard-3e2257a3-c25b-4bbf-8cac-bf6c2a9e8590.png`.
+- Browser-rendered implementation: `references/incoming/roi-implementation-final-1385x1150.png`.
+- Combined comparison input: `references/incoming/roi-reference-vs-implementation-final.png`.
+- Desktop viewport: 1385 × 1150 CSS px. The implementation capture is a focused crop of the selected product and return snapshot at that viewport.
+- Responsive viewport: 390 × 844 CSS px.
+- State: 38W standalone equipment investment with the Walnut Serving Board selected for the final comparison; interaction checks also covered Engraved Jewelry Box and Leather Wallet.
+
+### Visual comparison
+
+- Preserved the reference anatomy of one dominant equipment-payback value followed by supporting profit metrics, while translating the dark/orange reference into the existing OneLaser white, `#F5F5F7`, pale-red and OneLaser-red system.
+- The selected product remains the input state; changing products immediately recalculates profit per item, monthly net profit, annual net profit, example margin and estimated payback.
+- The forecast remains compact beside the existing product detail instead of introducing a second full calculator or configurator.
+- Explicit assumption and non-guarantee copy remains visible directly below the forecast numbers.
+
+### Required fidelity surfaces
+
+- Typography: passed. All newly introduced labels and disclaimers are at least 12 px; the payback value is the strongest numeric signal.
+- Spacing and layout: passed. Two-column desktop detail and economics panels remain aligned; 390 px reports zero document-level horizontal overflow.
+- Colors and tokens: passed. Red is limited to the payback/value emphasis and existing selected states; structural surfaces remain white or `#F5F5F7`.
+- Image quality: passed. The latest supplied `/Users/yongyuan/Downloads/3.webp` is copied byte-for-byte to `feature-overview-capabilities-v2.webp` and renders at its intrinsic 3840 × 1800 dimensions.
+- Business Expansion image: passed. `/Users/yongyuan/Downloads/Optional height for bigger objects.webp` is copied byte-for-byte to `business-expansion-optional-height-v2.webp`; desktop renders the complete 1260 × 840 source at 560.25 × 373.5 px, while 390 px mobile renders it at 354 × 236 px without page overflow.
+- Copy and content: passed. All figures are labeled illustrative, use one centralized data model and do not imply guaranteed income.
+
+### Interaction and browser checks
+
+- Engraved Jewelry Box renders a 3.7-month payback; Leather Wallet updates to 5.3 months with `$31`, `$749`, `$8,986` and `80%` metrics.
+- Desktop and 390 px mobile both report zero horizontal overflow; selected Product Opportunity images are complete with non-zero natural dimensions.
+- The removed `.commercial-hero` is absent from the rendered DOM.
+- Browser console contains no errors; only Vite and React development messages are present.
+
+### Findings
+
+- No actionable P0, P1 or P2 differences remain. The reference's sliders and graph were intentionally not copied because the requested section is a compact product-specific numeric explanation, not a second configurator.
+
+final result: passed
+
 ## 2026-07-26 RF imagery, image loading and back-to-top controls
 
 ### Asset and loading checks
