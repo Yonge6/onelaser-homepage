@@ -549,9 +549,9 @@
     z-index: 8;
     top: 55px;
     display: flex;
-    gap: 8px;
+    gap: 4px;
     width: 100%;
-    padding: 9px 18px;
+    padding: 4px 14px;
     overflow-x: auto;
     border-top: 0;
     border-right: 0;
@@ -568,8 +568,8 @@
   .capability-scroll__nav button {
     flex: 0 0 auto;
     min-width: max-content;
-    min-height: 52px;
-    padding: 10px 12px;
+    min-height: 44px;
+    padding: 6px 10px;
     border: 1px solid var(--divider);
     border-radius: 16px;
     background: #fff;
@@ -8464,6 +8464,11 @@ body { color: var(--ink); }
     background: transparent;
   }
 
+  .capability-scroll__nav button strong {
+    font-size: 13px;
+    line-height: 1.1;
+  }
+
   .capability-scroll__nav button.is-active {
     border-color: transparent;
     background: transparent;
@@ -8925,7 +8930,7 @@ body { color: var(--ink); }
   }
 
   .capability-scroll__chapter {
-    scroll-margin-top: 190px;
+    scroll-margin-top: 172px;
   }
 }
 
@@ -8936,7 +8941,7 @@ body { color: var(--ink); }
   }
 
   .capability-scroll__chapter {
-    scroll-margin-top: 174px;
+    scroll-margin-top: 156px;
   }
 }
 
