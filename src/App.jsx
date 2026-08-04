@@ -591,7 +591,6 @@ const faqs = [
 ];
 
 const journeySections = [
-  { id: "top", label: "Overview" },
   { id: "capabilities", label: "What you can make" },
   { id: "materials", label: "Materials" },
   { id: "rf-advantages", label: "Why RF" },
@@ -599,7 +598,6 @@ const journeySections = [
   { id: "capability-system", label: "Features" },
   { id: "software", label: "Software" },
   { id: "specs", label: "Specs" },
-  { id: "next-step", label: "Decide" },
   { id: "reviews", label: "Reviews" },
   { id: "support", label: "Support" },
   { id: "faq", label: "FAQ" },
@@ -914,19 +912,11 @@ function CapabilityBrowser({ onPlay }) {
 
               <div className="capability-scroll__stories">
                 {chapter.speedProof && <SpeedMotionProof />}
-                {chapter.spotlights.map((spotlight, storyIndex) => (
+                {chapter.spotlights.map((spotlight) => (
                   <article className="capability-scroll__story" key={spotlight.title}>
-                    <button
-                      type="button"
-                      className="capability-scroll__media"
-                      onClick={() => spotlight.youtubeId
-                        ? onPlay({ id: spotlight.youtubeId, title: spotlight.title, channel: "OneLaser", tag: "SMART WORKFLOW" })
-                        : onPlay(spotlight.title, asset(spotlight.image))}
-                      aria-label={spotlight.youtubeId ? `Play ${spotlight.title} video` : `Open ${spotlight.title} full-size media preview`}
-                    >
+                    <div className="capability-scroll__media capability-scroll__media--static">
                       <img src={asset(spotlight.image)} alt={`${spotlight.title} XRF Gen2 proof`} />
-                      <span className="capability-scroll__play" aria-hidden="true"><Play size={25} weight="fill" /></span>
-                    </button>
+                    </div>
                     <div className="capability-scroll__story-copy">
                       <h4>{spotlight.title}</h4>
                       <p>{spotlight.copy}</p>
@@ -1028,7 +1018,7 @@ export function App() {
   const [selectedPackageId, setSelectedPackageId] = useState("standalone");
   const [purchasePower, setPurchasePower] = useState("38W");
   const [selectedPurchaseAccessories, setSelectedPurchaseAccessories] = useState([]);
-  const [activeJourneySection, setActiveJourneySection] = useState("top");
+  const [activeJourneySection, setActiveJourneySection] = useState("capabilities");
   const [journeyVisible, setJourneyVisible] = useState(false);
   const [videoModal, setVideoModal] = useState(null);
   const [youtubeVideo, setYoutubeVideo] = useState(null);
@@ -1093,7 +1083,7 @@ export function App() {
         const node = document.getElementById(section.id);
         const absoluteTop = node ? node.getBoundingClientRect().top + currentScrollY : Number.POSITIVE_INFINITY;
         return absoluteTop <= readingLine ? section.id : active;
-      }, "top");
+      }, "capabilities");
       setActiveJourneySection(currentSection);
       if (currentScrollY < 480) {
         setTopButtonState("hidden");
@@ -1383,7 +1373,6 @@ export function App() {
 
       <nav className={journeyVisible ? "journey-nav is-visible" : "journey-nav"} aria-label="Explore XRF Gen2 page sections">
         <div className="journey-nav__inner">
-          <span className="journey-nav__label">Explore XRF Gen2</span>
           <div className="journey-nav__rail">
             {journeySections.map((section, index) => (
               <button
