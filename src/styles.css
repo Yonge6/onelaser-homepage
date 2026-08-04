@@ -2127,8 +2127,8 @@ img {
 }
 
 .purchase-power {
-  min-height: 118px;
-  padding: 16px;
+  min-height: 104px;
+  padding: 14px;
   border: 1px solid var(--line);
   border-radius: 12px;
   background: #fff;
@@ -2141,7 +2141,7 @@ img {
 .purchase-power > span { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .purchase-power > span strong { font-size: 18px; font-weight: 800; }
 .purchase-power > span small { padding: 4px 6px; border-radius: 4px; background: var(--red); color: #fff; font-size: 12px; font-weight: 800; letter-spacing: 0.08em; }
-.purchase-power p { min-height: 31px; margin: 10px 0; color: var(--muted); font-size: 12px; line-height: 1.4; }
+.purchase-power p { min-height: 17px; margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.4; }
 .purchase-power em { color: var(--red); font-size: 12px; font-style: normal; font-weight: 800; }
 
 .official-packages {
@@ -8485,15 +8485,22 @@ body { color: var(--ink); }
   letter-spacing: -0.04em;
 }
 
+.official-price__msrp > strong {
+  font-size: 24px;
+}
+
 .purchase-total > strong,
 .sticky-buy__price > span strong {
   font-weight: 800;
 }
 
 @media (max-width: 700px) {
-  .official-price__main > strong,
-  .official-price__msrp > strong {
+  .official-price__main > strong {
     font-size: 25px;
+  }
+
+  .official-price__msrp > strong {
+    font-size: 24px;
   }
 }
 
