@@ -1618,7 +1618,13 @@ export function App() {
             </div>
           </div>
           <button type="button" className="tv-proof__media" onClick={() => setYoutubeVideo(tvFeature)} aria-label="Play the FOX and Friends Weekend OneLaser feature">
-            <img src={`https://i.ytimg.com/vi/${tvFeature.id}/maxresdefault.jpg`} alt="FOX and Friends Weekend OneLaser television feature" loading="lazy" />
+            <img
+              src={asset("fox-friends-onelaser-hd.webp")}
+              alt="OneLaser XRF featured live on FOX and Friends Weekend"
+              width="1280"
+              height="720"
+              loading="lazy"
+            />
             <span className="tv-proof__play"><Play size={28} weight="fill" /></span>
             <i>FOX &amp; FRIENDS WEEKEND · VIDEO</i>
           </button>
