@@ -183,8 +183,8 @@ const rfAdvantages = [
     tab: "Faster Response",
     eyebrow: "FASTER RESPONSE",
     title: "Move faster without leaving quality behind.",
-    copy: "RF energy switches on and off quickly, helping XRF hold clean edges and consistent contrast through real engraving work at up to 1,300 mm/s.",
-    proof: "1,300 mm/s · True 3.5G",
+    copy: "RF energy switches on and off quickly, helping XRF hold clean edges and consistent contrast through real engraving work at up to 1,200 mm/s.",
+    proof: "1,200 mm/s · True 3.5G",
     image: "rf-faster-response.webp",
     alt: "XRF Gen2 motion system built for fast, controlled engraving",
     icon: ArrowClockwise,
@@ -424,7 +424,7 @@ const purchasePackages = [
     price: 3999,
     msrp: 6499,
     badge: "CURRENT OFFER",
-    description: "38W RF desktop laser with 1,300 mm/s motion, True 3.5G acceleration and a 24 × 12 in workspace.",
+    description: "38W RF desktop laser with 1,200 mm/s motion, True 3.5G acceleration and a 24 × 12 in workspace.",
     detail: "The King of RF Desktop Lasers",
   },
   {
@@ -500,7 +500,7 @@ const specs = [
   {
     title: "Performance",
     rows: [
-      ["Real working speed", "1,300 mm/s"],
+      ["Real working speed", "1,200 mm/s"],
       ["Real working acceleration", "3.5G"],
       ["Positioning accuracy", "≤ 0.01 mm"],
       ["Maximum scanning precision", "2,000 DPI"],
@@ -637,7 +637,7 @@ const consultationFeedback = [
 
 const competitorRows = [
   ["Laser source", "38W / 70W sealed RF metal tube", "55W CO₂ glass tube"],
-  ["Max engraving speed", "1,300 mm/s", "600 mm/s"],
+  ["Max engraving speed", "1,200 mm/s", "600 mm/s"],
   ["Acceleration", "True 3.5G", "Not published on the P2 spec page"],
   ["Detail", "Up to 2,000 DPI · 0.07 mm laser dot", "0.01 mm processing precision"],
   ["Cooling & source life", "Air-cooled · up to 30,000 hours", "Water-cooled · 6,000–8,000 hours"],
@@ -804,7 +804,7 @@ function SpeedMotionProof() {
           <h4>{selectedMaterial.title}</h4>
           <p>{selectedMaterial.copy}</p>
           <div className="speed-motion-proof__metrics" aria-label="Confirmed XRF Gen2 motion performance">
-            <div><strong>1,300</strong><span>mm/s working speed</span></div>
+            <div><strong>1,200</strong><span>mm/s working speed</span></div>
             <div><strong>True 3.5G</strong><span>Working acceleration</span></div>
           </div>
           <p className="speed-motion-proof__foundation">Closed-loop motion · all-steel, Hydra-derived axes · 20% lighter laser head</p>
@@ -1466,11 +1466,10 @@ export function App() {
             </div>
 
             <ul className="hero-highlights">
-              <li><strong>38W / 70W RF metal tube:</strong> rated up to 30,000 hours with air-cooled operation.</li>
-              <li><strong>1,300 mm/s + True 3.5G:</strong> real working speed with 34,335 mm/s² acceleration.</li>
-              <li><strong>Professional detail:</strong> up to 2,000 DPI, 0.07 mm laser dot and ≤ 0.01 mm repeat positioning.</li>
-              <li><strong>Desktop production area:</strong> 23.6 × 11.8 in working bed with a full-frame top-cover camera.</li>
-              <li><strong>Class 1 design:</strong> enclosed processing with U.S.-based engineer support.</li>
+              <li><strong>38W / 70W RF tube:</strong> up to 30,000 hours, air-cooled.</li>
+              <li><strong>1,200 mm/s + True 3.5G:</strong> 34,335 mm/s² acceleration.</li>
+              <li><strong>Professional detail:</strong> 2,000 DPI · 0.07 mm dot · ≤ 0.01 mm repeat.</li>
+              <li><strong>Work area:</strong> 23.6 × 11.8 in bed · full-frame top camera.</li>
             </ul>
 
             <div className="official-price">
@@ -1601,7 +1600,7 @@ export function App() {
         <section className="feature-overview" id="features" data-reveal>
           <img src={asset("feature-overview-hero.webp")} alt="OneLaser XRF Gen2 in a working studio with finished products and brand proof" />
           <img src={asset("xrf-profit-products-web.webp")} alt="Premium products and example business outputs made with the OneLaser XRF Gen2" />
-          <img src={asset("feature-overview-capabilities.webp")} alt="XRF Gen2 capabilities overview including RF precision, 38W and 70W power, 1,300 millimeters per second motion, IVS, workflow, safety and support" />
+          <img src={asset("feature-overview-capabilities.webp")} alt="XRF Gen2 capabilities overview including RF precision, 38W and 70W power, 1,200 millimeters per second motion, IVS, workflow, safety and support" />
         </section>
 
         <section className="tv-proof" aria-labelledby="tv-proof-title" data-reveal>
