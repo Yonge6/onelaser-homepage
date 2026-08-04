@@ -48,7 +48,7 @@ Do not invent reviews, discounts, urgency, shipping dates, accessory pricing, fi
 - Hero arrows are subdued until hover or keyboard focus. The overview slot uses local cover `xrf-overview-video-cover.jpg` and YouTube `F1ZJvoeANgk` through the shared lazy modal.
 - Below the gallery, keep side-by-side `Book A Free Call` and `Download Brochure` actions, then a compact 2×2 grid for 30-day returns, 3-2-1 warranty, California fulfillment and US support.
 - Purchase order is title/evidence → official price/MSRP → equal-fit 38W/70W selector → package → optional add-ons → quantity/actions. Power cards describe use-case fit and do not repeat prices.
-- Prices are red; MSRP is gray; financing links are blue. 38W/70W pricing is Standalone $3,999/$4,499 and Riser Base $4,499/$4,999 unless newer direct or official pricing supersedes it.
+- Prices are red; MSRP is gray; financing links are blue. Use current official 38W pricing, with every equivalent 70W configuration exactly $1,000 higher. Current baselines are Standalone $3,999/$4,999 and Riser Base $4,499/$5,499 unless newer direct or official pricing supersedes them.
 - Every accessory is explicitly optional. Frequently-bought-together images fill their crop edge-to-edge.
 - Keep `Add to Cart` as the primary Hero/sticky action with restrained prompting motion and a reduced-motion fallback. It must open the official 38W purchase flow. Until an official stable 70W checkout exists, route 70W interest to engineer consultation.
 - Show `Buy with SHOP` only while it points to the approved direct Shop Pay URL. Keep `More payment options` on its approved checkout URL. Never simulate an `Added` state.
@@ -86,7 +86,7 @@ Do not invent reviews, discounts, urgency, shipping dates, accessory pricing, fi
 - Reliability & Safety uses the approved Smart Air artwork plus three compact supplied safety cards. Desktop/tablet is a compact grid; mobile is image-left/copy-right. Preserve explicit optional framing and do not restore the old large stacked layout.
 - Support is one `#F5F5F7` band with three compact white cards: exact 30-day return terms, 3-2-1 warranty and One Support engineer promise. No Support eyebrow/standalone heading or duplicated intermediate subheads.
 - Reviews keep creator/customer video proof in one arrow-controlled rail, followed by named owner feedback in a horizontal scroll-snap rail: three cards desktop, two tablet, partial next card mobile. Keep review traffic on-page and omit the Mark Ellis CES 2025 clip.
-- xTool P2 comparison uses published numeric facts and the established split-card anatomy. FAQ follows the Specifications heading pattern and must cover outlet requirements, current shipping/processing expectations and the exact $500 70W delta. FAQ transitions directly to the footer.
+- xTool P2 comparison uses published numeric facts and the established split-card anatomy. FAQ follows the Specifications heading pattern and must cover outlet requirements, current shipping/processing expectations and the exact $1,000 70W delta. FAQ transitions directly to the footer.
 
 ## Video, motion, loading and accessibility
 

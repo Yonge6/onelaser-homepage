@@ -582,8 +582,8 @@ const faqs = [
     a: "OneLaser publishes fixed shipping rates for the lower 48 states. Orders typically require 3–5 business days for processing, with average delivery in 3–14 business days after payment. Final freight cost and timing depend on the destination, configuration and carrier conditions.",
   },
   {
-    q: "Why does the 70W configuration cost $500 more?",
-    a: "The 70W source is exactly $500 above the equivalent 38W configuration. Both use the same professional XRF Gen2 platform: choose 38W for fine-detail everyday production, or 70W for heavier workloads, deeper relief and more cutting headroom.",
+    q: "Why does the 70W configuration cost $1,000 more?",
+    a: "The 70W source is exactly $1,000 above the equivalent 38W configuration. Both use the same professional XRF Gen2 platform: choose 38W for fine-detail everyday production, or 70W for heavier workloads, deeper relief and more cutting headroom.",
   },
 ];
 
@@ -1183,7 +1183,7 @@ export function App() {
 
   const selectedPurchasePackage = useMemo(() => {
     const selected = purchasePackages.find((item) => item.id === selectedPackageId) ?? purchasePackages[0];
-    const powerDelta = purchasePower === "70W" ? 500 : 0;
+    const powerDelta = purchasePower === "70W" ? 1000 : 0;
     return { ...selected, price: selected.price + powerDelta, msrp: selected.msrp + powerDelta };
   }, [selectedPackageId, purchasePower]);
 
@@ -1482,7 +1482,7 @@ export function App() {
               </div>
             </div>
             <div className="financing-line">
-              <strong>$194/mo. for 60 months</strong>
+              <strong><span>$194/mo.</span> for 24 months</strong>
               <a href="https://www.1laser.com/pages/financing" target="_blank" rel="noreferrer">See if you qualify <CaretRight size={15} /></a>
             </div>
             <div className="financing-more">
@@ -1507,7 +1507,7 @@ export function App() {
                       key={item.id}
                       onClick={() => {
                         setPurchasePower(item.id);
-                        trackEvent("select_power", { power: item.id, value: item.id === "70W" ? 4499 : 3999, currency: "USD" });
+                        trackEvent("select_power", { power: item.id, value: item.id === "70W" ? 4999 : 3999, currency: "USD" });
                       }}
                       aria-pressed={selected}
                     >
@@ -1524,7 +1524,7 @@ export function App() {
               <div className="official-packages">
                 {purchasePackages.map((item) => {
                   const selected = selectedPackageId === item.id;
-                  const powerAdjustment = purchasePower === "70W" ? 500 : 0;
+                  const powerAdjustment = purchasePower === "70W" ? 1000 : 0;
                   const packagePrice = item.price + powerAdjustment;
                   const packageMsrp = item.msrp + powerAdjustment;
                   return (
