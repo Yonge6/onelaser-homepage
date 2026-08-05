@@ -299,11 +299,11 @@ const capabilityChapters = [
   {
     id: "precision",
     nav: "RF Precision",
-    title: "PowerMax 70™: More power. More materials. More possibilities.",
+    title: "More power. More materials. More possibilities.",
     summary: "The XRF Gen2 now offers a true 70W RF tube—the most powerful RF source in any desktop-class laser. With nearly double the output of the 38W tube and pulse frequencies up to 50 kHz, it delivers ultra-high-DPI flat engraving without sacrificing speed, visibly deeper 3D relief, sharper grayscale and greater cutting capacity.",
     spotlights: [
       {
-        title: "PowerMax 70™: More power. More materials. More possibilities.",
+        title: "More power. More materials. More possibilities.",
         copy: "The XRF Gen2 now offers a true 70W RF tube—the most powerful RF source in any desktop-class laser. With nearly double the output of the 38W tube and pulse frequencies up to 50 kHz, it delivers ultra-high-DPI flat engraving without sacrificing speed, visibly deeper 3D relief, sharper grayscale and greater cutting capacity.",
         metrics: ["2,000 DPI", "0.07 mm spot", "Up to 30,000 h"],
         image: "capability-precision-main.webp",
@@ -944,13 +944,11 @@ function CapabilityBrowser({ onPlay, children }) {
   }, []);
 
   function selectChapter(index) {
-    setActiveChapter(index + 2);
-    jumpToNode(chapterRefs.current[index], window.innerWidth <= 760 ? 136 : 100);
-  }
-
-  function selectIntroChapter(id, index) {
     setActiveChapter(index);
-    jumpToNode(document.getElementById(id), window.innerWidth <= 760 ? 136 : 100);
+    jumpToNode(
+      index === 0 ? document.getElementById("rf-advantages") : chapterRefs.current[index],
+      window.innerWidth <= 760 ? 136 : 100,
+    );
   }
 
   return (
@@ -967,48 +965,30 @@ function CapabilityBrowser({ onPlay, children }) {
           ref={navRef}
           style={{
             "--active-chapter": activeChapter,
-            "--chapter-count": capabilityChapters.length + 3,
+            "--chapter-count": capabilityChapters.length + 1,
           }}
         >
-          <button
-            type="button"
-            className={activeChapter === 0 ? "is-active" : ""}
-            onClick={() => selectIntroChapter("rf-advantages", 0)}
-            aria-current={activeChapter === 0 ? "step" : undefined}
-            data-chapter-nav="0"
-          >
-            <strong>WHY RF</strong>
-          </button>
-          <button
-            type="button"
-            className={activeChapter === 1 ? "is-active" : ""}
-            onClick={() => selectIntroChapter("power-guide", 1)}
-            aria-current={activeChapter === 1 ? "step" : undefined}
-            data-chapter-nav="1"
-          >
-            <strong>38W / 70W</strong>
-          </button>
           {capabilityChapters.map((item, index) => (
             <button
               type="button"
               key={item.id}
-              className={activeChapter === index + 2 ? "is-active" : ""}
+              className={activeChapter === index ? "is-active" : ""}
               onClick={() => selectChapter(index)}
-              aria-current={activeChapter === index + 2 ? "step" : undefined}
-              data-chapter-nav={index + 2}
+              aria-current={activeChapter === index ? "step" : undefined}
+              data-chapter-nav={index}
             >
               <strong>{item.nav}</strong>
             </button>
           ))}
           <button
             type="button"
-            className={activeChapter === capabilityChapters.length + 2 ? "is-active" : ""}
+            className={activeChapter === capabilityChapters.length ? "is-active" : ""}
             onClick={() => {
-              setActiveChapter(capabilityChapters.length + 2);
+              setActiveChapter(capabilityChapters.length);
               jumpToNode(document.getElementById("makerboost"), window.innerWidth <= 760 ? 136 : 100);
             }}
-            aria-current={activeChapter === capabilityChapters.length + 2 ? "step" : undefined}
-            data-chapter-nav={capabilityChapters.length + 2}
+            aria-current={activeChapter === capabilityChapters.length ? "step" : undefined}
+            data-chapter-nav={capabilityChapters.length}
           >
             <strong>Software</strong>
           </button>
@@ -1019,7 +999,7 @@ function CapabilityBrowser({ onPlay, children }) {
             <section
               className="capability-scroll__chapter"
               id={`capability-${chapter.id}`}
-              data-chapter-index={chapterIndex + 2}
+              data-chapter-index={chapterIndex}
               ref={(node) => { chapterRefs.current[chapterIndex] = node; }}
               aria-labelledby={`capability-${chapter.id}-title`}
               key={chapter.id}
@@ -1848,7 +1828,7 @@ export function App() {
 
         <CapabilityBrowser onPlay={openStory}>
           <RfAdvantages activeIndex={activeRfAdvantage} onChange={setActiveRfAdvantage} />
-          <section className="power-guide" id="power-guide" data-chapter-index="1" data-reveal>
+          <section className="power-guide" id="power-guide" data-chapter-index="0" data-reveal>
             <div className="power-guide__inner">
               <div className="section-heading section-heading--left">
                 <span className="eyebrow">TWO PURPOSE-BUILT RF OPTIONS</span>
@@ -1884,7 +1864,7 @@ export function App() {
           </section>
         </CapabilityBrowser>
 
-        <section className="makerboost-proof" id="makerboost" data-chapter-index={capabilityChapters.length + 2} data-reveal>
+        <section className="makerboost-proof" id="makerboost" data-chapter-index={capabilityChapters.length} data-reveal>
           <div className="makerboost-proof__inner">
             <div className="makerboost-proof__intro">
               <header className="makerboost-proof__header">

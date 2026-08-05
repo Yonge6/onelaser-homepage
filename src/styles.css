@@ -8460,8 +8460,6 @@ body { color: var(--ink); }
   .software-compatibility__copy h3,
   .software-compatibility__copy p,
   .software-compatibility__header h2,
-  .capability-scroll__chapter-heading h3,
-  .capability-scroll__chapter-heading > p,
   .capability-scroll__story-copy h4,
   .capability-scroll__story-copy p {
     white-space: nowrap;
