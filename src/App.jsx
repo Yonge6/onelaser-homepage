@@ -868,6 +868,9 @@ function CapabilityBrowser({ onPlay }) {
   return (
     <section className="capability-scroll" id="features">
       <span className="commercial-capabilities__anchor" id="capability-system" aria-hidden="true" />
+      <div className="journey-opening-artwork">
+        <img src={asset("feature-overview-capabilities-v2.webp")} alt="XRF Gen2 feature overview covering RF precision, power options, motion, workflow, safety and support" />
+      </div>
       <div className="capability-scroll__layout">
         <nav
           className="capability-scroll__nav"
@@ -1604,8 +1607,6 @@ export function App() {
 
         <section className="feature-overview" id="why-xrf" data-reveal>
           <img src={asset("feature-overview-hero.webp")} alt="OneLaser XRF Gen2 in a working studio with finished products and brand proof" />
-          <img src={asset("xrf-profit-products-web.webp")} alt="Premium products and example business outputs made with the OneLaser XRF Gen2" />
-          <img src={asset("feature-overview-capabilities-v2.webp")} alt="XRF Gen2 feature overview covering RF precision, power options, motion, workflow, safety and support" />
         </section>
 
         <section className="tv-proof" aria-labelledby="tv-proof-title" data-reveal>

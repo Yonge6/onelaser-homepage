@@ -7649,6 +7649,21 @@ body { color: var(--ink); }
   border-radius: 0;
 }
 
+.journey-opening-artwork {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #141414;
+}
+
+.journey-opening-artwork > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
 .power-proof-stage__copy h3 {
   font-size: 36px;
   line-height: 1.04;

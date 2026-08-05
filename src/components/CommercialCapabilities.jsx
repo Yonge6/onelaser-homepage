@@ -288,6 +288,9 @@ export function CommercialCapabilities({ asset, equipmentInvestment }) {
     <section className="commercial-capabilities" id="roi-materials" aria-label="XRF Gen2 ROI and material opportunities">
       <span className="commercial-capabilities__anchor" id="capabilities" aria-hidden="true" />
       <span className="commercial-capabilities__anchor" id="results" aria-hidden="true" />
+      <div className="journey-opening-artwork">
+        <img src={asset("xrf-profit-products-web.webp")} alt="Premium products and example business outputs made with the OneLaser XRF Gen2" />
+      </div>
       <ProductOpportunities asset={asset} equipmentInvestment={equipmentInvestment} />
       <WorkflowBridge />
     </section>
