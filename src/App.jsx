@@ -239,6 +239,7 @@ const decisionVideos = {
     title: "Inside OneLaser’s expanded production facility",
     channel: "OneLaser",
     tag: "BEHIND ONELASER",
+    cover: "facility-video-cover-hd.jpg",
   },
 };
 
@@ -671,7 +672,7 @@ function SpecGroup({ group }) {
 function YouTubeCover({ video, onPlay, className = "" }) {
   return (
     <button type="button" className={`youtube-cover ${className}`.trim()} onClick={() => onPlay(video)} aria-label={`Play ${video.title} by ${video.channel}`}>
-      <img src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`} alt="" loading="lazy" />
+      <img src={video.cover ? asset(video.cover) : `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`} alt="" loading="lazy" />
       <span className="youtube-cover__play"><Play size={26} weight="fill" /></span>
       <i>{video.tag}</i>
     </button>
@@ -872,7 +873,7 @@ function CapabilityBrowser({ onPlay }) {
     <section className="capability-scroll" id="features">
       <span className="commercial-capabilities__anchor" id="capability-system" aria-hidden="true" />
       <div className="journey-opening-artwork">
-        <img src={asset("feature-overview-capabilities-v2.webp")} alt="XRF Gen2 feature overview covering RF precision, power options, motion, workflow, safety and support" />
+        <img src={asset("feature-overview-capabilities-v3.webp")} alt="XRF Gen2 feature overview covering RF precision, power options, motion, workflow, safety and support" />
       </div>
       <div className="capability-scroll__layout">
         <nav
@@ -1041,6 +1042,7 @@ export function App() {
   const thumbnailRailRef = useRef(null);
   const heroMediaTouchStartX = useRef(null);
   const authorityVideoRailRef = useRef(null);
+  const authorityVideoDragRef = useRef({ pointerId: null, startX: 0, startScrollLeft: 0, dragged: false });
   const reviewVideoRailRef = useRef(null);
   const consultationFeedbackRailRef = useRef(null);
   const materialTabRefs = useRef([]);
@@ -1314,6 +1316,48 @@ export function App() {
 
   function scrollAuthorityVideos(direction) {
     authorityVideoRailRef.current?.scrollBy({ left: direction * 420, behavior: "smooth" });
+  }
+
+  function startAuthorityVideoDrag(event) {
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
+    const rail = authorityVideoRailRef.current;
+    if (!rail) return;
+    authorityVideoDragRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startScrollLeft: rail.scrollLeft,
+      dragged: false,
+    };
+    rail.setPointerCapture?.(event.pointerId);
+    rail.classList.add("is-dragging");
+  }
+
+  function moveAuthorityVideoDrag(event) {
+    const drag = authorityVideoDragRef.current;
+    const rail = authorityVideoRailRef.current;
+    if (!rail || drag.pointerId !== event.pointerId) return;
+    const distance = event.clientX - drag.startX;
+    if (Math.abs(distance) > 4) drag.dragged = true;
+    if (!drag.dragged) return;
+    event.preventDefault();
+    rail.scrollLeft = drag.startScrollLeft - distance;
+  }
+
+  function endAuthorityVideoDrag(event) {
+    const drag = authorityVideoDragRef.current;
+    const rail = authorityVideoRailRef.current;
+    if (!rail || drag.pointerId !== event.pointerId) return;
+    if (rail.hasPointerCapture?.(event.pointerId)) rail.releasePointerCapture(event.pointerId);
+    rail.classList.remove("is-dragging");
+    drag.pointerId = null;
+    if (drag.dragged) window.setTimeout(() => { drag.dragged = false; }, 0);
+  }
+
+  function suppressAuthorityVideoClickAfterDrag(event) {
+    if (!authorityVideoDragRef.current.dragged) return;
+    event.preventDefault();
+    event.stopPropagation();
+    authorityVideoDragRef.current.dragged = false;
   }
 
   function scrollConsultationFeedback(direction) {
@@ -1663,7 +1707,17 @@ export function App() {
               <button type="button" onClick={() => scrollAuthorityVideos(1)} aria-label="Show more independent XRF reviews"><CaretRight size={22} /></button>
             </div>
           </div>
-          <div className="review-proof__rail" ref={authorityVideoRailRef}>
+          <div
+            className="review-proof__rail"
+            ref={authorityVideoRailRef}
+            aria-label="Independent XRF review videos"
+            onPointerDown={startAuthorityVideoDrag}
+            onPointerMove={moveAuthorityVideoDrag}
+            onPointerUp={endAuthorityVideoDrag}
+            onPointerCancel={endAuthorityVideoDrag}
+            onClickCapture={suppressAuthorityVideoClickAfterDrag}
+            onDragStart={(event) => event.preventDefault()}
+          >
             {authorityVideos.map((video, index) => <ReviewVideoCard video={video} onPlay={setYoutubeVideo} index={index} total={authorityVideos.length} key={video.id} />)}
           </div>
         </section>
