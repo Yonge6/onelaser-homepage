@@ -9547,6 +9547,18 @@ body { color: var(--ink); }
   border: 0;
 }
 
+/* Annotation batch: remove decorative gray frames while preserving active and data-table states. */
+.review-video-card,
+.sales-video.sales-video--competitor,
+.sales-video.sales-video--competitor .youtube-cover,
+.makerboost-proof__media,
+.software-compatibility__media,
+.capability-scroll__media,
+.power-proof-stage,
+.rf-advantages__stage {
+  border: 0;
+}
+
 @media (max-width: 640px) {
   .sticky-buy > div:first-child {
     display: none;

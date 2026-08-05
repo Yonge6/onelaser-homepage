@@ -303,6 +303,13 @@
   transform: scale(.995);
 }
 
+.product-card:not(.is-active),
+.product-card:not(.is-active):hover,
+.product-detail,
+.product-economics {
+  border-color: transparent;
+}
+
 .product-card.is-active {
   border-color: var(--red);
   box-shadow: none;
@@ -1000,4 +1007,10 @@
   .product-card__media img {
     transition: none;
   }
+}
+
+/* Annotation: keep the selected product emphasis, remove surrounding gray frames. */
+.product-detail,
+.product-economics {
+  border: 0;
 }
