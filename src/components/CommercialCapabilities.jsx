@@ -1,38 +1,17 @@
 import { useMemo, useRef, useState } from "react";
 import {
-  ArrowClockwise,
-  CubeFocus,
-  ShieldCheck,
-  Target,
-} from "@phosphor-icons/react";
-import {
   economicsAssumptions,
   economicsDisclaimer,
   economicsExamples,
   productCategories,
   products,
-  workflowCapabilities,
 } from "../data/commercialCapabilities.js";
 import "./CommercialCapabilities.css";
-
-const workflowIcons = {
-  precision: Target,
-  motion: ArrowClockwise,
-  workflow: CubeFocus,
-  production: ShieldCheck,
-};
 
 const currencyFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
   maximumFractionDigits: 0,
-});
-
-const paymentFormatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
 });
 
 function ProductEconomics({ product, equipmentInvestment }) {
@@ -41,39 +20,25 @@ function ProductEconomics({ product, equipmentInvestment }) {
   const marginRate = Number.parseInt(economics.margin, 10) / 100;
   const profitPerItem = economics.unitPrice * marginRate;
   const monthlyNetProfit = profitPerItem * monthlySales;
-  const annualNetProfit = monthlyNetProfit * 12;
   const paybackMonths = equipmentInvestment / monthlyNetProfit;
 
   return (
     <aside className="product-economics" aria-live="polite" aria-atomic="true">
       <div key={product.id} className="product-economics__inner">
-        <header>
+        <header className="product-economics__header">
           <div>
             <span>ILLUSTRATIVE EXAMPLE</span>
-            <h4>Illustrative return snapshot</h4>
+            <h4>Profit per item</h4>
           </div>
+          <strong>{currencyFormatter.format(profitPerItem)}</strong>
         </header>
         <dl className="product-economics__metrics">
-          <div className="product-economics__payback">
-            <dt>Estimated equipment payback</dt>
-            <dd>{paybackMonths.toFixed(1)} <small>months</small></dd>
-          </div>
-          <div><dt>Profit per item</dt><dd>{currencyFormatter.format(profitPerItem)}</dd></div>
-          <div><dt>Monthly net profit</dt><dd>{currencyFormatter.format(monthlyNetProfit)}</dd></div>
-          <div><dt>Annual net profit</dt><dd>{currencyFormatter.format(annualNetProfit)}</dd></div>
           <div><dt>Example margin</dt><dd>{economics.margin}</dd></div>
+          <div className="product-economics__payback"><dt>Estimated payback</dt><dd>{paybackMonths.toFixed(1)} <small>months</small></dd></div>
         </dl>
         <p className="product-economics__assumptions">
           Based on {monthlySales} illustrative sales/mo. and a {currencyFormatter.format(equipmentInvestment)} equipment investment.
         </p>
-        <p className="product-economics__payment">
-          <span>24-month price reference: {paymentFormatter.format(equipmentInvestment / 24)}/mo.</span>
-          <strong>vs. {currencyFormatter.format(monthlyNetProfit)} illustrative monthly net profit</strong>
-        </p>
-        <dl className="product-economics__details">
-          <div><dt>Best suited for</dt><dd>{economics.bestFor}</dd></div>
-          <div><dt>Required setup</dt><dd>{economics.requiredSetup}</dd></div>
-        </dl>
         <p className="product-economics__disclaimer">{economicsDisclaimer}</p>
       </div>
     </aside>
@@ -235,10 +200,6 @@ function ProductOpportunities({ asset, equipmentInvestment }) {
               <div className="product-detail__facts">
                 <span><small>Material</small><strong>{activeProduct.material}</strong></span>
                 <span><small>Process</small><strong>{activeProduct.process}</strong></span>
-                <span>
-                  <small>Example selling price</small>
-                  <strong className="product-detail__price">{economicsExamples[activeProduct.economicsId].sellingPrice}</strong>
-                </span>
               </div>
               <div className="product-detail__tags">
                 {activeProduct.tags.map((tag) => <span key={tag}>{tag}</span>)}
@@ -257,32 +218,6 @@ function ProductOpportunities({ asset, equipmentInvestment }) {
   );
 }
 
-function WorkflowBridge() {
-  return (
-    <div className="workflow-bridge">
-      <section className="workflow-bridge__proof" aria-labelledby="workflow-bridge-title">
-        <header>
-          <span className="eyebrow">FROM PRODUCT TO PROCESS</span>
-          <h2 id="workflow-bridge-title">The workflow behind repeatable results.</h2>
-          <p>Four connected capabilities help turn a finished sample into work you can produce again with confidence.</p>
-        </header>
-        <div className="workflow-bridge__grid">
-          {workflowCapabilities.map((capability) => {
-            const Icon = workflowIcons[capability.icon];
-            return (
-              <article key={capability.id}>
-                <Icon size={25} weight="regular" aria-hidden="true" />
-                <h3>{capability.label}</h3>
-                <p>{capability.description}</p>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-    </div>
-  );
-}
-
 export function CommercialCapabilities({ asset, equipmentInvestment }) {
   return (
     <section className="commercial-capabilities" id="roi-materials" aria-label="XRF Gen2 ROI and material opportunities">
@@ -292,7 +227,6 @@ export function CommercialCapabilities({ asset, equipmentInvestment }) {
         <img src={asset("xrf-profit-products-web.webp")} alt="Premium products and example business outputs made with the OneLaser XRF Gen2" />
       </div>
       <ProductOpportunities asset={asset} equipmentInvestment={equipmentInvestment} />
-      <WorkflowBridge />
     </section>
   );
 }

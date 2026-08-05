@@ -233,6 +233,7 @@ const decisionVideos = {
     title: "How do they compare? xTool P2 vs OneLaser XRF",
     channel: "Bearded Builds Co",
     tag: "DIRECT COMPARISON",
+    cover: "competitor-video-cover-hd.jpg",
   },
   facility: {
     id: "tSroh4OUkX4",
@@ -1042,7 +1043,7 @@ export function App() {
   const thumbnailRailRef = useRef(null);
   const heroMediaTouchStartX = useRef(null);
   const authorityVideoRailRef = useRef(null);
-  const authorityVideoDragRef = useRef({ pointerId: null, startX: 0, startScrollLeft: 0, dragged: false });
+  const horizontalRailDragRef = useRef({ rail: null, pointerId: null, startX: 0, startScrollLeft: 0, dragged: false });
   const reviewVideoRailRef = useRef(null);
   const consultationFeedbackRailRef = useRef(null);
   const materialTabRefs = useRef([]);
@@ -1318,11 +1319,11 @@ export function App() {
     authorityVideoRailRef.current?.scrollBy({ left: direction * 420, behavior: "smooth" });
   }
 
-  function startAuthorityVideoDrag(event) {
+  function startHorizontalRailDrag(event) {
     if (event.pointerType !== "mouse" || event.button !== 0) return;
-    const rail = authorityVideoRailRef.current;
-    if (!rail) return;
-    authorityVideoDragRef.current = {
+    const rail = event.currentTarget;
+    horizontalRailDragRef.current = {
+      rail,
       pointerId: event.pointerId,
       startX: event.clientX,
       startScrollLeft: rail.scrollLeft,
@@ -1332,9 +1333,9 @@ export function App() {
     rail.classList.add("is-dragging");
   }
 
-  function moveAuthorityVideoDrag(event) {
-    const drag = authorityVideoDragRef.current;
-    const rail = authorityVideoRailRef.current;
+  function moveHorizontalRailDrag(event) {
+    const drag = horizontalRailDragRef.current;
+    const rail = drag.rail;
     if (!rail || drag.pointerId !== event.pointerId) return;
     const distance = event.clientX - drag.startX;
     if (Math.abs(distance) > 4) drag.dragged = true;
@@ -1343,21 +1344,22 @@ export function App() {
     rail.scrollLeft = drag.startScrollLeft - distance;
   }
 
-  function endAuthorityVideoDrag(event) {
-    const drag = authorityVideoDragRef.current;
-    const rail = authorityVideoRailRef.current;
+  function endHorizontalRailDrag(event) {
+    const drag = horizontalRailDragRef.current;
+    const rail = drag.rail;
     if (!rail || drag.pointerId !== event.pointerId) return;
     if (rail.hasPointerCapture?.(event.pointerId)) rail.releasePointerCapture(event.pointerId);
     rail.classList.remove("is-dragging");
+    drag.rail = null;
     drag.pointerId = null;
     if (drag.dragged) window.setTimeout(() => { drag.dragged = false; }, 0);
   }
 
-  function suppressAuthorityVideoClickAfterDrag(event) {
-    if (!authorityVideoDragRef.current.dragged) return;
+  function suppressHorizontalRailClickAfterDrag(event) {
+    if (!horizontalRailDragRef.current.dragged) return;
     event.preventDefault();
     event.stopPropagation();
-    authorityVideoDragRef.current.dragged = false;
+    horizontalRailDragRef.current.dragged = false;
   }
 
   function scrollConsultationFeedback(direction) {
@@ -1708,14 +1710,14 @@ export function App() {
             </div>
           </div>
           <div
-            className="review-proof__rail"
+            className="review-proof__rail is-mouse-draggable"
             ref={authorityVideoRailRef}
             aria-label="Independent XRF review videos"
-            onPointerDown={startAuthorityVideoDrag}
-            onPointerMove={moveAuthorityVideoDrag}
-            onPointerUp={endAuthorityVideoDrag}
-            onPointerCancel={endAuthorityVideoDrag}
-            onClickCapture={suppressAuthorityVideoClickAfterDrag}
+            onPointerDown={startHorizontalRailDrag}
+            onPointerMove={moveHorizontalRailDrag}
+            onPointerUp={endHorizontalRailDrag}
+            onPointerCancel={endHorizontalRailDrag}
+            onClickCapture={suppressHorizontalRailClickAfterDrag}
             onDragStart={(event) => event.preventDefault()}
           >
             {authorityVideos.map((video, index) => <ReviewVideoCard video={video} onPlay={setYoutubeVideo} index={index} total={authorityVideos.length} key={video.id} />)}
@@ -2004,7 +2006,17 @@ export function App() {
               <button type="button" onClick={() => scrollReviewVideos(1)} aria-label="Show more customer stories"><CaretRight size={22} /></button>
             </div>
           </div>
-          <div className="review-proof__rail" ref={reviewVideoRailRef}>
+          <div
+            className="review-proof__rail is-mouse-draggable"
+            ref={reviewVideoRailRef}
+            aria-label="Customer story videos"
+            onPointerDown={startHorizontalRailDrag}
+            onPointerMove={moveHorizontalRailDrag}
+            onPointerUp={endHorizontalRailDrag}
+            onPointerCancel={endHorizontalRailDrag}
+            onClickCapture={suppressHorizontalRailClickAfterDrag}
+            onDragStart={(event) => event.preventDefault()}
+          >
             {customerStoryVideos.map((video, index) => <ReviewVideoCard video={video} onPlay={setYoutubeVideo} index={index} total={customerStoryVideos.length} key={video.id} />)}
           </div>
           <div className="consultation-feedback" aria-label="OneLaser XRF owner reviews">
@@ -2018,7 +2030,15 @@ export function App() {
                 <button type="button" onClick={() => scrollConsultationFeedback(1)} aria-label="Show more XRF owner reviews"><CaretRight size={20} /></button>
               </div>
             </div>
-            <div className="consultation-feedback__grid" ref={consultationFeedbackRailRef}>
+            <div
+              className="consultation-feedback__grid is-mouse-draggable"
+              ref={consultationFeedbackRailRef}
+              onPointerDown={startHorizontalRailDrag}
+              onPointerMove={moveHorizontalRailDrag}
+              onPointerUp={endHorizontalRailDrag}
+              onPointerCancel={endHorizontalRailDrag}
+              onClickCapture={suppressHorizontalRailClickAfterDrag}
+            >
               {consultationFeedback.map((item) => (
                 <blockquote key={item.name}>
                   <div className="consultation-feedback__stars" aria-label="5 out of 5 stars">
