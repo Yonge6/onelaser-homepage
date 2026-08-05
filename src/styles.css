@@ -2180,7 +2180,7 @@ img {
 .official-package__top strong { font-size: 16px; font-weight: 800; }
 .official-package__top > span:last-child strong { color: var(--red); font-size: 18px; }
 .official-package__monthly { color: var(--muted); font-size: 12px; font-weight: 650; white-space: nowrap; }
-.official-package__top em { padding: 4px 7px; border-radius: 5px; background: var(--red); color: #fff; font-size: 11px; font-style: normal; font-weight: 800; }
+.official-package__top em { padding: 4px 7px; border-radius: 5px; background: var(--red); color: #fff; font-size: 12px; font-style: normal; font-weight: 800; }
 .official-package__detail { display: flex; align-items: center; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 12px; font-weight: 700; }
 .official-package__detail svg { color: var(--red); }
 
@@ -7664,6 +7664,20 @@ body { color: var(--ink); }
   object-fit: contain;
 }
 
+.capability-scroll {
+  padding-top: 0;
+}
+
+.capability-scroll > .journey-opening-artwork {
+  margin-bottom: 48px;
+}
+
+@media (max-width: 640px) {
+  .capability-scroll > .journey-opening-artwork {
+    margin-bottom: 32px;
+  }
+}
+
 .power-proof-stage__copy h3 {
   font-size: 36px;
   line-height: 1.04;
@@ -9445,4 +9459,13 @@ body { color: var(--ink); }
     font-size: 14px;
     scroll-snap-align: start;
   }
+}
+
+/* Annotation: present the facility story without a surrounding surface card. */
+.sales-video.authority-facility {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }

@@ -253,6 +253,9 @@ const authorityVideos = [
 const customerStoryVideos = [
   decisionVideos.business,
   decisionVideos.businessFit,
+  { id: "5q2-Iy9Nhdc", title: "OneLaser XRF unboxing and first tests", channel: "Bearded Builds Co", tag: "OWNER SETUP" },
+  { id: "f2cJ7G0t_cw", title: "Expand XRF with the Riser Base", channel: "Edmonds Woodshop", tag: "WORKSHOP EXPANSION" },
+  { id: "arBKtqSz21o", title: "XRF 38W unboxing and test cutting", channel: "Peachy Creations", tag: "MAKER TEST RUN" },
 ];
 
 const speedMotionMaterials = [
@@ -893,6 +896,18 @@ function CapabilityBrowser({ onPlay }) {
               <strong>{item.nav}</strong>
             </button>
           ))}
+          <button
+            type="button"
+            className={activeChapter === capabilityChapters.length ? "is-active" : ""}
+            onClick={() => {
+              setActiveChapter(capabilityChapters.length);
+              jumpToNode(document.getElementById("makerboost"), window.innerWidth <= 760 ? 136 : 100);
+            }}
+            aria-current={activeChapter === capabilityChapters.length ? "step" : undefined}
+            data-chapter-nav={capabilityChapters.length}
+          >
+            <strong>Software</strong>
+          </button>
         </nav>
 
         <div className="capability-scroll__chapters">
@@ -1025,6 +1040,7 @@ export function App() {
   const [youtubeVideo, setYoutubeVideo] = useState(null);
   const thumbnailRailRef = useRef(null);
   const heroMediaTouchStartX = useRef(null);
+  const authorityVideoRailRef = useRef(null);
   const reviewVideoRailRef = useRef(null);
   const consultationFeedbackRailRef = useRef(null);
   const materialTabRefs = useRef([]);
@@ -1294,6 +1310,10 @@ export function App() {
 
   function scrollReviewVideos(direction) {
     reviewVideoRailRef.current?.scrollBy({ left: direction * 420, behavior: "smooth" });
+  }
+
+  function scrollAuthorityVideos(direction) {
+    authorityVideoRailRef.current?.scrollBy({ left: direction * 420, behavior: "smooth" });
   }
 
   function scrollConsultationFeedback(direction) {
@@ -1638,8 +1658,12 @@ export function App() {
               <h2 id="authority-proof-title">Why professionals take XRF seriously.</h2>
               <p>Start with independent hands-on evaluations and performance testing from experienced laser reviewers.</p>
             </div>
+            <div className="review-proof__controls" aria-label="Browse independent XRF reviews">
+              <button type="button" onClick={() => scrollAuthorityVideos(-1)} aria-label="Show previous independent XRF review"><CaretLeft size={22} /></button>
+              <button type="button" onClick={() => scrollAuthorityVideos(1)} aria-label="Show more independent XRF reviews"><CaretRight size={22} /></button>
+            </div>
           </div>
-          <div className="review-proof__rail">
+          <div className="review-proof__rail" ref={authorityVideoRailRef}>
             {authorityVideos.map((video, index) => <ReviewVideoCard video={video} onPlay={setYoutubeVideo} index={index} total={authorityVideos.length} key={video.id} />)}
           </div>
         </section>
