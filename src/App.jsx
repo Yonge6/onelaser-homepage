@@ -46,8 +46,7 @@ const SALES_CALL_URL = "https://www.1laser.com/products/sales-consultation-call"
 const BROCHURE_URL = "https://webforms.pipedrive.com/f/ckzBDiOdWxvKiAs4kk7LLCTIRbPsdg46WE8RFicSySaVdIPVjKrCYkIjSZEgd9bdM7";
 const SUPPORT_URL = "https://www.1laser.com/pages/contact-us";
 
-const media = Array.from({ length: 23 }, (_, index) => index + 1)
-  .filter((number) => ![16, 17, 18].includes(number))
+const media = Array.from({ length: 20 }, (_, index) => index + 1)
   .map((mediaNumber) => {
     const number = String(mediaNumber).padStart(2, "0");
     return {
@@ -427,7 +426,7 @@ const purchasePackages = [
   {
     id: "standalone",
     name: "XRF Standalone",
-    price: 3999,
+    price: 4399,
     msrp: 6499,
     badge: "CURRENT OFFER",
     detail: "The King of RF Desktop Lasers",
@@ -435,7 +434,7 @@ const purchasePackages = [
   {
     id: "riser",
     name: "XRF & Riser Base",
-    price: 4499,
+    price: 4899,
     msrp: 6999,
     badge: "EXPANDED HEIGHT",
     detail: "Includes optional Riser Base",
@@ -513,7 +512,7 @@ const specs = [
   {
     title: "Workspace",
     rows: [
-      ["True engraving area", "23.6 × 11.8 in (nominal 24 × 12 in)"],
+      ["True engraving area", "24 × 12 in"],
       ["Honeycomb table", "650 × 350 mm"],
       ["Maximum work height", "8.5 in with optional Riser Base"],
       ["Maximum length", "Unlimited with pass-through workflow"],
@@ -643,7 +642,7 @@ const competitorRows = [
   ["Detail", "Up to 2,000 DPI · 0.07 mm laser dot", "0.01 mm processing precision"],
   ["Cooling & source life", "Air-cooled · up to 30,000 hours", "Water-cooled · 6,000–8,000 hours"],
   ["Warranty", "3-year frame · 2-year electronics · 1-year source", "12-month coverage on main components · 6-month coverage on the laser tube"],
-  ["Starting price", "$3,999 for 38W Standalone", "$3,999 for P2 Standalone"],
+  ["Starting price", "$4,399 for 38W Standalone", "$3,999 for P2 Standalone"],
 ];
 
 function SpecGroup({ group }) {
@@ -1143,7 +1142,7 @@ export function App() {
     trackEvent("view_content", {
       content_name: "OneLaser XRF Gen2",
       content_category: "Laser engraver",
-      value: 3999,
+      value: 4399,
       currency: "USD",
     });
   }, []);
@@ -1664,7 +1663,7 @@ export function App() {
                       key={item.id}
                       onClick={() => {
                         setPurchasePower(item.id);
-                        trackEvent("select_power", { power: item.id, value: item.id === "70W" ? 4999 : 3999, currency: "USD" });
+                        trackEvent("select_power", { power: item.id, value: item.id === "70W" ? 5399 : 4399, currency: "USD" });
                       }}
                       aria-pressed={selected}
                     >
