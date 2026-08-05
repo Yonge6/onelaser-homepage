@@ -299,27 +299,25 @@ const capabilityChapters = [
   {
     id: "precision",
     nav: "RF Precision",
-    title: "Make products worth a closer look.",
-    summary: "The RF source turns fine detail, tonal range and dimensional relief into a visible product advantage.",
+    title: "PowerMax 70™: More power. More materials. More possibilities.",
+    summary: "The XRF Gen2 now offers a true 70W RF tube—the most powerful RF source in any desktop-class laser. With nearly double the output of the 38W tube and pulse frequencies up to 50 kHz, it delivers ultra-high-DPI flat engraving without sacrificing speed, visibly deeper 3D relief, sharper grayscale and greater cutting capacity.",
     spotlights: [
       {
         title: "PowerMax 70™: More power. More materials. More possibilities.",
         copy: "The XRF Gen2 now offers a true 70W RF tube—the most powerful RF source in any desktop-class laser. With nearly double the output of the 38W tube and pulse frequencies up to 50 kHz, it delivers ultra-high-DPI flat engraving without sacrificing speed, visibly deeper 3D relief, sharper grayscale and greater cutting capacity.",
         metrics: ["2,000 DPI", "0.07 mm spot", "Up to 30,000 h"],
         image: "capability-precision-main.webp",
+        hideCopy: true,
       },
     ],
-    support: [
-      { title: "Magnetic QuickSwitch™", copy: "Effortlessly swap magnetic focus lenses with no tools needed — fast, easy, and accessible for everyone. Routine optics care takes seconds, not a teardown.", image: "capability-tool-free-optics-care.webp" },
-      { title: "Output that stays consistent", copy: "A sealed, factory-calibrated optical path helps the beam arrive true and stay true through daily production.", image: "capability-output-consistent.webp" },
-    ],
+    support: [],
     proofs: [
       { value: "Air-cooled", label: "No water chiller", icon: Thermometer },
       { value: "≤ 0.01 mm", label: "Repeat positioning", icon: Target },
       { value: "2.5 in", label: "Standard focal lens", icon: CubeFocus },
       { value: "38W / 70W", label: "Equal-fit RF options", icon: Fire },
     ],
-    details: ["Optional 2 in lens", "Three-mirror optical path", "3× beam expander"],
+    details: ["Magnetic QuickSwitch™ tool-free lens swaps", "Optional 2 in lens", "Three-mirror optical path", "3× beam expander"],
   },
   {
     id: "motion",
@@ -820,7 +818,7 @@ function SpeedMotionProof() {
 
 function RfAdvantages({ activeIndex, onChange }) {
   return (
-    <section className="rf-advantages" id="rf-advantages">
+    <section className="rf-advantages" id="rf-advantages" data-chapter-index="0">
       <div className="rf-advantages__inner">
         <header className="rf-advantages__header">
           <span className="eyebrow">WHY RF</span>
@@ -906,11 +904,17 @@ function CapabilityBrowser({ onPlay, children }) {
   }
 
   useEffect(() => {
-    const chapters = chapterRefs.current.filter(Boolean);
-    const observer = new IntersectionObserver((entries) => {
-      const visible = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => Math.abs(a.boundingClientRect.top - 150) - Math.abs(b.boundingClientRect.top - 150));
+    const chapters = [
+      document.getElementById("rf-advantages"),
+      document.getElementById("power-guide"),
+      ...chapterRefs.current,
+      document.getElementById("makerboost"),
+    ].filter(Boolean);
+    const observer = new IntersectionObserver(() => {
+      const visible = chapters
+        .map((target) => ({ target, rect: target.getBoundingClientRect() }))
+        .filter(({ rect }) => rect.bottom > 96 && rect.top < window.innerHeight * .32)
+        .sort((a, b) => Math.abs(a.rect.top - 150) - Math.abs(b.rect.top - 150));
       if (visible[0]) setActiveChapter(Number(visible[0].target.dataset.chapterIndex));
     }, { rootMargin: "-96px 0px -68% 0px", threshold: 0 });
 
@@ -940,8 +944,13 @@ function CapabilityBrowser({ onPlay, children }) {
   }, []);
 
   function selectChapter(index) {
-    setActiveChapter(index);
+    setActiveChapter(index + 2);
     jumpToNode(chapterRefs.current[index], window.innerWidth <= 760 ? 136 : 100);
+  }
+
+  function selectIntroChapter(id, index) {
+    setActiveChapter(index);
+    jumpToNode(document.getElementById(id), window.innerWidth <= 760 ? 136 : 100);
   }
 
   return (
@@ -958,30 +967,48 @@ function CapabilityBrowser({ onPlay, children }) {
           ref={navRef}
           style={{
             "--active-chapter": activeChapter,
-            "--chapter-count": capabilityChapters.length,
+            "--chapter-count": capabilityChapters.length + 3,
           }}
         >
+          <button
+            type="button"
+            className={activeChapter === 0 ? "is-active" : ""}
+            onClick={() => selectIntroChapter("rf-advantages", 0)}
+            aria-current={activeChapter === 0 ? "step" : undefined}
+            data-chapter-nav="0"
+          >
+            <strong>WHY RF</strong>
+          </button>
+          <button
+            type="button"
+            className={activeChapter === 1 ? "is-active" : ""}
+            onClick={() => selectIntroChapter("power-guide", 1)}
+            aria-current={activeChapter === 1 ? "step" : undefined}
+            data-chapter-nav="1"
+          >
+            <strong>38W / 70W</strong>
+          </button>
           {capabilityChapters.map((item, index) => (
             <button
               type="button"
               key={item.id}
-              className={activeChapter === index ? "is-active" : ""}
+              className={activeChapter === index + 2 ? "is-active" : ""}
               onClick={() => selectChapter(index)}
-              aria-current={activeChapter === index ? "step" : undefined}
-              data-chapter-nav={index}
+              aria-current={activeChapter === index + 2 ? "step" : undefined}
+              data-chapter-nav={index + 2}
             >
               <strong>{item.nav}</strong>
             </button>
           ))}
           <button
             type="button"
-            className={activeChapter === capabilityChapters.length ? "is-active" : ""}
+            className={activeChapter === capabilityChapters.length + 2 ? "is-active" : ""}
             onClick={() => {
-              setActiveChapter(capabilityChapters.length);
+              setActiveChapter(capabilityChapters.length + 2);
               jumpToNode(document.getElementById("makerboost"), window.innerWidth <= 760 ? 136 : 100);
             }}
-            aria-current={activeChapter === capabilityChapters.length ? "step" : undefined}
-            data-chapter-nav={capabilityChapters.length}
+            aria-current={activeChapter === capabilityChapters.length + 2 ? "step" : undefined}
+            data-chapter-nav={capabilityChapters.length + 2}
           >
             <strong>Software</strong>
           </button>
@@ -992,7 +1019,7 @@ function CapabilityBrowser({ onPlay, children }) {
             <section
               className="capability-scroll__chapter"
               id={`capability-${chapter.id}`}
-              data-chapter-index={chapterIndex}
+              data-chapter-index={chapterIndex + 2}
               ref={(node) => { chapterRefs.current[chapterIndex] = node; }}
               aria-labelledby={`capability-${chapter.id}-title`}
               key={chapter.id}
@@ -1010,16 +1037,19 @@ function CapabilityBrowser({ onPlay, children }) {
                     <div className="capability-scroll__media capability-scroll__media--static">
                       <img src={asset(spotlight.image)} alt={`${spotlight.title} XRF Gen2 proof`} />
                     </div>
-                    <div className="capability-scroll__story-copy">
-                      <h4>{spotlight.title}</h4>
-                      <p>{spotlight.copy}</p>
-                      <div>{spotlight.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
-                    </div>
+                    {!spotlight.hideCopy && (
+                      <div className="capability-scroll__story-copy">
+                        <h4>{spotlight.title}</h4>
+                        <p>{spotlight.copy}</p>
+                        <div>{spotlight.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
+                      </div>
+                    )}
                   </article>
                 ))}
               </div>
 
-              <div className={chapter.id === "protection" ? "capability-scroll__media-showcase capability-scroll__media-showcase--compact" : "capability-scroll__media-showcase"}>
+              {(chapter.feature || chapter.support.length > 0) && (
+                <div className={chapter.id === "protection" ? "capability-scroll__media-showcase capability-scroll__media-showcase--compact" : "capability-scroll__media-showcase"}>
                 {chapter.feature && (
                   <article className="capability-scroll__feature capability-scroll__story">
                     {chapter.id === "protection" ? (
@@ -1065,7 +1095,8 @@ function CapabilityBrowser({ onPlay, children }) {
                     </article>
                   ))}
                 </div>
-              </div>
+                </div>
+              )}
 
               {chapter.proofs.length > 0 && (
                 <div className="capability-scroll__proofs">
@@ -1817,7 +1848,7 @@ export function App() {
 
         <CapabilityBrowser onPlay={openStory}>
           <RfAdvantages activeIndex={activeRfAdvantage} onChange={setActiveRfAdvantage} />
-          <section className="power-guide" id="power-guide" data-reveal>
+          <section className="power-guide" id="power-guide" data-chapter-index="1" data-reveal>
             <div className="power-guide__inner">
               <div className="section-heading section-heading--left">
                 <span className="eyebrow">TWO PURPOSE-BUILT RF OPTIONS</span>
@@ -1853,7 +1884,7 @@ export function App() {
           </section>
         </CapabilityBrowser>
 
-        <section className="makerboost-proof" id="makerboost" data-reveal>
+        <section className="makerboost-proof" id="makerboost" data-chapter-index={capabilityChapters.length + 2} data-reveal>
           <div className="makerboost-proof__inner">
             <div className="makerboost-proof__intro">
               <header className="makerboost-proof__header">
