@@ -817,7 +817,80 @@ function SpeedMotionProof() {
   );
 }
 
-function CapabilityBrowser({ onPlay }) {
+function RfAdvantages({ activeIndex, onChange }) {
+  return (
+    <section className="rf-advantages" id="rf-advantages" data-reveal>
+      <div className="rf-advantages__inner">
+        <header className="rf-advantages__header">
+          <span className="eyebrow">WHY RF</span>
+          <h2>Why makers choose RF.</h2>
+          <p>Cleaner detail, faster response, and up to 30,000 hours of source life—built for products worth making and selling.</p>
+        </header>
+        <div className="rf-advantages__tabs" role="tablist" aria-label="Explore the advantages of RF laser technology">
+          {rfAdvantages.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <button
+                type="button"
+                role="tab"
+                id={`rf-tab-${item.id}`}
+                aria-selected={activeIndex === index}
+                aria-controls="rf-advantage-panel"
+                tabIndex={activeIndex === index ? 0 : -1}
+                className={activeIndex === index ? "is-active" : ""}
+                key={item.id}
+                onClick={() => onChange(index)}
+                onKeyDown={(event) => {
+                  const navigationKeys = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"];
+                  if (!navigationKeys.includes(event.key)) return;
+                  event.preventDefault();
+                  const lastIndex = rfAdvantages.length - 1;
+                  const nextIndex = event.key === "Home"
+                    ? 0
+                    : event.key === "End"
+                      ? lastIndex
+                      : event.key === "ArrowLeft" || event.key === "ArrowUp"
+                        ? (index - 1 + rfAdvantages.length) % rfAdvantages.length
+                        : (index + 1) % rfAdvantages.length;
+                  onChange(nextIndex);
+                  event.currentTarget.parentElement
+                    ?.querySelectorAll('[role="tab"]')
+                    [nextIndex]?.focus();
+                }}
+              >
+                <Icon size={22} weight={activeIndex === index ? "bold" : "regular"} aria-hidden="true" />
+                <span>{item.tab}</span>
+              </button>
+            );
+          })}
+        </div>
+        <div
+          className="rf-advantages__stage"
+          id="rf-advantage-panel"
+          role="tabpanel"
+          aria-labelledby={`rf-tab-${rfAdvantages[activeIndex].id}`}
+          aria-live="polite"
+        >
+          <div className="rf-advantages__media">
+            <img
+              key={rfAdvantages[activeIndex].id}
+              src={asset(rfAdvantages[activeIndex].image)}
+              alt={rfAdvantages[activeIndex].alt}
+            />
+          </div>
+          <div className="rf-advantages__copy">
+            <span className="eyebrow">{rfAdvantages[activeIndex].eyebrow}</span>
+            <h3>{rfAdvantages[activeIndex].title}</h3>
+            <p>{rfAdvantages[activeIndex].copy}</p>
+            <strong>{rfAdvantages[activeIndex].proof}</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CapabilityBrowser({ onPlay, children }) {
   const [activeChapter, setActiveChapter] = useState(0);
   const chapterRefs = useRef([]);
   const navRef = useRef(null);
@@ -876,6 +949,7 @@ function CapabilityBrowser({ onPlay }) {
       <div className="journey-opening-artwork">
         <img src={asset("feature-overview-capabilities-v3.webp")} alt="XRF Gen2 feature overview covering RF precision, power options, motion, workflow, safety and support" />
       </div>
+      {children}
       <div className="capability-scroll__layout">
         <nav
           className="capability-scroll__nav"
@@ -1226,6 +1300,7 @@ export function App() {
 
   const purchaseTotal = (selectedPurchasePackage.price + purchaseAccessoryTotal) * quantity;
   const purchaseMsrpTotal = (selectedPurchasePackage.msrp + purchaseAccessoryMsrpTotal) * quantity;
+  const monthlyPayment = purchaseTotal / 24;
 
   function configure() {
     document.getElementById("purchase-options")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -1552,7 +1627,7 @@ export function App() {
               </div>
             </div>
             <div className="financing-line">
-              <strong><span>$166.63/mo.</span> for 24 months</strong>
+              <strong><span>{formatMoney(monthlyPayment)}/mo.</span> for 24 months</strong>
               <a href="https://www.1laser.com/pages/financing" target="_blank" rel="noreferrer">See if you qualify <CaretRight size={15} /></a>
             </div>
             <div className="financing-more">
@@ -1739,75 +1814,6 @@ export function App() {
           </div>
         </section>
 
-        <section className="rf-advantages" id="rf-advantages" data-reveal>
-          <div className="rf-advantages__inner">
-            <header className="rf-advantages__header">
-              <span className="eyebrow">WHY RF</span>
-              <h2>Why makers choose RF.</h2>
-              <p>Cleaner detail, faster response, and up to 30,000 hours of source life—built for products worth making and selling.</p>
-            </header>
-            <div className="rf-advantages__tabs" role="tablist" aria-label="Explore the advantages of RF laser technology">
-              {rfAdvantages.map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <button
-                    type="button"
-                    role="tab"
-                    id={`rf-tab-${item.id}`}
-                    aria-selected={activeRfAdvantage === index}
-                    aria-controls="rf-advantage-panel"
-                    tabIndex={activeRfAdvantage === index ? 0 : -1}
-                    className={activeRfAdvantage === index ? "is-active" : ""}
-                    key={item.id}
-                    onClick={() => setActiveRfAdvantage(index)}
-                    onKeyDown={(event) => {
-                      const navigationKeys = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"];
-                      if (!navigationKeys.includes(event.key)) return;
-                      event.preventDefault();
-                      const lastIndex = rfAdvantages.length - 1;
-                      const nextIndex = event.key === "Home"
-                        ? 0
-                        : event.key === "End"
-                          ? lastIndex
-                          : event.key === "ArrowLeft" || event.key === "ArrowUp"
-                            ? (index - 1 + rfAdvantages.length) % rfAdvantages.length
-                            : (index + 1) % rfAdvantages.length;
-                      setActiveRfAdvantage(nextIndex);
-                      event.currentTarget.parentElement
-                        ?.querySelectorAll('[role="tab"]')
-                        [nextIndex]?.focus();
-                    }}
-                  >
-                    <Icon size={22} weight={activeRfAdvantage === index ? "bold" : "regular"} aria-hidden="true" />
-                    <span>{item.tab}</span>
-                  </button>
-                );
-              })}
-            </div>
-            <div
-              className="rf-advantages__stage"
-              id="rf-advantage-panel"
-              role="tabpanel"
-              aria-labelledby={`rf-tab-${rfAdvantages[activeRfAdvantage].id}`}
-              aria-live="polite"
-            >
-              <div className="rf-advantages__media">
-                <img
-                  key={rfAdvantages[activeRfAdvantage].id}
-                  src={asset(rfAdvantages[activeRfAdvantage].image)}
-                  alt={rfAdvantages[activeRfAdvantage].alt}
-                />
-              </div>
-              <div className="rf-advantages__copy">
-                <span className="eyebrow">{rfAdvantages[activeRfAdvantage].eyebrow}</span>
-                <h3>{rfAdvantages[activeRfAdvantage].title}</h3>
-                <p>{rfAdvantages[activeRfAdvantage].copy}</p>
-                <strong>{rfAdvantages[activeRfAdvantage].proof}</strong>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section className="power-guide" id="power-guide" data-reveal>
           <div className="power-guide__inner">
             <div className="section-heading section-heading--left">
@@ -1845,7 +1851,9 @@ export function App() {
 
         <GenerationComparison />
 
-        <CapabilityBrowser onPlay={openStory} />
+        <CapabilityBrowser onPlay={openStory}>
+          <RfAdvantages activeIndex={activeRfAdvantage} onChange={setActiveRfAdvantage} />
+        </CapabilityBrowser>
 
         <section className="makerboost-proof" id="makerboost" data-reveal>
           <div className="makerboost-proof__inner">
@@ -1881,7 +1889,7 @@ export function App() {
           </div>
         </section>
 
-        <CommercialCapabilities asset={asset} equipmentInvestment={selectedPurchasePackage.price} />
+        <CommercialCapabilities asset={asset} equipmentInvestment={purchaseTotal} />
 
         <section className="section materials" id="materials" data-reveal>
           <div className="section-heading section-heading--stack">
@@ -2215,7 +2223,10 @@ export function App() {
           <small>30-Day Money-Back · 3-2-1 Warranty · Ships from California</small>
         </div>
         <div className="sticky-buy__price">
-          <span><strong>{formatMoney(purchaseTotal)}</strong><del>{formatMoney(purchaseMsrpTotal)}</del></span>
+          <div className="sticky-buy__amounts">
+            <span><strong>{formatMoney(purchaseTotal)}</strong><del>{formatMoney(purchaseMsrpTotal)}</del></span>
+            <small>{formatMoney(monthlyPayment)}/mo. for 24 months</small>
+          </div>
           <button type="button" onClick={handleAddToCart}>Add to Cart</button>
         </div>
       </div>

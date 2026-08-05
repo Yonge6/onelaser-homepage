@@ -9508,3 +9508,70 @@ body { color: var(--ink); }
     padding-block: 32px;
   }
 }
+
+/* Annotation batch: dynamic financing, compact review heading and borderless support cards. */
+.sticky-buy__amounts > span {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+}
+
+.sticky-buy__amounts > span strong {
+  color: var(--red);
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.sticky-buy__amounts > span del {
+  color: #9b9b97;
+  font-size: 12px;
+}
+
+.sticky-buy__amounts > small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 650;
+  text-align: right;
+}
+
+.consultation-feedback__intro strong {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.ownership-support__card,
+.ownership-support__card--wide {
+  border: 0;
+}
+
+@media (max-width: 640px) {
+  .sticky-buy > div:first-child {
+    display: none;
+  }
+
+  .sticky-buy__price {
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .sticky-buy__amounts > span strong {
+    font-size: 16px;
+  }
+
+  .sticky-buy__amounts > span del {
+    display: none;
+  }
+
+  .sticky-buy__amounts > small {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .consultation-feedback__intro strong {
+    font-size: 20px;
+  }
+}

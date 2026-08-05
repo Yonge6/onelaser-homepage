@@ -14,30 +14,35 @@ const currencyFormatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0,
 });
 
+const monthlyCurrencyFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+
 function ProductEconomics({ product, equipmentInvestment }) {
   const economics = economicsExamples[product.economicsId];
   const monthlySales = economics.monthlySales ?? economicsAssumptions.monthlySales;
-  const marginRate = Number.parseInt(economics.margin, 10) / 100;
-  const profitPerItem = economics.unitPrice * marginRate;
-  const monthlyNetProfit = profitPerItem * monthlySales;
-  const paybackMonths = equipmentInvestment / monthlyNetProfit;
+  const monthlyPayment = equipmentInvestment / 24;
+  const monthlyGrossOutput = economics.unitPrice * monthlySales;
 
   return (
     <aside className="product-economics" aria-live="polite" aria-atomic="true">
       <div key={product.id} className="product-economics__inner">
         <header className="product-economics__header">
           <div>
-            <span>ILLUSTRATIVE EXAMPLE</span>
-            <h4>Profit per item</h4>
+            <span>ROI SNAPSHOT</span>
+            <h4>Monthly payment vs. output</h4>
           </div>
-          <strong>{currencyFormatter.format(profitPerItem)}</strong>
+          <strong>{(monthlyGrossOutput / monthlyPayment).toFixed(1)}×</strong>
         </header>
         <dl className="product-economics__metrics">
-          <div><dt>Example margin</dt><dd>{economics.margin}</dd></div>
-          <div className="product-economics__payback"><dt>Estimated payback</dt><dd>{paybackMonths.toFixed(1)} <small>months</small></dd></div>
+          <div><dt>24-month payment</dt><dd>{monthlyCurrencyFormatter.format(monthlyPayment)}<small>/mo.</small></dd></div>
+          <div className="product-economics__output"><dt>Illustrative monthly gross output</dt><dd>{currencyFormatter.format(monthlyGrossOutput)}<small>/mo.</small></dd></div>
         </dl>
         <p className="product-economics__assumptions">
-          Based on {monthlySales} illustrative sales/mo. and a {currencyFormatter.format(equipmentInvestment)} equipment investment.
+          {monthlySales} products/mo. × {economics.sellingPrice} selling price. Payment is the current {currencyFormatter.format(equipmentInvestment)} configuration divided by 24.
         </p>
         <p className="product-economics__disclaimer">{economicsDisclaimer}</p>
       </div>
@@ -178,7 +183,11 @@ function ProductOpportunities({ asset, equipmentInvestment }) {
                   <span className="product-card__body">
                     <small>{String(index + 1).padStart(2, "0")}</small>
                     <strong>{product.name}</strong>
-                    <span>Example {economics.sellingPrice}</span>
+                    <span className="product-card__economics">
+                      <span>Selling Price: <b>{economics.sellingPrice}</b></span>
+                      <span>Net Margin: <b>{economics.margin}</b></span>
+                      <span>Hourly Revenue Output: <b>{economics.hourlyOutput}</b></span>
+                    </span>
                   </span>
                 </button>
               );
