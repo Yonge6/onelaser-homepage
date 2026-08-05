@@ -821,8 +821,8 @@ function RfAdvantages({ activeIndex, onChange }) {
     <section className="rf-advantages" id="rf-advantages" data-chapter-index="0">
       <div className="rf-advantages__inner">
         <header className="rf-advantages__header">
-          <span className="eyebrow">WHY RF</span>
-          <h2>Why makers choose RF.</h2>
+          <span className="eyebrow">WHY RF TUBE</span>
+          <h2>Why makers choose RF tube.</h2>
           <p>Cleaner detail, faster response, and up to 30,000 hours of source life—built for products worth making and selling.</p>
         </header>
         <div className="rf-advantages__tabs" role="tablist" aria-label="Explore the advantages of RF laser technology">
