@@ -24,25 +24,27 @@ const monthlyCurrencyFormatter = new Intl.NumberFormat("en-US", {
 function ProductEconomics({ product, equipmentInvestment }) {
   const economics = economicsExamples[product.economicsId];
   const monthlySales = economics.monthlySales ?? economicsAssumptions.monthlySales;
+  const marginRate = Number.parseInt(economics.margin, 10) / 100;
   const monthlyPayment = equipmentInvestment / 24;
-  const monthlyGrossOutput = economics.unitPrice * monthlySales;
+  const monthlyProfit = economics.unitPrice * marginRate * monthlySales;
+  const paybackMonths = equipmentInvestment / monthlyProfit;
 
   return (
     <aside className="product-economics" aria-live="polite" aria-atomic="true">
       <div key={product.id} className="product-economics__inner">
         <header className="product-economics__header">
           <div>
-            <span>ROI SNAPSHOT</span>
-            <h4>Monthly payment vs. output</h4>
+            <span>ILLUSTRATIVE EARNINGS</span>
+            <h4>Estimated monthly profit</h4>
           </div>
-          <strong>{(monthlyGrossOutput / monthlyPayment).toFixed(1)}×</strong>
+          <strong>{currencyFormatter.format(monthlyProfit)}<small>/mo.</small></strong>
         </header>
         <dl className="product-economics__metrics">
+          <div className="product-economics__payback"><dt>Estimated payback</dt><dd>{paybackMonths.toFixed(1)}<small>months</small></dd></div>
           <div><dt>24-month payment</dt><dd>{monthlyCurrencyFormatter.format(monthlyPayment)}<small>/mo.</small></dd></div>
-          <div className="product-economics__output"><dt>Illustrative monthly gross output</dt><dd>{currencyFormatter.format(monthlyGrossOutput)}<small>/mo.</small></dd></div>
         </dl>
         <p className="product-economics__assumptions">
-          {monthlySales} products/mo. × {economics.sellingPrice} selling price. Payment is the current {currencyFormatter.format(equipmentInvestment)} configuration divided by 24.
+          {monthlySales} products/mo. × {economics.sellingPrice} selling price × {economics.margin} net margin. Payback uses the current {currencyFormatter.format(equipmentInvestment)} configuration.
         </p>
         <p className="product-economics__disclaimer">{economicsDisclaimer}</p>
       </div>

@@ -7689,12 +7689,12 @@ body { color: var(--ink); }
 }
 
 .capability-scroll > .journey-opening-artwork {
-  margin-bottom: 48px;
+  margin-bottom: 0;
 }
 
 @media (max-width: 640px) {
   .capability-scroll > .journey-opening-artwork {
-    margin-bottom: 32px;
+    margin-bottom: 0;
   }
 }
 

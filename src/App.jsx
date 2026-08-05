@@ -695,7 +695,8 @@ function ReviewVideoCard({ video, onPlay, index, total }) {
 
 function GenerationComparison() {
   return (
-    <section className="generation-comparison" id="generation-comparison" aria-labelledby="generation-comparison-title" data-reveal>
+    <section className="generation-comparison" id="compare" aria-labelledby="generation-comparison-title" data-reveal>
+      <span className="commercial-capabilities__anchor" id="generation-comparison" aria-hidden="true" />
       <div className="generation-comparison__inner">
         <header className="generation-comparison__header">
           <span className="eyebrow">XRF GEN 2 VS. GEN 1</span>
@@ -819,7 +820,7 @@ function SpeedMotionProof() {
 
 function RfAdvantages({ activeIndex, onChange }) {
   return (
-    <section className="rf-advantages" id="rf-advantages" data-reveal>
+    <section className="rf-advantages" id="rf-advantages">
       <div className="rf-advantages__inner">
         <header className="rf-advantages__header">
           <span className="eyebrow">WHY RF</span>
@@ -1814,45 +1815,42 @@ export function App() {
           </div>
         </section>
 
-        <section className="power-guide" id="power-guide" data-reveal>
-          <div className="power-guide__inner">
-            <div className="section-heading section-heading--left">
-              <span className="eyebrow">TWO PURPOSE-BUILT RF OPTIONS</span>
-              <h2>Choose the power that fits your work.</h2>
-              <p>38W and 70W share the same professional platform. Explore the result each RF source is designed to produce.</p>
-            </div>
-            <div className="power-switch" role="tablist" aria-label="Explore 38W and 70W RF results">
-              {powerProofs.map((item, index) => (
-                <button
-                  type="button"
-                  role="tab"
-                  aria-selected={activePowerProof === index}
-                  className={activePowerProof === index ? "is-active" : ""}
-                  key={item.id}
-                  onClick={() => setActivePowerProof(index)}
-                >
-                  {item.tab}
-                </button>
-              ))}
-            </div>
-            <div className="power-proof-stage" aria-live="polite">
-              <div className="power-proof-stage__media">
-                <img key={powerProofs[activePowerProof].id} src={asset(powerProofs[activePowerProof].image)} alt={powerProofs[activePowerProof].alt} />
-              </div>
-              <div className="power-proof-stage__copy">
-                <span className="eyebrow">{powerProofs[activePowerProof].eyebrow}</span>
-                <h3>{powerProofs[activePowerProof].title}</h3>
-                <p>{powerProofs[activePowerProof].copy}</p>
-                <strong>{powerProofs[activePowerProof].proof}</strong>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <GenerationComparison />
-
         <CapabilityBrowser onPlay={openStory}>
           <RfAdvantages activeIndex={activeRfAdvantage} onChange={setActiveRfAdvantage} />
+          <section className="power-guide" id="power-guide" data-reveal>
+            <div className="power-guide__inner">
+              <div className="section-heading section-heading--left">
+                <span className="eyebrow">TWO PURPOSE-BUILT RF OPTIONS</span>
+                <h2>Choose the power that fits your work.</h2>
+                <p>38W and 70W share the same professional platform. Explore the result each RF source is designed to produce.</p>
+              </div>
+              <div className="power-switch" role="tablist" aria-label="Explore 38W and 70W RF results">
+                {powerProofs.map((item, index) => (
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={activePowerProof === index}
+                    className={activePowerProof === index ? "is-active" : ""}
+                    key={item.id}
+                    onClick={() => setActivePowerProof(index)}
+                  >
+                    {item.tab}
+                  </button>
+                ))}
+              </div>
+              <div className="power-proof-stage" aria-live="polite">
+                <div className="power-proof-stage__media">
+                  <img key={powerProofs[activePowerProof].id} src={asset(powerProofs[activePowerProof].image)} alt={powerProofs[activePowerProof].alt} />
+                </div>
+                <div className="power-proof-stage__copy">
+                  <span className="eyebrow">{powerProofs[activePowerProof].eyebrow}</span>
+                  <h3>{powerProofs[activePowerProof].title}</h3>
+                  <p>{powerProofs[activePowerProof].copy}</p>
+                  <strong>{powerProofs[activePowerProof].proof}</strong>
+                </div>
+              </div>
+            </div>
+          </section>
         </CapabilityBrowser>
 
         <section className="makerboost-proof" id="makerboost" data-reveal>
@@ -1977,7 +1975,9 @@ export function App() {
           </div>
         </section>
 
-        <section className="sales-video sales-video--competitor" id="compare" data-reveal>
+        <GenerationComparison />
+
+        <section className="sales-video sales-video--competitor" data-reveal>
           <span className="commercial-capabilities__anchor" id="comparison-proof" aria-hidden="true" />
           <YouTubeCover video={decisionVideos.competitor} onPlay={setYoutubeVideo} />
           <div className="sales-video__copy">
