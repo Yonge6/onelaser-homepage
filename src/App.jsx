@@ -956,9 +956,7 @@ function CapabilityBrowser({ onPlay, children }) {
       <div className="journey-opening-artwork">
         <img src={asset("feature-overview-capabilities-v3.webp")} alt="XRF Gen2 feature overview covering RF precision, power options, motion, workflow, safety and support" />
       </div>
-      {children}
-      <div className="capability-scroll__layout">
-        <nav
+      <nav
           className="capability-scroll__nav"
           aria-label="Explore XRF Gen2 advantages"
           ref={navRef}
@@ -991,7 +989,9 @@ function CapabilityBrowser({ onPlay, children }) {
           >
             <strong>Software</strong>
           </button>
-        </nav>
+      </nav>
+      {children}
+      <div className="capability-scroll__layout">
 
         <div className="capability-scroll__chapters">
           {capabilityChapters.map((chapter, chapterIndex) => (
@@ -2085,7 +2085,7 @@ export function App() {
               onClick={() => trackLead("find-demo-host", "book_live_demo")}
             >
               <span><Play size={22} weight="fill" /></span>
-              <strong>Book a live demo</strong>
+              <strong>Book a FREE Demo</strong>
               <p>See XRF in action and ask questions about the work you want to make.</p>
               <i>Find a demo host <ArrowUpRight size={15} /></i>
             </a>
