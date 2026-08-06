@@ -9631,12 +9631,15 @@ body { color: var(--ink); }
 }
 
 .official-film__play {
-  width: 64px;
-  height: 64px;
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 72px;
+  height: 72px;
   display: grid;
   place-items: center;
-  padding: 0;
-  border: 1px solid rgba(255, 255, 255, .28);
+  margin: auto;
+  border: 0;
   border-radius: 999px;
   background: rgba(0, 0, 0, .2);
   color: #fff;
@@ -9687,11 +9690,6 @@ body { color: var(--ink); }
 
   .official-film__placeholder-copy {
     gap: 10px;
-  }
-
-  .official-film__play {
-    width: 48px;
-    height: 48px;
   }
 
   .official-film__placeholder-copy span,
