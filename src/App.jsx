@@ -1761,6 +1761,21 @@ export function App() {
           <img src={asset("feature-overview-hero.webp")} alt="OneLaser XRF Gen2 in a working studio with finished products and brand proof" />
         </section>
 
+        <section className="official-film" aria-labelledby="official-film-title" data-reveal>
+          <header className="official-film__header">
+            <span className="eyebrow">OFFICIAL XRF GEN 2 FILM</span>
+            <h2 id="official-film-title">XRF Gen2 Product Walkthrough</h2>
+            <p>Take a complete tour of the eight upgrades behind XRF Gen 2—power, True Speed, workspace, smart workflow, engineering, safety, software and support.</p>
+          </header>
+          <div className="official-film__placeholder" role="img" aria-label="Placeholder for the official XRF Gen 2 promotional film">
+            <div className="official-film__placeholder-copy">
+              <span>ONELASER · OFFICIAL FILM</span>
+              <strong>XRF GEN 2</strong>
+              <small>VIDEO COMING SOON</small>
+            </div>
+          </div>
+        </section>
+
         <section className="tv-proof" aria-labelledby="tv-proof-title" data-reveal>
           <div className="tv-proof__copy">
             <span className="eyebrow">AS SEEN ON TV</span>

@@ -5064,58 +5064,25 @@ h3 { font-weight: 800; }
   }
 
   .generation-comparison__table-wrap {
+    overflow-x: auto;
     border-radius: 20px;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: thin;
   }
 
-  .generation-comparison__table,
-  .generation-comparison__table thead,
-  .generation-comparison__table tbody,
-  .generation-comparison__table tr,
-  .generation-comparison__table th,
-  .generation-comparison__table td {
-    display: block;
-    width: 100%;
-  }
-
-  .generation-comparison__table colgroup,
-  .generation-comparison__table thead {
-    display: none;
+  .generation-comparison__table {
+    width: 760px;
+    min-width: 760px;
   }
 
   .generation-comparison__table tbody th {
-    padding: 20px 20px 16px;
-    border-bottom: 1px solid var(--line);
-    font-size: 18px;
-  }
-
-  .generation-comparison__table tbody td {
-    position: relative;
-    padding: 42px 20px 20px;
+    padding: 18px 20px;
     font-size: 15px;
   }
 
-  .generation-comparison__table tbody td::before {
-    position: absolute;
-    top: 16px;
-    left: 20px;
-    content: attr(data-label);
-    font-size: 12px;
-    font-weight: 800;
-    line-height: 1;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-  }
-
-  .generation-comparison__table .generation-comparison__gen1::before {
-    color: var(--muted-2);
-  }
-
-  .generation-comparison__table .generation-comparison__gen2::before {
-    color: var(--red);
-  }
-
-  .generation-comparison__table tbody tr:not(:last-child) .generation-comparison__gen1 {
-    border-bottom: 12px solid #f5f5f7;
+  .generation-comparison__table tbody td {
+    padding: 18px 20px;
+    font-size: 14px;
   }
 
   .generation-comparison__statement {
@@ -7950,7 +7917,7 @@ body { color: var(--ink); }
 }
 
 .software-compatibility {
-  background: #f5f5f7;
+  background: #fff;
 }
 
 .ownership-support {
@@ -9566,6 +9533,87 @@ body { color: var(--ink); }
   border: 0;
 }
 
+.official-film {
+  width: min(1280px, calc(100% - 72px));
+  margin: 0 auto;
+  padding: 96px 0 48px;
+}
+
+.official-film__header {
+  max-width: 1040px;
+  margin-bottom: 32px;
+}
+
+.official-film__header h2 {
+  margin: 8px 0 0;
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -.035em;
+}
+
+.official-film__header p {
+  max-width: 960px;
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.official-film__placeholder {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 32px;
+  background: linear-gradient(135deg, #141414 0%, #27100c 62%, #e7310e 100%);
+  color: #fff;
+}
+
+.official-film__placeholder::before {
+  position: absolute;
+  z-index: -1;
+  inset: 8% -8% auto auto;
+  width: 52%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 50%;
+  box-shadow: 0 0 0 80px rgba(255, 255, 255, .035), 0 0 0 160px rgba(255, 255, 255, .025);
+  content: "";
+}
+
+.official-film__placeholder-copy {
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.official-film__placeholder-copy span,
+.official-film__placeholder-copy small {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+
+.official-film__placeholder-copy strong {
+  font-size: clamp(64px, 10vw, 148px);
+  font-weight: 900;
+  line-height: .86;
+  letter-spacing: -.065em;
+}
+
+.official-film + .tv-proof {
+  padding-top: 48px;
+}
+
+#capability-precision {
+  padding-top: 48px;
+}
+
 /* Annotation batch: remove decorative gray frames while preserving active and data-table states. */
 .review-video-card,
 .sales-video.sales-video--competitor,
@@ -9579,6 +9627,45 @@ body { color: var(--ink); }
 }
 
 @media (max-width: 640px) {
+  .official-film {
+    width: calc(100% - 36px);
+    padding: 64px 0 32px;
+  }
+
+  .official-film__header {
+    margin-bottom: 24px;
+  }
+
+  .official-film__header h2 {
+    font-size: 32px;
+  }
+
+  .official-film__header p {
+    font-size: 14px;
+  }
+
+  .official-film__placeholder {
+    border-radius: 24px;
+  }
+
+  .official-film__placeholder-copy {
+    gap: 10px;
+  }
+
+  .official-film__placeholder-copy span,
+  .official-film__placeholder-copy small {
+    font-size: 12px;
+    letter-spacing: .12em;
+  }
+
+  .official-film + .tv-proof {
+    padding-top: 32px;
+  }
+
+  #capability-precision {
+    padding-top: 32px;
+  }
+
   .sticky-buy > div:first-child {
     display: none;
   }
