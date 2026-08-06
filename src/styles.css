@@ -8921,7 +8921,7 @@ body { color: var(--ink); }
     grid-auto-rows: 40px;
     row-gap: 4px;
     width: 164px;
-    margin-bottom: -216px;
+    margin-bottom: -260px;
     padding: 0;
     overflow: visible;
     transform: translateX(calc(-1 * max(0px, (100vw - 1280px) / 2) + 28px));
