@@ -56,9 +56,9 @@ const media = Array.from({ length: 20 }, (_, index) => index + 1)
     };
   });
 
-const heroOverviewVideo = {
-  src: asset("xrf-overview-video-cover.jpg"),
-  youtubeId: "F1ZJvoeANgk",
+const officialFilm = {
+  youtubeId: "",
+  title: "XRF Gen2 Product Walkthrough",
 };
 
 const materialCategories = [
@@ -642,7 +642,6 @@ const competitorRows = [
   ["Detail", "Up to 2,000 DPI · 0.07 mm laser dot", "0.01 mm processing precision"],
   ["Cooling & source life", "Air-cooled · up to 30,000 hours", "Water-cooled · 6,000–8,000 hours"],
   ["Warranty", "3-year frame · 2-year electronics · 1-year source", "12-month coverage on main components · 6-month coverage on the laser tube"],
-  ["Starting price", "$4,399 for 38W Standalone", "$3,999 for P2 Standalone"],
 ];
 
 function SpecGroup({ group }) {
@@ -1367,12 +1366,13 @@ export function App() {
     setActiveMedia(index);
   }
 
-  function playHeroOverview() {
+  function playOfficialFilm() {
+    if (!officialFilm.youtubeId) return;
     setYoutubeVideo({
-      id: heroOverviewVideo.youtubeId,
-      title: "OneLaser XRF Gen2 overview",
+      id: officialFilm.youtubeId,
+      title: officialFilm.title,
       channel: "OneLaser",
-      tag: "XRF GEN2 OVERVIEW",
+      tag: "OFFICIAL XRF GEN 2 FILM",
     });
   }
 
@@ -1580,9 +1580,8 @@ export function App() {
               </div>
               <button type="button" className="thumb-arrow" aria-label="Scroll product views right" onClick={() => scrollThumbnails(1)}><CaretRight size={20} /></button>
               <span className="thumbnail-divider" aria-hidden="true" />
-              <button type="button" className="video-thumbnail" onClick={playHeroOverview} aria-label="Play the OneLaser XRF Gen2 overview video">
-                <img src={heroOverviewVideo.src} alt="" />
-                <span><Play size={16} weight="fill" /></span>
+              <button type="button" className="video-thumbnail video-thumbnail--placeholder" onClick={playOfficialFilm} aria-label="Official XRF Gen 2 film coming soon" disabled={!officialFilm.youtubeId}>
+                <span><Play size={16} weight="fill" /><small>SOON</small></span>
               </button>
             </div>
             <div className="hero-assurance-grid" aria-label="XRF Gen2 information, consultation, and support benefits">
@@ -1767,13 +1766,16 @@ export function App() {
             <h2 id="official-film-title">XRF Gen2 Product Walkthrough</h2>
             <p>Take a complete tour of the eight upgrades behind XRF Gen 2—power, True Speed, workspace, smart workflow, engineering, safety, software and support.</p>
           </header>
-          <div className="official-film__placeholder" role="img" aria-label="Placeholder for the official XRF Gen 2 promotional film">
+          <button type="button" className="official-film__placeholder" onClick={playOfficialFilm} aria-label="Official XRF Gen 2 film coming soon" disabled={!officialFilm.youtubeId}>
             <div className="official-film__placeholder-copy">
               <span>ONELASER · OFFICIAL FILM</span>
               <strong>XRF GEN 2</strong>
+              <span className="official-film__play" aria-hidden="true">
+                <Play size={28} weight="fill" />
+              </span>
               <small>VIDEO COMING SOON</small>
             </div>
-          </div>
+          </button>
         </section>
 
         <section className="tv-proof" aria-labelledby="tv-proof-title" data-reveal>
