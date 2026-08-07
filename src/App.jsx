@@ -142,7 +142,7 @@ const generationComparisons = [
   {
     feature: "Motion Control",
     gen1: "—",
-    gen2: "Closed-Loop Motion System — Position Feedback at Full Speed",
+    gen2: "Leadshine Motors System — Position Feedback at Full Speed",
   },
   {
     feature: "Laser Head",
@@ -258,7 +258,7 @@ const speedMotionMaterials = [
     id: "wood",
     label: "Wood",
     title: "Controlled motion for detailed woodwork.",
-    copy: "Closed-loop motion keeps the toolpath under closed-loop control through detailed engraving and repeatable passes on wood.",
+    copy: "Leadshine Motors keeps the toolpath under closed-loop control through detailed engraving and repeatable passes on wood.",
     image: "speed-motion-wood.webp",
     icon: Tree,
   },
@@ -310,7 +310,7 @@ const capabilityChapters = [
       { value: "2.5 in", label: "Standard focal lens", icon: CubeFocus },
       { value: "38W / 70W", label: "Equal-fit RF options", icon: Fire },
     ],
-    details: ["Magnetic QuickSwitch™ tool-free lens swaps", "Optional 2 in lens", "Three-mirror optical path", "3× beam expander"],
+    details: ["MagSwitch™ tool-free lens swaps", "Optional 2 in lens", "Three-mirror optical path", "3× beam expander"],
   },
   {
     id: "motion",
@@ -320,7 +320,7 @@ const capabilityChapters = [
     speedProof: true,
     spotlights: [],
     support: [
-      { title: "High speed with its own feedback loop", copy: "Closed-loop motion monitors position while all-steel, Hydra-derived axes carry the toolpath.", icon: ArrowClockwise },
+      { title: "High speed with its own feedback loop", copy: "Leadshine Motors monitors position while all-steel, Hydra-derived axes carry the toolpath.", icon: ArrowClockwise },
       { title: "20% lighter laser head", copy: "The lighter head reduces moving mass across the XRF motion platform.", icon: CubeTransparent },
     ],
     proofs: [],
@@ -354,7 +354,7 @@ const capabilityChapters = [
   {
     id: "expansion",
     nav: "Business Expansion",
-    title: "Start desktop. Grow beyond it.",
+    title: "A Desktop built to grow with your business.",
     summary: "A universal bed, optional height and automatic material handling let the same platform follow a wider product catalog.",
     spotlights: [
       {
@@ -798,14 +798,14 @@ function SpeedMotionProof() {
         </div>
 
         <div className="speed-motion-proof__copy">
-          <span className="speed-motion-proof__profile">Measured speed · closed-loop motion</span>
+          <span className="speed-motion-proof__profile">Measured speed · Leadshine Motors</span>
           <h4>{selectedMaterial.title}</h4>
           <p>{selectedMaterial.copy}</p>
           <div className="speed-motion-proof__metrics" aria-label="Confirmed XRF Gen2 motion performance">
             <div><strong>1,200</strong><span>mm/s working speed</span></div>
             <div><strong>True 3.5G</strong><span>Working acceleration</span></div>
           </div>
-          <p className="speed-motion-proof__foundation">Closed-loop motion · all-steel, Hydra-derived axes · 20% lighter laser head</p>
+          <p className="speed-motion-proof__foundation">Leadshine Motors · all-steel, Hydra-derived axes · 20% lighter laser head</p>
         </div>
       </div>
     </article>
@@ -949,7 +949,7 @@ function CapabilityBrowser({ onPlay, children }) {
     <section className="capability-scroll" id="features">
       <span className="commercial-capabilities__anchor" id="capability-system" aria-hidden="true" />
       <div className="journey-opening-artwork">
-        <img src={asset("feature-overview-capabilities-v3.webp")} alt="XRF Gen2 feature overview covering RF precision, power options, motion, workflow, safety and support" />
+        <img src={asset("feature-overview-capabilities-v4.webp")} alt="XRF Gen2 feature overview covering RF precision, power options, motion, workflow, safety and support" />
       </div>
       <nav
           className="capability-scroll__nav"

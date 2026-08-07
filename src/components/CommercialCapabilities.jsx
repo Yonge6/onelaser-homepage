@@ -261,7 +261,7 @@ export function CommercialCapabilities({ asset, equipmentInvestment }) {
       <span className="commercial-capabilities__anchor" id="capabilities" aria-hidden="true" />
       <span className="commercial-capabilities__anchor" id="results" aria-hidden="true" />
       <div className="journey-opening-artwork">
-        <img src={asset("xrf-profit-products-web.webp")} alt="Premium products and example business outputs made with the OneLaser XRF Gen2" />
+        <img src={asset("xrf-profit-products-v2.webp")} alt="Premium products and example business outputs made with the OneLaser XRF Gen2" />
       </div>
       <ProductOpportunities asset={asset} equipmentInvestment={equipmentInvestment} />
     </section>
