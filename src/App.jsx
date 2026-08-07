@@ -37,6 +37,7 @@ import {
 } from "@phosphor-icons/react";
 import { CommercialCapabilities } from "./components/CommercialCapabilities.jsx";
 import { initializeAnalytics, trackEvent } from "./analytics.js";
+import { useAutoplayCarousel } from "./hooks/useAutoplayCarousel.js";
 
 const asset = (name) => `${import.meta.env.BASE_URL}assets/${name}`;
 const MATERIAL_AUTOPLAY_DELAY = 6000;
@@ -233,13 +234,6 @@ const decisionVideos = {
     channel: "Bearded Builds Co",
     tag: "DIRECT COMPARISON",
     cover: "competitor-video-cover-hd.jpg",
-  },
-  facility: {
-    id: "tSroh4OUkX4",
-    title: "Inside OneLaser’s expanded production facility",
-    channel: "OneLaser",
-    tag: "BEHIND ONELASER",
-    cover: "facility-video-cover-hd.jpg",
   },
 };
 
@@ -734,7 +728,11 @@ function GenerationComparison() {
 }
 
 function SpeedMotionProof() {
-  const [activeMaterial, setActiveMaterial] = useState(0);
+  const {
+    activeIndex: activeMaterial,
+    selectIndex: selectMaterial,
+    interactionProps: carouselProps,
+  } = useAutoplayCarousel(speedMotionMaterials.length);
   const materialTabRefs = useRef([]);
   const selectedMaterial = speedMotionMaterials[activeMaterial];
 
@@ -750,12 +748,12 @@ function SpeedMotionProof() {
         : event.key === "ArrowLeft"
           ? (index - 1 + speedMotionMaterials.length) % speedMotionMaterials.length
           : (index + 1) % speedMotionMaterials.length;
-    setActiveMaterial(nextIndex);
+    selectMaterial(nextIndex);
     materialTabRefs.current[nextIndex]?.focus();
   }
 
   return (
-    <article className="speed-motion-proof">
+    <article className="speed-motion-proof" {...carouselProps}>
       <div className="speed-motion-proof__controls">
         <div
           className="speed-motion-proof__materials"
@@ -773,7 +771,7 @@ function SpeedMotionProof() {
                 className={activeMaterial === index ? "is-active" : ""}
                 key={item.id}
                 ref={(node) => { materialTabRefs.current[index] = node; }}
-                onClick={() => setActiveMaterial(index)}
+                onClick={() => selectMaterial(index)}
                 onKeyDown={(event) => handleMaterialKeyDown(event, index)}
               >
                 <Icon size={20} weight={activeMaterial === index ? "bold" : "regular"} aria-hidden="true" />
@@ -814,9 +812,9 @@ function SpeedMotionProof() {
   );
 }
 
-function RfAdvantages({ activeIndex, onChange }) {
+function RfAdvantages({ activeIndex, onChange, carouselProps }) {
   return (
-    <section className="rf-advantages" id="rf-advantages" data-chapter-index="0">
+    <section className="rf-advantages" id="rf-advantages" data-chapter-index="0" {...carouselProps}>
       <div className="rf-advantages__inner">
         <header className="rf-advantages__header">
           <span className="eyebrow">WHY RF TUBE</span>
@@ -825,7 +823,6 @@ function RfAdvantages({ activeIndex, onChange }) {
         </header>
         <div className="rf-advantages__tabs" role="tablist" aria-label="Explore the advantages of RF laser technology">
           {rfAdvantages.map((item, index) => {
-            const Icon = item.icon;
             return (
               <button
                 type="button"
@@ -855,7 +852,6 @@ function RfAdvantages({ activeIndex, onChange }) {
                     [nextIndex]?.focus();
                 }}
               >
-                <Icon size={22} weight={activeIndex === index ? "bold" : "regular"} aria-hidden="true" />
                 <span>{item.tab}</span>
               </button>
             );
@@ -1112,8 +1108,16 @@ export function App() {
       ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
       : false
   ));
-  const [activeRfAdvantage, setActiveRfAdvantage] = useState(0);
-  const [activePowerProof, setActivePowerProof] = useState(0);
+  const {
+    activeIndex: activeRfAdvantage,
+    selectIndex: setActiveRfAdvantage,
+    interactionProps: rfCarouselProps,
+  } = useAutoplayCarousel(rfAdvantages.length);
+  const {
+    activeIndex: activePowerProof,
+    selectIndex: setActivePowerProof,
+    interactionProps: powerCarouselProps,
+  } = useAutoplayCarousel(powerProofs.length);
   const [openFaq, setOpenFaq] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -1827,24 +1831,9 @@ export function App() {
           </div>
         </section>
 
-        <section className="sales-video sales-video--facility authority-facility" data-reveal>
-          <YouTubeCover video={decisionVideos.facility} onPlay={setYoutubeVideo} />
-          <div className="sales-video__copy">
-            <span className="eyebrow">ENGINEERING YOU CAN SEE</span>
-            <h2>The capability behind the product.</h2>
-            <p>See the production capability, quality process and parts readiness behind every OneLaser machine.</p>
-            <dl className="comparison-proof">
-              <div><dt>Facility</dt><dd>Expanded production capacity</dd></div>
-              <div><dt>Assembly</dt><dd>Built and tuned by OneLaser</dd></div>
-              <div><dt>Quality control</dt><dd>Checked before delivery</dd></div>
-              <div><dt>Parts readiness</dt><dd>Support beyond setup</dd></div>
-            </dl>
-          </div>
-        </section>
-
         <CapabilityBrowser onPlay={openStory}>
-          <RfAdvantages activeIndex={activeRfAdvantage} onChange={setActiveRfAdvantage} />
-          <section className="power-guide" id="power-guide" data-chapter-index="0" data-reveal>
+          <RfAdvantages activeIndex={activeRfAdvantage} onChange={setActiveRfAdvantage} carouselProps={rfCarouselProps} />
+          <section className="power-guide" id="power-guide" data-chapter-index="0" data-reveal {...powerCarouselProps}>
             <div className="power-guide__inner">
               <div className="section-heading section-heading--left">
                 <span className="eyebrow">TWO PURPOSE-BUILT RF OPTIONS</span>
@@ -1856,16 +1845,41 @@ export function App() {
                   <button
                     type="button"
                     role="tab"
+                    id={`power-tab-${item.id}`}
+                    aria-controls="power-proof-panel"
                     aria-selected={activePowerProof === index}
+                    tabIndex={activePowerProof === index ? 0 : -1}
                     className={activePowerProof === index ? "is-active" : ""}
                     key={item.id}
                     onClick={() => setActivePowerProof(index)}
+                    onKeyDown={(event) => {
+                      const navigationKeys = ["ArrowLeft", "ArrowRight", "Home", "End"];
+                      if (!navigationKeys.includes(event.key)) return;
+                      event.preventDefault();
+                      const nextIndex = event.key === "Home"
+                        ? 0
+                        : event.key === "End"
+                          ? powerProofs.length - 1
+                          : event.key === "ArrowLeft"
+                            ? (index - 1 + powerProofs.length) % powerProofs.length
+                            : (index + 1) % powerProofs.length;
+                      setActivePowerProof(nextIndex);
+                      event.currentTarget.parentElement
+                        ?.querySelectorAll('[role="tab"]')
+                        [nextIndex]?.focus();
+                    }}
                   >
                     {item.tab}
                   </button>
                 ))}
               </div>
-              <div className="power-proof-stage" aria-live="polite">
+              <div
+                className="power-proof-stage"
+                id="power-proof-panel"
+                role="tabpanel"
+                aria-labelledby={`power-tab-${powerProofs[activePowerProof].id}`}
+                aria-live="polite"
+              >
                 <div className="power-proof-stage__media">
                   <img key={powerProofs[activePowerProof].id} src={asset(powerProofs[activePowerProof].image)} alt={powerProofs[activePowerProof].alt} />
                 </div>

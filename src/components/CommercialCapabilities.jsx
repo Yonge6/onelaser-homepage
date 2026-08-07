@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   economicsAssumptions,
   economicsDisclaimer,
@@ -6,6 +6,7 @@ import {
   productCategories,
   products,
 } from "../data/commercialCapabilities.js";
+import { useAutoplayCarousel } from "../hooks/useAutoplayCarousel.js";
 import "./CommercialCapabilities.css";
 
 const currencyFormatter = new Intl.NumberFormat("en-US", {
@@ -53,7 +54,17 @@ function ProductEconomics({ product, equipmentInvestment }) {
 }
 
 function ProductOpportunities({ asset, equipmentInvestment }) {
-  const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
+  const {
+    activeIndex: activeCategoryIndex,
+    selectIndex: selectCategoryIndex,
+    interactionProps: categoryCarouselProps,
+  } = useAutoplayCarousel(productCategories.length);
+  const {
+    onTouchStart: startCategorySwipe,
+    onTouchEnd: endCategorySwipe,
+    onTouchCancel: cancelCategorySwipe,
+    ...categoryPauseProps
+  } = categoryCarouselProps;
   const [activeProductId, setActiveProductId] = useState(productCategories[0].productIds[0]);
   const categoryTabRefs = useRef([]);
   const productTabRefs = useRef([]);
@@ -65,10 +76,13 @@ function ProductOpportunities({ asset, equipmentInvestment }) {
   );
   const activeProduct = products[activeProductId] ?? categoryProducts[0];
 
+  useEffect(() => {
+    setActiveProductId(productCategories[activeCategoryIndex].productIds[0]);
+  }, [activeCategoryIndex]);
+
   function selectCategory(index) {
     const nextIndex = (index + productCategories.length) % productCategories.length;
-    setActiveCategoryIndex(nextIndex);
-    setActiveProductId(productCategories[nextIndex].productIds[0]);
+    selectCategoryIndex(nextIndex);
   }
 
   function handleCategoryKeyDown(event, index) {
@@ -113,7 +127,12 @@ function ProductOpportunities({ asset, equipmentInvestment }) {
   }
 
   return (
-    <section id="product-opportunities" className="product-opportunities" aria-labelledby="product-opportunities-title">
+    <section
+      id="product-opportunities"
+      className="product-opportunities"
+      aria-labelledby="product-opportunities-title"
+      {...categoryPauseProps}
+    >
       <div className="product-opportunities__inner">
         <header className="product-opportunities__header">
           <span className="eyebrow">PRODUCT OPPORTUNITIES</span>
@@ -121,7 +140,14 @@ function ProductOpportunities({ asset, equipmentInvestment }) {
           <p>Explore product categories designed for one-offs, repeat orders and small-batch production.</p>
         </header>
 
-        <div className="product-opportunities__tabs" role="tablist" aria-label="Explore product opportunity categories">
+        <div
+          className="product-opportunities__tabs"
+          role="tablist"
+          aria-label="Explore product opportunity categories"
+          onTouchStart={startCategorySwipe}
+          onTouchEnd={endCategorySwipe}
+          onTouchCancel={cancelCategorySwipe}
+        >
           {productCategories.map((category, index) => (
             <button
               type="button"

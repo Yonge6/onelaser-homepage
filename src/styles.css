@@ -1931,7 +1931,7 @@ img {
 
 .video-thumbnail--placeholder small {
   color: #fff;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: .1em;
 }
@@ -7456,7 +7456,7 @@ body { color: var(--ink); }
 }
 
 .power-switch {
-  width: min(100%, 480px);
+  width: min(100%, 360px);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 4px;
@@ -7467,8 +7467,8 @@ body { color: var(--ink); }
 }
 
 .power-switch button {
-  min-height: 58px;
-  padding: 0 24px;
+  min-height: 46px;
+  padding: 0 20px;
   border: 0;
   border-radius: 999px;
   background: transparent;
@@ -7848,10 +7848,6 @@ body { color: var(--ink); }
   font-weight: 800;
   cursor: pointer;
   transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease;
-}
-
-.rf-advantages__tabs button svg {
-  flex: 0 0 auto;
 }
 
 .rf-advantages__tabs button.is-active {
@@ -9159,7 +9155,7 @@ body { color: var(--ink); }
 }
 
 .speed-motion-proof__controls {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .speed-motion-proof__materials {
@@ -9417,7 +9413,7 @@ body { color: var(--ink); }
 /* 2026-07-28: one centered segmented-control treatment for material and RF tabs. */
 .speed-motion-proof__materials,
 .rf-advantages__tabs {
-  width: min(100%, 720px);
+  width: min(100%, 600px);
   margin-right: auto;
   margin-left: auto;
   gap: 4px;
@@ -9429,14 +9425,14 @@ body { color: var(--ink); }
 
 .speed-motion-proof__materials button,
 .rf-advantages__tabs button {
-  min-height: 58px;
-  padding: 0 20px;
+  min-height: 46px;
+  padding: 0 16px;
   justify-content: center;
   border: 0;
   border-radius: 999px;
   background: transparent;
   color: var(--muted);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 800;
   transition: background-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
 }
@@ -9477,13 +9473,18 @@ body { color: var(--ink); }
 
   .speed-motion-proof__materials button,
   .rf-advantages__tabs button {
-    flex: 0 0 auto;
-    min-width: max-content;
-    min-height: 48px;
-    padding: 0 18px;
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 44px;
+    padding: 0 6px;
     justify-content: center;
-    font-size: 14px;
+    font-size: 12px;
     scroll-snap-align: start;
+  }
+
+  .speed-motion-proof__materials button {
+    gap: 4px;
+    padding-inline: 4px;
   }
 }
 
