@@ -689,14 +689,14 @@ function GenerationComparison() {
       <span className="commercial-capabilities__anchor" id="generation-comparison" aria-hidden="true" />
       <div className="generation-comparison__inner">
         <header className="generation-comparison__header">
-          <span className="eyebrow">XRF GEN 2 VS. GEN 1</span>
+          <span className="eyebrow">XRF GEN2 VS. GEN1</span>
           <h2 id="generation-comparison-title">The XRF’s Biggest Upgrade Yet.</h2>
           <p><strong>More power. Higher precision. Greater reliability.</strong></p>
         </header>
 
         <div className="generation-comparison__table-wrap">
           <table className="generation-comparison__table">
-            <caption className="sr-only">XRF Gen 1 and XRF Gen2 feature comparison</caption>
+            <caption className="sr-only">XRF Gen1 and XRF Gen2 feature comparison</caption>
             <colgroup>
               <col className="generation-comparison__feature-column" />
               <col className="generation-comparison__gen2-column" />
@@ -706,7 +706,7 @@ function GenerationComparison() {
               <tr>
                 <th scope="col"><span className="sr-only">Feature</span></th>
                 <th scope="col" className="generation-comparison__gen2-heading">XRF Gen2</th>
-                <th scope="col" className="generation-comparison__gen1-heading">XRF Gen 1</th>
+                <th scope="col" className="generation-comparison__gen1-heading">XRF Gen1</th>
               </tr>
             </thead>
             <tbody>
@@ -714,7 +714,7 @@ function GenerationComparison() {
                 <tr key={item.feature}>
                   <th scope="row">{item.feature}</th>
                   <td className="generation-comparison__gen2" data-label="XRF Gen2">{item.gen2}</td>
-                  <td className="generation-comparison__gen1" data-label="XRF Gen 1">{item.gen1}</td>
+                  <td className="generation-comparison__gen1" data-label="XRF Gen1">{item.gen1}</td>
                 </tr>
               ))}
             </tbody>
