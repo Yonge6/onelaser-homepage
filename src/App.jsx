@@ -365,7 +365,7 @@ const capabilityChapters = [
       },
     ],
     support: [
-      { title: "One size fits most materials.", copy: "The 25.59\" × 13.78\" (650 × 350 mm) honeycomb table gives you a true 24\" × 12\" engraving area — the most universal material size there is, so full sheets load and run without trimming.", image: "business-expansion-mainstream-stock.webp" },
+      { title: "One size fits most materials.", copy: "The 25.59\" × 13.78\" (650 × 350 mm) honeycomb table gives you a true 24\" × 12\" (610 × 305 mm) engraving area — the most universal material size there is, so full sheets load and run without trimming.", image: "business-expansion-mainstream-stock.webp" },
       { title: "Desktop footprint. Big-project capability.", copy: "Any object within 24 × 12 × 8.5 inches — paired with the rotary attachment — can be engraved on the XRF: a class-leading working envelope for a desktop machine. The optional Base Boost™ add-on unlocks the full 8.5 inches of height for tall workpieces, 40 oz tumblers and rotary jobs, and opens straight-through access for stock up to 8.5 inches thick — long boards and oversized sheets simply slide through, with no length limit. All while improving airflow, debris management, visibility and access.", image: "business-expansion-optional-height-v2.webp" },
     ],
     proofs: [
