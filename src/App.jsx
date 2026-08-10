@@ -805,7 +805,6 @@ function SpeedMotionProof() {
             <div><strong>1,200</strong><span>mm/s working speed</span></div>
             <div><strong>True 3.5G</strong><span>Working acceleration</span></div>
           </div>
-          <p className="speed-motion-proof__foundation">3× faster than a regular CO₂ machine · 5× faster than a regular diode machine</p>
         </div>
       </div>
     </article>
