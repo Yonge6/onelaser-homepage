@@ -257,32 +257,32 @@ const speedMotionMaterials = [
   {
     id: "wood",
     label: "Wood",
-    title: "Controlled motion for detailed woodwork.",
-    copy: "Leadshine Motors keeps the toolpath under closed-loop control through detailed engraving and repeatable passes on wood.",
+    title: "XRF Gen2 control for detailed woodwork.",
+    copy: "Leadshine Motors keeps the XRF Gen2 toolpath on course through detailed engraving and repeatable passes on wood.",
     image: "speed-motion-wood.webp",
     icon: Tree,
   },
   {
     id: "acrylic",
     label: "Acrylic",
-    title: "Measured speed for acrylic work.",
-    copy: "The all-steel, Hydra-derived axes support the same measured motion platform across acrylic engraving and cutting work.",
+    title: "XRF Gen2 speed for acrylic work.",
+    copy: "Leadshine Motors and all-steel, Hydra-derived axes keep XRF Gen2 acrylic engraving and cutting fast and controlled.",
     image: "speed-motion-acrylic.webp",
     icon: CubeTransparent,
   },
   {
     id: "slate",
     label: "Slate",
-    title: "Responsive motion for crisp surface detail.",
-    copy: "Closed-loop control keeps the planned path on course while the RF source marks detailed slate surfaces.",
+    title: "XRF Gen2 motion for crisp slate detail.",
+    copy: "Leadshine Motors keeps the XRF Gen2 path on course while the RF source marks detailed slate surfaces.",
     image: "speed-motion-slate.webp",
     icon: Target,
   },
   {
     id: "leather",
     label: "Leather",
-    title: "Less moving mass for personalized runs.",
-    copy: "A 20% lighter laser head reduces moving mass across personalized leather engraving and cutting work.",
+    title: "XRF Gen2 speed for personalized leather.",
+    copy: "Leadshine Motors and a 20% lighter laser head keep XRF Gen2 leather engraving and cutting responsive across personalized runs.",
     image: "speed-motion-leather.webp",
     icon: Handbag,
   },
@@ -316,7 +316,7 @@ const capabilityChapters = [
     id: "motion",
     nav: "Speed & Motion",
     title: "Turn speed into finished output.",
-    summary: "Measured working performance, closed-loop control and all-steel, Hydra-derived axes keep fast jobs under closed-loop control.",
+    summary: "Measured working performance, Leadshine Motors and all-steel, Hydra-derived axes keep fast jobs under position control.",
     speedProof: true,
     spotlights: [],
     support: [
@@ -334,7 +334,7 @@ const capabilityChapters = [
     spotlights: [
       {
         title: "Print and cut, made easy.",
-        copy: "An integrated vision camera in the laser head performs real-time Mark-point recognition and cut-path compensation — closed-loop visual registration that delivers precision contour cutting with minimal manual calibration.",
+        copy: "An integrated vision camera in the laser head performs real-time Mark-point recognition and cut-path compensation — real-time visual registration that delivers precision contour cutting with minimal manual calibration.",
         metrics: ["Mark detection", "Live compensation", "Less material waste"],
         image: "smart-workflow-print-cut.webp",
       },
@@ -798,14 +798,14 @@ function SpeedMotionProof() {
         </div>
 
         <div className="speed-motion-proof__copy">
-          <span className="speed-motion-proof__profile">Measured speed · Leadshine Motors</span>
+          <span className="speed-motion-proof__profile">XRF Gen2 speed · Leadshine Motors</span>
           <h4>{selectedMaterial.title}</h4>
           <p>{selectedMaterial.copy}</p>
           <div className="speed-motion-proof__metrics" aria-label="Confirmed XRF Gen2 motion performance">
             <div><strong>1,200</strong><span>mm/s working speed</span></div>
             <div><strong>True 3.5G</strong><span>Working acceleration</span></div>
           </div>
-          <p className="speed-motion-proof__foundation">Leadshine Motors · all-steel, Hydra-derived axes · 20% lighter laser head</p>
+          <p className="speed-motion-proof__foundation">3× faster than a regular CO₂ machine · 5× faster than a regular diode machine</p>
         </div>
       </div>
     </article>
