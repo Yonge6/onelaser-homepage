@@ -1375,7 +1375,7 @@ export function App() {
       id: officialFilm.youtubeId,
       title: officialFilm.title,
       channel: "OneLaser",
-      tag: "OFFICIAL XRF GEN 2 FILM",
+      tag: "OFFICIAL XRF GEN2 FILM",
     });
   }
 
@@ -1583,7 +1583,7 @@ export function App() {
               </div>
               <button type="button" className="thumb-arrow" aria-label="Scroll product views right" onClick={() => scrollThumbnails(1)}><CaretRight size={20} /></button>
               <span className="thumbnail-divider" aria-hidden="true" />
-              <button type="button" className="video-thumbnail video-thumbnail--placeholder" onClick={playOfficialFilm} aria-label="Official XRF Gen 2 film coming soon" disabled={!officialFilm.youtubeId}>
+              <button type="button" className="video-thumbnail video-thumbnail--placeholder" onClick={playOfficialFilm} aria-label="Official XRF Gen2 film coming soon" disabled={!officialFilm.youtubeId}>
                 <span><Play size={16} weight="fill" /><small>SOON</small></span>
               </button>
             </div>
@@ -1765,14 +1765,14 @@ export function App() {
 
         <section className="official-film" aria-labelledby="official-film-title" data-reveal>
           <header className="official-film__header">
-            <span className="eyebrow">OFFICIAL XRF GEN 2 FILM</span>
+            <span className="eyebrow">OFFICIAL XRF GEN2 FILM</span>
             <h2 id="official-film-title">XRF Gen2 Product Walkthrough</h2>
-            <p>Take a complete tour of the eight upgrades behind XRF Gen 2—power, True Speed, workspace, smart workflow, engineering, safety, software and support.</p>
+            <p>Take a complete tour of the eight upgrades behind XRF Gen2—power, True Speed, workspace, smart workflow, engineering, safety, software and support.</p>
           </header>
-          <button type="button" className="official-film__placeholder" onClick={playOfficialFilm} aria-label="Official XRF Gen 2 film coming soon" disabled={!officialFilm.youtubeId}>
+          <button type="button" className="official-film__placeholder" onClick={playOfficialFilm} aria-label="Official XRF Gen2 film coming soon" disabled={!officialFilm.youtubeId}>
             <div className="official-film__placeholder-copy">
               <span>ONELASER · OFFICIAL FILM</span>
-              <strong>XRF GEN 2</strong>
+              <strong>XRF GEN2</strong>
               <span className="official-film__play" aria-hidden="true">
                 <Play size={28} weight="fill" />
               </span>
