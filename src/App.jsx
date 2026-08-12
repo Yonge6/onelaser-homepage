@@ -2121,7 +2121,7 @@ export function App() {
             </a>
             <a
               className="decision-path"
-              href="https://www.1laser.com/pages/sales-consultation?utm_source=xrf-gen2-listing&utm_medium=product-page&utm_campaign=xrf-gen2-consultation"
+              href={SALES_CALL_URL}
               target="_blank"
               rel="noreferrer"
               onClick={() => trackLead("sales-consultation", "talk_to_engineer")}
