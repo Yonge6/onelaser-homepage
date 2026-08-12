@@ -1419,8 +1419,6 @@ export function App() {
       startScrollLeft: rail.scrollLeft,
       dragged: false,
     };
-    rail.setPointerCapture?.(event.pointerId);
-    rail.classList.add("is-dragging");
   }
 
   function moveHorizontalRailDrag(event) {
@@ -1428,7 +1426,11 @@ export function App() {
     const rail = drag.rail;
     if (!rail || drag.pointerId !== event.pointerId) return;
     const distance = event.clientX - drag.startX;
-    if (Math.abs(distance) > 4) drag.dragged = true;
+    if (Math.abs(distance) > 4 && !drag.dragged) {
+      drag.dragged = true;
+      rail.setPointerCapture?.(event.pointerId);
+      rail.classList.add("is-dragging");
+    }
     if (!drag.dragged) return;
     event.preventDefault();
     rail.scrollLeft = drag.startScrollLeft - distance;
