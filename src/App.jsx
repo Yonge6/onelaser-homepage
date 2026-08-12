@@ -1200,7 +1200,7 @@ export function App() {
         setTopButtonState("muted");
       }
       const journeyStart = document.getElementById("why-xrf");
-      setJourneyVisible(Boolean(journeyStart && journeyStart.getBoundingClientRect().top < window.innerHeight * 0.8));
+      setJourneyVisible(Boolean(journeyStart && journeyStart.getBoundingClientRect().bottom <= window.innerHeight));
       lastScrollYRef.current = currentScrollY;
     };
     updateProgress();
