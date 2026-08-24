@@ -36,6 +36,7 @@ import {
   X,
 } from "@phosphor-icons/react";
 import { CommercialCapabilities } from "./components/CommercialCapabilities.jsx";
+import { HomePage } from "./Home.jsx";
 import { initializeAnalytics, trackEvent } from "./analytics.js";
 import { useAutoplayCarousel } from "./hooks/useAutoplayCarousel.js";
 
@@ -1097,7 +1098,12 @@ function CapabilityBrowser({ onPlay, children }) {
   );
 }
 
-export function App() {
+export function XrfPage() {
+  useEffect(() => {
+    document.title = "OneLaser XRF Gen2 Desktop RF Laser | OneLaser";
+    const description = document.querySelector('meta[name="description"]');
+    if (description) description.content = "Explore the OneLaser XRF Gen2 professional RF desktop laser, built for precision, speed and production-ready performance.";
+  }, []);
   const [activeMedia, setActiveMedia] = useState(0);
   const [activeMaterial, setActiveMaterial] = useState(0);
   const [materialPaused, setMaterialPaused] = useState(false);
@@ -2309,4 +2315,9 @@ export function App() {
       )}
     </div>
   );
+}
+
+export function App() {
+  const page = new URLSearchParams(window.location.search).get("page");
+  return page === "xrf" ? <XrfPage /> : <HomePage />;
 }

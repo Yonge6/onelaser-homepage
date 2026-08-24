@@ -1,39 +1,36 @@
-# XRF Gen2 Current State
+# OneLaser Homepage + XRF Gen2 Current State
 
-Updated: 2026-08-03 (Asia/Shanghai)
+Updated: 2026-08-24 (Asia/Shanghai)
 
 ## Start here
 
-This file is the sole routine continuation handoff. Work directly in `/Users/yongyuan/Documents/XRF Gen2 网页` using the saved local project; do not create a worktree. Read `AGENTS.md`, then inspect only files needed for the current request. Never replay old Codex sessions or read the archived decision file in full.
+This is the sole routine continuation handoff. Work directly in `/Users/yongyuan/Documents/XRF Gen2 网页`; do not create a worktree. Preserve all untracked `qa/*.png`. Use focused inspection only and never replay old task logs or read the archived decision file in full.
 
-## Live baseline
+## Routes
 
-- Repository: `Yonge6/xrf-gen2-listing`
-- Branch: `main`
-- Last verified UI commit: `86e66b2`
-- Production: `https://yonge6.github.io/xrf-gen2-listing/?v=86e66b2`
-- Pages workflow: `30795510267` succeeded.
+- Repository: `Yonge6/xrf-gen2-listing`, branch `main`.
+- OneLaser homepage: `https://yonge6.github.io/xrf-gen2-listing/`.
+- XRF Gen2 commercial detail: `https://yonge6.github.io/xrf-gen2-listing/?page=xrf`.
 
-## Current product state
+## Current homepage state
 
-- Full commercial page, Hero purchase flow, 23-image gallery and official overview video are live.
-- Hero consultation/brochure actions, 2×2 assurance grid, payment exits and Specs brochure action are live.
-- Desktop and 390×844 mobile checks passed with no horizontal overflow, no text below 12 px, loaded 23rd image and no console warnings/errors.
-- No known incomplete UI request remains at this checkpoint.
+- Global header, 600 px desktop hero carousel and three supplied 3840 × 1200 campaign banners.
+- Four product families directly below the banner: XRF, VertiGo, Hydra Gen2 and Cobra, using the supplied transparent machine renders.
+- Brand manifesto, workflow tabs, finished-product inspiration, ownership assurance, engineer consultation and footer.
+- Desktop uses four product columns; 390 px mobile uses two columns and a mobile-specific hero crop/copy treatment.
+- Carousel, mobile menu, workflow tabs and homepage-to-XRF route are functional and keyboard labeled.
+
+## Validation state
+
+- `npm run verify` passes.
+- Desktop hero is exactly 600 px high.
+- 390 × 844 has zero document overflow, 12 px minimum visible text and loaded product images with real natural dimensions.
+- Browser console warnings/errors are empty.
+- `design-qa.md` records a passed visual comparison and responsive QA.
 
 ## Working-tree contract
 
-- Existing `qa/*.png` files are user-owned untracked evidence. Preserve them and never print, stage or delete them by default.
-- Use `./scripts/compact-status.sh` for orientation.
-- Use focused `rg`, `git diff --stat` and `git diff --check`; avoid full logs, whole-file dumps and broad screenshots.
-- Temporary reference images go in ignored `references/incoming/`; approved production assets go in `public/assets/`.
-
-## Completion loop
-
-1. Inspect the target module and exact user feedback.
-2. Make one scoped patch.
-3. Run `npm run verify` once.
-4. For UI changes, check one desktop viewport and one 390 px mobile viewport.
-5. If publication is requested, commit target files, push `main`, wait for Pages and verify the cache-busted live URL and new asset routes.
-
-Replace stale state instead of appending a diary. Keep this file under 2 KB.
+- Existing `qa/*.png` files are user-owned evidence. Never stage, rename, overwrite or delete them.
+- Temporary visual evidence stays in ignored `references/incoming/`; production assets live in `public/assets/`.
+- Run `./scripts/compact-status.sh`, then `npm run verify` after scoped changes.
+- For publication, commit only target files, push `main`, wait for GitHub Pages and validate a cache-busted homepage plus `?page=xrf`.
