@@ -53,6 +53,7 @@ const productCards = [
     copy: "Performance CO₂+IR Dual-Laser System",
     features: ["Up to 130W Glass+3/5W IR", "Master 300+ Materials", "1200mm/s Speed", "1,000 DPI Max Resolution"],
     image: "home-product-cobra.png",
+    scene: "home-product-cobra-scene.webp",
     href: "https://www.1laser.com/products/cobra-10-100w-co2-laser-engraver-cutter",
   },
   {
@@ -62,6 +63,7 @@ const productCards = [
     copy: "World’s Best-Performing RF Desktop Laser",
     features: ["38W RF Power", "1200mm/s Speed", "3G Acceleration", "Conveyor Feeder Available"],
     image: "home-product-xrf.png",
+    scene: "home-product-xrf-scene.webp",
     href: XRF_PAGE_URL,
   },
   {
@@ -71,6 +73,7 @@ const productCards = [
     copy: "RF Laser Beast: Brutal Speed Meets Insane Detail.",
     features: ["Ultra-Fast 2000mm/s", "4G Acceleration", "Up to 150W Glass/70W RF Power", "Smart Dual Air-Assist"],
     image: "home-product-hydra-gen2.png",
+    scene: "home-product-hydra-gen2-scene.webp",
     href: "https://www.1laser.com/products/hydra-9-gen-2-70w-rf-co2-dual-laser-machine",
   },
   {
@@ -80,6 +83,7 @@ const productCards = [
     copy: "World’s First Vertical Laser — Tumblers & Cups Engraved Like Never Before",
     features: ["Cylindrical Engraving", "38W RF Power", "Built with an Integrated PiBurn Grip", "Smart Autofocus"],
     image: "home-product-vertigo.png",
+    scene: "home-product-vertigo-scene.webp",
     href: "https://www.1laser.com/products/vertigo-vertical-laser-engraver",
   },
 ];
@@ -90,24 +94,24 @@ const whyAdvantages = [
     title: "Long-Life RF Precision.",
     benefit: "Sharper Details, Less Downtime, Better Long-Term ROI.",
     proof: ["Sealed Metal RF Tube", "Stable Beam", "20,000–50,000-Hour Lifespan"],
-    image: "home-why-rf-core.jpg",
-    alt: "Exploded view of OneLaser RF laser engineering",
+    image: "why-onelaser-rf-precision.jpg",
+    alt: "Precision-engineered sealed RF laser assembly",
   },
   {
     number: "02",
     title: "Print & Cut with Full Vision Intelligence.",
     benefit: "Every Cut Lands Exactly Where It Should.",
     proof: ["Camera-Guided Alignment", "Auto Edge & Mark Detection"],
-    image: "smart-workflow-print-cut.webp",
-    alt: "OneLaser camera-guided print and cut workflow",
+    image: "why-onelaser-vision-intelligence.jpg",
+    alt: "Camera-guided print and cut alignment inside a desktop laser",
   },
   {
     number: "03",
     title: "Unmatched Speed.",
     benefit: "Finish 3× More Orders Per Day.",
     proof: ["Up to 2,000 mm/s", "True 4G Acceleration"],
-    image: "speed-motion-wood.webp",
-    alt: "OneLaser XRF Gen2 speed comparison on a detailed wood engraving",
+    image: "why-onelaser-unmatched-speed.jpg",
+    alt: "High-speed laser production of detailed wood panels",
   },
 ];
 
@@ -332,6 +336,7 @@ export function HomePage() {
           <div className="home-products__grid">
             {productCards.map((product) => (
               <a className={`home-product-card home-product-card--${product.id}`} href={product.href} key={product.name}>
+                <img className="home-product-card__scene" src={asset(product.scene)} alt="" loading="lazy" />
                 <div className="home-product-card__copy">
                   <span className="home-product-card__eyebrow">{product.label}</span>
                   <h2>{product.name}</h2>
@@ -341,36 +346,11 @@ export function HomePage() {
                   </div>
                 </div>
                 <div className="home-product-card__media">
-                  <img src={asset(product.image)} alt={`${product.name} laser system`} />
+                  <img src={asset(product.image)} alt={`${product.name} laser system`} loading="lazy" />
                 </div>
                 <strong className="home-product-card__cta">Explore {product.name.replace("™ Series", "").replace("™", "")} <ArrowUpRight size={16} weight="bold" /></strong>
               </a>
             ))}
-          </div>
-        </section>
-
-        <section className="home-why" id="why-onelaser" aria-labelledby="why-onelaser-title">
-          <div className="home-why__inner">
-            <header className="home-why__header">
-              <span>WHY ONELASER</span>
-              <h2 id="why-onelaser-title">OneLaser means high performance, reinvented.</h2>
-              <p>Buy Once. Run Longer. Make More.</p>
-            </header>
-            <div className="home-why__grid">
-              {whyAdvantages.map((advantage) => (
-                <article className="home-why-card" key={advantage.number}>
-                  <div className="home-why-card__media"><img src={asset(advantage.image)} alt={advantage.alt} /></div>
-                  <div className="home-why-card__copy">
-                    <span>{advantage.number}</span>
-                    <h3>{advantage.title}</h3>
-                    <p>{advantage.benefit}</p>
-                    <div className="home-why-card__proof" aria-label={`${advantage.title} proof points`}>
-                      {advantage.proof.map((item) => <strong key={item}>{item}</strong>)}
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
           </div>
         </section>
 
@@ -394,6 +374,79 @@ export function HomePage() {
                 <span className="home-showcase-card__copy"><small>{project.material}</small><strong>{project.title}</strong></span>
               </button>
             ))}
+          </div>
+        </section>
+
+        <section className="home-why" id="why-onelaser" aria-labelledby="why-onelaser-title">
+          <div className="home-why__inner">
+            <header className="home-why__header">
+              <span>WHY ONELASER</span>
+              <h2 id="why-onelaser-title">OneLaser means high performance, reinvented.</h2>
+              <p>Buy Once. Run Longer. Make More.</p>
+            </header>
+            <div className="home-why__grid">
+              {whyAdvantages.map((advantage) => (
+                <article className="home-why-card" key={advantage.number}>
+                  <div className="home-why-card__media"><img src={asset(advantage.image)} alt={advantage.alt} loading="lazy" /></div>
+                  <div className="home-why-card__copy">
+                    <span>{advantage.number}</span>
+                    <h3>{advantage.title}</h3>
+                    <p>{advantage.benefit}</p>
+                    <div className="home-why-card__proof" aria-label={`${advantage.title} proof points`}>
+                      {advantage.proof.map((item) => <strong key={item}>{item}</strong>)}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="home-industries" id="industries" aria-labelledby="home-industries-title">
+          <header className="home-industries__header">
+            <h2 id="home-industries-title">Inspiring Makers, Builders, and Innovators Everywhere</h2>
+            <p>From first projects to production floors and classrooms, OneLaser gives every idea room to grow.</p>
+          </header>
+          <div className="home-industries__grid">
+            <a className="home-industry home-industry--makers" href="https://www.1laser.com/pages/laser-engraving-community" target="_blank" rel="noreferrer">
+              <img src={asset("home-banner-xrf-maker.png")} alt="A maker holding a finished wood project beside a OneLaser" />
+              <span className="home-industry__shade" />
+              <div><h2>For Makers & Creators</h2><p>From your first project to your next big idea, OneLaser is with you every step of the way.</p><strong>Explore for Makers <ArrowRight size={15} /></strong></div>
+            </a>
+            <a className="home-industry home-industry--business" href="https://www.1laser.com/products/sales-consultation-call" target="_blank" rel="noreferrer">
+              <img src={asset("xrf-workshop-story.webp")} alt="A professional business owner working with a OneLaser system" />
+              <span className="home-industry__shade" />
+              <div><h2>For Business</h2><p>Increase throughput, broaden your catalog, and build repeatable production.</p><strong>Explore for Business <ArrowRight size={15} /></strong></div>
+            </a>
+            <a className="home-industry home-industry--education" href="https://www.1laser.com/pages/education" target="_blank" rel="noreferrer">
+              <img src={asset("home-banner-hydra-education.png")} alt="Students learning with OneLaser in a classroom" />
+              <span className="home-industry__shade" />
+              <div><h2>For Education</h2><p>Bring hands-on STEM learning into classrooms, labs, and maker spaces.</p><strong>Explore Education <ArrowRight size={15} /></strong></div>
+            </a>
+          </div>
+        </section>
+
+        <section className="home-brand-pillars" id="support" aria-labelledby="brand-pillars-title">
+          <header>
+            <span>THE ONELASER STANDARD</span>
+            <h2 id="brand-pillars-title">Built around your success.</h2>
+          </header>
+          <div className="home-brand-pillars__grid">
+            <article>
+              <span>01</span>
+              <h3>U.S. Machine Company</h3>
+              <p>A machine partner built for the U.S. market, with accountable delivery, local support, spare parts, users, community, and service you can rely on.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>Innovation-Driven Performance</h3>
+              <p>We turn innovation into real productivity: faster workflows, steadier output, and less manual work.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <h3>Outcome Guarantee</h3>
+              <p>We stand behind the results you need, from setup and first successful jobs to reliable, measurable production over time.</p>
+            </article>
           </div>
         </section>
 
@@ -421,48 +474,6 @@ export function HomePage() {
                 <p>{video.copy}</p>
               </article>
             ))}
-          </div>
-        </section>
-
-        <section className="home-industries" id="industries" aria-label="OneLaser solutions">
-          <a className="home-industry home-industry--makers" href="https://www.1laser.com/pages/laser-engraving-community" target="_blank" rel="noreferrer">
-            <img src={asset("home-banner-xrf-maker.png")} alt="A maker holding a finished wood project beside a OneLaser" />
-            <span className="home-industry__shade" />
-            <div><h2>For Makers & Creators</h2><p>From your first project to your next big idea, OneLaser is with you every step of the way.</p><strong>Explore for Makers <ArrowRight size={15} /></strong></div>
-          </a>
-          <a className="home-industry home-industry--business" href="https://www.1laser.com/products/sales-consultation-call" target="_blank" rel="noreferrer">
-            <img src={asset("xrf-workshop-story.webp")} alt="A professional business owner working with a OneLaser system" />
-            <span className="home-industry__shade" />
-            <div><h2>For Business</h2><p>Increase throughput, broaden your catalog, and build repeatable production.</p><strong>Explore for Business <ArrowRight size={15} /></strong></div>
-          </a>
-          <a className="home-industry home-industry--education" href="https://www.1laser.com/pages/education" target="_blank" rel="noreferrer">
-            <img src={asset("home-banner-hydra-education.png")} alt="Students learning with OneLaser in a classroom" />
-            <span className="home-industry__shade" />
-            <div><h2>For Education</h2><p>Bring hands-on STEM learning into classrooms, labs, and maker spaces.</p><strong>Explore Education <ArrowRight size={15} /></strong></div>
-          </a>
-        </section>
-
-        <section className="home-brand-pillars" id="support" aria-labelledby="brand-pillars-title">
-          <header>
-            <span>THE ONELASER STANDARD</span>
-            <h2 id="brand-pillars-title">Built around your success.</h2>
-          </header>
-          <div className="home-brand-pillars__grid">
-            <article>
-              <span>01</span>
-              <h3>U.S. Machine Company</h3>
-              <p>A machine partner built for the U.S. market, with accountable delivery, local support, spare parts, users, community, and service you can rely on.</p>
-            </article>
-            <article>
-              <span>02</span>
-              <h3>Innovation-Driven Performance</h3>
-              <p>We turn innovation into real productivity: faster workflows, steadier output, and less manual work.</p>
-            </article>
-            <article>
-              <span>03</span>
-              <h3>Outcome Guarantee</h3>
-              <p>We stand behind the results you need, from setup and first successful jobs to reliable, measurable production over time.</p>
-            </article>
           </div>
         </section>
 
