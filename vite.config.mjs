@@ -1,8 +1,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
+const repositoryName = process.env.GITHUB_REPOSITORY?.split("/")[1] || "xrf-gen2-listing";
+
 export default defineConfig({
-  base: "/xrf-gen2-listing/",
+  base: `/${repositoryName}/`,
   optimizeDeps: {
     include: ["react", "react-dom/client"],
   },

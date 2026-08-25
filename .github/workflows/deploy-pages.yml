@@ -1,4 +1,4 @@
-name: Deploy XRF Gen2 listing to GitHub Pages
+name: Deploy OneLaser website to GitHub Pages
 
 on:
   push:

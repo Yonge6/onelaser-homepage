@@ -93,25 +93,37 @@ const whyAdvantages = [
     number: "01",
     title: "Long-Life RF Precision.",
     benefit: "Sharper Details, Less Downtime, Better Long-Term ROI.",
-    proof: ["Sealed Metal RF Tube", "Stable Beam", "20,000–50,000-Hour Lifespan"],
-    image: "why-onelaser-rf-precision.jpg",
-    alt: "Precision-engineered sealed RF laser assembly",
+    proof: "Sealed Metal RF Tube · Stable Beam · 20,000–50,000-Hour Lifespan",
   },
   {
     number: "02",
-    title: "Print & Cut with Full Vision Intelligence.",
-    benefit: "Every Cut Lands Exactly Where It Should.",
-    proof: ["Camera-Guided Alignment", "Auto Edge & Mark Detection"],
-    image: "why-onelaser-vision-intelligence.jpg",
-    alt: "Camera-guided print and cut alignment inside a desktop laser",
+    title: "The RF Laser Leader.",
+    benefit: "Industrial RF performance, made practical for desktop production.",
+    proof: "RF-first engineering · Auto-switch RF hybrid systems",
   },
   {
     number: "03",
+    title: "Print & Cut with Full Vision Intelligence.",
+    benefit: "Every Cut Lands Exactly Where It Should.",
+    proof: "Camera-Guided Alignment · Auto Edge & Mark Detection",
+  },
+  {
+    number: "04",
     title: "Unmatched Speed.",
     benefit: "Finish 3× More Orders Per Day.",
-    proof: ["Up to 2,000 mm/s", "True 4G Acceleration"],
-    image: "why-onelaser-unmatched-speed.jpg",
-    alt: "High-speed laser production of detailed wood panels",
+    proof: "Up to 2,000 mm/s · True 4G Acceleration",
+  },
+  {
+    number: "05",
+    title: "Engineered & Supported in the USA.",
+    benefit: "Real answers, real parts, and accountable support.",
+    proof: "US-Based Engineering · Service & Parts · Real Technicians",
+  },
+  {
+    number: "06",
+    title: "Rock-Solid Build.",
+    benefit: "Built for long-term rigidity, precision, and stability.",
+    proof: "Aircraft-Grade Aluminum Frame · Reinforced Industrial Construction",
   },
 ];
 
@@ -384,20 +396,21 @@ export function HomePage() {
               <h2 id="why-onelaser-title">OneLaser means high performance, reinvented.</h2>
               <p>Buy Once. Run Longer. Make More.</p>
             </header>
-            <div className="home-why__grid">
-              {whyAdvantages.map((advantage) => (
-                <article className="home-why-card" key={advantage.number}>
-                  <div className="home-why-card__media"><img src={asset(advantage.image)} alt={advantage.alt} loading="lazy" /></div>
-                  <div className="home-why-card__copy">
+            <div className="home-why__story">
+              <figure className="home-why__visual">
+                <img src={asset("why-onelaser-rf-precision.jpg")} alt="Precision-engineered sealed RF laser assembly" loading="lazy" />
+                <figcaption><span>RF ENGINEERING</span><strong>Performance built from the inside out.</strong></figcaption>
+              </figure>
+              <div className="home-why__advantages" aria-label="Why choose OneLaser">
+                {whyAdvantages.map((advantage) => (
+                  <article className="home-why-advantage" key={advantage.number}>
                     <span>{advantage.number}</span>
                     <h3>{advantage.title}</h3>
                     <p>{advantage.benefit}</p>
-                    <div className="home-why-card__proof" aria-label={`${advantage.title} proof points`}>
-                      {advantage.proof.map((item) => <strong key={item}>{item}</strong>)}
-                    </div>
-                  </div>
-                </article>
-              ))}
+                    <strong>{advantage.proof}</strong>
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -409,17 +422,17 @@ export function HomePage() {
           </header>
           <div className="home-industries__grid">
             <a className="home-industry home-industry--makers" href="https://www.1laser.com/pages/laser-engraving-community" target="_blank" rel="noreferrer">
-              <img src={asset("home-banner-xrf-maker.png")} alt="A maker holding a finished wood project beside a OneLaser" />
+              <img src={asset("home-industry-makers-v2.jpg")} alt="A maker presenting a collection of finished engraved creations" loading="lazy" />
               <span className="home-industry__shade" />
               <div><h2>For Makers & Creators</h2><p>From your first project to your next big idea, OneLaser is with you every step of the way.</p><strong>Explore for Makers <ArrowRight size={15} /></strong></div>
             </a>
             <a className="home-industry home-industry--business" href="https://www.1laser.com/products/sales-consultation-call" target="_blank" rel="noreferrer">
-              <img src={asset("xrf-workshop-story.webp")} alt="A professional business owner working with a OneLaser system" />
+              <img src={asset("home-industry-business-v2.jpg")} alt="A small business owner preparing finished personalized products for customers" loading="lazy" />
               <span className="home-industry__shade" />
               <div><h2>For Business</h2><p>Increase throughput, broaden your catalog, and build repeatable production.</p><strong>Explore for Business <ArrowRight size={15} /></strong></div>
             </a>
             <a className="home-industry home-industry--education" href="https://www.1laser.com/pages/education" target="_blank" rel="noreferrer">
-              <img src={asset("home-banner-hydra-education.png")} alt="Students learning with OneLaser in a classroom" />
+              <img src={asset("home-industry-education-v2.jpg")} alt="Students collaborating on hands-on STEM projects in a classroom" loading="lazy" />
               <span className="home-industry__shade" />
               <div><h2>For Education</h2><p>Bring hands-on STEM learning into classrooms, labs, and maker spaces.</p><strong>Explore Education <ArrowRight size={15} /></strong></div>
             </a>

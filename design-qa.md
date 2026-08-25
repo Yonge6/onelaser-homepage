@@ -11,6 +11,7 @@
 - Dense-gallery source/implementation comparison: `/Users/yongyuan/Documents/XRF Gen2 网页/references/incoming/homepage-gallery-density-comparison.png`
 - Product-hover implementation evidence: `/Users/yongyuan/Documents/XRF Gen2 网页/references/incoming/homepage-product-hover-final.png`
 - Generated WHY image evidence: `/Users/yongyuan/Documents/XRF Gen2 网页/references/incoming/homepage-why-image2-final.png` and `/Users/yongyuan/Documents/XRF Gen2 网页/references/incoming/homepage-why-image2-mobile-final.png`
+- Image 2 audience assets: `public/assets/home-industry-makers-v2.jpg`, `public/assets/home-industry-business-v2.jpg`, and `public/assets/home-industry-education-v2.jpg`.
 
 ## Viewport and normalization
 
@@ -33,7 +34,7 @@ The implementation uses the official OneLaser product card order, images, labels
 
 - Product grid: the official override and implementation are shown together in `home-products-refinement-combined.png`. Card order, labels, copy, parameters, machine identity, and text actions match. The latest user-supplied Cobra, XRF, Hydra Gen2, and VertiGo renders replace the earlier files. OneLaser red, 24 px radii, Certia typography, and mobile single-column behavior follow the XRF Gen2 UI specification.
 - Hero: the exact three supplied 3840 × 1200 campaign artworks remain intact and uncropped at desktop inside the required 600 px stage.
-- WHY ONELASER: each card preserves one brochure claim as its own information unit—Long-Life RF Precision, Print & Cut with Full Vision Intelligence, and Unmatched Speed—with separate outcome copy and technical proof. Three purpose-built, text-free 3:2 images now express those claims through one restrained black/white/red industrial-photography system. The module follows ENDLESS POSSIBILITIES as requested.
+- WHY ONELASER: the brochure-led module now uses one dominant RF engineering image beside six distinct, numbered advantages. The image, statement, outcome copy, and technical proof remain separate information levels rather than being merged into generic cards. The module follows ENDLESS POSSIBILITIES as requested.
 - Product families: the clean machine render remains the default state. On fine-pointer hover and keyboard focus, each card crossfades to its supplied real-world machine scene with a controlled dark gradient, white technical copy, and no layout shift; touch devices retain the stable default card.
 - Finished projects: nineteen real engraving outputs form an edge-to-edge horizontal scroll-snap gallery: three dense rows on desktop and two rows on mobile. Each card owns its image and material label, opens an accessible enlarged-image viewer with a consistent image-stage height, and uses no synthetic placeholder or code-drawn asset.
 - Videos: four real local YouTube covers replace generic placeholders in an edge-to-edge horizontal rail. The video story now follows THE ONELASER STANDARD as requested. Iframes are absent until interaction, and removed on close.
@@ -45,7 +46,7 @@ The implementation uses the official OneLaser product card order, images, labels
 - Fonts and typography: Certia is used throughout; editorial headings are 48 px desktop and 32 px mobile; card and body hierarchy follows `UI-SPEC.md`; visible text floor is 12 px.
 - Spacing and layout rhythm: 12–16 px card grouping, 24–28 px product radii, 48 px desktop / 32 px mobile section boundaries, one shared 1280 px editorial axis, and an aspect-correct Hero capped at 600 px are consistent with the XRF Gen2 system. Product, project, WHY, audience, brand, video, and footer content begin at the same 180 px desktop / 18 px mobile axis at the tested viewports.
 - Colors and visual tokens: surfaces are `#FFFFFF` / `#F5F5F7`, text uses black / `#6B6B70`, borders use XRF gray tokens, brand accents use `#E7310E`, and primary actions use `#D92D0D`.
-- Image quality and asset fidelity: all production images load with real natural dimensions; no machine render, logo, video cover, or photographic module uses a placeholder or code-drawn approximation.
+- Image quality and asset fidelity: all production images load with real natural dimensions. The Maker, Business, and Education panels use three 1536 × 1024 Image 2 photographs centered on people and finished work, with no machine or equipment visible. No machine render, logo, video cover, or photographic module uses a placeholder or code-drawn approximation.
 - Copy and content: the product grid uses live official OneLaser copy verified from `https://www.1laser.com/`; the WHY module uses the supplied brochure copy directly; the closing brand statements use the user's text verbatim; header and footer information follow the current official homepage.
 - Browser checks: zero broken or pending images, zero document overflow at desktop and 390 px, and a 12 px mobile text floor. The project and video rails advance, the project lightbox moves between images and restores page scrolling on close, the lazy video modal inserts exactly one iframe and removes it on close, and the mobile navigation opens and closes correctly.
 - Footer checks: the full dark footer uses the same content axis as the section above. Its desktop demo action and subscription form are both exactly 48 px high; the mobile form intentionally stacks for touch usability without overflow.
@@ -63,6 +64,9 @@ The implementation uses the official OneLaser product card order, images, labels
 9. The product grid initially communicated only isolated machines. Added four supplied real-world scene images as progressive hover/focus states while preserving the uncluttered white default and mobile behavior.
 10. The WHY media mixed brochure artwork and inconsistent visual languages. Replaced all three images with purpose-generated 3:2 industrial photography tied one-to-one to the approved RF precision, vision intelligence, and speed claims.
 11. Footer and media rails used different horizontal calculations. Unified every major heading, body, first card, footer lead, footer columns, and footer bottom rule to the XRF Gen2 1280 px content axis.
+12. The product specifications read as plain ruled rows. Rebuilt them as compact 10 px rounded rectangles on desktop and 9 px on mobile, with a translucent dark hover treatment over the machine scenes.
+13. The three-card WHY layout felt like separate campaign tiles rather than the supplied brochure. Rebuilt it as one technical image plus a structured six-point editorial introduction.
+14. The audience panels still showed laser machines. Replaced all three with purpose-generated Maker, Business, and Education scenes showing only people, engraved outcomes, business fulfillment, and hands-on STEM work.
 
 ## Primary interactions tested
 
