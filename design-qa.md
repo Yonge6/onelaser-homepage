@@ -1,63 +1,62 @@
 # OneLaser Homepage Design QA
 
-Source visual truth paths:
+## Comparison target
 
-- `/Users/yongyuan/Downloads/web/OneLaser_Hydra Gen2_WEB_AdCopy_Education_EN_v1.png`
-- `/Users/yongyuan/Downloads/web/OneLaser_XRF_WEB_EN_v1.png`
-- `/Users/yongyuan/Downloads/web/OneLaser_XRF_WEB_AdCopy_EN_v2.png`
-- `/Users/yongyuan/Downloads/XRF/XRF-image.png 3.png`
-- `/Users/yongyuan/Downloads/VertiGo/VertiGo1.png`
-- `/Users/yongyuan/Downloads/Hydra Gen2/Hydra Gen2-9-1100x678-2 1.png`
-- `/Users/yongyuan/Downloads/Cobra/Cobra10渲染.63 1.png`
-- `/Users/yongyuan/Documents/XRF Gen2 网页/UI-SPEC.md`
+- Overall source visual truth: `/Users/yongyuan/.codex/generated_images/01a032c2-4b43-7912-848c-37760ec1eb31/exec-cc036295-7872-4d18-9023-1d92f772311c.png`
+- Product-grid override: `/Users/yongyuan/Documents/XRF Gen2 网页/references/incoming/onelaser-official-product-grid-reference.png`
+- Design-system source: `/Users/yongyuan/Documents/XRF Gen2 网页/UI-SPEC.md`
+- Desktop implementation evidence: `/Users/yongyuan/Documents/XRF Gen2 网页/references/incoming/homepage-final-desktop-top.png` and `/Users/yongyuan/Documents/XRF Gen2 网页/references/incoming/homepage-final-desktop-bottom.png`
+- Mobile implementation evidence: `/Users/yongyuan/Documents/XRF Gen2 网页/references/incoming/homepage-mobile-xrf-system.png` and `/Users/yongyuan/Documents/XRF Gen2 网页/references/incoming/homepage-mobile-end.png`
+- Combined source and implementation comparison: `/Users/yongyuan/Documents/XRF Gen2 网页/references/incoming/design-qa-combined.png`
 
-Implementation evidence:
+## Viewport and normalization
 
-- `/Users/yongyuan/Documents/XRF Gen2 网页/references/incoming/home-desktop-hero.png`
-- `/Users/yongyuan/Documents/XRF Gen2 网页/references/incoming/home-mobile-hero-390.png`
-- `/Users/yongyuan/Documents/XRF Gen2 网页/references/incoming/home-mobile-solutions-390.png`
-- `/Users/yongyuan/Documents/XRF Gen2 网页/references/incoming/home-mobile-results-390.png`
-- `/Users/yongyuan/Documents/XRF Gen2 网页/references/incoming/home-products-desktop-final.png`
-- `/Users/yongyuan/Documents/XRF Gen2 网页/references/incoming/home-products-mobile-390-final.png`
-- Combined comparison: `/Users/yongyuan/Documents/XRF Gen2 网页/references/incoming/home-banner-comparison.png`
+- Overall source pixels: 727 × 2162.
+- Product-grid source pixels: 2678 × 2288.
+- Desktop implementation pixels: 1440 × 4096 for each upper/lower checkpoint; CSS viewport 1440 × 4096; device scale factor 1.
+- Mobile implementation pixels: 390 × 844; CSS viewport 390 × 844; device scale factor 1.
+- The combined comparison normalizes source and implementation to equal column widths and top alignment. Focused mobile evidence is reviewed at native 390 px width.
+- State: homepage, XRF campaign hero, default product grid. Additional interaction states cover carousel navigation, open/closed YouTube modal, and open/closed mobile navigation.
 
-Viewport and normalization:
+## Full-view comparison evidence
 
-- Desktop browser viewport: 1280 × 720 CSS px at device scale 1. Hero stage: 1280 × 600 CSS px.
-- Desktop source normalized from 3840 × 1200 to 1280 × 400 and centered within the same 1280 × 600 OneLaser-brown stage used by the implementation.
-- Mobile browser viewport: 390 × 844 CSS px at device scale 1. Hero stage: 390 × 510 CSS px.
-- States checked: hero banner 1, hero next-banner state, closed/open mobile menu, Small Business/Education solution states, homepage, and `?page=xrf`.
+The combined comparison confirms the selected hierarchy from header through footer: white navigation, 600 px banner carousel, immediate four-machine 2 × 2 campaign grid, finished-output band, three alternating engineering stories, editorial YouTube module, three-step workflow, maker/education panels, support rail, final CTA, and footer. The additional three-part brand promise is an intentional user-requested extension before the final CTA.
+
+The implementation uses the official OneLaser product card order, images, labels, copy, parameter pills, and Explore Now actions from the later user-supplied product-grid override. This later source intentionally supersedes the simpler product cards shown in the original generated mock.
+
+## Focused comparison evidence
+
+- Product grid: the official override and implementation are shown together in `design-qa-combined.png`. Card order, labels, copy, parameter pills, machine identity, and actions match. OneLaser red, 24 px radii, Certia typography, and mobile single-column behavior follow the XRF Gen2 UI specification.
+- Hero: the exact three supplied 3840 × 1200 campaign artworks remain intact and uncropped at desktop inside the required 600 px stage.
+- Videos: four real local YouTube covers replace generic placeholders. Iframes are absent until interaction, and removed on close.
+- Mobile: native 390 px captures confirm no horizontal overflow, readable copy, 12 px minimum visible text, full-width primary actions, and single-column product cards in line with the XRF Gen2 responsive system.
 
 ## Findings
 
-No actionable P0, P1 or P2 findings remain.
-
-- Fonts and typography: official Certia files load; headings preserve the approved 800 weight and compact display rhythm; visible mobile text floor is 12 px.
-- Spacing and layout rhythm: the desktop hero is exactly 600 px high; homepage sections use deliberate white space, consistent 24–32 px media radii and stable editorial axes.
-- Colors and visual tokens: exact OneLaser reds, black, white and `#F5F5F7` are used. The education hero edge field matches the supplied banner rather than introducing a new decorative color.
-- Image quality and asset fidelity: all three supplied 3840 × 1200 banners and all four supplied transparent product renders are shipped unchanged. Machine and result imagery uses approved source assets; no product image is approximated with code art.
-- Copy and content: the supplied banner copy stays inside the source assets. Mobile companion copy is shorter and avoids unsupported commercial claims. Support, fulfillment and warranty wording follows the existing approved project system.
-- Responsiveness and accessibility: 390 px document overflow is 0; all images completed with non-zero natural dimensions; navigation, carousel and solution tabs expose semantic labels and states; reduced motion is supported.
-
-Focused comparison was required for the hero because the source typography and machine crop are embedded in the raster. The side-by-side comparison confirms the implementation preserves the normalized source exactly, with only the intentional carousel arrows and dots added.
+- No actionable P0, P1, or P2 fidelity issues remain.
+- Fonts and typography: Certia is used throughout; editorial headings are 48 px desktop and 32 px mobile; card and body hierarchy follows `UI-SPEC.md`; visible text floor is 12 px.
+- Spacing and layout rhythm: 12–16 px card grouping, 24 px product radii, 48–96 px section boundaries, 1280–1440 px editorial axes, and 600 px desktop Hero are consistent with the XRF Gen2 system.
+- Colors and visual tokens: surfaces are `#FFFFFF` / `#F5F5F7`, text uses black / `#6B6B70`, borders use XRF gray tokens, brand accents use `#E7310E`, and primary actions use `#D92D0D`.
+- Image quality and asset fidelity: all production images load with real natural dimensions; no machine render, logo, video cover, or photographic module uses a placeholder or code-drawn approximation.
+- Copy and content: the product grid uses live official OneLaser copy verified from `https://www.1laser.com/`; the closing brand statements use the user's text verbatim.
+- Browser checks: zero broken images, zero document overflow at 1440 px and 390 px, and no console warnings or errors.
 
 ## Comparison history
 
-1. First desktop pass: P2 — `object-fit: cover` cropped the supplied left-side headline at 1280 px. Fix: switched to `contain` inside a color-matched 600 px stage. Post-fix evidence: `home-banner-comparison.png` preserves the complete banner and machine.
-2. First mobile pass: P2 — the narrow crop exposed part of the banner’s embedded headline behind the mobile companion copy. Fix: repositioned each original raster around its people/machine focal area and moved embedded desktop copy fully out of view. Post-fix evidence: `home-mobile-hero-390.png` shows one clear content hierarchy.
-3. First four-product mobile pass: P2 — a leftover tablet minimum height created excessive blank space below the first product row. Fix: removed the inherited 600 px minimum and let the two-column cards size to their content. Post-fix card heights are 341/341/365/365 px with zero document overflow.
+1. Initial product cards lacked the official labels, specification pills, and CTA anatomy. Fixed by verifying the live OneLaser homepage and rebuilding the 2 × 2 grid with the supplied official reference. Post-fix evidence: `homepage-final-desktop-top.png` and `homepage-mobile-xrf-system.png`.
+2. Initial audience panels allowed embedded banner copy to overlap the new overlay copy. Fixed by using the approved right-side image crop. Post-fix evidence: `homepage-final-desktop-bottom.png`.
+3. Initial homepage tokens drifted from the XRF Gen2 system in card radius, accent red, heading sizes, play-control scale, and mobile card layout. Fixed with 24 px product radii, `#E7310E` / `#D92D0D`, 48/32 px editorial headings, 72/58 px play controls, and single-column mobile product cards. Post-fix evidence: desktop and 390 px captures above.
+4. A trial full-bleed Hero crop clipped the banner's left-side message at 1440 px. Reverted to uncropped `contain` rendering inside the exact 600 px stage. Post-fix evidence: `homepage-final-desktop-top.png`.
 
 ## Primary interactions tested
 
-- Previous/next hero controls and active dot update.
-- Mobile menu open state.
-- Solution tab selection and panel content update.
-- Homepage-to-XRF route and XRF page render.
-- Desktop and mobile image loading and overflow checks.
-- Browser console warnings/errors: none.
+- Hero autoplay structure, direct slide-dot selection, keyboard arrows, and swipe handlers.
+- YouTube cover opens the accessible lazy modal; close removes the iframe; overlay and Escape close are implemented.
+- Mobile menu opens, exposes navigation, and closes after navigation.
+- Product, demo, YouTube, support, email, telephone, footer, and internal XRF links have real destinations.
 
 ## Follow-up polish
 
-- P3: If dedicated portrait campaign art is produced later, replace the mobile focal crops while keeping the current accessible copy and controls.
+- P3: re-evaluate line breaks at intermediate tablet widths after future localization or copy changes.
 
 final result: passed
