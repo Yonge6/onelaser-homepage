@@ -8,13 +8,10 @@ import {
   List,
   MagnifyingGlass,
   MapPin,
-  Monitor,
   Phone,
   Play,
   ShoppingBag,
-  Sparkle,
   UserCircle,
-  Wrench,
   X,
 } from "@phosphor-icons/react";
 
@@ -127,6 +124,13 @@ const projectShowcase = [
   { image: "product-outdoor-estate-sign.webp", title: "Outdoor Estate Sign", material: "Wood" },
   { image: "product-coated-metal-tags.webp", title: "Branded Metal Tags", material: "Coated Metal" },
   { image: "product-custom-keychains.webp", title: "Custom Keychains", material: "Acrylic" },
+  { image: "product-house-number-sign.webp", title: "Modern House Number", material: "Wood" },
+  { image: "power-38w-result.webp", title: "Portrait & Botanical Collection", material: "Wood, Acrylic & Leather" },
+  { image: "power-70w-result.webp", title: "Wildlife Art Collection", material: "Wood, Acrylic & Metal" },
+  { image: "material-wood.webp", title: "Wood Maker Collection", material: "Wood" },
+  { image: "material-acrylic.webp", title: "Acrylic Design Collection", material: "Acrylic" },
+  { image: "material-glass-stone.webp", title: "Glass & Stone Collection", material: "Glass & Stone" },
+  { image: "material-leather.webp", title: "Personalized Leather Goods", material: "Leather" },
 ];
 
 const videos = [
@@ -157,30 +161,15 @@ const videos = [
   },
 ];
 
-const workflow = [
-  {
-    icon: Monitor,
-    step: "1. Design",
-    copy: "Create in your favorite software or choose from templates.",
-  },
-  {
-    icon: Wrench,
-    step: "2. Set Up",
-    copy: "Place your material, focus, and set your parameters.",
-  },
-  {
-    icon: Sparkle,
-    step: "3. Make",
-    copy: "Start the job and watch your idea become real.",
-  },
-];
-
 export function HomePage() {
   const [activeHero, setActiveHero] = useState(0);
   const [heroPaused, setHeroPaused] = useState(false);
+  const [heroCycle, setHeroCycle] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeVideo, setActiveVideo] = useState(null);
+  const [activeProject, setActiveProject] = useState(null);
   const touchStart = useRef(null);
+  const showcaseRailRef = useRef(null);
   const videoRailRef = useRef(null);
 
   useEffect(() => {
@@ -197,24 +186,33 @@ export function HomePage() {
       setActiveHero((current) => (current + 1) % heroSlides.length);
     }, 6500);
     return () => window.clearInterval(timer);
-  }, [heroPaused]);
+  }, [heroCycle, heroPaused]);
 
   useEffect(() => {
-    if (!activeVideo) return undefined;
+    if (!activeVideo && !activeProject) return undefined;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const closeOnEscape = (event) => {
-      if (event.key === "Escape") setActiveVideo(null);
+      if (event.key === "Escape") {
+        setActiveVideo(null);
+        setActiveProject(null);
+      }
     };
     window.addEventListener("keydown", closeOnEscape);
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", closeOnEscape);
     };
-  }, [activeVideo]);
+  }, [activeProject, activeVideo]);
 
   function moveHero(direction) {
     setActiveHero((current) => (current + direction + heroSlides.length) % heroSlides.length);
+    setHeroCycle((current) => current + 1);
+  }
+
+  function chooseHero(index) {
+    setActiveHero(index);
+    setHeroCycle((current) => current + 1);
   }
 
   function handleHeroTouchEnd(event) {
@@ -226,6 +224,17 @@ export function HomePage() {
 
   function scrollVideos(direction) {
     videoRailRef.current?.scrollBy({ left: direction * 460, behavior: "smooth" });
+  }
+
+  function scrollShowcase(direction) {
+    showcaseRailRef.current?.scrollBy({ left: direction * 520, behavior: "smooth" });
+  }
+
+  function moveProject(direction) {
+    setActiveProject((current) => {
+      const index = projectShowcase.findIndex((project) => project.image === current?.image);
+      return projectShowcase[(index + direction + projectShowcase.length) % projectShowcase.length];
+    });
   }
 
   return (
@@ -268,7 +277,7 @@ export function HomePage() {
 
       <main id="home-main">
         <section
-          className="home-hero"
+          className={heroPaused ? "home-hero is-paused" : "home-hero"}
           aria-roledescription="carousel"
           aria-label="Featured OneLaser stories"
           onMouseEnter={() => setHeroPaused(true)}
@@ -306,7 +315,7 @@ export function HomePage() {
               <button
                 className={index === activeHero ? "is-active" : ""}
                 type="button"
-                onClick={() => setActiveHero(index)}
+                onClick={() => chooseHero(index)}
                 aria-label={`Show banner ${index + 1}`}
                 aria-current={index === activeHero ? "true" : undefined}
                 key={slide.image}
@@ -315,7 +324,11 @@ export function HomePage() {
           </div>
         </section>
 
-        <section className="home-products" id="machines" aria-label="OneLaser product families">
+        <section className="home-products" id="machines" aria-labelledby="home-products-title">
+          <header className="home-products__header">
+            <h2 id="home-products-title">Engrave the Future</h2>
+            <p>Browse our high-performance machines engineered for elite creators</p>
+          </header>
           <div className="home-products__grid">
             {productCards.map((product) => (
               <a className={`home-product-card home-product-card--${product.id}`} href={product.href} key={product.name}>
@@ -363,20 +376,25 @@ export function HomePage() {
 
         <section className="home-showcase" id="inspiration" aria-labelledby="home-showcase-title">
           <header className="home-showcase__header">
-            <span>ENDLESS POSSIBILITIES</span>
-            <h2 id="home-showcase-title">One Machine. Endless Possibilities.</h2>
-            <p>Your work is only as good as your laser. That’s why the best work runs on OneLaser.</p>
+            <div className="home-showcase__heading">
+              <span>ENDLESS POSSIBILITIES</span>
+              <h2 id="home-showcase-title">One Machine. Endless Possibilities.</h2>
+              <p>Your work is only as good as your laser. That’s why the best work runs on OneLaser.</p>
+            </div>
+            <div className="home-showcase__controls" aria-label="Browse finished OneLaser projects">
+              <button type="button" onClick={() => scrollShowcase(-1)} aria-label="Show previous finished projects"><CaretLeft size={22} /></button>
+              <button type="button" onClick={() => scrollShowcase(1)} aria-label="Show more finished projects"><CaretRight size={22} /></button>
+            </div>
           </header>
-          <div className="home-showcase__grid" aria-label="Finished projects made with OneLaser">
+          <div className="home-showcase__grid" ref={showcaseRailRef} aria-label="Finished projects made with OneLaser">
             {projectShowcase.map((project) => (
-              <a href="https://www.1laser.com/collections/materials" target="_blank" rel="noreferrer" className="home-showcase-card" key={project.image}>
+              <button type="button" className="home-showcase-card" onClick={() => setActiveProject(project)} aria-label={`Enlarge ${project.title}`} key={project.image}>
                 <img src={asset(project.image)} alt={project.title} />
                 <span className="home-showcase-card__shade" />
                 <span className="home-showcase-card__copy"><small>{project.material}</small><strong>{project.title}</strong></span>
-              </a>
+              </button>
             ))}
           </div>
-          <a className="home-showcase__link" href="https://www.1laser.com/collections/materials" target="_blank" rel="noreferrer">Explore materials and projects <ArrowUpRight size={16} weight="bold" /></a>
         </section>
 
         <section className="home-videos" id="videos">
@@ -401,23 +419,6 @@ export function HomePage() {
                 </button>
                 <h3>{video.title}</h3>
                 <p>{video.copy}</p>
-              </article>
-            ))}
-          </div>
-          <a className="home-youtube-link" href="https://www.youtube.com/@OneLaser.Official" target="_blank" rel="noreferrer">Visit the OneLaser channel <ArrowUpRight size={15} weight="bold" /></a>
-        </section>
-
-        <section className="home-workflow" aria-label="OneLaser workflow">
-          <header className="home-section-heading home-section-heading--centered">
-            <h2>Simple Workflow. Stunning Results.</h2>
-          </header>
-          <div className="home-workflow__steps">
-            {workflow.map(({ icon: Icon, step, copy }, index) => (
-              <article key={step}>
-                <div className="home-workflow__icon"><Icon size={44} weight="light" /></div>
-                <h3>{step}</h3>
-                <p>{copy}</p>
-                {index < workflow.length - 1 && <ArrowRight className="home-workflow__arrow" size={22} weight="light" aria-hidden="true" />}
               </article>
             ))}
           </div>
@@ -502,7 +503,6 @@ export function HomePage() {
             <p><MapPin size={16} />Headquarters: 20472 Crescent Bay Dr, STE 104, Lake Forest, CA 92630</p>
           </div>
         </div>
-        <div className="home-footer__payments" aria-label="Accepted payment methods"><span>Amazon</span><span>American Express</span><span>Apple Pay</span><span>Diners Club</span><span>Discover</span><span>Google Pay</span><span>Mastercard</span><span>PayPal</span><span>Shop Pay</span><span>Venmo</span><span>Visa</span></div>
         <div className="home-footer__bottom"><span>© {new Date().getFullYear()} OneLaser. All rights reserved.</span><div><a href="https://www.1laser.com/pages/privacy-policy">Privacy Policy</a><a href="https://www.1laser.com/pages/terms-of-service">Terms of Service</a><a href="#top">Back to top <ArrowUpRight size={13} /></a></div></div>
       </footer>
 
@@ -513,6 +513,20 @@ export function HomePage() {
             <div className="home-video-modal__frame">
               <iframe src={`https://www.youtube-nocookie.com/embed/${activeVideo.id}?autoplay=1&rel=0`} title={activeVideo.title} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen />
             </div>
+          </div>
+        </div>
+      )}
+
+      {activeProject && (
+        <div className="home-project-modal" role="dialog" aria-modal="true" aria-label={activeProject.title} onMouseDown={(event) => { if (event.target === event.currentTarget) setActiveProject(null); }}>
+          <div className="home-project-modal__panel">
+            <button className="home-project-modal__close" type="button" onClick={() => setActiveProject(null)} aria-label="Close enlarged project"><X size={22} weight="bold" /></button>
+            <button className="home-project-modal__arrow home-project-modal__arrow--left" type="button" onClick={() => moveProject(-1)} aria-label="Show previous project"><CaretLeft size={26} /></button>
+            <figure>
+              <img src={asset(activeProject.image)} alt={activeProject.title} />
+              <figcaption><small>{activeProject.material}</small><strong>{activeProject.title}</strong></figcaption>
+            </figure>
+            <button className="home-project-modal__arrow home-project-modal__arrow--right" type="button" onClick={() => moveProject(1)} aria-label="Show next project"><CaretRight size={26} /></button>
           </div>
         </div>
       )}

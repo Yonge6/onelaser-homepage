@@ -22,7 +22,7 @@
 
 ## Full-view comparison evidence
 
-The combined comparison confirms the selected hierarchy from header through footer: white navigation, adaptive 3840 × 1200 campaign carousel, immediate four-machine 2 × 2 campaign grid, brochure-led WHY ONELASER proof, a dense finished-project wall, editorial YouTube rail, three-step workflow, three separate maker/business/education panels, the required three-part brand promise, and the official-content footer. The former results banner, engineering-story stack, duplicate support rail, and final CTA were intentionally removed following direct user feedback.
+The combined comparison confirms the selected hierarchy from header through footer: white navigation, adaptive 3840 × 1200 campaign carousel, an `Engrave the Future` introduction and four-machine 2 × 2 campaign grid, brochure-led WHY ONELASER proof, a full-viewport finished-project rail, a full-viewport editorial YouTube rail, three separate maker/business/education panels, the required three-part brand promise, and the official-content dark footer. The former results banner, engineering-story stack, three-step workflow, duplicate support rail, payment-logo row, and final CTA were intentionally removed following direct user feedback.
 
 The implementation uses the official OneLaser product card order, images, labels, copy, parameter pills, and Explore Now actions from the later user-supplied product-grid override. This later source intentionally supersedes the simpler product cards shown in the original generated mock.
 
@@ -31,8 +31,8 @@ The implementation uses the official OneLaser product card order, images, labels
 - Product grid: the official override and implementation are shown together in `home-products-refinement-combined.png`. Card order, labels, copy, parameters, machine identity, and text actions match. The latest user-supplied Cobra, XRF, Hydra Gen2, and VertiGo renders replace the earlier files. OneLaser red, 24 px radii, Certia typography, and mobile single-column behavior follow the XRF Gen2 UI specification.
 - Hero: the exact three supplied 3840 × 1200 campaign artworks remain intact and uncropped at desktop inside the required 600 px stage.
 - WHY ONELASER: each card preserves one brochure claim as its own information unit—Long-Life RF Precision, Print & Cut with Full Vision Intelligence, and Unmatched Speed—with separate outcome copy and technical proof. The title stays on one line on desktop, and the three cards use consistent 16:9 media anatomy.
-- Finished projects: twelve real engraving outputs form a four-column desktop gallery and a two-row horizontal mobile rail. Each card owns its image and material label; no synthetic placeholder or code-drawn asset is used.
-- Videos: four real local YouTube covers replace generic placeholders. Iframes are absent until interaction, and removed on close.
+- Finished projects: nineteen real engraving outputs form an edge-to-edge horizontal scroll-snap rail at every breakpoint. Each card owns its image and material label, opens an accessible enlarged-image viewer instead of navigating away, and uses no synthetic placeholder or code-drawn asset.
+- Videos: four real local YouTube covers replace generic placeholders in an edge-to-edge horizontal rail. Iframes are absent until interaction, and removed on close.
 - Mobile: native 390 px captures confirm no document overflow, readable copy, a 12 px minimum visible text floor, single-column product cards, intentional horizontal media rails, a working navigation drawer, and a complete two-column-to-single-column footer adaptation.
 
 ## Findings
@@ -43,7 +43,7 @@ The implementation uses the official OneLaser product card order, images, labels
 - Colors and visual tokens: surfaces are `#FFFFFF` / `#F5F5F7`, text uses black / `#6B6B70`, borders use XRF gray tokens, brand accents use `#E7310E`, and primary actions use `#D92D0D`.
 - Image quality and asset fidelity: all production images load with real natural dimensions; no machine render, logo, video cover, or photographic module uses a placeholder or code-drawn approximation.
 - Copy and content: the product grid uses live official OneLaser copy verified from `https://www.1laser.com/`; the WHY module uses the supplied brochure copy directly; the closing brand statements use the user's text verbatim; header and footer information follow the current official homepage.
-- Browser checks: zero broken or pending images, zero document overflow at desktop and 390 px, and a 12 px mobile text floor. The video rail advances, the lazy modal inserts exactly one iframe and removes it on close, and the mobile navigation opens and closes correctly.
+- Browser checks: zero broken or pending images, zero document overflow at desktop and 390 px, and a 12 px mobile text floor. The project and video rails advance, the project lightbox moves between images and restores page scrolling on close, the lazy video modal inserts exactly one iframe and removes it on close, and the mobile navigation opens and closes correctly.
 
 ## Comparison history
 
@@ -52,8 +52,9 @@ The implementation uses the official OneLaser product card order, images, labels
 3. Initial homepage tokens drifted from the XRF Gen2 system in card radius, accent red, heading sizes, play-control scale, and mobile card layout. Fixed with 24 px product radii, `#E7310E` / `#D92D0D`, 48/32 px editorial headings, 72/58 px play controls, and single-column mobile product cards. Post-fix evidence: desktop and 390 px captures above.
 4. A trial full-bleed Hero crop clipped the banner's left-side message at 1440 px. Reverted to uncropped `contain` rendering inside the exact 600 px stage. Post-fix evidence: `homepage-final-desktop-top.png`.
 5. The first WHY ONELASER draft combined unrelated brochure statements into one narrative. Rebuilt it as three discrete brochure claims with one outcome and proof set per card. Post-fix evidence: `homepage-brochure-why-desktop.png`.
-6. The homepage lacked the requested breadth of finished-work evidence. Added a twelve-item real-project gallery with dense desktop composition and a two-row mobile swipe rail.
+6. The homepage lacked the requested breadth of finished-work evidence. Added a nineteen-item real-project rail with full-viewport horizontal movement and an accessible enlarged-image viewer.
 7. The prior footer and navigation were simplified approximations. Rebuilt both from the current official OneLaser information architecture while retaining the XRF Gen2 white/light-gray visual system.
+8. The first carousel indicator used framed dots and did not communicate timing. Replaced it with borderless 52 px progress bars whose active fill mirrors the 6.5-second banner cycle, with a reduced-motion fallback.
 
 ## Primary interactions tested
 
