@@ -34,11 +34,13 @@ const recommendedMachines = {
     name: "XRF Gen2",
     href: XRF_PAGE_URL,
     copy: "Precision RF desktop laser for detailed flat engraving and repeatable personalization.",
+    image: "home-product-xrf.png",
   },
   vertigo: {
     name: "VertiGo",
     href: "https://www.1laser.com/products/vertigo-vertical-laser-engraver",
     copy: "Purpose-built vertical rotary laser for tumblers, bottles, glassware, and other cylindrical goods.",
+    image: "home-product-vertigo.png",
   },
 };
 
@@ -111,40 +113,46 @@ const productCards = [
 
 const whyAdvantages = [
   {
-    number: "01",
-    title: "Long-Life RF Precision.",
-    benefit: "Sharper Details, Less Downtime, Better Long-Term ROI.",
-    proof: "Sealed Metal RF Tube · Stable Beam · 20,000–50,000-Hour Lifespan",
+    title: "Long-Life RF Precision",
+    body: [
+      "Sealed Metal RF Tube, Stable Beam & 20,000–50,000-Hour Lifespan",
+      "Sharper Details, Less Downtime, Better Long-Term ROI",
+    ],
   },
   {
-    number: "02",
-    title: "The RF Laser Leader.",
-    benefit: "Industrial RF performance, made practical for desktop production.",
-    proof: "RF-first engineering · Auto-switch RF hybrid systems",
+    title: "The RF Laser Leader",
+    body: [
+      "Industrial #1 RF Brand for Desktop",
+      "Industrial First Auto-Switch RF Hybrid System",
+    ],
   },
   {
-    number: "03",
-    title: "Print & Cut with Full Vision Intelligence.",
-    benefit: "Every Cut Lands Exactly Where It Should.",
-    proof: "Camera-Guided Alignment · Auto Edge & Mark Detection",
+    title: "Print & Cut with Full Vision Intelligence",
+    body: [
+      "Camera-Guided Alignment, Auto Edge & Mark Detection",
+      "Every Cut Lands Exactly Where It Should",
+    ],
   },
   {
-    number: "04",
-    title: "Unmatched Speed.",
-    benefit: "Finish 3× More Orders Per Day.",
-    proof: "Up to 2,000 mm/s · True 4G Acceleration",
+    title: "Unmatched Speed",
+    body: [
+      "Up to 2,000 mm/s with True 4G Acceleration",
+      "Finish 3× More Orders Per Day",
+    ],
   },
   {
-    number: "05",
-    title: "Engineered & Supported in the USA.",
-    benefit: "Real answers, real parts, and accountable support.",
-    proof: "US-Based Engineering · Service & Parts · Real Technicians",
+    title: "Engineered & Supported in the USA",
+    body: [
+      "US-Based Engineering, Service & Parts",
+      "Real Answers from Real Technicians, Fast",
+    ],
   },
   {
-    number: "06",
-    title: "Rock-Solid Build.",
-    benefit: "Built for long-term rigidity, precision, and stability.",
-    proof: "Aircraft-Grade Aluminum Frame · Reinforced Industrial Construction",
+    title: "Rock-Solid Build",
+    body: [
+      "Aircraft-Grade Aluminum Frame, Reinforced Industrial Construction",
+      "Built for Long-Term Rigidity, Precision & Stability",
+    ],
   },
 ];
 
@@ -441,11 +449,9 @@ export function HomePage() {
               </figure>
               <div className="home-why__advantages" aria-label="Why choose OneLaser">
                 {whyAdvantages.map((advantage) => (
-                  <article className="home-why-advantage" key={advantage.number}>
-                    <span>{advantage.number}</span>
+                  <article className="home-why-advantage" key={advantage.title}>
                     <h3>{advantage.title}</h3>
-                    <p>{advantage.benefit}</p>
-                    <strong>{advantage.proof}</strong>
+                    <p>{advantage.body.map((line) => <span key={line}>{line}</span>)}</p>
                   </article>
                 ))}
               </div>
@@ -646,17 +652,6 @@ export function HomePage() {
                 </section>
               )}
 
-              {activeProjectMachine && (
-                <section className="home-project-modal__machine">
-                  <div>
-                    <span>RECOMMENDED MACHINE</span>
-                    <h3>{activeProjectMachine.name}</h3>
-                    <p>{activeProjectMachine.copy}</p>
-                  </div>
-                  <a href={activeProjectMachine.href}>Explore {activeProjectMachine.name} <ArrowUpRight size={16} weight="bold" /></a>
-                </section>
-              )}
-
               {activeProjectEconomics && (
                 <section className="home-project-modal__economics">
                   <header>
@@ -670,6 +665,18 @@ export function HomePage() {
                   </dl>
                   <p>{activeProjectMonthlySales} products/mo. × {activeProjectEconomics.sellingPrice} selling price × {activeProjectEconomics.margin} net margin.</p>
                   <small>{economicsDisclaimer}</small>
+                </section>
+              )}
+
+              {activeProjectMachine && (
+                <section className="home-project-modal__machine">
+                  <div className="home-project-modal__machine-copy">
+                    <span>RECOMMENDED MACHINE</span>
+                    <h3>{activeProjectMachine.name}</h3>
+                    <p>{activeProjectMachine.copy}</p>
+                  </div>
+                  <img className={`home-project-modal__machine-image--${activeProject.machineId}`} src={asset(activeProjectMachine.image)} alt={`${activeProjectMachine.name} laser machine`} />
+                  <a href={activeProjectMachine.href}>Explore {activeProjectMachine.name} <ArrowUpRight size={16} weight="bold" /></a>
                 </section>
               )}
             </aside>

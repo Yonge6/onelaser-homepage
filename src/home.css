@@ -154,10 +154,9 @@
 .home-why-advantage { min-width: 0; padding: 28px 26px; }
 .home-why-advantage:nth-child(even) { border-left: 1px solid #dedee2; }
 .home-why-advantage:nth-child(n+3) { border-top: 1px solid #dedee2; }
-.home-why-advantage > span { display: block; color: var(--home-red); font-size: 12px; font-weight: 800; letter-spacing: .12em; }
-.home-why-advantage h3 { margin: 20px 0 0; font-size: 20px; font-weight: 800; line-height: 1.08; letter-spacing: -.025em; }
-.home-why-advantage p { margin: 10px 0 0; color: #6b6b70; font-size: 13px; line-height: 1.45; }
-.home-why-advantage strong { display: block; margin-top: 16px; color: #303034; font-size: 12px; font-weight: 700; line-height: 1.45; }
+.home-why-advantage h3 { margin: 0; color: var(--home-action); font-size: 20px; font-weight: 800; line-height: 1.1; letter-spacing: -.025em; }
+.home-why-advantage p { display: grid; gap: 5px; margin: 16px 0 0; color: #303034; font-size: 13px; line-height: 1.42; }
+.home-why-advantage p span { display: block; }
 
 .home-showcase { padding: 48px 0; overflow: hidden; background: #fff; color: #000; scroll-margin-top: 76px; }
 .home-showcase__header { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; padding: 0 var(--home-content-gutter); }
@@ -266,17 +265,17 @@
 .home-video-modal__frame iframe { width: 100%; height: 100%; border: 0; }
 
 .home-project-modal { position: fixed; z-index: 250; inset: 0; display: grid; place-items: center; padding: 32px; background: rgba(0,0,0,.86); backdrop-filter: blur(14px); }
-.home-project-modal__panel { position: relative; width: min(1180px, calc(100vw - 64px)); height: min(1040px, calc(100vh - 64px)); display: grid; grid-template-rows: minmax(360px, 56%) minmax(0, 44%); overflow: hidden; border: 1px solid rgba(255,255,255,.18); border-radius: 28px; background: #fff; box-shadow: 0 32px 90px rgba(0,0,0,.4); }
+.home-project-modal__panel { position: relative; width: 1180px; height: 1040px; max-width: calc(100vw - 64px); max-height: calc(100vh - 64px); display: grid; grid-template-rows: minmax(360px, 560px) minmax(0, 1fr); overflow: hidden; border: 1px solid rgba(255,255,255,.18); border-radius: 28px; background: #fff; box-shadow: 0 32px 90px rgba(0,0,0,.4); }
 .home-project-modal__media { position: relative; min-width: 0; height: 100%; margin: 0; overflow: hidden; background: #111; }
 .home-project-modal__media > img { width: 100%; height: 100%; display: block; object-fit: cover; background: #111; }
-.home-project-modal__details { min-width: 0; display: grid; grid-template-columns: 1.06fr .97fr .97fr; gap: 14px; align-content: start; padding: 26px 28px 28px; overflow-y: auto; color: #1d1d1f; background: #fff; }
+.home-project-modal__details { min-width: 0; display: grid; grid-template-columns: 1.06fr .97fr .97fr; grid-template-rows: auto minmax(0,1fr); gap: 14px; align-content: stretch; padding: 26px 28px 28px; overflow-y: auto; color: #1d1d1f; background: #fff; }
 .home-project-modal__details > header { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(240px, .9fr) minmax(0, 1.5fr); align-items: end; gap: 12px 34px; }
 .home-project-modal__details > header > span, .home-project-modal__details > header h2 { grid-column: 1; }
 .home-project-modal__details > header p { grid-column: 2; grid-row: 1 / span 2; align-self: end; }
 .home-project-modal__details > header > span, .home-project-modal__machine > div > span, .home-project-modal__economics header span { color: var(--home-action); font-size: 12px; font-weight: 800; letter-spacing: .12em; }
 .home-project-modal__details > header h2 { margin: 6px 0 0; font-size: 34px; font-weight: 800; line-height: 1.02; letter-spacing: -.035em; }
 .home-project-modal__details > header p { margin: 0; color: #6b6b70; font-size: 14px; line-height: 1.55; }
-.home-project-modal__product-info, .home-project-modal__machine, .home-project-modal__economics { min-width: 0; margin-top: 4px; border-radius: 18px; background: #f5f5f7; }
+.home-project-modal__product-info, .home-project-modal__machine, .home-project-modal__economics { min-width: 0; height: 100%; margin-top: 4px; border-radius: 18px; background: #f5f5f7; }
 .home-project-modal__product-info { padding: 16px; }
 .home-project-modal__facts { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; margin: 0; }
 .home-project-modal__facts div { min-width: 0; padding: 14px 16px; border-radius: 14px; background: #f5f5f7; }
@@ -286,9 +285,12 @@
 .home-project-modal__tags span { min-height: 27px; display: inline-flex; align-items: center; padding: 5px 10px; border: 1px solid #dedee3; border-radius: 999px; background: #fff; color: #55555a; font-size: 12px; font-weight: 600; line-height: 1.15; }
 .home-project-modal__setup { display: grid; gap: 7px; margin: 12px 0 0; padding: 13px 14px; border-radius: 14px; background: #fff3ef; font-size: 12px; line-height: 1.45; }
 .home-project-modal__setup strong { color: var(--home-action); white-space: nowrap; }
-.home-project-modal__machine { display: flex; flex-direction: column; align-items: stretch; gap: 14px; padding: 18px; border: 1px solid #dedee3; }
+.home-project-modal__machine { display: flex; flex-direction: column; align-items: stretch; gap: 10px; padding: 18px; border: 1px solid #dedee3; }
+.home-project-modal__machine-copy { align-self: start; }
 .home-project-modal__machine h3 { margin: 7px 0 0; font-size: 24px; line-height: 1.05; }
 .home-project-modal__machine p { margin: 8px 0 0; color: #6b6b70; font-size: 12px; line-height: 1.45; }
+.home-project-modal__machine > img { width: 100%; height: 92px; object-fit: contain; filter: drop-shadow(0 10px 16px rgba(0,0,0,.1)); }
+.home-project-modal__machine > img.home-project-modal__machine-image--xrf { object-fit: cover; }
 .home-project-modal__machine a { min-height: 40px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin-top: auto; padding: 0 15px; border-radius: 999px; background: #111214; color: #fff !important; font-size: 12px; font-weight: 800; white-space: nowrap; }
 .home-project-modal__economics { padding: 18px; }
 .home-project-modal__economics > header { display: grid; gap: 12px; }
@@ -420,7 +422,7 @@
   .home-industry > div { left: 22px; right: 22px; top: 26px; }
   .home-industry h2 { font-size: 26px; }
   .home-industry p { font-size: 13px; }
-  .home-industries__cta { width: 100%; min-height: 48px; margin-top: 22px; }
+  .home-industries__cta { width: calc(100% - (2 * var(--home-content-gutter))); min-height: 48px; margin-top: 22px; }
   .home-brand-pillars { padding-top: 32px; padding-bottom: 32px; }
   .home-brand-pillars > header { margin-bottom: 38px; }
   .home-brand-pillars > header h2 { font-size: 32px; }
@@ -457,6 +459,9 @@
   .home-project-modal__economics > dl div:last-child { grid-column: 1 / -1; }
   .home-project-modal__close, .home-project-modal__arrow { width: 42px; height: 42px; }
   .home-why__visual figcaption strong { white-space: normal; }
+  .home-why__advantages { grid-template-columns: 1fr; }
+  .home-why-advantage:nth-child(even) { border-left: 0; }
+  .home-why-advantage:nth-child(n+2) { border-top: 1px solid #dedee2; }
 }
 
 @media (prefers-reduced-motion: reduce) {
