@@ -5,14 +5,19 @@ import {
   CaretRight,
   CaretUp,
   EnvelopeSimple,
+  FacebookLogo,
+  InstagramLogo,
   List,
   MagnifyingGlass,
   MapPin,
   Phone,
   Play,
   ShoppingBag,
+  TiktokLogo,
   UserCircle,
   X,
+  XLogo,
+  YoutubeLogo,
 } from "@phosphor-icons/react";
 import {
   economicsAssumptions,
@@ -41,12 +46,14 @@ const recommendedMachines = {
     href: "https://www.1laser.com/products/cobra-10-100w-co2-laser-engraver-cutter",
     copy: "Dual-laser cutting and engraving for acrylic, wood, signage, and mixed-material production.",
     image: "home-product-cobra.png",
+    modalImage: "home-product-cobra-modal.webp",
   },
   hydra: {
     name: "Hydra Gen2",
     href: "https://www.1laser.com/products/hydra-9-gen-2-70w-rf-co2-dual-laser-machine",
     copy: "High-throughput RF production for large-format detail, repeat orders, and demanding batch work.",
     image: "home-product-hydra-gen2.png",
+    modalImage: "home-product-hydra-gen2-modal.webp",
   },
   vertigo: {
     name: "VertiGo",
@@ -546,12 +553,13 @@ export function HomePage() {
             </header>
             <div className="home-why__story">
               <figure className="home-why__visual">
-                <img src={asset("why-onelaser-rf-precision.jpg")} alt="Exploded-view RF laser engineering and detailed wood engraving result" loading="lazy" />
+                <img src={asset("why-onelaser-rf-precision.webp")} alt="Exploded-view RF laser engineering and detailed wood engraving result" loading="lazy" />
                 <figcaption><span>RF ENGINEERING</span><strong>Performance built from the inside out.</strong></figcaption>
               </figure>
               <div className="home-why__advantages" aria-label="Why choose OneLaser">
-                {whyAdvantages.map((advantage) => (
+                {whyAdvantages.map((advantage, index) => (
                   <article className="home-why-advantage" key={advantage.title}>
+                    <span className="home-why-advantage__index">{String(index + 1).padStart(2, "0")}</span>
                     <h3>{advantage.title}</h3>
                     <p>{advantage.body.map((line) => <span key={line}>{line}</span>)}</p>
                   </article>
@@ -711,6 +719,13 @@ export function HomePage() {
             <a href="mailto:cs@1laser.com"><EnvelopeSimple size={16} />Customer Support: cs@1laser.com</a>
             <a href="mailto:sales@1laser.com"><EnvelopeSimple size={16} />Sales Consultation: sales@1laser.com</a>
             <p><MapPin size={16} />Headquarters: 20472 Crescent Bay Dr, STE 104, Lake Forest, CA 92630</p>
+            <nav className="home-footer__socials" aria-label="OneLaser social media">
+              <a href="https://www.facebook.com/onelaser.official" target="_blank" rel="noreferrer" aria-label="OneLaser on Facebook"><FacebookLogo size={18} weight="fill" /></a>
+              <a href="https://www.youtube.com/@OneLaser.Official" target="_blank" rel="noreferrer" aria-label="OneLaser on YouTube"><YoutubeLogo size={19} weight="fill" /></a>
+              <a href="https://www.instagram.com/onelaser.official/" target="_blank" rel="noreferrer" aria-label="OneLaser on Instagram"><InstagramLogo size={18} weight="bold" /></a>
+              <a href="https://x.com/OneLaserHQ" target="_blank" rel="noreferrer" aria-label="OneLaser on X"><XLogo size={17} weight="bold" /></a>
+              <a href="https://www.tiktok.com/@onelaser.official" target="_blank" rel="noreferrer" aria-label="OneLaser on TikTok"><TiktokLogo size={18} weight="fill" /></a>
+            </nav>
           </div>
         </div>
         <div className="home-footer__bottom"><span>© {new Date().getFullYear()} OneLaser. All rights reserved.</span><div><a href="https://www.1laser.com/pages/privacy-policy">Privacy Policy</a><a href="https://www.1laser.com/pages/terms-of-service">Terms of Service</a><a href="#top">Back to top <ArrowUpRight size={13} /></a></div></div>
@@ -792,7 +807,7 @@ export function HomePage() {
                     <h3>{activeProjectMachine.name}</h3>
                     <p>{activeProjectMachine.copy}</p>
                   </div>
-                  <img className={`home-project-modal__machine-image--${activeProject.machineId}`} src={asset(activeProjectMachine.image)} alt={`${activeProjectMachine.name} laser machine`} />
+                  <img className={`home-project-modal__machine-image--${activeProject.machineId}`} src={asset(activeProjectMachine.modalImage || activeProjectMachine.image)} alt={`${activeProjectMachine.name} laser machine`} />
                   <a href={activeProjectMachine.href}>Explore {activeProjectMachine.name} <ArrowUpRight size={16} weight="bold" /></a>
                 </section>
               )}

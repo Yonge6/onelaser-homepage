@@ -196,6 +196,7 @@ export const products = {
     setupNote: "Cut and engrave laser-compatible acrylic, then complete mounting, spacing and installation as separate finishing steps.",
     image: "home-project-large-acrylic-sign.webp",
     imageAlt: "Layered acrylic wall sign in a premium reception interior",
+    economicsId: "house-number-sign",
   },
   "walnut-mountain-wall": {
     id: "walnut-mountain-wall",
@@ -207,6 +208,7 @@ export const products = {
     setupNote: "Use flat, stable wood panels with validated engraving settings; panel joining, finishing and installation are separate workflows.",
     image: "home-project-walnut-mountain-wall.webp",
     imageAlt: "Large engraved walnut mountain wall artwork in a luxury lodge",
+    economicsId: "house-number-sign",
   },
   "batch-leather-gift-set": {
     id: "batch-leather-gift-set",
@@ -218,6 +220,7 @@ export const products = {
     setupNote: "Confirm every leather or leatherette blank is laser-safe, then fixture the batch for consistent placement and finish.",
     image: "home-project-batch-leather-gifts.webp",
     imageAlt: "Batch of premium engraved leather gifts arranged for commercial production",
+    economicsId: "leather-patch-cap",
   },
   "layered-city-map": {
     id: "layered-city-map",
@@ -229,6 +232,7 @@ export const products = {
     setupNote: "Cut and engrave laser-compatible sheet goods, then align, assemble and finish the layers as separate production steps.",
     image: "home-project-layered-city-map.webp",
     imageAlt: "Large layered wood city map displayed in an executive office",
+    economicsId: "house-number-sign",
   },
 };
 
