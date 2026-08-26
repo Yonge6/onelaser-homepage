@@ -31,10 +31,22 @@ const wholeCurrencyFormatter = new Intl.NumberFormat("en-US", {
 
 const recommendedMachines = {
   xrf: {
-    name: "XRF Gen2",
+    name: "XRF",
     href: XRF_PAGE_URL,
     copy: "Precision RF desktop laser for detailed flat engraving and repeatable personalization.",
     image: "home-product-xrf.png",
+  },
+  cobra: {
+    name: "Cobra Series",
+    href: "https://www.1laser.com/products/cobra-10-100w-co2-laser-engraver-cutter",
+    copy: "Dual-laser cutting and engraving for acrylic, wood, signage, and mixed-material production.",
+    image: "home-product-cobra.png",
+  },
+  hydra: {
+    name: "Hydra Gen2",
+    href: "https://www.1laser.com/products/hydra-9-gen-2-70w-rf-co2-dual-laser-machine",
+    copy: "High-throughput RF production for large-format detail, repeat orders, and demanding batch work.",
+    image: "home-product-hydra-gen2.png",
   },
   vertigo: {
     name: "VertiGo",
@@ -67,6 +79,7 @@ const heroSlides = [
     label: "Discover OneLaser XRF",
   },
 ];
+const loopedHeroSlides = [heroSlides.at(-1), ...heroSlides, heroSlides[0]];
 
 const productCards = [
   {
@@ -159,24 +172,37 @@ const whyAdvantages = [
 const projectShowcase = [
   { image: "product-walnut-serving-board.webp", title: "Personalized Serving Board", material: "Wood", productId: "walnut-serving-board", machineId: "xrf" },
   { image: "product-photo-wall-panel.webp", title: "Family Photo Panel", material: "Wood", productId: "photo-wall-panel", machineId: "xrf" },
+  { image: "home-project-large-acrylic-sign.webp", title: "Layered Acrylic Wall Sign", material: "Acrylic", productId: "large-acrylic-wall-sign", machineId: "cobra" },
+  { image: "home-project-walnut-mountain-wall.webp", title: "Mountain Feature Wall", material: "Walnut", productId: "walnut-mountain-wall", machineId: "hydra" },
   { image: "product-wine-bottle.webp", title: "Adventure Bottle", material: "Coated Metal", productId: "wine-bottle", machineId: "vertigo" },
   { image: "product-custom-tumbler.webp", title: "Custom Tumbler", material: "Coated Metal", productId: "custom-tumbler", machineId: "vertigo" },
-  { image: "product-acrylic-counter-sign.webp", title: "Counter Sign", material: "Acrylic", productId: "acrylic-counter-sign", machineId: "xrf" },
+  { image: "product-acrylic-counter-sign.webp", title: "Counter Sign", material: "Acrylic", productId: "acrylic-counter-sign", machineId: "cobra" },
   { image: "product-rocks-glass.webp", title: "Whiskey Glass Set", material: "Glass", productId: "rocks-glass", machineId: "vertigo" },
-  { image: "product-leather-patch-cap.webp", title: "Leather Patch Cap", material: "Leather", productId: "leather-patch-cap", machineId: "xrf" },
+  { image: "product-leather-patch-cap.webp", title: "Leather Patch Cap", material: "Leather", productId: "leather-patch-cap", machineId: "cobra" },
   { image: "product-engraved-jewelry-box.webp", title: "Keepsake Jewelry Box", material: "Wood", productId: "engraved-jewelry-box", machineId: "xrf" },
+  { image: "home-project-batch-leather-gifts.webp", title: "Batch Leather Gift Set", material: "Leather", productId: "batch-leather-gift-set", machineId: "hydra" },
+  { image: "home-project-layered-city-map.webp", title: "Layered City Map", material: "Wood", productId: "layered-city-map", machineId: "hydra" },
   { image: "product-leather-wallet.webp", title: "Monogram Wallet", material: "Leather", productId: "leather-wallet", machineId: "xrf" },
-  { image: "product-outdoor-estate-sign.webp", title: "Outdoor Estate Sign", material: "Wood", productId: "house-number-sign", machineId: "xrf" },
-  { image: "product-coated-metal-tags.webp", title: "Branded Metal Tags", material: "Coated Metal", productId: "coated-metal-tags", machineId: "xrf" },
-  { image: "product-custom-keychains.webp", title: "Custom Keychains", material: "Acrylic", productId: "custom-keychains", machineId: "xrf" },
-  { image: "product-house-number-sign.webp", title: "Modern House Number", material: "Wood", productId: "house-number-sign", machineId: "xrf" },
+  { image: "product-outdoor-estate-sign.webp", title: "Outdoor Estate Sign", material: "Wood", productId: "house-number-sign", machineId: "hydra" },
+  { image: "product-coated-metal-tags.webp", title: "Branded Metal Tags", material: "Coated Metal", productId: "coated-metal-tags", machineId: "hydra" },
+  { image: "product-custom-keychains.webp", title: "Custom Keychains", material: "Acrylic", productId: "custom-keychains", machineId: "cobra" },
+  { image: "product-house-number-sign.webp", title: "Modern House Number", material: "Wood", productId: "house-number-sign", machineId: "hydra" },
   { image: "power-38w-result.webp", title: "Portrait & Botanical Collection", material: "Wood, Acrylic & Leather", productId: "photo-wall-panel", machineId: "xrf", representative: true },
-  { image: "power-70w-result.webp", title: "Wildlife Art Collection", material: "Wood, Acrylic & Metal", productId: "photo-wall-panel", machineId: "xrf", representative: true },
+  { image: "power-70w-result.webp", title: "Wildlife Art Collection", material: "Wood, Acrylic & Metal", productId: "photo-wall-panel", machineId: "hydra", representative: true },
   { image: "material-wood.webp", title: "Wood Maker Collection", material: "Wood", productId: "walnut-serving-board", machineId: "xrf", representative: true },
-  { image: "material-acrylic.webp", title: "Acrylic Design Collection", material: "Acrylic", productId: "acrylic-counter-sign", machineId: "xrf", representative: true },
+  { image: "material-acrylic.webp", title: "Acrylic Design Collection", material: "Acrylic", productId: "acrylic-counter-sign", machineId: "cobra", representative: true },
   { image: "material-glass-stone.webp", title: "Glass & Stone Collection", material: "Glass & Stone", productId: "rocks-glass", machineId: "xrf", representative: true },
   { image: "material-leather.webp", title: "Personalized Leather Goods", material: "Leather", productId: "leather-wallet", machineId: "xrf", representative: true },
 ];
+
+const projectFilters = ["All", "Wood", "Acrylic", "Leather", "Metal", "Glass"];
+
+function projectMatchesFilter(project, filter) {
+  if (filter === "All") return true;
+  const material = project.material.toLowerCase();
+  if (filter === "Wood") return material.includes("wood") || material.includes("walnut");
+  return material.includes(filter.toLowerCase());
+}
 
 function ProductName({ name }) {
   const [beforeTrademark, afterTrademark] = name.split("™");
@@ -213,11 +239,14 @@ const videos = [
 
 export function HomePage() {
   const [activeHero, setActiveHero] = useState(0);
+  const [heroPosition, setHeroPosition] = useState(1);
+  const [heroTransitioning, setHeroTransitioning] = useState(true);
   const [heroPaused, setHeroPaused] = useState(false);
   const [heroCycle, setHeroCycle] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeVideo, setActiveVideo] = useState(null);
   const [activeProject, setActiveProject] = useState(null);
+  const [projectFilter, setProjectFilter] = useState("All");
   const [topButtonState, setTopButtonState] = useState("hidden");
   const touchStart = useRef(null);
   const showcaseRailRef = useRef(null);
@@ -233,9 +262,58 @@ export function HomePage() {
   }, []);
 
   useEffect(() => {
+    const palettes = [
+      ["#e7ded5", "#d8c9bc", "#f3ece5"],
+      ["#dfe5df", "#cbd8cf", "#edf2ed"],
+      ["#dde4e8", "#c7d4db", "#edf2f4"],
+      ["#e8dfdf", "#d9c8ca", "#f4ebeb"],
+      ["#e5e0e9", "#d3cadb", "#f1edf4"],
+      ["#e1e6e3", "#cbd7d2", "#eff3f1"],
+      ["#e8e2d7", "#d8cdbb", "#f4efe6"],
+    ];
+    const prepareImage = (image) => {
+      if (!(image instanceof HTMLImageElement)) return;
+      const seed = `${image.currentSrc || image.getAttribute("src") || ""}|${image.alt || ""}`;
+      const hash = [...seed].reduce((value, character) => (((value << 5) - value + character.charCodeAt(0)) | 0), 0);
+      const [base, low, high] = palettes[Math.abs(hash) % palettes.length];
+      image.style.setProperty("--image-placeholder-base", base);
+      image.style.setProperty("--image-placeholder-low", low);
+      image.style.setProperty("--image-placeholder-high", high);
+      image.classList.toggle("is-image-ready", image.complete && image.naturalWidth > 0);
+      image.classList.toggle("is-image-error", image.complete && image.naturalWidth === 0);
+    };
+    const markReady = (event) => {
+      if (!(event.target instanceof HTMLImageElement)) return;
+      event.target.classList.add("is-image-ready");
+      event.target.classList.remove("is-image-error");
+    };
+    const markError = (event) => {
+      if (!(event.target instanceof HTMLImageElement)) return;
+      event.target.classList.add("is-image-error");
+      event.target.classList.remove("is-image-ready");
+    };
+    const observer = new MutationObserver((records) => records.forEach((record) => {
+      if (record.type === "attributes") prepareImage(record.target);
+      record.addedNodes.forEach((node) => {
+        if (node instanceof HTMLImageElement) prepareImage(node);
+        if (node instanceof Element) node.querySelectorAll("img").forEach(prepareImage);
+      });
+    }));
+    document.querySelectorAll(".home-shell img").forEach(prepareImage);
+    document.addEventListener("load", markReady, true);
+    document.addEventListener("error", markError, true);
+    observer.observe(document.body, { attributes: true, attributeFilter: ["src", "srcset"], childList: true, subtree: true });
+    return () => {
+      document.removeEventListener("load", markReady, true);
+      document.removeEventListener("error", markError, true);
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
     if (heroPaused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
     const timer = window.setInterval(() => {
-      setActiveHero((current) => (current + 1) % heroSlides.length);
+      moveHero(1);
     }, 6500);
     return () => window.clearInterval(timer);
   }, [heroCycle, heroPaused]);
@@ -286,12 +364,21 @@ export function HomePage() {
 
   function moveHero(direction) {
     setActiveHero((current) => (current + direction + heroSlides.length) % heroSlides.length);
+    setHeroPosition((current) => current + direction);
     setHeroCycle((current) => current + 1);
   }
 
   function chooseHero(index) {
     setActiveHero(index);
+    setHeroPosition(index + 1);
     setHeroCycle((current) => current + 1);
+  }
+
+  function handleHeroTransitionEnd() {
+    if (heroPosition !== 0 && heroPosition !== heroSlides.length + 1) return;
+    setHeroTransitioning(false);
+    setHeroPosition(heroPosition === 0 ? heroSlides.length : 1);
+    window.requestAnimationFrame(() => window.requestAnimationFrame(() => setHeroTransitioning(true)));
   }
 
   function handleHeroTouchEnd(event) {
@@ -309,10 +396,18 @@ export function HomePage() {
     showcaseRailRef.current?.scrollBy({ left: direction * 520, behavior: "smooth" });
   }
 
+  function chooseProjectFilter(filter) {
+    setProjectFilter(filter);
+    showcaseRailRef.current?.scrollTo({ left: 0, behavior: "smooth" });
+  }
+
+  const filteredProjects = projectShowcase.filter((project) => projectMatchesFilter(project, projectFilter));
+
   function moveProject(direction) {
     setActiveProject((current) => {
-      const index = projectShowcase.findIndex((project) => project.image === current?.image);
-      return projectShowcase[(index + direction + projectShowcase.length) % projectShowcase.length];
+      const availableProjects = filteredProjects.length ? filteredProjects : projectShowcase;
+      const index = availableProjects.findIndex((project) => project.image === current?.image);
+      return availableProjects[(index + direction + availableProjects.length) % availableProjects.length];
     });
   }
 
@@ -382,16 +477,23 @@ export function HomePage() {
           }}
           tabIndex={0}
         >
-          <div className="home-hero__track" style={{ transform: `translate3d(-${activeHero * 100}%, 0, 0)` }}>
-            {heroSlides.map((slide, index) => (
-              <article className="home-hero__slide" aria-hidden={activeHero !== index} key={slide.desktopImage}>
+          <div
+            className={`home-hero__track${heroTransitioning ? "" : " is-jumping"}`}
+            style={{ transform: `translate3d(-${heroPosition * 100}%, 0, 0)` }}
+            onTransitionEnd={handleHeroTransitionEnd}
+          >
+            {loopedHeroSlides.map((slide, trackIndex) => {
+              const index = (trackIndex - 1 + heroSlides.length) % heroSlides.length;
+              return (
+              <article className="home-hero__slide" aria-hidden={activeHero !== index || trackIndex !== heroPosition} key={`${slide.desktopImage}-${trackIndex}`}>
                 <picture>
                   <source media="(max-width: 560px)" srcSet={asset(slide.mobileImage)} />
                   <img src={asset(slide.desktopImage)} alt={slide.alt} draggable="false" />
                 </picture>
-                <a className="home-hero__link" href={slide.href} aria-label={slide.label} tabIndex={activeHero === index ? 0 : -1} />
+                <a className="home-hero__link" href={slide.href} aria-label={slide.label} tabIndex={activeHero === index && trackIndex === heroPosition ? 0 : -1} />
               </article>
-            ))}
+              );
+            })}
           </div>
           <button className="home-hero__arrow home-hero__arrow--left" type="button" onClick={() => moveHero(-1)} aria-label="Previous banner"><CaretLeft size={22} weight="bold" /></button>
           <button className="home-hero__arrow home-hero__arrow--right" type="button" onClick={() => moveHero(1)} aria-label="Next banner"><CaretRight size={22} weight="bold" /></button>
@@ -471,8 +573,23 @@ export function HomePage() {
               <button type="button" onClick={() => scrollShowcase(1)} aria-label="Show more finished projects"><CaretRight size={22} /></button>
             </div>
           </header>
+          <nav className="home-showcase__filters" aria-label="Filter finished projects by material">
+            <div>
+              {projectFilters.map((filter) => (
+                <button
+                  type="button"
+                  className={projectFilter === filter ? "is-active" : ""}
+                  aria-pressed={projectFilter === filter}
+                  onClick={() => chooseProjectFilter(filter)}
+                  key={filter}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+          </nav>
           <div className="home-showcase__grid" ref={showcaseRailRef} aria-label="Finished projects made with OneLaser">
-            {projectShowcase.map((project) => (
+            {filteredProjects.map((project) => (
               <button type="button" className="home-showcase-card" onClick={() => setActiveProject(project)} aria-label={`Enlarge ${project.title}`} key={project.image}>
                 <img src={asset(project.image)} alt={project.title} />
                 <span className="home-showcase-card__shade" />
@@ -632,7 +749,7 @@ export function HomePage() {
               <button className="home-project-modal__arrow home-project-modal__arrow--left" type="button" onClick={() => moveProject(-1)} aria-label="Show previous project"><CaretLeft size={26} /></button>
               <button className="home-project-modal__arrow home-project-modal__arrow--right" type="button" onClick={() => moveProject(1)} aria-label="Show next project"><CaretRight size={26} /></button>
             </figure>
-            <aside className="home-project-modal__details">
+            <aside className={`home-project-modal__details${activeProjectEconomics ? "" : " home-project-modal__details--no-economics"}`}>
               <header>
                 <span>{activeProject.representative ? "REPRESENTATIVE OPPORTUNITY" : activeProject.material}</span>
                 <h2>{activeProject.title}</h2>
