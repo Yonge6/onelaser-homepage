@@ -4,6 +4,7 @@ import {
   ArrowUpRight,
   CaretLeft,
   CaretRight,
+  CaretUp,
   EnvelopeSimple,
   List,
   MagnifyingGlass,
@@ -14,34 +15,55 @@ import {
   UserCircle,
   X,
 } from "@phosphor-icons/react";
+import {
+  economicsAssumptions,
+  economicsDisclaimer,
+  economicsExamples,
+  products,
+} from "./data/commercialCapabilities.js";
 
 const asset = (name) => `${import.meta.env.BASE_URL}assets/${name}`;
 const XRF_PAGE_URL = `${import.meta.env.BASE_URL}?page=xrf`;
+const wholeCurrencyFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 0,
+});
+
+const recommendedMachines = {
+  xrf: {
+    name: "XRF Gen2",
+    href: XRF_PAGE_URL,
+    copy: "Precision RF desktop laser for detailed flat engraving and repeatable personalization.",
+  },
+  vertigo: {
+    name: "VertiGo",
+    href: "https://www.1laser.com/products/vertigo-vertical-laser-engraver",
+    copy: "Purpose-built vertical rotary laser for tumblers, bottles, glassware, and other cylindrical goods.",
+  },
+};
 
 const heroSlides = [
   {
-    image: "home-banner-xrf-dark.png",
-    alt: "OneLaser XRF desktop RF laser on a dramatic red and black stage",
-    href: XRF_PAGE_URL,
-    label: "Discover OneLaser XRF",
-    mobileTitle: "The all-in-one RF desktop laser.",
-    mobileCopy: "Finer detail. Faster output. Forged solid. Fully backed.",
-  },
-  {
-    image: "home-banner-hydra-education.png",
+    desktopImage: "home-banner-education-desktop.webp",
+    mobileImage: "home-banner-education-mobile.webp",
     alt: "OneLaser Hydra Gen2 in a bright STEM classroom with students and an instructor",
     href: "https://www.1laser.com/pages/education",
     label: "Explore OneLaser for Education",
-    mobileTitle: "OneLaser for Education.",
-    mobileCopy: "Classroom-ready tools for hands-on STEM learning.",
   },
   {
-    image: "home-banner-xrf-maker.png",
+    desktopImage: "home-banner-maker-desktop.webp",
+    mobileImage: "home-banner-maker-mobile.webp",
     alt: "A small business maker presenting engraved products beside a OneLaser XRF",
     href: XRF_PAGE_URL,
     label: "Shop OneLaser XRF",
-    mobileTitle: "Made for makers who mean business.",
-    mobileCopy: "Desktop footprint. Professional output. Built to keep up.",
+  },
+  {
+    desktopImage: "home-banner-xrf-desktop.webp",
+    mobileImage: "home-banner-xrf-mobile.webp",
+    alt: "OneLaser XRF desktop RF laser on a dramatic red and black stage",
+    href: XRF_PAGE_URL,
+    label: "Discover OneLaser XRF",
   },
 ];
 
@@ -128,26 +150,31 @@ const whyAdvantages = [
 ];
 
 const projectShowcase = [
-  { image: "product-walnut-serving-board.webp", title: "Personalized Serving Board", material: "Wood" },
-  { image: "product-photo-wall-panel.webp", title: "Family Photo Panel", material: "Wood" },
-  { image: "product-wine-bottle.webp", title: "Adventure Bottle", material: "Coated Metal" },
-  { image: "product-custom-tumbler.webp", title: "Custom Tumbler", material: "Coated Metal" },
-  { image: "product-acrylic-counter-sign.webp", title: "Counter Sign", material: "Acrylic" },
-  { image: "product-rocks-glass.webp", title: "Whiskey Glass Set", material: "Glass" },
-  { image: "product-leather-patch-cap.webp", title: "Leather Patch Cap", material: "Leather" },
-  { image: "product-engraved-jewelry-box.webp", title: "Keepsake Jewelry Box", material: "Wood" },
-  { image: "product-leather-wallet.webp", title: "Monogram Wallet", material: "Leather" },
-  { image: "product-outdoor-estate-sign.webp", title: "Outdoor Estate Sign", material: "Wood" },
-  { image: "product-coated-metal-tags.webp", title: "Branded Metal Tags", material: "Coated Metal" },
-  { image: "product-custom-keychains.webp", title: "Custom Keychains", material: "Acrylic" },
-  { image: "product-house-number-sign.webp", title: "Modern House Number", material: "Wood" },
-  { image: "power-38w-result.webp", title: "Portrait & Botanical Collection", material: "Wood, Acrylic & Leather" },
-  { image: "power-70w-result.webp", title: "Wildlife Art Collection", material: "Wood, Acrylic & Metal" },
-  { image: "material-wood.webp", title: "Wood Maker Collection", material: "Wood" },
-  { image: "material-acrylic.webp", title: "Acrylic Design Collection", material: "Acrylic" },
-  { image: "material-glass-stone.webp", title: "Glass & Stone Collection", material: "Glass & Stone" },
-  { image: "material-leather.webp", title: "Personalized Leather Goods", material: "Leather" },
+  { image: "product-walnut-serving-board.webp", title: "Personalized Serving Board", material: "Wood", productId: "walnut-serving-board", machineId: "xrf" },
+  { image: "product-photo-wall-panel.webp", title: "Family Photo Panel", material: "Wood", productId: "photo-wall-panel", machineId: "xrf" },
+  { image: "product-wine-bottle.webp", title: "Adventure Bottle", material: "Coated Metal", productId: "wine-bottle", machineId: "vertigo" },
+  { image: "product-custom-tumbler.webp", title: "Custom Tumbler", material: "Coated Metal", productId: "custom-tumbler", machineId: "vertigo" },
+  { image: "product-acrylic-counter-sign.webp", title: "Counter Sign", material: "Acrylic", productId: "acrylic-counter-sign", machineId: "xrf" },
+  { image: "product-rocks-glass.webp", title: "Whiskey Glass Set", material: "Glass", productId: "rocks-glass", machineId: "vertigo" },
+  { image: "product-leather-patch-cap.webp", title: "Leather Patch Cap", material: "Leather", productId: "leather-patch-cap", machineId: "xrf" },
+  { image: "product-engraved-jewelry-box.webp", title: "Keepsake Jewelry Box", material: "Wood", productId: "engraved-jewelry-box", machineId: "xrf" },
+  { image: "product-leather-wallet.webp", title: "Monogram Wallet", material: "Leather", productId: "leather-wallet", machineId: "xrf" },
+  { image: "product-outdoor-estate-sign.webp", title: "Outdoor Estate Sign", material: "Wood", productId: "house-number-sign", machineId: "xrf" },
+  { image: "product-coated-metal-tags.webp", title: "Branded Metal Tags", material: "Coated Metal", productId: "coated-metal-tags", machineId: "xrf" },
+  { image: "product-custom-keychains.webp", title: "Custom Keychains", material: "Acrylic", productId: "custom-keychains", machineId: "xrf" },
+  { image: "product-house-number-sign.webp", title: "Modern House Number", material: "Wood", productId: "house-number-sign", machineId: "xrf" },
+  { image: "power-38w-result.webp", title: "Portrait & Botanical Collection", material: "Wood, Acrylic & Leather", productId: "photo-wall-panel", machineId: "xrf", representative: true },
+  { image: "power-70w-result.webp", title: "Wildlife Art Collection", material: "Wood, Acrylic & Metal", productId: "photo-wall-panel", machineId: "xrf", representative: true },
+  { image: "material-wood.webp", title: "Wood Maker Collection", material: "Wood", productId: "walnut-serving-board", machineId: "xrf", representative: true },
+  { image: "material-acrylic.webp", title: "Acrylic Design Collection", material: "Acrylic", productId: "acrylic-counter-sign", machineId: "xrf", representative: true },
+  { image: "material-glass-stone.webp", title: "Glass & Stone Collection", material: "Glass & Stone", productId: "rocks-glass", machineId: "xrf", representative: true },
+  { image: "material-leather.webp", title: "Personalized Leather Goods", material: "Leather", productId: "leather-wallet", machineId: "xrf", representative: true },
 ];
+
+function ProductName({ name }) {
+  const [beforeTrademark, afterTrademark] = name.split("™");
+  return <>{beforeTrademark}<sup>™</sup>{afterTrademark}</>;
+}
 
 const videos = [
   {
@@ -184,9 +211,11 @@ export function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeVideo, setActiveVideo] = useState(null);
   const [activeProject, setActiveProject] = useState(null);
+  const [topButtonState, setTopButtonState] = useState("hidden");
   const touchStart = useRef(null);
   const showcaseRailRef = useRef(null);
   const videoRailRef = useRef(null);
+  const lastScrollYRef = useRef(0);
 
   useEffect(() => {
     document.title = "OneLaser — Make More";
@@ -213,6 +242,8 @@ export function HomePage() {
         setActiveVideo(null);
         setActiveProject(null);
       }
+      if (activeProject && event.key === "ArrowLeft") moveProject(-1);
+      if (activeProject && event.key === "ArrowRight") moveProject(1);
     };
     window.addEventListener("keydown", closeOnEscape);
     return () => {
@@ -220,6 +251,31 @@ export function HomePage() {
       window.removeEventListener("keydown", closeOnEscape);
     };
   }, [activeProject, activeVideo]);
+
+  useEffect(() => {
+    let frame = 0;
+    const updateTopButton = () => {
+      frame = 0;
+      const currentScrollY = window.scrollY;
+      if (currentScrollY < 480) {
+        setTopButtonState("hidden");
+      } else if (currentScrollY < lastScrollYRef.current - 4) {
+        setTopButtonState("visible");
+      } else if (currentScrollY > lastScrollYRef.current + 4) {
+        setTopButtonState("muted");
+      }
+      lastScrollYRef.current = currentScrollY;
+    };
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateTopButton);
+    };
+    updateTopButton();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
 
   function moveHero(direction) {
     setActiveHero((current) => (current + direction + heroSlides.length) % heroSlides.length);
@@ -252,6 +308,14 @@ export function HomePage() {
       return projectShowcase[(index + direction + projectShowcase.length) % projectShowcase.length];
     });
   }
+
+  const activeProjectProduct = activeProject ? products[activeProject.productId] : null;
+  const activeProjectEconomics = activeProjectProduct ? economicsExamples[activeProjectProduct.economicsId] : null;
+  const activeProjectMachine = activeProject ? recommendedMachines[activeProject.machineId] : null;
+  const activeProjectMonthlySales = activeProjectEconomics?.monthlySales ?? economicsAssumptions.monthlySales;
+  const activeProjectMonthlyProfit = activeProjectEconomics
+    ? activeProjectEconomics.unitPrice * (Number.parseInt(activeProjectEconomics.margin, 10) / 100) * activeProjectMonthlySales
+    : 0;
 
   return (
     <div className="home-shell" id="top">
@@ -313,13 +377,11 @@ export function HomePage() {
         >
           <div className="home-hero__track" style={{ transform: `translate3d(-${activeHero * 100}%, 0, 0)` }}>
             {heroSlides.map((slide, index) => (
-              <article className="home-hero__slide" aria-hidden={activeHero !== index} key={slide.image}>
-                <img src={asset(slide.image)} alt={slide.alt} draggable="false" />
-                <div className="home-hero__mobile-copy">
-                  <h1>{slide.mobileTitle}</h1>
-                  <p>{slide.mobileCopy}</p>
-                  <span>Learn more <ArrowRight size={15} weight="bold" /></span>
-                </div>
+              <article className="home-hero__slide" aria-hidden={activeHero !== index} key={slide.desktopImage}>
+                <picture>
+                  <source media="(max-width: 560px)" srcSet={asset(slide.mobileImage)} />
+                  <img src={asset(slide.desktopImage)} alt={slide.alt} draggable="false" />
+                </picture>
                 <a className="home-hero__link" href={slide.href} aria-label={slide.label} tabIndex={activeHero === index ? 0 : -1} />
               </article>
             ))}
@@ -351,7 +413,7 @@ export function HomePage() {
                 <img className="home-product-card__scene" src={asset(product.scene)} alt="" loading="lazy" />
                 <div className="home-product-card__copy">
                   <span className="home-product-card__eyebrow">{product.label}</span>
-                  <h2>{product.name}</h2>
+                  <h2><ProductName name={product.name} /></h2>
                   <p>{product.copy}</p>
                   <div className="home-product-card__features">
                     {product.features.map((feature) => <span key={feature}>{feature}</span>)}
@@ -468,7 +530,6 @@ export function HomePage() {
             <div className="home-section-heading">
               <h2>At OneLaser, Performance Drives Innovation</h2>
               <p>Our promise is clear: deliver innovative products built with integrity, empower users with lasting support, and strengthen our community through shared growth. These values guide everything we do and define the future we are creating together.</p>
-              <strong>Designed and Engineered in the USA.</strong>
               <a href="https://www.1laser.com/pages/our-story" target="_blank" rel="noreferrer">Read Our Story <ArrowUpRight size={17} weight="bold" /></a>
             </div>
             <div className="home-videos__controls" aria-label="Browse OneLaser videos">
@@ -530,6 +591,19 @@ export function HomePage() {
         <div className="home-footer__bottom"><span>© {new Date().getFullYear()} OneLaser. All rights reserved.</span><div><a href="https://www.1laser.com/pages/privacy-policy">Privacy Policy</a><a href="https://www.1laser.com/pages/terms-of-service">Terms of Service</a><a href="#top">Back to top <ArrowUpRight size={13} /></a></div></div>
       </footer>
 
+      <button
+        type="button"
+        className={`home-back-to-top home-back-to-top--${topButtonState}`}
+        aria-label="Back to top"
+        onClick={() => window.scrollTo({
+          top: 0,
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        })}
+      >
+        <CaretUp size={17} weight="bold" aria-hidden="true" />
+        <span>TOP</span>
+      </button>
+
       {activeVideo && (
         <div className="home-video-modal" role="dialog" aria-modal="true" aria-label={activeVideo.title} onMouseDown={(event) => { if (event.target === event.currentTarget) setActiveVideo(null); }}>
           <div className="home-video-modal__panel">
@@ -544,13 +618,59 @@ export function HomePage() {
       {activeProject && (
         <div className="home-project-modal" role="dialog" aria-modal="true" aria-label={activeProject.title} onMouseDown={(event) => { if (event.target === event.currentTarget) setActiveProject(null); }}>
           <div className="home-project-modal__panel">
-            <button className="home-project-modal__close" type="button" onClick={() => setActiveProject(null)} aria-label="Close enlarged project"><X size={22} weight="bold" /></button>
-            <button className="home-project-modal__arrow home-project-modal__arrow--left" type="button" onClick={() => moveProject(-1)} aria-label="Show previous project"><CaretLeft size={26} /></button>
-            <figure>
+            <button className="home-project-modal__close" type="button" onClick={() => setActiveProject(null)} aria-label="Close project details"><X size={22} weight="bold" /></button>
+            <figure className="home-project-modal__media">
               <img src={asset(activeProject.image)} alt={activeProject.title} />
-              <figcaption><small>{activeProject.material}</small><strong>{activeProject.title}</strong></figcaption>
+              <button className="home-project-modal__arrow home-project-modal__arrow--left" type="button" onClick={() => moveProject(-1)} aria-label="Show previous project"><CaretLeft size={26} /></button>
+              <button className="home-project-modal__arrow home-project-modal__arrow--right" type="button" onClick={() => moveProject(1)} aria-label="Show next project"><CaretRight size={26} /></button>
             </figure>
-            <button className="home-project-modal__arrow home-project-modal__arrow--right" type="button" onClick={() => moveProject(1)} aria-label="Show next project"><CaretRight size={26} /></button>
+            <aside className="home-project-modal__details">
+              <header>
+                <span>{activeProject.representative ? "REPRESENTATIVE OPPORTUNITY" : activeProject.material}</span>
+                <h2>{activeProject.title}</h2>
+                <p>{activeProjectProduct?.description}</p>
+              </header>
+
+              {activeProjectProduct && (
+                <>
+                  <dl className="home-project-modal__facts">
+                    <div><dt>Material</dt><dd>{activeProjectProduct.material}</dd></div>
+                    <div><dt>Process</dt><dd>{activeProjectProduct.process}</dd></div>
+                  </dl>
+                  <div className="home-project-modal__tags">
+                    {activeProjectProduct.tags.map((tag) => <span key={tag}>{tag}</span>)}
+                  </div>
+                  <p className="home-project-modal__setup"><strong>Setup guidance</strong><span>{activeProjectProduct.setupNote}</span></p>
+                </>
+              )}
+
+              {activeProjectMachine && (
+                <section className="home-project-modal__machine">
+                  <div>
+                    <span>RECOMMENDED MACHINE</span>
+                    <h3>{activeProjectMachine.name}</h3>
+                    <p>{activeProjectMachine.copy}</p>
+                  </div>
+                  <a href={activeProjectMachine.href}>Explore {activeProjectMachine.name} <ArrowUpRight size={16} weight="bold" /></a>
+                </section>
+              )}
+
+              {activeProjectEconomics && (
+                <section className="home-project-modal__economics">
+                  <header>
+                    <div><span>ILLUSTRATIVE EARNINGS</span><strong>Estimated monthly profit</strong></div>
+                    <b>{wholeCurrencyFormatter.format(activeProjectMonthlyProfit)}<small>/mo.</small></b>
+                  </header>
+                  <dl>
+                    <div><dt>Selling price</dt><dd>{activeProjectEconomics.sellingPrice}</dd></div>
+                    <div><dt>Net margin</dt><dd>{activeProjectEconomics.margin}</dd></div>
+                    <div><dt>Hourly output</dt><dd>{activeProjectEconomics.hourlyOutput}</dd></div>
+                  </dl>
+                  <p>{activeProjectMonthlySales} products/mo. × {activeProjectEconomics.sellingPrice} selling price × {activeProjectEconomics.margin} net margin.</p>
+                  <small>{economicsDisclaimer}</small>
+                </section>
+              )}
+            </aside>
           </div>
         </div>
       )}
