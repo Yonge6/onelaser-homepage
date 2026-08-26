@@ -291,6 +291,19 @@ const projectShowcase = [
   { image: "material-acrylic.webp", title: "Acrylic Design Collection", material: "Acrylic", productId: "acrylic-counter-sign", machineId: "cobra", representative: true },
   { image: "material-glass-stone.webp", title: "Glass & Stone Collection", material: "Glass & Stone", productId: "rocks-glass", machineId: "xrf", representative: true },
   { image: "material-leather.webp", title: "Personalized Leather Goods", material: "Leather", productId: "leather-wallet", machineId: "xrf", representative: true },
+  { image: "home-project-etsy-wedding-welcome-suite.webp", title: "Wedding Welcome Suite", material: "Wood, Acrylic, Metal & Glass", productId: "wedding-welcome-suite", machineId: "xrf" },
+  { image: "home-project-etsy-whiskey-decanter-gift-set.webp", title: "Whiskey Decanter Gift Set", material: "Wood, Leather, Metal & Glass", productId: "whiskey-decanter-gift-set", machineId: "vertigo" },
+  { image: "home-project-etsy-pet-memorial-keepsake.webp", title: "Pet Memorial Keepsake", material: "Wood, Acrylic, Leather, Metal & Glass", productId: "pet-memorial-keepsake", machineId: "xrf" },
+  { image: "home-project-etsy-corporate-logo-barware-set.webp", title: "Corporate Barware Set", material: "Wood, Acrylic, Leather, Metal & Glass", productId: "corporate-logo-barware-set", machineId: "vertigo" },
+  { image: "home-project-etsy-bridesmaid-table-setting.webp", title: "Bridesmaid Table Setting", material: "Acrylic, Leather, Metal & Glass", productId: "bridesmaid-table-setting", machineId: "vertigo" },
+  { image: "home-project-etsy-city-map-home-bar-set.webp", title: "City Map Home Bar Set", material: "Wood, Acrylic, Leather, Metal & Glass", productId: "city-map-home-bar-set", machineId: "vertigo" },
+  { image: "home-project-etsy-personalized-coffee-station.webp", title: "Personalized Coffee Station", material: "Wood, Acrylic, Leather, Metal & Glass", productId: "personalized-coffee-station", machineId: "vertigo" },
+  { image: "home-project-etsy-family-recipe-display.webp", title: "Family Recipe Display", material: "Wood, Acrylic, Leather & Glass", productId: "family-recipe-display", machineId: "xrf" },
+  { image: "home-project-etsy-wedding-vow-keepsake-box.webp", title: "Wedding Vow Keepsake Box", material: "Wood, Acrylic, Leather, Metal & Glass", productId: "wedding-vow-keepsake-box", machineId: "xrf" },
+  { image: "home-project-etsy-groomsmen-bar-set.webp", title: "Groomsmen Bar Set", material: "Wood, Acrylic, Leather, Metal & Glass", productId: "groomsmen-bar-set", machineId: "vertigo" },
+  { image: "home-project-etsy-baby-name-nursery-keepsake.webp", title: "Baby Name Nursery Keepsake", material: "Wood, Acrylic, Leather & Glass", productId: "baby-name-nursery-keepsake", machineId: "xrf" },
+  { image: "home-project-etsy-realtor-closing-gift-set.webp", title: "Realtor Closing Gift Set", material: "Wood, Acrylic, Leather, Metal & Glass", productId: "realtor-closing-gift-set", machineId: "vertigo" },
+  { image: "home-project-etsy-holiday-ornament-collection.webp", title: "Holiday Ornament Collection", material: "Wood, Acrylic, Leather, Metal & Glass", productId: "holiday-ornament-collection", machineId: "xrf" },
 ];
 
 const projectFilters = ["All", "Wood", "Acrylic", "Leather", "Metal", "Glass"];

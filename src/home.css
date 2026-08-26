@@ -61,7 +61,8 @@
 @keyframes home-announcement-marquee { to { transform: translateX(-50%); } }
 
 .home-header {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 60;
   height: 72px;
   display: grid;
@@ -87,8 +88,8 @@
 .home-header__actions a:hover, .home-header__actions a:focus-visible { background: #f2f2f4; color: var(--home-action); }
 .home-menu-button { display: none; border: 0; background: transparent; padding: 8px; }
 
-.home-mega-backdrop { position: fixed; z-index: 50; inset: 72px 0 0; border: 0; background: rgba(16,16,18,.28); -webkit-backdrop-filter: blur(11px); backdrop-filter: blur(11px); cursor: default; animation: home-mega-backdrop-reveal 180ms ease both; }
-.home-mega-backdrop.has-announcement { top: 106px; }
+.home-mega-backdrop { position: fixed; z-index: 50; inset: 0; border: 0; background: rgba(16,16,18,.28); -webkit-backdrop-filter: blur(11px); backdrop-filter: blur(11px); cursor: default; animation: home-mega-backdrop-reveal 180ms ease both; }
+.home-mega-backdrop.has-announcement { top: 0; }
 .home-mega { position: absolute; left: 0; right: 0; top: 100%; z-index: 70; border-top: 1px solid #ececee; border-bottom: 1px solid #dedee3; background: rgba(255,255,255,.99); box-shadow: 0 24px 54px rgba(0,0,0,.1); animation: home-mega-reveal 180ms ease both; }
 .home-mega__inner { max-width: 1340px; min-height: 320px; display: grid; grid-template-columns: 210px minmax(0,1fr); gap: 30px; margin: 0 auto; padding: 28px 32px 32px; }
 .home-mega--machines .home-mega__inner { height: 340px; min-height: 0; }
