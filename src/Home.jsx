@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   ArrowUpRight,
   CaretLeft,
+  CaretDown,
   CaretRight,
   CaretUp,
   EnvelopeSimple,
@@ -37,7 +38,7 @@ const wholeCurrencyFormatter = new Intl.NumberFormat("en-US", {
 const recommendedMachines = {
   xrf: {
     name: "XRF",
-    href: XRF_PAGE_URL,
+    href: "https://www.1laser.com/products/onelaser-xrf-desktop-laser-machine",
     copy: "Precision RF desktop laser for detailed flat engraving and repeatable personalization.",
     image: "home-product-xrf.png",
   },
@@ -68,21 +69,21 @@ const heroSlides = [
     desktopImage: "home-banner-education-desktop.webp",
     mobileImage: "home-banner-education-mobile.webp",
     alt: "OneLaser Hydra Gen2 in a bright STEM classroom with students and an instructor",
-    href: "https://www.1laser.com/pages/education",
+    href: "https://www.1laser.com/products/hydra-9-gen-2-70w-rf-co2-dual-laser-machine",
     label: "Explore OneLaser for Education",
   },
   {
     desktopImage: "home-banner-maker-desktop.webp",
     mobileImage: "home-banner-maker-mobile.webp",
     alt: "A small business maker presenting engraved products beside a OneLaser XRF",
-    href: XRF_PAGE_URL,
+    href: "https://www.1laser.com/products/onelaser-xrf-desktop-laser-machine",
     label: "Shop OneLaser XRF",
   },
   {
     desktopImage: "home-banner-xrf-desktop.webp",
     mobileImage: "home-banner-xrf-mobile.webp",
     alt: "OneLaser XRF desktop RF laser on a dramatic red and black stage",
-    href: XRF_PAGE_URL,
+    href: "https://www.1laser.com/products/onelaser-xrf-desktop-laser-machine",
     label: "Discover OneLaser XRF",
   },
 ];
@@ -107,7 +108,7 @@ const productCards = [
     features: ["38W RF Power", "1200mm/s Speed", "3G Acceleration", "Conveyor Feeder Available"],
     image: "home-product-xrf.png",
     scene: "home-product-xrf-scene.webp",
-    href: XRF_PAGE_URL,
+    href: "https://www.1laser.com/products/onelaser-xrf-desktop-laser-machine",
   },
   {
     id: "hydra",
@@ -128,6 +129,91 @@ const productCards = [
     image: "home-product-vertigo.png",
     scene: "home-product-vertigo-scene.webp",
     href: "https://www.1laser.com/products/vertigo-vertical-laser-engraver",
+  },
+];
+
+const machineMenuSeries = {
+  x: {
+    label: "X Series",
+    products: [
+      {
+        name: "XRF™",
+        copy: "Performance Desktop Laser Engraver (38W RF)",
+        href: "https://www.1laser.com/products/onelaser-xrf-desktop-laser-machine",
+        image: "https://www.1laser.com/cdn/shop/files/XRF_360cdcd1-c129-44be-a750-7da43a587a00.png?v=1782463970&width=400",
+      },
+    ],
+  },
+  cobra: {
+    label: "Cobra Series",
+    products: [
+      { name: "Cobra™ 8", copy: "Workshop Essential Laser Engraver/Cutter (90W Glass)", href: "https://www.1laser.com/products/cobra-8-90w-co2-laser-engraver-cutter", image: "https://www.1laser.com/cdn/shop/files/Cobra_8.png?v=1782460144&width=400" },
+      { name: "Cobra™ 10", copy: "Workshop Essential Laser Engraver/Cutter (100W Glass)", href: "https://www.1laser.com/products/cobra-10-100w-co2-laser-engraver-cutter", image: "https://www.1laser.com/cdn/shop/files/Cobra_10.png?v=1782460375&width=400" },
+      { name: "Cobra™ 14", copy: "Workshop Essential Laser Engraver/Cutter (130W Glass)", href: "https://www.1laser.com/products/cobra-14-130w-co2-laser-engraver-cutter", image: "https://www.1laser.com/cdn/shop/files/Cobra_14.png?v=1782460438&width=400" },
+    ],
+  },
+  hydra: {
+    label: "Hydra Series",
+    products: [
+      { name: "Hydra™ 7 Gen2", copy: "Industrial RF Laser Engraver (70W RF)", href: "https://www.1laser.com/products/hydra-7-gen-2-70w-rf-co2-dual-laser-machine", image: "https://www.1laser.com/cdn/shop/files/Hydra_7Gen2.png?v=1782813665&width=400" },
+      { name: "Hydra™ 9 Gen2", copy: "CO₂ Glass/RF Industrial Hybrid Laser Engraver", href: "https://www.1laser.com/products/hydra-9-gen-2-70w-rf-co2-dual-laser-machine", image: "https://www.1laser.com/cdn/shop/files/Hydra_9Gen2.png?v=1782813672&width=400" },
+      { name: "Hydra™ 13 Gen2", copy: "CO₂ Glass/RF Industrial Hybrid Laser Engraver", href: "https://www.1laser.com/products/hydra-13-gen-2-70w-rf-co2-dual-laser-machine", image: "https://www.1laser.com/cdn/shop/files/Hydra_13Gen2.png?v=1782813672&width=400" },
+      { name: "Hydra™ 16 Gen2", copy: "CO₂ Glass/RF Industrial Hybrid Laser Engraver", href: "https://www.1laser.com/products/hydra-16-gen-2-70w-rf-co2-dual-laser-machine", image: "https://www.1laser.com/cdn/shop/files/Hydra_16Gen2.png?v=1782813672&width=400" },
+    ],
+  },
+  vertigo: {
+    label: "VertiGo",
+    products: [
+      {
+        name: "VertiGo™",
+        copy: "Performance Rotary Laser for Drinkware (38W RF)",
+        href: "https://www.1laser.com/products/vertigo-vertical-laser-engraver",
+        image: "https://www.1laser.com/cdn/shop/files/VertiGo_3c806291-bd5f-4153-9ca8-d54e3fd1cd0b.png?v=1782698357&width=400",
+      },
+    ],
+  },
+};
+
+const supportMenuGroups = [
+  {
+    title: "Get Help",
+    links: [
+      ["Submit a Ticket", "https://zohodesk.1laser.com/portal/en/newticket"],
+      ["Product Knowledge Base", "https://wiki.1laser.com/"],
+      ["1-on-1 Training", "https://www.1laser.com/products/engineer-1-on-1-training-support"],
+    ],
+  },
+  {
+    title: "Plan a Purchase",
+    links: [
+      ["Get a Quote", "https://www.1laser.com/pages/sales-consultation"],
+      ["Financing", "https://www.1laser.com/pages/financing"],
+      ["Policy", "https://www.1laser.com/policies/shipping-policy"],
+    ],
+  },
+  {
+    title: "Learn & Create",
+    links: [
+      ["Blogs", "https://www.1laser.com/blogs/topic"],
+    ],
+  },
+];
+
+const communityMenuGroups = [
+  {
+    title: "Join & Earn",
+    links: [
+      ["Purchase Rewards", "https://www.1laser.com/pages/onelaser-rewards"],
+      ["Become Affiliate", "https://af.uppromote.com/OneLaser/register"],
+      ["Join Community", "https://www.1laser.com/pages/laser-engraving-community"],
+    ],
+  },
+  {
+    title: "Stories & Spaces",
+    links: [
+      ["Testimonials", "https://www.1laser.com/pages/testimonials"],
+      ["Demo Room", "https://www.1laser.com/pages/demoroom"],
+    ],
   },
 ];
 
@@ -251,6 +337,8 @@ export function HomePage() {
   const [heroPaused, setHeroPaused] = useState(false);
   const [heroCycle, setHeroCycle] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeMegaMenu, setActiveMegaMenu] = useState(null);
+  const [activeMachineSeries, setActiveMachineSeries] = useState("x");
   const [activeVideo, setActiveVideo] = useState(null);
   const [activeProject, setActiveProject] = useState(null);
   const [projectFilter, setProjectFilter] = useState("All");
@@ -259,6 +347,7 @@ export function HomePage() {
   const showcaseRailRef = useRef(null);
   const videoRailRef = useRef(null);
   const lastScrollYRef = useRef(0);
+  const suppressMegaFocusRef = useRef(false);
 
   useEffect(() => {
     document.title = "OneLaser — Make More";
@@ -267,6 +356,32 @@ export function HomePage() {
       description.content = "Discover OneLaser professional laser systems for makers, businesses, education, and production.";
     }
   }, []);
+
+  useEffect(() => {
+    if (!activeMegaMenu) return undefined;
+    const closeOnEscape = (event) => {
+      if (event.key !== "Escape") return;
+      event.preventDefault();
+      const trigger = document.querySelector(`[data-mega-trigger="${activeMegaMenu}"]`);
+      suppressMegaFocusRef.current = true;
+      setActiveMegaMenu(null);
+      window.requestAnimationFrame(() => {
+        trigger?.focus();
+        window.setTimeout(() => { suppressMegaFocusRef.current = false; }, 0);
+      });
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [activeMegaMenu]);
+
+  const enterMegaMenu = (menu) => (event) => {
+    if (event.key !== "ArrowDown") return;
+    event.preventDefault();
+    setActiveMegaMenu(menu);
+    window.requestAnimationFrame(() => {
+      document.querySelector(`#home-mega-${menu} button, #home-mega-${menu} a`)?.focus();
+    });
+  };
 
   useEffect(() => {
     const palettes = [
@@ -435,7 +550,13 @@ export function HomePage() {
         <a href="https://www.1laser.com/pages/financing" target="_blank" rel="noreferrer">$0 Down Financing for Small Businesses</a>
         <a href="https://www.1laser.com/pages/refund-policy" target="_blank" rel="noreferrer">30-Day Easy Returns</a>
       </div>
-      <header className="home-header">
+      <header
+        className="home-header"
+        onMouseLeave={() => setActiveMegaMenu(null)}
+        onBlur={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget)) setActiveMegaMenu(null);
+        }}
+      >
         <a className="home-brand" href={import.meta.env.BASE_URL} aria-label="OneLaser home">
           <img src={asset("onelaser-logo.png")} alt="OneLaser" />
         </a>
@@ -450,18 +571,72 @@ export function HomePage() {
           <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
         </button>
         <nav id="home-navigation" className={menuOpen ? "home-nav is-open" : "home-nav"} aria-label="Main navigation">
-          <a href="https://www.1laser.com/collections/laser-engraving-cutting-marking-machines" target="_blank" rel="noreferrer">Laser Machines</a>
-          <a href="https://www.1laser.com/collections/laser-accessories" target="_blank" rel="noreferrer">Accessories</a>
-          <a href="https://www.1laser.com/collections/limited-offers" target="_blank" rel="noreferrer">Clearance</a>
-          <a href="https://www.1laser.com/pages/sales-consultation" target="_blank" rel="noreferrer">Support</a>
-          <a href="https://www.1laser.com/pages/laser-engraving-community" target="_blank" rel="noreferrer">Community</a>
-          <a href="https://www.1laser.com/pages/contact-us" target="_blank" rel="noreferrer">Contact</a>
+          <div className="home-nav__item">
+            <a href="https://www.1laser.com/collections/laser-engraving-cutting-marking-machines" target="_blank" rel="noreferrer" aria-haspopup="true" aria-controls="home-mega-machines" aria-expanded={activeMegaMenu === "machines"} data-mega-trigger="machines" onMouseEnter={() => setActiveMegaMenu("machines")} onFocus={() => { if (!suppressMegaFocusRef.current) setActiveMegaMenu("machines"); }} onKeyDown={enterMegaMenu("machines")}>Laser Machines <CaretDown size={13} weight="bold" /></a>
+          </div>
+          <a href="https://www.1laser.com/collections/laser-accessories" target="_blank" rel="noreferrer" onMouseEnter={() => setActiveMegaMenu(null)} onFocus={() => setActiveMegaMenu(null)}>Accessories</a>
+          <a href="https://www.1laser.com/collections/limited-offers" target="_blank" rel="noreferrer" onMouseEnter={() => setActiveMegaMenu(null)} onFocus={() => setActiveMegaMenu(null)}>Clearance</a>
+          <div className="home-nav__item">
+            <a href="https://www.1laser.com/pages/sales-consultation" target="_blank" rel="noreferrer" aria-haspopup="true" aria-controls="home-mega-support" aria-expanded={activeMegaMenu === "support"} data-mega-trigger="support" onMouseEnter={() => setActiveMegaMenu("support")} onFocus={() => { if (!suppressMegaFocusRef.current) setActiveMegaMenu("support"); }} onKeyDown={enterMegaMenu("support")}>Support <CaretDown size={13} weight="bold" /></a>
+          </div>
+          <div className="home-nav__item">
+            <a href="https://www.1laser.com/pages/laser-engraving-community" target="_blank" rel="noreferrer" aria-haspopup="true" aria-controls="home-mega-community" aria-expanded={activeMegaMenu === "community"} data-mega-trigger="community" onMouseEnter={() => setActiveMegaMenu("community")} onFocus={() => { if (!suppressMegaFocusRef.current) setActiveMegaMenu("community"); }} onKeyDown={enterMegaMenu("community")}>Community <CaretDown size={13} weight="bold" /></a>
+          </div>
+          <a href="https://www.1laser.com/pages/contact-us" target="_blank" rel="noreferrer" onMouseEnter={() => setActiveMegaMenu(null)} onFocus={() => setActiveMegaMenu(null)}>Contact</a>
         </nav>
         <div className="home-header__actions" aria-label="OneLaser account and shopping">
           <a href="https://www.1laser.com/search" target="_blank" rel="noreferrer" aria-label="Search OneLaser"><MagnifyingGlass size={20} /></a>
           <a href="https://www.1laser.com/cart" target="_blank" rel="noreferrer" aria-label="View cart"><ShoppingBag size={20} /></a>
           <a href="https://www.1laser.com/account/login" target="_blank" rel="noreferrer" aria-label="Log in"><UserCircle size={21} /></a>
         </div>
+
+        {activeMegaMenu === "machines" && (
+          <div id="home-mega-machines" className="home-mega home-mega--machines" aria-label="Laser Machines menu">
+            <div className="home-mega__inner">
+              <aside className="home-mega__series" aria-label="Machine series">
+                <span>Product Families</span>
+                {Object.entries(machineMenuSeries).map(([id, series]) => (
+                  <button key={id} className={activeMachineSeries === id ? "is-active" : ""} type="button" aria-pressed={activeMachineSeries === id} onMouseEnter={() => setActiveMachineSeries(id)} onFocus={() => setActiveMachineSeries(id)} onClick={() => setActiveMachineSeries(id)}>
+                    {series.label}<CaretRight size={15} weight="bold" />
+                  </button>
+                ))}
+                <a href="https://www.1laser.com/collections/laser-engraving-cutting-marking-machines" target="_blank" rel="noreferrer">View all machines <ArrowUpRight size={14} weight="bold" /></a>
+              </aside>
+              <div className={`home-mega__products${machineMenuSeries[activeMachineSeries].products.length === 1 ? " has-one" : ""}`}>
+                {machineMenuSeries[activeMachineSeries].products.map((product) => (
+                  <a className="home-mega-product" href={product.href} target="_blank" rel="noreferrer" key={product.name}>
+                    <img src={product.image} alt={product.name} />
+                    <div><h3><ProductName name={product.name} /></h3><p>{product.copy}</p><span>Explore <ArrowUpRight size={14} weight="bold" /></span></div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {(activeMegaMenu === "support" || activeMegaMenu === "community") && (
+          <div id={`home-mega-${activeMegaMenu}`} className={`home-mega home-mega--${activeMegaMenu}`} aria-label={`${activeMegaMenu} menu`}>
+            <div className="home-mega__inner home-mega__inner--resources">
+              <header>
+                <span>{activeMegaMenu === "support" ? "ONE SUPPORT" : "ONE COMMUNITY"}</span>
+                <h2>{activeMegaMenu === "support" ? "Real help, whenever you need it." : "Make more, together."}</h2>
+                <p>{activeMegaMenu === "support" ? "U.S. engineers, practical resources, and accountable service." : "Connect with OneLaser owners, creators, and local demo spaces."}</p>
+              </header>
+              <div className="home-mega__resource-groups">
+                {(activeMegaMenu === "support" ? supportMenuGroups : communityMenuGroups).map((group) => (
+                  <section key={group.title}>
+                    <h3>{group.title}</h3>
+                    {group.links.map(([label, href]) => <a href={href} target="_blank" rel="noreferrer" key={label}>{label}<ArrowUpRight size={13} weight="bold" /></a>)}
+                  </section>
+                ))}
+              </div>
+              <a className="home-mega__visual" href={activeMegaMenu === "support" ? "https://www.1laser.com/pages/sales-consultation" : "https://www.1laser.com/pages/laser-engraving-community"} target="_blank" rel="noreferrer">
+                <img src={asset(activeMegaMenu === "support" ? "home-video-engineered-usa.jpg" : "home-industry-makers-v2.jpg")} alt="" />
+                <span>{activeMegaMenu === "support" ? "U.S. Engineers. Lifetime Support" : "Join the OneLaser Community"}<ArrowUpRight size={15} weight="bold" /></span>
+              </a>
+            </div>
+          </div>
+        )}
       </header>
 
       <main id="home-main">
