@@ -35,6 +35,12 @@ const wholeCurrencyFormatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0,
 });
 
+const announcementItems = [
+  ["Subscribe & Get $50 OFF Your First Purchase!", "https://www.1laser.com/pages/onelaser-rewards"],
+  ["$0 Down Financing for Small Businesses", "https://www.1laser.com/pages/financing"],
+  ["30-Day Easy Returns", "https://www.1laser.com/pages/refund-policy"],
+];
+
 const recommendedMachines = {
   xrf: {
     name: "XRF",
@@ -174,48 +180,47 @@ const machineMenuSeries = {
   },
 };
 
-const supportMenuGroups = [
-  {
-    title: "Get Help",
-    links: [
-      ["Submit a Ticket", "https://zohodesk.1laser.com/portal/en/newticket"],
-      ["Product Knowledge Base", "https://wiki.1laser.com/"],
-      ["1-on-1 Training", "https://www.1laser.com/products/engineer-1-on-1-training-support"],
-    ],
-  },
-  {
-    title: "Plan a Purchase",
-    links: [
-      ["Get a Quote", "https://www.1laser.com/pages/sales-consultation"],
-      ["Financing", "https://www.1laser.com/pages/financing"],
-      ["Policy", "https://www.1laser.com/policies/shipping-policy"],
-    ],
-  },
-  {
-    title: "Learn & Create",
-    links: [
-      ["Blogs", "https://www.1laser.com/blogs/topic"],
-    ],
-  },
-];
+const supportMenu = {
+  featured: [
+    {
+      label: "Get a Quote",
+      href: "https://www.1laser.com/products/sales-consultation-call",
+      image: "https://www.1laser.com/cdn/shop/files/Consultation_Call_Session_f357d165-c36d-445e-8589-cd76cb193639.png?v=1764916744&width=600",
+    },
+    {
+      label: "1-on-1 Support",
+      href: "https://www.1laser.com/products/engineer-1-on-1-training-support",
+      image: "https://www.1laser.com/cdn/shop/files/1-on-1_training.png?v=1764920272&width=600",
+    },
+  ],
+  links: [
+    ["Submit a Ticket", "https://zohodesk.1laser.com/portal/en/newticket"],
+    ["Financing", "https://www.1laser.com/pages/financing"],
+    ["Policy", "https://www.1laser.com/policies/shipping-policy"],
+    ["Blogs", "https://www.1laser.com/blogs/topic"],
+    ["Product Knowledge Base", "https://wiki.1laser.com/"],
+  ],
+};
 
-const communityMenuGroups = [
-  {
-    title: "Join & Earn",
-    links: [
-      ["Purchase Rewards", "https://www.1laser.com/pages/onelaser-rewards"],
-      ["Become Affiliate", "https://af.uppromote.com/OneLaser/register"],
-      ["Join Community", "https://www.1laser.com/pages/laser-engraving-community"],
-    ],
-  },
-  {
-    title: "Stories & Spaces",
-    links: [
-      ["Testimonials", "https://www.1laser.com/pages/testimonials"],
-      ["Demo Room", "https://www.1laser.com/pages/demoroom"],
-    ],
-  },
-];
+const communityMenu = {
+  featured: [
+    {
+      label: "Become Affiliate",
+      href: "https://www.1laser.com/pages/laser-engraving-community",
+      image: "https://www.1laser.com/cdn/shop/files/3_154dd9e8-536b-43e4-9e64-5e1532331fdd.png?v=1782712883&width=600",
+    },
+    {
+      label: "Purchase Rewards",
+      href: "https://www.1laser.com/pages/onelaser-rewards",
+      image: "https://www.1laser.com/cdn/shop/files/OneLaser_Forum_4979b167-4ed1-476c-a24f-bd1b496f235a.png?v=1782714101&width=600",
+    },
+  ],
+  links: [
+    ["Join Community", "https://www.1laser.com/pages/laser-engraving-community"],
+    ["Testimonials", "https://www.1laser.com/pages/testimonials"],
+    ["Demo Room", "https://www.1laser.com/pages/demoroom"],
+  ],
+};
 
 const whyAdvantages = [
   {
@@ -337,6 +342,7 @@ export function HomePage() {
   const [heroPaused, setHeroPaused] = useState(false);
   const [heroCycle, setHeroCycle] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [announcementVisible, setAnnouncementVisible] = useState(true);
   const [activeMegaMenu, setActiveMegaMenu] = useState(null);
   const [activeMachineSeries, setActiveMachineSeries] = useState("x");
   const [activeVideo, setActiveVideo] = useState(null);
@@ -540,16 +546,28 @@ export function HomePage() {
   const activeProjectMonthlyProfit = activeProjectEconomics
     ? activeProjectEconomics.unitPrice * (Number.parseInt(activeProjectEconomics.margin, 10) / 100) * activeProjectMonthlySales
     : 0;
+  const activeResourceMenu = activeMegaMenu === "support" ? supportMenu : communityMenu;
 
   return (
     <div className="home-shell" id="top">
       <a className="home-skip" href="#home-main">Skip to content</a>
 
-      <div className="home-announcement" aria-label="OneLaser offers and service updates">
-        <a href="https://www.1laser.com/pages/onelaser-rewards" target="_blank" rel="noreferrer">Subscribe &amp; Get $50 OFF Your First Purchase!</a>
-        <a href="https://www.1laser.com/pages/financing" target="_blank" rel="noreferrer">$0 Down Financing for Small Businesses</a>
-        <a href="https://www.1laser.com/pages/refund-policy" target="_blank" rel="noreferrer">30-Day Easy Returns</a>
-      </div>
+      {announcementVisible && (
+        <div className="home-announcement" aria-label="OneLaser offers and service updates">
+          <div className="home-announcement__viewport">
+            <div className="home-announcement__track">
+              {[false, true].map((duplicate) => (
+                <div className="home-announcement__group" aria-hidden={duplicate ? "true" : undefined} key={duplicate ? "duplicate" : "primary"}>
+                  {announcementItems.map(([label, href]) => (
+                    <a href={href} target="_blank" rel="noreferrer" tabIndex={duplicate ? -1 : undefined} key={label}>{label}</a>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+          <button className="home-announcement__close" type="button" onClick={() => setAnnouncementVisible(false)} aria-label="Close announcements"><X size={15} weight="bold" /></button>
+        </div>
+      )}
       <header
         className="home-header"
         onMouseLeave={() => setActiveMegaMenu(null)}
@@ -594,19 +612,17 @@ export function HomePage() {
           <div id="home-mega-machines" className="home-mega home-mega--machines" aria-label="Laser Machines menu">
             <div className="home-mega__inner">
               <aside className="home-mega__series" aria-label="Machine series">
-                <span>Product Families</span>
                 {Object.entries(machineMenuSeries).map(([id, series]) => (
                   <button key={id} className={activeMachineSeries === id ? "is-active" : ""} type="button" aria-pressed={activeMachineSeries === id} onMouseEnter={() => setActiveMachineSeries(id)} onFocus={() => setActiveMachineSeries(id)} onClick={() => setActiveMachineSeries(id)}>
                     {series.label}<CaretRight size={15} weight="bold" />
                   </button>
                 ))}
-                <a href="https://www.1laser.com/collections/laser-engraving-cutting-marking-machines" target="_blank" rel="noreferrer">View all machines <ArrowUpRight size={14} weight="bold" /></a>
               </aside>
-              <div className={`home-mega__products${machineMenuSeries[activeMachineSeries].products.length === 1 ? " has-one" : ""}`}>
+              <div className="home-mega__products">
                 {machineMenuSeries[activeMachineSeries].products.map((product) => (
                   <a className="home-mega-product" href={product.href} target="_blank" rel="noreferrer" key={product.name}>
-                    <img src={product.image} alt={product.name} />
-                    <div><h3><ProductName name={product.name} /></h3><p>{product.copy}</p><span>Explore <ArrowUpRight size={14} weight="bold" /></span></div>
+                    <span className={`home-mega-product__media home-mega-product__media--${activeMachineSeries}`}><img src={product.image} alt={product.name} /></span>
+                    <div><h3><ProductName name={product.name} /></h3><p>{product.copy}</p></div>
                   </a>
                 ))}
               </div>
@@ -617,27 +633,23 @@ export function HomePage() {
         {(activeMegaMenu === "support" || activeMegaMenu === "community") && (
           <div id={`home-mega-${activeMegaMenu}`} className={`home-mega home-mega--${activeMegaMenu}`} aria-label={`${activeMegaMenu} menu`}>
             <div className="home-mega__inner home-mega__inner--resources">
-              <header>
-                <span>{activeMegaMenu === "support" ? "ONE SUPPORT" : "ONE COMMUNITY"}</span>
-                <h2>{activeMegaMenu === "support" ? "Real help, whenever you need it." : "Make more, together."}</h2>
-                <p>{activeMegaMenu === "support" ? "U.S. engineers, practical resources, and accountable service." : "Connect with OneLaser owners, creators, and local demo spaces."}</p>
-              </header>
-              <div className="home-mega__resource-groups">
-                {(activeMegaMenu === "support" ? supportMenuGroups : communityMenuGroups).map((group) => (
-                  <section key={group.title}>
-                    <h3>{group.title}</h3>
-                    {group.links.map(([label, href]) => <a href={href} target="_blank" rel="noreferrer" key={label}>{label}<ArrowUpRight size={13} weight="bold" /></a>)}
-                  </section>
+              {activeResourceMenu.featured.map((item) => (
+                <a className="home-mega-resource-card" href={item.href} target="_blank" rel="noreferrer" key={item.label}>
+                  <img src={item.image} alt="" />
+                  <span>{item.label}<CaretRight size={18} weight="bold" /></span>
+                </a>
+              ))}
+              <nav className="home-mega-resource-links" aria-label={`${activeMegaMenu} links`}>
+                {activeResourceMenu.links.map(([label, href]) => (
+                  <a href={href} target="_blank" rel="noreferrer" key={label}>{label}<CaretRight size={15} weight="bold" /></a>
                 ))}
-              </div>
-              <a className="home-mega__visual" href={activeMegaMenu === "support" ? "https://www.1laser.com/pages/sales-consultation" : "https://www.1laser.com/pages/laser-engraving-community"} target="_blank" rel="noreferrer">
-                <img src={asset(activeMegaMenu === "support" ? "home-video-engineered-usa.jpg" : "home-industry-makers-v2.jpg")} alt="" />
-                <span>{activeMegaMenu === "support" ? "U.S. Engineers. Lifetime Support" : "Join the OneLaser Community"}<ArrowUpRight size={15} weight="bold" /></span>
-              </a>
+              </nav>
             </div>
           </div>
         )}
       </header>
+
+      {activeMegaMenu && <button className={`home-mega-backdrop${announcementVisible ? " has-announcement" : ""}`} type="button" onClick={() => setActiveMegaMenu(null)} aria-label="Close expanded navigation" />}
 
       <main id="home-main">
         <section
