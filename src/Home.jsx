@@ -304,6 +304,12 @@ const projectShowcase = [
   { image: "home-project-etsy-baby-name-nursery-keepsake.webp", title: "Baby Name Nursery Keepsake", material: "Wood, Acrylic, Leather & Glass", productId: "baby-name-nursery-keepsake", machineId: "xrf" },
   { image: "home-project-etsy-realtor-closing-gift-set.webp", title: "Realtor Closing Gift Set", material: "Wood, Acrylic, Leather, Metal & Glass", productId: "realtor-closing-gift-set", machineId: "xrf" },
   { image: "home-project-etsy-holiday-ornament-collection.webp", title: "Holiday Ornament Collection", material: "Wood, Acrylic, Leather, Metal & Glass", productId: "holiday-ornament-collection", machineId: "xrf" },
+  { image: "home-project-vertigo-wildflower-handled-tumbler.webp", title: "Wildflower Handled Tumbler", material: "Powder-Coated Metal", productId: "wildflower-handled-tumbler", machineId: "vertigo" },
+  { image: "home-project-vertigo-mountain-rambler.webp", title: "Mountain Rambler Tumbler", material: "Powder-Coated Metal", productId: "mountain-rambler-tumbler", machineId: "vertigo" },
+  { image: "home-project-vertigo-coastal-wide-mouth-bottle.webp", title: "Coastal Wide-Mouth Bottle", material: "Powder-Coated Metal", productId: "coastal-wide-mouth-bottle", machineId: "vertigo" },
+  { image: "home-project-vertigo-celestial-flip-sip-bottle.webp", title: "Celestial Flip-Sip Bottle", material: "Powder-Coated Metal", productId: "celestial-flip-sip-bottle", machineId: "vertigo" },
+  { image: "home-project-vertigo-corporate-tumbler-batch.webp", title: "Corporate Tumbler Batch", material: "Powder-Coated Metal", productId: "corporate-tumbler-batch", machineId: "vertigo" },
+  { image: "home-project-vertigo-event-tumbler-batch.webp", title: "Event Tumbler Batch", material: "Powder-Coated Metal", productId: "event-tumbler-batch", machineId: "vertigo" },
 ];
 
 const projectFilters = ["All", "Wood", "Acrylic", "Leather", "Metal", "Glass"];
