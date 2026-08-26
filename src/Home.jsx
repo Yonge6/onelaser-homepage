@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import {
-  ArrowRight,
   ArrowUpRight,
   CaretLeft,
   CaretRight,
@@ -396,7 +395,7 @@ export function HomePage() {
                 onClick={() => chooseHero(index)}
                 aria-label={`Show banner ${index + 1}`}
                 aria-current={index === activeHero ? "true" : undefined}
-                key={slide.image}
+                key={slide.desktopImage}
               ><span /></button>
             ))}
           </div>
@@ -428,6 +427,32 @@ export function HomePage() {
           </div>
         </section>
 
+        <section className="home-why" id="why-onelaser" aria-labelledby="why-onelaser-title">
+          <div className="home-why__inner">
+            <header className="home-why__header">
+              <span>WHY ONELASER</span>
+              <h2 id="why-onelaser-title">OneLaser means high performance, reinvented.</h2>
+              <p>Buy Once. Run Longer. Make More.</p>
+            </header>
+            <div className="home-why__story">
+              <figure className="home-why__visual">
+                <img src={asset("why-onelaser-rf-precision.jpg")} alt="Exploded-view RF laser engineering and detailed wood engraving result" loading="lazy" />
+                <figcaption><span>RF ENGINEERING</span><strong>Performance built from the inside out.</strong></figcaption>
+              </figure>
+              <div className="home-why__advantages" aria-label="Why choose OneLaser">
+                {whyAdvantages.map((advantage) => (
+                  <article className="home-why-advantage" key={advantage.number}>
+                    <span>{advantage.number}</span>
+                    <h3>{advantage.title}</h3>
+                    <p>{advantage.benefit}</p>
+                    <strong>{advantage.proof}</strong>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="home-showcase" id="inspiration" aria-labelledby="home-showcase-title">
           <header className="home-showcase__header">
             <div className="home-showcase__heading">
@@ -451,54 +476,31 @@ export function HomePage() {
           </div>
         </section>
 
-        <section className="home-why" id="why-onelaser" aria-labelledby="why-onelaser-title">
-          <div className="home-why__inner">
-            <header className="home-why__header">
-              <span>WHY ONELASER</span>
-              <h2 id="why-onelaser-title">OneLaser means high performance, reinvented.</h2>
-              <p>Buy Once. Run Longer. Make More.</p>
-            </header>
-            <div className="home-why__story">
-              <figure className="home-why__visual">
-                <img src={asset("why-onelaser-rf-precision.jpg")} alt="Precision-engineered sealed RF laser assembly" loading="lazy" />
-                <figcaption><span>RF ENGINEERING</span><strong>Performance built from the inside out.</strong></figcaption>
-              </figure>
-              <div className="home-why__advantages" aria-label="Why choose OneLaser">
-                {whyAdvantages.map((advantage) => (
-                  <article className="home-why-advantage" key={advantage.number}>
-                    <span>{advantage.number}</span>
-                    <h3>{advantage.title}</h3>
-                    <p>{advantage.benefit}</p>
-                    <strong>{advantage.proof}</strong>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section className="home-industries" id="industries" aria-labelledby="home-industries-title">
           <header className="home-industries__header">
             <h2 id="home-industries-title">Inspiring Makers, Builders, and Innovators Everywhere</h2>
             <p>From first projects to production floors and classrooms, OneLaser gives every idea room to grow.</p>
           </header>
           <div className="home-industries__grid">
-            <a className="home-industry home-industry--makers" href="https://www.1laser.com/pages/laser-engraving-community" target="_blank" rel="noreferrer">
+            <article className="home-industry home-industry--makers">
               <img src={asset("home-industry-makers-v2.jpg")} alt="A maker presenting a collection of finished engraved creations" loading="lazy" />
               <span className="home-industry__shade" />
-              <div><h2>For Makers & Creators</h2><p>From your first project to your next big idea, OneLaser is with you every step of the way.</p><strong>Explore for Makers <ArrowRight size={15} /></strong></div>
-            </a>
-            <a className="home-industry home-industry--business" href="https://www.1laser.com/products/sales-consultation-call" target="_blank" rel="noreferrer">
+              <div><h2>For Makers & Creators</h2><p>From your first project to your next big idea, OneLaser is with you every step of the way.</p></div>
+            </article>
+            <article className="home-industry home-industry--business">
               <img src={asset("home-industry-business-v2.jpg")} alt="A small business owner preparing finished personalized products for customers" loading="lazy" />
               <span className="home-industry__shade" />
-              <div><h2>For Business</h2><p>Increase throughput, broaden your catalog, and build repeatable production.</p><strong>Explore for Business <ArrowRight size={15} /></strong></div>
-            </a>
-            <a className="home-industry home-industry--education" href="https://www.1laser.com/pages/education" target="_blank" rel="noreferrer">
+              <div><h2>For Business</h2><p>Increase throughput, broaden your catalog, and build repeatable production.</p></div>
+            </article>
+            <article className="home-industry home-industry--education">
               <img src={asset("home-industry-education-v2.jpg")} alt="Students collaborating on hands-on STEM projects in a classroom" loading="lazy" />
               <span className="home-industry__shade" />
-              <div><h2>For Education</h2><p>Bring hands-on STEM learning into classrooms, labs, and maker spaces.</p><strong>Explore Education <ArrowRight size={15} /></strong></div>
-            </a>
+              <div><h2>For Education</h2><p>Bring hands-on STEM learning into classrooms, labs, and maker spaces.</p></div>
+            </article>
           </div>
+          <a className="home-industries__cta" href="https://www.1laser.com/pages/contact-us" target="_blank" rel="noreferrer">
+            Let’s Talk with Our Experts! <ArrowUpRight size={17} weight="bold" />
+          </a>
         </section>
 
         <section className="home-brand-pillars" id="support" aria-labelledby="brand-pillars-title">
@@ -530,7 +532,7 @@ export function HomePage() {
             <div className="home-section-heading">
               <h2>At OneLaser, Performance Drives Innovation</h2>
               <p>Our promise is clear: deliver innovative products built with integrity, empower users with lasting support, and strengthen our community through shared growth. These values guide everything we do and define the future we are creating together.</p>
-              <a href="https://www.1laser.com/pages/our-story" target="_blank" rel="noreferrer">Read Our Story <ArrowUpRight size={17} weight="bold" /></a>
+              <a href="https://www.1laser.com/pages/about-us" target="_blank" rel="noreferrer">Read Our Story <ArrowUpRight size={17} weight="bold" /></a>
             </div>
             <div className="home-videos__controls" aria-label="Browse OneLaser videos">
               <button type="button" onClick={() => scrollVideos(-1)} aria-label="Show previous OneLaser video"><CaretLeft size={22} /></button>
@@ -632,7 +634,7 @@ export function HomePage() {
               </header>
 
               {activeProjectProduct && (
-                <>
+                <section className="home-project-modal__product-info" aria-label="Project specifications">
                   <dl className="home-project-modal__facts">
                     <div><dt>Material</dt><dd>{activeProjectProduct.material}</dd></div>
                     <div><dt>Process</dt><dd>{activeProjectProduct.process}</dd></div>
@@ -641,7 +643,7 @@ export function HomePage() {
                     {activeProjectProduct.tags.map((tag) => <span key={tag}>{tag}</span>)}
                   </div>
                   <p className="home-project-modal__setup"><strong>Setup guidance</strong><span>{activeProjectProduct.setupNote}</span></p>
-                </>
+                </section>
               )}
 
               {activeProjectMachine && (
