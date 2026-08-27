@@ -447,7 +447,7 @@
   .home-products__header h2 { font-size: 32px; }
   .home-products__header p { font-size: 15px; }
   .home-products__grid { grid-template-columns: 1fr; gap: 12px; margin-top: 32px; }
-  .home-product-card { height: 590px; border-radius: 26px; }
+  .home-product-card { height: 540px; border-radius: 26px; }
   .home-product-card__copy { min-height: 250px; padding: 30px 24px 8px; }
   .home-product-card__eyebrow { margin-bottom: 12px; font-size: 12px; }
   .home-product-card__copy h2 { font-size: 30px; }
@@ -466,10 +466,10 @@
   .home-why__visual { border-radius: 24px; }
   .home-why__visual figcaption { left: 22px; right: 22px; bottom: 20px; }
   .home-why__visual figcaption strong { font-size: 23px; }
-  .home-why-advantage { padding: 22px 18px; }
-  .home-why-advantage h3 { font-size: 18px; }
-  .home-why-advantage p { font-size: 12px; }
-  .home-why-advantage strong { margin-top: 12px; font-size: 12px; }
+  .home-why__advantages { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+  .home-why-advantage { justify-content: flex-start; padding: 16px 14px; border-radius: 16px; }
+  .home-why-advantage h3 { margin-top: 8px; font-size: 16px; line-height: 1.15; }
+  .home-why-advantage p { gap: 6px; margin-top: 10px; font-size: 12px; line-height: 1.4; }
   .home-showcase { padding: 32px 0; }
   .home-showcase__header { display: block; }
   .home-showcase__heading h2 { font-size: 32px; }
@@ -494,20 +494,21 @@
   .home-industries { padding: 32px 0 10px; }
   .home-industries__header h2 { font-size: 32px; }
   .home-industries__header p { font-size: 15px; }
-  .home-industries__grid { gap: 8px; margin-top: 32px; }
-  .home-industry { height: 330px; border-radius: 24px; }
+  .home-industries__grid { display: flex; gap: 10px; margin-top: 32px; overflow-x: auto; scroll-padding-inline: var(--home-content-gutter); scroll-snap-type: x mandatory; overscroll-behavior-inline: contain; scrollbar-width: none; }
+  .home-industries__grid::-webkit-scrollbar { display: none; }
+  .home-industry { height: 280px; flex: 0 0 84vw; border-radius: 24px; scroll-snap-align: start; }
   .home-industry > div { left: 22px; right: 22px; top: 26px; }
   .home-industry h2 { font-size: 26px; }
   .home-industry p { font-size: 13px; }
   .home-industries__cta { width: calc(100% - (2 * var(--home-content-gutter))); min-height: 48px; margin-top: 22px; }
-  .home-brand-pillars { padding-top: 32px; padding-bottom: 32px; }
-  .home-brand-pillars > header { margin-bottom: 38px; }
-  .home-brand-pillars > header h2 { font-size: 32px; }
+  .home-brand-pillars { padding-top: 28px; padding-bottom: 28px; }
+  .home-brand-pillars > header { margin-bottom: 24px; }
+  .home-brand-pillars > header h2 { font-size: 30px; }
   .home-brand-pillars__grid { grid-template-columns: 1fr; }
-  .home-brand-pillars__grid article { min-height: 0; padding: 28px 0 34px; }
+  .home-brand-pillars__grid article { min-height: 0; padding: 20px 0 22px; }
   .home-brand-pillars__grid article + article { padding-left: 0; border-top: 1px solid #dcdce0; border-left: 0; }
-  .home-brand-pillars__grid h3 { margin-top: 24px; font-size: 30px; }
-  .home-brand-pillars__grid p { font-size: 14px; }
+  .home-brand-pillars__grid h3 { margin-top: 14px; font-size: 24px; line-height: 1.08; }
+  .home-brand-pillars__grid p { margin-top: 10px; font-size: 13px; line-height: 1.45; }
   .home-footer { padding: 0 var(--home-content-gutter) 20px; }
   .home-footer__lead { padding: 58px 0 52px; }
   .home-footer__lead h2 { font-size: 28px; }
@@ -536,7 +537,6 @@
   .home-project-modal__economics > dl div:last-child { grid-column: 1 / -1; }
   .home-project-modal__close, .home-project-modal__arrow { width: 42px; height: 42px; }
   .home-why__visual figcaption strong { white-space: normal; }
-  .home-why__advantages { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
