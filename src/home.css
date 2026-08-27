@@ -504,10 +504,11 @@
   .home-brand-pillars { padding-top: 28px; padding-bottom: 28px; }
   .home-brand-pillars > header { margin-bottom: 24px; }
   .home-brand-pillars > header h2 { font-size: 30px; }
-  .home-brand-pillars__grid { grid-template-columns: 1fr; }
-  .home-brand-pillars__grid article { min-height: 0; padding: 20px 0 22px; }
-  .home-brand-pillars__grid article + article { padding-left: 0; border-top: 1px solid #dcdce0; border-left: 0; }
-  .home-brand-pillars__grid h3 { margin-top: 14px; font-size: 24px; line-height: 1.08; }
+  .home-brand-pillars__grid { grid-auto-flow: column; grid-auto-columns: minmax(270px,82vw); grid-template-columns: none; gap: 10px; overflow-x: auto; border: 0; scroll-padding-inline: var(--home-content-gutter); scroll-snap-type: x mandatory; overscroll-behavior-inline: contain; scrollbar-width: none; }
+  .home-brand-pillars__grid::-webkit-scrollbar { display: none; }
+  .home-brand-pillars__grid article { min-height: 220px; padding: 20px; border: 1px solid #dedee3; border-radius: 22px; background: #f5f5f7; scroll-snap-align: start; }
+  .home-brand-pillars__grid article + article { padding-left: 20px; border: 1px solid #dedee3; }
+  .home-brand-pillars__grid h3 { margin-top: 18px; font-size: 24px; line-height: 1.08; }
   .home-brand-pillars__grid p { margin-top: 10px; font-size: 13px; line-height: 1.45; }
   .home-footer { padding: 0 var(--home-content-gutter) 20px; }
   .home-footer__lead { padding: 58px 0 52px; }
