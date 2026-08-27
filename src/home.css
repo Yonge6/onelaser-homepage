@@ -486,10 +486,10 @@
   .home-section-heading p { margin-top: 12px; font-size: 15px; }
   .home-section-heading > a { margin-top: 24px; font-size: 14px; }
   .home-videos__controls { margin-top: 32px; }
-  .home-videos__rail { gap: 12px; margin-top: 32px; padding-bottom: 12px; }
+  .home-videos__rail { align-items: flex-start; gap: 12px; margin-top: 32px; padding-bottom: 12px; }
   .home-video-card { flex-basis: 86vw; border-radius: 20px; }
-  .home-video-card h3 { font-size: 20px; }
-  .home-video-card p { font-size: 12px; }
+  .home-video-card h3 { padding: 18px 20px 0; font-size: 20px; }
+  .home-video-card p { min-height: 48px; padding: 8px 20px 16px; font-size: 12px; }
   .home-video-card__play { width: 58px; height: 58px; }
   .home-industries { padding: 32px 0 10px; }
   .home-industries__header h2 { font-size: 32px; }
@@ -526,9 +526,12 @@
   .home-back-to-top { right: 14px; bottom: 14px; width: 48px; height: 48px; }
   .home-project-modal { padding: 12px; }
   .home-project-modal__panel { height: calc(100vh - 24px); grid-template-rows: 230px minmax(0, 1fr); border-radius: 22px; }
-  .home-project-modal__details { display: block; padding: 24px 18px 22px; }
+  .home-project-modal__details { display: flex; flex-direction: column; padding: 24px 18px 22px; }
   .home-project-modal__details > header h2 { font-size: 30px; }
   .home-project-modal__details > header p { margin-top: 12px; }
+  .home-project-modal__economics { order: 1; }
+  .home-project-modal__product-info { order: 2; }
+  .home-project-modal__machine { order: 3; }
   .home-project-modal__product-info, .home-project-modal__machine, .home-project-modal__economics { height: auto; margin-top: 16px; }
   .home-project-modal__setup { grid-template-columns: 1fr; gap: 6px; }
   .home-project-modal__machine a { width: 100%; }
