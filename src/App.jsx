@@ -4,7 +4,6 @@ import {
   ArrowUpRight,
   ArrowClockwise,
   Camera,
-  CaretDown,
   CaretLeft,
   CaretRight,
   CaretUp,
@@ -16,7 +15,6 @@ import {
   Fire,
   Handbag,
   Headset,
-  List,
   LockKey,
   MapPin,
   Minus,
@@ -36,7 +34,7 @@ import {
   X,
 } from "@phosphor-icons/react";
 import { CommercialCapabilities } from "./components/CommercialCapabilities.jsx";
-import { HomePage } from "./Home.jsx";
+import { HomeFooter, HomeNavigation, HomePage } from "./Home.jsx";
 import { initializeAnalytics, trackEvent } from "./analytics.js";
 import { useAutoplayCarousel } from "./hooks/useAutoplayCarousel.js";
 
@@ -1124,7 +1122,6 @@ export function XrfPage() {
     interactionProps: powerCarouselProps,
   } = useAutoplayCarousel(powerProofs.length);
   const [openFaq, setOpenFaq] = useState(0);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [selectedPackageId, setSelectedPackageId] = useState("standalone");
   const [purchasePower, setPurchasePower] = useState("38W");
@@ -1322,10 +1319,6 @@ export function XrfPage() {
   const purchaseMsrpTotal = (selectedPurchasePackage.msrp + purchaseAccessoryMsrpTotal) * quantity;
   const monthlyPayment = purchaseTotal / 24;
 
-  function configure() {
-    document.getElementById("purchase-options")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
   function handleJourneyNavigation(section) {
     trackEvent("navigate_section", { section_id: section.id, section_name: section.label });
     document.getElementById(section.id)?.scrollIntoView({
@@ -1512,29 +1505,10 @@ export function XrfPage() {
   }
 
   return (
-    <div className="site-shell">
+    <div className="site-shell home-global-chrome">
       <div className="page-progress" aria-hidden="true"><span style={{ width: `${scrollProgress}%` }} /></div>
       <a className="skip-link" href="#main">Skip to content</a>
-      <header className="site-header">
-        <a href="#top" className="brand" aria-label="OneLaser XRF Gen2 home">
-          <img src={asset("onelaser-logo.png")} alt="OneLaser" />
-        </a>
-        <button className="menu-button" type="button" onClick={() => setMenuOpen((value) => !value)} aria-expanded={menuOpen}>
-          {menuOpen ? <X size={19} weight="bold" /> : <List size={20} weight="bold" />}
-          <span>{menuOpen ? "Close" : "Menu"}</span>
-        </button>
-        <nav className={menuOpen ? "nav is-open" : "nav"} aria-label="Product navigation">
-          <a href="https://www.1laser.com/collections/laser-engraving-cutting-marking-machines" target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>Laser Machines <ArrowUpRight size={13} /></a>
-          <a href="https://www.1laser.com/collections/laser-accessories" target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>Accessories <ArrowUpRight size={13} /></a>
-          <a href="https://www.1laser.com/pages/contact-us" target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>Support <ArrowUpRight size={13} /></a>
-          <a href="https://www.1laser.com/pages/laser-engraving-community" target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>Community <ArrowUpRight size={13} /></a>
-          <a href="https://www.1laser.com/pages/contact-us" target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>Contact <ArrowUpRight size={13} /></a>
-        </nav>
-        <div className="header-actions">
-          <a className="header-contact" href="tel:+16268004130" aria-label="Call OneLaser at 626-800-4130"><Phone size={17} weight="bold" /></a>
-          <button className="header-cta" type="button" onClick={configure}>Configure <CaretDown size={15} weight="bold" /></button>
-        </div>
-      </header>
+      <HomeNavigation />
 
       <nav className={journeyVisible ? "journey-nav is-visible" : "journey-nav"} aria-label="Explore XRF Gen2 page sections">
         <div className="journey-nav__inner">
@@ -2231,26 +2205,7 @@ export function XrfPage() {
 
       </main>
 
-      <footer className="site-footer">
-        <div className="site-footer__inner">
-          <div className="site-footer__brand">
-            <a href="#top" className="site-footer__logo" aria-label="Back to OneLaser XRF Gen2 top"><img src={asset("onelaser-logo-transparent.svg")} alt="OneLaser" /></a>
-            <p>Professional laser production for creators, studios and growing custom-product businesses.</p>
-            <div className="site-footer__contact">
-              <a href="tel:+16268004130"><Phone size={16} weight="bold" />626-800-4130</a>
-              <a href="mailto:sales@1laser.com"><EnvelopeSimple size={16} weight="bold" />sales@1laser.com</a>
-              <span><MapPin size={16} weight="bold" />Lake Forest, California</span>
-            </div>
-          </div>
-          <div className="site-footer__columns">
-            <div className="site-footer__column"><strong>Machines</strong><a href="https://www.1laser.com/products/onelaser-xrf-desktop-laser-machine" target="_blank" rel="noreferrer">XRF Gen2</a><a href="https://www.1laser.com/collections/laser-engraving-cutting-marking-machines" target="_blank" rel="noreferrer">All laser machines</a><a href="https://www.1laser.com/collections/laser-accessories" target="_blank" rel="noreferrer">Laser accessories</a></div>
-            <div className="site-footer__column"><strong>Support</strong><a href="https://www.1laser.com/pages/contact-us" target="_blank" rel="noreferrer">Contact OneLaser</a><a href="https://www.1laser.com/pages/sales-consultation" target="_blank" rel="noreferrer">Get a quote</a><a href="https://www.1laser.com/pages/laser-engraving-community" target="_blank" rel="noreferrer">Join the community</a></div>
-            <div className="site-footer__column"><strong>Resources</strong><a href="https://www.1laser.com/pages/common-faq" target="_blank" rel="noreferrer">Common FAQ</a><a href="https://www.1laser.com/pages/financing" target="_blank" rel="noreferrer">Financing</a><a href="https://www.1laser.com/blogs/topic" target="_blank" rel="noreferrer">Blog center</a></div>
-            <div className="site-footer__column"><strong>Follow</strong><a href="https://www.youtube.com/@OneLaser.Official" target="_blank" rel="noreferrer">YouTube <ArrowUpRight size={13} /></a><a href="https://www.instagram.com/onelaser.official/" target="_blank" rel="noreferrer">Instagram <ArrowUpRight size={13} /></a><a href="https://www.facebook.com/onelaser.official" target="_blank" rel="noreferrer">Facebook <ArrowUpRight size={13} /></a></div>
-          </div>
-        </div>
-        <div className="site-footer__bottom"><span>© {new Date().getFullYear()} OneLaser. All rights reserved.</span><span>20472 Crescent Bay Dr, STE 104, Lake Forest, CA 92630</span><a href="#top">Back to top <ArrowUpRight size={13} /></a></div>
-      </footer>
+      <HomeFooter />
 
       <button
         type="button"

@@ -36,6 +36,12 @@
   font-family: "Certia", Arial, sans-serif;
 }
 
+.home-global-chrome {
+  --home-red: #e7310e;
+  --home-action: #d92d0d;
+  --home-content-gutter: max(36px, calc((100vw - 1280px) / 2));
+}
+
 .home-shell *, .home-shell *::before, .home-shell *::after { box-sizing: border-box; }
 .home-shell a { color: inherit; text-decoration: none; }
 .home-shell button { font: inherit; }
@@ -429,6 +435,7 @@
 
 @media (max-width: 560px) {
   .home-shell { --home-content-gutter: 18px; }
+  .home-global-chrome { --home-content-gutter: 18px; }
   .home-announcement { min-height: 32px; padding: 0 38px 0 10px; }
   .home-announcement__viewport { width: 100%; }
   .home-announcement__group a { padding: 7px 14px; }
