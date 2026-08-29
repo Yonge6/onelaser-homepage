@@ -550,6 +550,8 @@ export function HomePage() {
   const [projectFilter, setProjectFilter] = useState("All");
   const [topButtonState, setTopButtonState] = useState("hidden");
   const touchStart = useRef(null);
+  const projectTouchStart = useRef(null);
+  const projectPanelRef = useRef(null);
   const showcaseRailRef = useRef(null);
   const videoRailRef = useRef(null);
   const lastScrollYRef = useRef(0);
@@ -639,6 +641,12 @@ export function HomePage() {
   }, [activeProject, activeVideo]);
 
   useEffect(() => {
+    if (!activeProject) return undefined;
+    const frame = window.requestAnimationFrame(() => projectPanelRef.current?.scrollTo({ top: 0 }));
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeProject]);
+
+  useEffect(() => {
     let frame = 0;
     const updateTopButton = () => {
       frame = 0;
@@ -687,6 +695,28 @@ export function HomePage() {
     const distance = event.changedTouches[0].clientX - touchStart.current;
     if (Math.abs(distance) > 45) moveHero(distance > 0 ? -1 : 1);
     touchStart.current = null;
+  }
+
+  function handleProjectTouchStart(event) {
+    if (event.touches.length !== 1) {
+      projectTouchStart.current = null;
+      return;
+    }
+    projectTouchStart.current = {
+      x: event.touches[0].clientX,
+      y: event.touches[0].clientY,
+    };
+  }
+
+  function handleProjectTouchEnd(event) {
+    const start = projectTouchStart.current;
+    projectTouchStart.current = null;
+    if (!start || event.changedTouches.length !== 1) return;
+    const distanceX = event.changedTouches[0].clientX - start.x;
+    const distanceY = event.changedTouches[0].clientY - start.y;
+    if (Math.abs(distanceX) > 56 && Math.abs(distanceX) > Math.abs(distanceY) * 1.2) {
+      moveProject(distanceX > 0 ? -1 : 1);
+    }
   }
 
   function scrollVideos(direction) {
@@ -974,7 +1004,13 @@ export function HomePage() {
 
       {activeProject && (
         <div className="home-project-modal" role="dialog" aria-modal="true" aria-label={activeProject.title} onMouseDown={(event) => { if (event.target === event.currentTarget) setActiveProject(null); }}>
-          <div className="home-project-modal__panel">
+          <div
+            className="home-project-modal__panel"
+            ref={projectPanelRef}
+            onTouchStart={handleProjectTouchStart}
+            onTouchEnd={handleProjectTouchEnd}
+            onTouchCancel={() => { projectTouchStart.current = null; }}
+          >
             <button className="home-project-modal__close" type="button" onClick={() => setActiveProject(null)} aria-label="Close project details"><X size={22} weight="bold" /></button>
             <figure className="home-project-modal__media">
               <img src={asset(activeProject.image)} alt={activeProject.title} />
