@@ -275,9 +275,12 @@
 .home-industry h2 { margin: 0; font-size: 28px; font-weight: 800; line-height: 1.05; letter-spacing: -.03em; }
 .home-industry p { margin: 12px 0 0; color: rgba(255,255,255,.9); font-size: 14px; line-height: 1.48; }
 .home-industry strong { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; font-size: 13px; }
-.home-industries__cta { width: fit-content; min-height: 52px; display: flex; align-items: center; justify-content: center; gap: 8px; margin: 28px auto 0; padding: 0 28px; border-radius: 999px; background: #111214; color: #fff !important; font-size: 15px; font-weight: 800; letter-spacing: -.01em; transition: transform 180ms ease, background 180ms ease; }
-.home-industries__cta:hover { background: #2a2b2e; transform: translateY(-2px); }
-.home-industries__cta:focus-visible { outline: 2px solid var(--home-action); outline-offset: 3px; }
+.home-industries__cta { width: fit-content; min-height: 52px; display: flex; align-items: center; justify-content: center; gap: 8px; margin: 28px auto 0; padding: 0 28px; border-radius: 999px; background: var(--home-red); color: #fff !important; box-shadow: 0 8px 20px rgba(231,49,14,.18); font-size: 15px; font-weight: 800; letter-spacing: -.01em; animation: home-industries-cta-breathe 3.6s ease-in-out infinite; transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease; }
+.home-industries__cta svg { transition: transform 180ms ease; }
+.home-industries__cta:hover { background: var(--home-action); box-shadow: 0 12px 28px rgba(217,45,13,.3); transform: translateY(-2px); animation-play-state: paused; }
+.home-industries__cta:hover svg { transform: translate(2px,-2px); }
+.home-industries__cta:focus-visible { outline: 2px solid #111214; outline-offset: 3px; }
+@keyframes home-industries-cta-breathe { 0%, 100% { box-shadow: 0 8px 20px rgba(231,49,14,.18); } 50% { box-shadow: 0 11px 26px rgba(231,49,14,.28); } }
 
 .home-brand-pillars { padding: 48px var(--home-content-gutter); }
 .home-brand-pillars > header { max-width: 760px; margin-bottom: 54px; }
@@ -570,6 +573,9 @@
   .home-showcase-card:hover > img,
   .home-video-card__cover:hover img,
   .home-industry:hover > img { transform: none; }
+  .home-industries__cta { animation: none; transition: none; }
+  .home-industries__cta svg { transition: none; }
+  .home-industries__cta:hover, .home-industries__cta:hover svg { transform: none; }
   .home-mega, .home-mega-backdrop { animation: none; }
   .home-back-to-top { transition: none; }
 }
